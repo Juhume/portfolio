@@ -1181,8 +1181,50 @@ button {
     .about__grid {
         grid-template-columns: 1.2fr 0.8fr;
         gap: var(--space-3xl);
-        align-items: center;
+        align-items: start;
     }
+}
+
+.about__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.about__photo {
+    position: relative;
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+.about__photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 1.5rem;
+    object-fit: cover;
+    aspect-ratio: 1;
+    filter: grayscale(0.15);
+    transition: filter var(--duration-normal) ease,
+                transform var(--duration-normal) var(--ease-out);
+}
+
+.about__photo:hover img {
+    filter: grayscale(0);
+    transform: scale(1.02);
+}
+
+.about__photo::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 1.75rem;
+    border: 1px solid var(--border);
+    pointer-events: none;
+    transition: border-color var(--duration-normal) ease;
+}
+
+.about__photo:hover::after {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
 .about__text {
