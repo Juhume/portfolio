@@ -962,6 +962,17 @@ button {
 .case-block {
     display: grid;
     gap: var(--space-md);
+    position: relative;
+}
+
+.case-block + .case-block::before {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--space-xl) / 2);
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
 }
 
 @media (min-width: 600px) {
@@ -978,7 +989,8 @@ button {
     letter-spacing: 0.1em;
     color: var(--accent);
     position: relative;
-    padding-top: var(--space-sm);
+    padding-top: var(--space-md);
+    padding-left: 1.25rem;
 }
 
 .case-block__label::before {
@@ -992,6 +1004,18 @@ button {
     border-radius: 1px;
 }
 
+.case-block__label::after {
+    content: '›';
+    position: absolute;
+    left: 0;
+    top: var(--space-md);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.6;
+    line-height: 1;
+}
+
 .case-block__content {
     color: var(--text-secondary);
     line-height: 1.8;
@@ -1003,9 +1027,15 @@ button {
 
 .case-block__highlight {
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1.375rem;
     color: var(--text-primary);
-    line-height: 1.5;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    font-feature-settings: 'liga' 1;
+    background: linear-gradient(135deg, var(--text-primary) 60%, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .case-block__list {
@@ -1050,6 +1080,16 @@ button {
     padding: var(--space-md);
     border-radius: 0.75rem;
     text-align: center;
+    border: 1px solid transparent;
+    transition: transform var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) ease,
+                box-shadow var(--duration-fast) ease;
+}
+
+.renuncia:hover {
+    transform: translateY(-2px);
+    border-color: var(--border);
+    box-shadow: 0 8px 24px var(--shadow);
 }
 
 .renuncia__label {
@@ -1088,6 +1128,7 @@ button {
     padding: var(--space-lg);
     border-radius: 1rem;
     margin-top: var(--space-lg);
+    border-left: 3px solid var(--accent);
 }
 
 .highlight-box__title {
