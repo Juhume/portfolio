@@ -1,76 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
 ---
 
 <BaseLayout>
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="container nav__inner">
-            <a href="#" class="nav__logo" data-hover>Julio Huerta</a>
-            <div class="nav__right">
-                <ul class="nav__links">
-                    <li><a href="#proyectos" class="nav__link" data-hover>Proyectos</a></li>
-                    <li><a href="#caso" class="nav__link" data-hover>Caso</a></li>
-                    <li><a href="#sobre-mi" class="nav__link" data-hover>Sobre mi</a></li>
-                    <li><a href="#contacto" class="nav__link" data-hover>Contacto</a></li>
-                </ul>
-                <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" data-hover>
-                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="5"/>
-                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                    </svg>
-                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
-                </button>
-                <button class="nav__menu-btn" id="menuBtn" aria-label="Menu" data-hover>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#proyectos" class="mobile-menu__link" data-hover>Proyectos</a>
-        <a href="#caso" class="mobile-menu__link" data-hover>Caso</a>
-        <a href="#sobre-mi" class="mobile-menu__link" data-hover>Sobre mi</a>
-        <a href="#contacto" class="mobile-menu__link" data-hover>Contacto</a>
-    </div>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero__bg">
-            <div class="hero__shape hero__shape--1"></div>
-            <div class="hero__shape hero__shape--2"></div>
-        </div>
-
-        <div class="container hero__content">
-            <span class="hero__label">Frontend / Full-Stack</span>
-            <h1 class="hero__title">
-                Aplicaciones web que llegan a <em>produccion</em>.
-            </h1>
-            <p class="hero__subtitle">
-                React, Next.js, TypeScript, Node.js, Docker. Experiencia en banca me dio criterio tecnico real sobre lo que implica que el software funcione cuando hay usuarios y responsabilidad.
-            </p>
-            <div class="hero__cta">
-                <a href="#proyectos" class="btn btn--primary" data-hover>
-                    Ver proyectos
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 8h10M9 4l4 4-4 4"/>
-                    </svg>
-                </a>
-                <a href="#caso" class="btn btn--secondary" data-hover>Leer caso Espejo</a>
-            </div>
-        </div>
-
-        <div class="hero__scroll">
-            <div class="hero__scroll-line"></div>
-            <span>Scroll</span>
-        </div>
-    </section>
+    <Header />
+    <Hero />
 
     <!-- Projects -->
     <section class="section" id="proyectos">
