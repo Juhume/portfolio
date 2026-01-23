@@ -725,8 +725,7 @@ button {
 }
 
 .project + .project {
-    border-top: 1px solid var(--border);
-    border-radius: 1.5rem;
+    margin-top: var(--space-sm);
 }
 
 .project:hover {
