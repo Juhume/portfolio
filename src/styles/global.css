@@ -235,11 +235,13 @@ button {
     font-size: 1.25rem;
     font-weight: 400;
     letter-spacing: -0.02em;
-    transition: opacity var(--duration-fast) ease;
+    transition: letter-spacing var(--duration-normal) var(--ease-out),
+                opacity var(--duration-fast) ease;
 }
 
 .nav__logo:hover {
-    opacity: 0.6;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
 }
 
 .nav__right {
@@ -272,10 +274,12 @@ button {
     position: absolute;
     bottom: -4px;
     left: 0;
-    width: 0;
+    width: 100%;
     height: 1px;
     background-color: var(--accent);
-    transition: width var(--duration-normal) var(--ease-out);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--duration-normal) var(--ease-out);
 }
 
 .nav__link:hover {
@@ -283,7 +287,8 @@ button {
 }
 
 .nav__link:hover::after {
-    width: 100%;
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 /* Theme Toggle */
@@ -371,7 +376,9 @@ button {
     position: fixed;
     inset: 0;
     z-index: 99;
-    background-color: var(--bg-primary);
+    background-color: color-mix(in srgb, var(--bg-primary) 92%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -637,6 +644,10 @@ button {
     box-shadow: 0 10px 30px var(--shadow);
 }
 
+.btn--primary:active {
+    transform: translateY(0) scale(0.97);
+}
+
 .btn--secondary {
     background-color: transparent;
     color: var(--text-primary);
@@ -646,6 +657,11 @@ button {
 .btn--secondary:hover {
     background-color: var(--bg-secondary);
     border-color: var(--text-muted);
+    transform: translateY(-1px);
+}
+
+.btn--secondary:active {
+    transform: translateY(0) scale(0.97);
 }
 
 .btn svg {
@@ -1395,11 +1411,13 @@ button {
     gap: 0.5rem;
     font-size: 0.9375rem;
     color: var(--text-secondary);
-    transition: color var(--duration-fast) ease;
+    transition: color var(--duration-fast) ease,
+                transform var(--duration-fast) var(--ease-out);
 }
 
 .social-link:hover {
     color: var(--accent);
+    transform: translateY(-2px);
 }
 
 .social-link svg {
