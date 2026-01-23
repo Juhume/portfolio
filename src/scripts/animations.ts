@@ -18,6 +18,7 @@ revealOnScroll();
 // Hero parallax
 const heroShapes = document.querySelectorAll('.hero__shape') as NodeListOf<HTMLElement>;
 const heroContent = document.querySelector('.hero__content') as HTMLElement;
+const heroScroll = document.querySelector('.hero__scroll') as HTMLElement;
 
 if (heroShapes.length > 0) {
     window.addEventListener('scroll', () => {
@@ -32,6 +33,14 @@ if (heroShapes.length > 0) {
             if (heroContent) {
                 heroContent.style.transform = `translateY(${scrollY * 0.1}px)`;
                 heroContent.style.opacity = `${1 - scrollY / heroHeight}`;
+            }
+        }
+
+        if (heroScroll) {
+            if (scrollY > 80) {
+                heroScroll.classList.add('hidden');
+            } else {
+                heroScroll.classList.remove('hidden');
             }
         }
     });

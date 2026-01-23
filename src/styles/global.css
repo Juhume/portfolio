@@ -463,6 +463,27 @@ button {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
 }
 
+.hero__shape--3 {
+    width: min(300px, 45vw);
+    height: min(280px, 40vw);
+    top: 35%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    background: color-mix(in srgb, var(--blue) 20%, transparent);
+    animation-delay: -7s;
+    border-radius: 50% 60% 40% 70% / 55% 45% 65% 35%;
+}
+
+.hero__mesh {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background:
+        radial-gradient(ellipse at 20% 50%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, color-mix(in srgb, var(--blue) 6%, transparent) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, color-mix(in srgb, var(--sage) 5%, transparent) 0%, transparent 50%);
+}
+
 @keyframes float {
     0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
     25% { transform: translate(20px, -25px) scale(1.03) rotate(2deg); }
@@ -486,7 +507,7 @@ button {
     color: var(--text-muted);
     margin-bottom: var(--space-lg);
     opacity: 0;
-    animation: fadeUp 0.8s var(--ease-out) 0.2s forwards;
+    animation: fadeUp 1s var(--ease-out) 0.15s forwards;
 }
 
 .hero__label::before {
@@ -503,10 +524,11 @@ button {
     line-height: 1.05;
     letter-spacing: -0.03em;
     font-feature-settings: 'liga' 1, 'kern' 1;
+    text-shadow: 0 2px 40px rgba(0, 0, 0, 0.04);
     max-width: 15ch;
     margin-bottom: var(--space-lg);
     opacity: 0;
-    animation: fadeUp 0.8s var(--ease-out) 0.4s forwards;
+    animation: fadeUp 1s var(--ease-out) 0.4s forwards;
 }
 
 .hero__title em {
@@ -521,7 +543,7 @@ button {
     line-height: 1.75;
     margin-bottom: var(--space-xl);
     opacity: 0;
-    animation: fadeUp 0.8s var(--ease-out) 0.6s forwards;
+    animation: fadeUp 1s var(--ease-out) 0.7s forwards;
 }
 
 .hero__cta {
@@ -529,7 +551,7 @@ button {
     flex-wrap: wrap;
     gap: var(--space-sm);
     opacity: 0;
-    animation: fadeUp 0.8s var(--ease-out) 0.8s forwards;
+    animation: fadeUp 1s var(--ease-out) 1.0s forwards;
 }
 
 @keyframes fadeUp {
@@ -556,7 +578,12 @@ button {
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     opacity: 0;
-    animation: fadeUp 0.8s var(--ease-out) 1.2s forwards;
+    animation: fadeUp 1s var(--ease-out) 1.4s forwards;
+    transition: opacity 0.4s ease;
+}
+
+.hero__scroll.hidden {
+    opacity: 0 !important;
 }
 
 .hero__scroll-line {
