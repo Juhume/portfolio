@@ -562,6 +562,25 @@ button {
     height: 1.1em;
 }
 
+.hero__rotate::after {
+    content: '';
+    position: absolute;
+    bottom: 0.05em;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
+    background-size: 200% 100%;
+    border-radius: 2px;
+    animation: gradientSlide 3s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+@keyframes gradientSlide {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
 .hero__rotate-word {
     display: block;
     position: absolute;
@@ -738,6 +757,12 @@ button {
     line-height: 1.1;
     letter-spacing: -0.03em;
     font-feature-settings: 'liga' 1, 'kern' 1;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.8s var(--ease-out);
+}
+
+.reveal.visible .section__title {
+    clip-path: inset(0 0% 0 0);
 }
 
 .section__subtitle {
@@ -1469,6 +1494,48 @@ button {
 /* ==========================================
    Contact
    ========================================== */
+.contact-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.contact__shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.contact__shape {
+    position: absolute;
+    border: 1px solid var(--border);
+    animation: floatGeometric 20s ease-in-out infinite;
+}
+
+.contact__shape--1 {
+    width: 120px;
+    height: 120px;
+    top: 15%;
+    right: 8%;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation-delay: -5s;
+}
+
+.contact__shape--2 {
+    width: 80px;
+    height: 80px;
+    bottom: 20%;
+    left: 5%;
+    border-radius: 50%;
+    animation-delay: -12s;
+}
+
+@keyframes floatGeometric {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(15px, -20px) rotate(5deg); }
+    50% { transform: translate(-10px, 10px) rotate(-3deg); }
+    75% { transform: translate(20px, 5px) rotate(4deg); }
+}
+
 .contact__text {
     font-size: clamp(1rem, 2vw, 1.125rem);
     color: var(--text-secondary);
