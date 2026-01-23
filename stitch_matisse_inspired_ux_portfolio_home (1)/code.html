@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elara Vance | UX Portfolio</title>
+<!-- Google Fonts: Epilogue & Plus Jakarta Sans (for body text variation if needed, though Epilogue is requested for all) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ce8e78",
+                        "background-light": "#fbfaf9",
+                        "background-dark": "#2c2e30",
+                        "matisse-sage": "#84A7A1",
+                        "matisse-ochre": "#E7D58C",
+                        "matisse-dark": "#181211",
+                        "matisse-blue": "#3E5F8A",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Utilities for that organic feel */
+        .organic-shape {
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            33% { transform: translate(10px, -15px) rotate(2deg); }
+            66% { transform: translate(-5px, 10px) rotate(-1deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+
+        .text-outline {
+            -webkit-text-stroke: 1px currentColor;
+            color: transparent;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-matisse-dark dark:text-background-light font-display overflow-x-hidden selection:bg-primary selection:text-white">
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12 backdrop-blur-sm bg-background-light/80 dark:bg-background-dark/80 transition-colors duration-300">
+<a class="text-xl font-bold tracking-tight z-50 hover:text-primary transition-colors" href="#">
+            Studio Matisse
+        </a>
+<!-- Desktop Menu -->
+<div class="hidden md:flex items-center gap-12">
+<a class="text-sm font-medium hover:text-primary hover:italic transition-all duration-300 decoration-primary underline-offset-4 hover:underline" href="#work">Work</a>
+<a class="text-sm font-medium hover:text-primary hover:italic transition-all duration-300 decoration-primary underline-offset-4 hover:underline" href="#about">About</a>
+<a class="text-sm font-medium hover:text-primary hover:italic transition-all duration-300 decoration-primary underline-offset-4 hover:underline" href="#contact">Contact</a>
+</div>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden z-50 text-matisse-dark dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- Hero Section -->
+<header class="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-20 overflow-hidden">
+<!-- Abstract Background Shapes -->
+<div class="absolute top-0 left-0 w-full h-full pointer-events-none -z-10 opacity-80 mix-blend-multiply dark:mix-blend-normal">
+<!-- Sage Shape -->
+<svg class="absolute top-[-10%] right-[-10%] w-[60vh] h-[60vh] text-matisse-sage fill-current organic-shape md:w-[80vh] md:h-[80vh]" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.3C93.5,8.6,82.2,21.5,71.2,32.7C60.2,43.9,49.5,53.4,37.6,60.8C25.7,68.2,12.6,73.5,-1.2,75.6C-15,77.7,-29.7,76.6,-42.6,70.2C-55.5,63.8,-66.6,52.1,-74.6,38.5C-82.6,24.9,-87.5,9.4,-85.4,-5.2C-83.3,-19.8,-74.2,-33.5,-63.4,-44.6C-52.6,-55.7,-40.1,-64.2,-27.2,-72.1C-14.3,-80,-1,-87.3,13.6,-86.3C28.2,-85.3,42.4,-76,44.7,-76.4Z" transform="translate(100 100)"></path>
+</svg>
+<!-- Ochre Shape -->
+<svg class="absolute bottom-[-5%] left-[-5%] w-[50vh] h-[50vh] text-matisse-ochre fill-current organic-shape md:w-[60vh] md:h-[60vh]" style="animation-delay: -3s;" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M41.4,-72.3C52.9,-65.1,61.1,-52,69.5,-39.3C77.9,-26.6,86.5,-14.3,85.6,-2.4C84.7,9.5,74.3,21,65.3,33.1C56.3,45.2,48.7,57.9,38,65.5C27.3,73.1,13.4,75.6,0.3,75.1C-12.8,74.6,-25.9,71.1,-37.8,64.2C-49.7,57.3,-60.4,47,-68.8,34.9C-77.2,22.8,-83.3,8.9,-80.6,-3.6C-77.9,-16.1,-66.4,-27.2,-55.6,-37.6C-44.8,-48,-34.7,-57.7,-23.4,-65.1C-12.1,-72.5,-0.4,-77.6,12.2,-78.9C24.8,-80.2,49.6,-77.6,41.4,-72.3Z" transform="translate(100 100)"></path>
+</svg>
+</div>
+<div class="relative max-w-5xl w-full mx-auto">
+<h1 class="text-[14vw] md:text-[9rem] font-bold leading-[0.85] tracking-tight mb-8 text-matisse-dark dark:text-white mix-blend-hard-light dark:mix-blend-normal">
+                ELARA<br/>VANCE
+            </h1>
+<div class="flex flex-col md:flex-row gap-8 items-start justify-between w-full mt-12">
+<p class="max-w-md text-lg md:text-xl leading-relaxed text-matisse-dark/80 dark:text-white/80 font-body">
+                    Crafting digital experiences with a human touch. A portfolio inspired by organic forms and editorial clarity.
+                </p>
+<a class="group flex items-center gap-3 text-lg font-bold" href="#work">
+<span class="bg-primary text-white p-3 rounded-full group-hover:bg-matisse-dark transition-colors duration-300">
+<span class="material-symbols-outlined block rotate-90">arrow_right_alt</span>
+</span>
+<span class="group-hover:translate-x-1 transition-transform duration-300">View Selected Work</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Selected Work Section (Masonry Grid) -->
+<section class="px-6 md:px-12 py-20 md:py-32" id="work">
+<div class="max-w-[1200px] mx-auto">
+<div class="flex items-end justify-between mb-16 border-b border-matisse-dark/10 pb-8">
+<h2 class="text-4xl md:text-6xl font-bold">Selected Works</h2>
+<span class="hidden md:block text-sm font-body text-matisse-dark/60 dark:text-white/60">(2023 — 2024)</span>
+</div>
+<!-- CSS Columns for Masonry Effect -->
+<div class="columns-1 md:columns-2 gap-12 space-y-12">
+<!-- Project 1 -->
+<div class="group break-inside-avoid cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl bg-[#E0E5EC] dark:bg-zinc-800 mb-6 transition-transform duration-500 ease-out group-hover:-translate-y-2">
+<div class="aspect-[4/5] w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist banking app interface on a sage green background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDsMWbgnvHqsnuebGTtfSXwAIS__RPM98D9mPUucwGcZcenik4Ay_02uVk28637zW12tfigIuhZylJSylKM2Xz-2kF818Ep2Gvv1FN0c2rYm5T2efe-m7LO9lliK47b8UY6nCpzuAbn3gkJoJd6haYvC6TT8kxQek_e0XXPbW6IVcGXACKCgcwwEwA4W6_yoQQ70ah4XX7kOUfLH2IskJ-k4QaSYzcPRd4An9uGfxup15s6Z0SjsVsO9BN3cfxVVJLn6kApooUJwcfC');"></div>
+<!-- Color Overlay on hover -->
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold uppercase tracking-widest text-primary font-body">Fintech</span>
+<h3 class="text-3xl font-bold group-hover:text-primary transition-colors">Nova Dashboard</h3>
+<p class="text-matisse-dark/60 dark:text-white/60 font-body text-sm mt-1">Redesigning the future of personal banking.</p>
+</div>
+</div>
+<!-- Project 2 (Shorter Aspect Ratio) -->
+<div class="group break-inside-avoid cursor-pointer pt-12 md:pt-24">
+<div class="relative overflow-hidden rounded-2xl bg-[#F4F1EA] dark:bg-zinc-800 mb-6 transition-transform duration-500 ease-out group-hover:-translate-y-2">
+<div class="aspect-[1/1] w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Abstract colorful shapes representing a music streaming app" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDldrnEfyGZPySlyNUrcvfN57vI0wAMqbNJFXEo2E9n2TbccinVkDV24JmSY-4LCpb9XNtEO3iiNPkOfqdyrN3RnDD-1O_4Nuc_iMXz0Zjwtin8Qc_tscv9I7PsFybFjy7QC451zeAi4dBcBb3XHsM6MszAcpe2HXYOOSeir-Qx5md8hlOfDFkyAH4VENB1cCFa2s_QlHvLDfQDEyw3t_wU1SkQzgl_K_qQcRss2qQ9UQGIwBcbkKDi7FxwNtFIL00qmxTnUyfZ8ZmT');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold uppercase tracking-widest text-primary font-body">Mobile App</span>
+<h3 class="text-3xl font-bold group-hover:text-primary transition-colors">Echo Stream</h3>
+<p class="text-matisse-dark/60 dark:text-white/60 font-body text-sm mt-1">Immersive audio experience design.</p>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="group break-inside-avoid cursor-pointer">
+<div class="relative overflow-hidden rounded-2xl bg-[#E8E8E8] dark:bg-zinc-800 mb-6 transition-transform duration-500 ease-out group-hover:-translate-y-2">
+<div class="aspect-[3/4] w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Clean architectural website layout displayed on a tablet" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuArD5sh965DUcc1GzuoJYAaVz4tJ9h0_gaBOokOKipTgu0Xo4hMicXl2xpB9RiusIuEASSfX06z_Lb6D2YhtpwB1RQQWsCbsmRx8FLcI4dqQu_56wSXmf3rwudxsDFqy6V3n-c9c4QolJjW2XknU2qGfGHY84fBmQCpZB1UlcqdJVn2WgOrKil3DG8lFCs6uyIk3glUDcBJetsX6gGyek2ecjc-thvi-AluYsW9kGY7cmVEN5WnYbC9RP0YITRE0DcEz51OwXropM7K');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold uppercase tracking-widest text-primary font-body">Web Design</span>
+<h3 class="text-3xl font-bold group-hover:text-primary transition-colors">Arch &amp; Co.</h3>
+<p class="text-matisse-dark/60 dark:text-white/60 font-body text-sm mt-1">Minimalist portfolio for architects.</p>
+</div>
+</div>
+<!-- Project 4 -->
+<div class="group break-inside-avoid cursor-pointer pt-0 md:pt-12">
+<div class="relative overflow-hidden rounded-2xl bg-[#D9D9D9] dark:bg-zinc-800 mb-6 transition-transform duration-500 ease-out group-hover:-translate-y-2">
+<div class="aspect-[16/10] w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="E-commerce fashion website interface" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCwKA3OC6UAwUFQwncQsbYI2Sq6BBC7DqYJsD9uxPNHGFOwucUxdXwS7DeblME_5toflaw5IW-O4iNuA09-ScPFNxn1sDgZxrbn6MUWqxIgwDG5QCay8IRfFT4QBMwD8SifIvZJeY4gjDPrdEd6T-hGDIIEGI9duAsl8rL3cvStMZXLSXksIio4b9hAXwE4AyA1hU1RVtaEljPAGcDhWow8IE-vUu-6YXNlapWxUZo03bk3X1bwwHFF3DsZ-lnTWnbmT-a38YFV9dPn');"></div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold uppercase tracking-widest text-primary font-body">E-Commerce</span>
+<h3 class="text-3xl font-bold group-hover:text-primary transition-colors">Vogue Market</h3>
+<p class="text-matisse-dark/60 dark:text-white/60 font-body text-sm mt-1">Seamless shopping checkout flows.</p>
+</div>
+</div>
+</div>
+<div class="mt-20 text-center">
+<button class="inline-flex items-center gap-2 px-8 py-4 border-2 border-matisse-dark dark:border-white rounded-full font-bold hover:bg-matisse-dark hover:text-white dark:hover:bg-white dark:hover:text-background-dark transition-all duration-300">
+                    View Archive
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="px-6 md:px-12 py-20 relative overflow-hidden" id="about">
+<!-- Background Terracotta Shape -->
+<div class="absolute right-[-10%] top-[20%] w-[600px] h-[600px] text-primary/10 fill-current -z-10 pointer-events-none hidden md:block">
+<svg viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M45.7,-76.4C58.9,-69.3,69.1,-55.6,76.9,-41.2C84.7,-26.8,90.1,-11.7,87.6,2.2C85.1,16.1,74.7,28.8,64.3,39.9C53.9,51,43.5,60.5,31.7,66.8C19.9,73.1,6.7,76.2,-5.2,74.9C-17.1,73.6,-27.7,67.9,-38.3,60.6C-48.9,53.3,-59.5,44.4,-67.6,33.1C-75.7,21.8,-81.3,8.1,-79.8,-4.8C-78.3,-17.7,-69.7,-29.8,-59.5,-39.8C-49.3,-49.8,-37.5,-57.7,-25.3,-65.4C-13.1,-73.1,-0.5,-80.6,13.2,-80.3C26.9,-80,45.7,-76.4,45.7,-76.4Z" transform="translate(100 100)"></path>
+</svg>
+</div>
+<div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+<!-- Image Side with organic mask -->
+<div class="relative flex justify-center md:justify-end group">
+<!-- SVG Blob Mask Container -->
+<div class="relative w-full max-w-sm aspect-[3/4]">
+<!-- This image is masked by CSS clip-path or we simulate it by placing it inside a div with overflow hidden and border radius, but for true organic feel, we will use a custom border radius -->
+<div class="w-full h-full bg-cover bg-center shadow-xl transition-all duration-700 grayscale group-hover:grayscale-0" data-alt="Portrait of the designer Elara Vance smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSMgfnOtlyJrPjK6b5XwxJgbpmWX-czQ0SusyC8NvB8FVGuOEBJZ0fCP1jZuw9M8kqISBsIdPEg8_-yE_0CMQHzY0U_XVcW7YNVgyPtVaXLL10tuuCJ_41oVbZdqNVA9cbG2rOcLF2gZMfNh2xjAJPBlUgdcGeTowPoI-lJo8z_Wi6D2bSof6h68fMmVyIUV4_7dQsgcW8x6ug5fdyGI65-QtQatjrV2a_LKNeBerUBeMwHoWqYtX_afXB-Ieo5GIbmgmfR8W8sqJi'); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;">
+</div>
+<!-- Decorative small shapes -->
+<div class="absolute -bottom-8 -left-8 w-24 h-24 bg-matisse-blue rounded-full mix-blend-multiply opacity-80 z-[-1] animate-pulse"></div>
+<div class="absolute -top-4 -right-4 w-16 h-16 bg-matisse-ochre rounded-full mix-blend-multiply opacity-80 z-[-1]"></div>
+</div>
+</div>
+<!-- Content Side -->
+<div class="flex flex-col gap-6">
+<span class="text-primary font-bold tracking-widest uppercase text-sm font-body">About The Designer</span>
+<h2 class="text-4xl md:text-5xl font-bold leading-tight">
+                    Data-driven logic meets <span class="italic text-primary">artistic intuition</span>.
+                </h2>
+<div class="space-y-4 text-matisse-dark/70 dark:text-white/70 font-body text-lg leading-relaxed">
+<p>
+                        I believe digital spaces should feel as organic and welcoming as physical ones. Inspired by the cut-outs of Matisse, I strive for simplicity and bold expression in every interface.
+                    </p>
+<p>
+                        With 5+ years of experience in Fintech and E-commerce, I help brands translate complex requirements into seamless, delightful user journeys.
+                    </p>
+</div>
+<div class="flex gap-4 pt-4">
+<a class="text-sm font-bold border-b-2 border-matisse-dark pb-1 hover:text-primary hover:border-primary transition-colors" href="#">Download Resume</a>
+<a class="text-sm font-bold border-b-2 border-matisse-dark pb-1 hover:text-primary hover:border-primary transition-colors" href="#">Read Process</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Services / Skills Strip (Optional but good for portfolio) -->
+<div class="w-full overflow-hidden bg-primary py-4 mt-12 mb-0">
+<div class="flex whitespace-nowrap gap-12 animate-[marquee_20s_linear_infinite] text-white font-bold text-2xl uppercase tracking-wider opacity-90">
+<span>User Interface</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>Experience Design</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>Prototyping</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>Design Systems</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>Interaction</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>User Interface</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>Experience Design</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>Prototyping</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>Design Systems</span>
+<span class="w-2 h-2 rounded-full bg-white self-center"></span>
+<span>Interaction</span>
+</div>
+</div>
+<style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+<!-- Footer Contact -->
+<footer class="bg-background-light dark:bg-background-dark pt-20 pb-12 px-6 md:px-12 relative" id="contact">
+<div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+<h2 class="text-3xl md:text-5xl font-bold mb-8">Have an idea? Let's create.</h2>
+<a class="group relative inline-block" href="mailto:hello@elara.design">
+<span class="text-[8vw] md:text-[6rem] font-black tracking-tighter leading-none text-primary group-hover:text-matisse-dark transition-colors duration-500">
+                    hello@elara.design
+                </span>
+<!-- Underline squiggle SVG -->
+<svg class="w-full h-4 md:h-8 text-matisse-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-2" fill="none" viewbox="0 0 200 9" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.00025 7.00002C32.0946 -1.27218 53.6446 8.24301 85.0002 4.50002C116.356 0.757036 153.287 11.0028 198 2.00002" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</a>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 w-full border-t border-matisse-dark/10 pt-12">
+<div class="flex flex-col items-start gap-4">
+<span class="text-xs font-bold uppercase tracking-widest text-matisse-dark/50 dark:text-white/50">Socials</span>
+<div class="flex flex-col gap-2 text-lg font-medium">
+<a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-primary transition-colors" href="#">Dribbble</a>
+<a class="hover:text-primary transition-colors" href="#">Instagram</a>
+</div>
+</div>
+<div class="flex flex-col items-start gap-4">
+<span class="text-xs font-bold uppercase tracking-widest text-matisse-dark/50 dark:text-white/50">Location</span>
+<p class="text-lg font-medium">Berlin, Germany<br/>Remote Worldwide</p>
+</div>
+<div class="flex flex-col items-start gap-4 col-span-2 md:col-span-2 md:items-end">
+<span class="text-xs font-bold uppercase tracking-widest text-matisse-dark/50 dark:text-white/50">Current Status</span>
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+</span>
+<p class="text-lg font-medium">Available for new projects</p>
+</div>
+</div>
+</div>
+<div class="w-full flex flex-col md:flex-row justify-between items-center mt-20 pt-8 text-sm text-matisse-dark/40 dark:text-white/40">
+<p>© 2024 Elara Vance. Inspired by Matisse.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-matisse-dark dark:hover:text-white" href="#">Privacy</a>
+<a class="hover:text-matisse-dark dark:hover:text-white" href="#">Imprint</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple script to toggle mobile menu visibility (optional interaction enhancement)
+        const menuBtn = document.querySelector('button.md\\:hidden');
+        // In a real scenario, this would toggle a mobile menu overlay. 
+        // For this single file output without external JS logic, we keep it simple.
+    </script>
+</body></html>
