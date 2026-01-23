@@ -662,6 +662,21 @@ button {
     margin-bottom: var(--space-lg);
     opacity: 0;
     animation: heroReveal 1.2s var(--ease-out) 0.3s forwards;
+    position: relative;
+}
+
+.hero__label::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background: var(--accent);
+    margin-left: 0.25rem;
+    animation: blink 1s step-end infinite, labelCursorFade 3s ease forwards 2s;
+}
+
+@keyframes labelCursorFade {
+    to { opacity: 0; }
 }
 
 .hero__label::before {
@@ -933,6 +948,21 @@ button {
     clip-path: inset(0 0% 0 0);
 }
 
+.section__title::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    margin-top: 0.4em;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 2px;
+    transition: width 1s var(--ease-out) 0.4s;
+}
+
+.reveal.visible .section__title::after {
+    width: clamp(40px, 8vw, 80px);
+}
+
 .section__subtitle {
     font-size: 1rem;
     color: var(--text-secondary);
@@ -1001,6 +1031,29 @@ button {
     box-shadow: 0 8px 40px var(--shadow);
 }
 
+.project::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--bg-tertiary) 60%, transparent),
+        color-mix(in srgb, var(--bg-tertiary) 30%, transparent)
+    );
+    backdrop-filter: blur(0px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-normal) var(--ease-out),
+                backdrop-filter var(--duration-normal) var(--ease-out);
+    z-index: 0;
+}
+
+.project:hover::after {
+    opacity: 0.4;
+    backdrop-filter: blur(2px);
+}
+
 @media (min-width: 768px) {
     .project {
         grid-template-columns: 1fr 1fr;
@@ -1054,6 +1107,12 @@ button {
     align-items: center;
     justify-content: center;
     box-shadow: 0 20px 60px var(--shadow);
+    animation: iconFloat 6s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
 }
 
 .project__icon svg {
@@ -1631,6 +1690,7 @@ button {
 .about__photo:hover img {
     filter: grayscale(0);
     transform: scale(1.02);
+    box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .about__photo::before {
@@ -1676,6 +1736,22 @@ button {
 .about__text p + p {
     margin-top: var(--space-md);
 }
+
+.about__text p {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s var(--ease-out),
+                transform 0.8s var(--ease-out);
+}
+
+.reveal.visible .about__text p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal.visible .about__text p:nth-child(1) { transition-delay: 0.1s; }
+.reveal.visible .about__text p:nth-child(2) { transition-delay: 0.3s; }
+.reveal.visible .about__text p:nth-child(3) { transition-delay: 0.5s; }
 
 .about__text strong {
     color: var(--text-primary);
@@ -1766,6 +1842,8 @@ button {
     background: var(--bg-tertiary);
     border-radius: 1rem;
     align-items: flex-start;
+    position: relative;
+    overflow: visible;
     transition: transform var(--duration-normal) var(--ease-out),
                 box-shadow var(--duration-normal) ease;
 }
@@ -1773,6 +1851,27 @@ button {
 .process__item:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 40px var(--shadow);
+}
+
+.process__item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(var(--space-md) + var(--space-lg) + 1.5rem + 3px);
+    width: 1px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    opacity: 0.2;
+    transition: height 0.8s var(--ease-out);
+    z-index: -1;
+}
+
+.reveal-stagger.visible .process__item::before {
+    height: calc(100% + var(--space-md));
+}
+
+.process__item:last-child::before {
+    display: none;
 }
 
 .process__number {
@@ -2347,12 +2446,30 @@ a:focus-visible {
         filter: none;
     }
 
+    .hero__label::after {
+        display: none;
+    }
+
     .reveal, .reveal-left, .reveal-right, .reveal-scale {
         opacity: 1;
         transform: none;
     }
 
+    .reveal-stagger > * {
+        opacity: 1;
+        transform: none;
+    }
+
+    .about__text p {
+        opacity: 1;
+        transform: none;
+    }
+
     .marquee__track {
+        animation: none;
+    }
+
+    .project__icon {
         animation: none;
     }
 }
