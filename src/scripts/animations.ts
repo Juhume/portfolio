@@ -72,6 +72,23 @@ if (heroShapes.length > 0) {
     });
 }
 
+// Hero interactive mesh - mouse tracking
+const heroSection = document.querySelector('.hero') as HTMLElement;
+const heroMeshEl = document.querySelector('.hero__mesh') as HTMLElement;
+
+if (heroSection && heroMeshEl && window.matchMedia('(hover: hover)').matches) {
+    heroSection.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = heroSection.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        heroMeshEl.style.background = `
+            radial-gradient(ellipse at ${x}% ${y}%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 50%),
+            radial-gradient(ellipse at ${100 - x}% ${100 - y}%, color-mix(in srgb, var(--blue) 8%, transparent) 0%, transparent 50%),
+            radial-gradient(ellipse at ${x * 0.5 + 25}% ${y * 0.5 + 25}%, color-mix(in srgb, var(--sage) 6%, transparent) 0%, transparent 50%)
+        `;
+    });
+}
+
 // Hero rotating words
 const rotateWords = document.querySelectorAll('.hero__rotate-word');
 if (rotateWords.length > 1) {
@@ -87,6 +104,68 @@ if (rotateWords.length > 1) {
         setTimeout(() => prev.classList.remove('exit'), 500);
     }, 2800);
 }
+
+// Text decode/scramble effect
+const decodeElements = document.querySelectorAll('[data-decode]') as NodeListOf<HTMLElement>;
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
+
+decodeElements.forEach(el => {
+    const originalText = el.textContent?.trim() || '';
+    const length = originalText.length;
+    let frame = 0;
+    const totalFrames = length * 1.5;
+
+    const scramble = () => {
+        let output = '';
+        for (let i = 0; i < length; i++) {
+            if (originalText[i] === ' ') {
+                output += ' ';
+            } else if (i < frame) {
+                output += originalText[i];
+            } else {
+                output += chars[Math.floor(Math.random() * chars.length)];
+            }
+        }
+        el.textContent = output;
+        frame += 0.8;
+        if (frame < totalFrames) {
+            requestAnimationFrame(scramble);
+        } else {
+            el.textContent = originalText;
+        }
+    };
+
+    // Start after the hero reveal animation delay
+    setTimeout(scramble, 1200);
+});
+
+// Section number count-up animation
+const sectionNumbers = document.querySelectorAll('.section__number');
+const numberObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const target = parseInt(el.textContent || '0', 10);
+            let current = 0;
+            const duration = 800;
+            const start = performance.now();
+
+            const animate = (now: number) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                current = Math.round(eased * target);
+                el.textContent = String(current).padStart(2, '0');
+                if (progress < 1) requestAnimationFrame(animate);
+            };
+
+            el.textContent = '00';
+            requestAnimationFrame(animate);
+            numberObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+sectionNumbers.forEach(el => numberObserver.observe(el));
 
 // Magnetic effect on buttons
 document.querySelectorAll('.btn').forEach(btn => {

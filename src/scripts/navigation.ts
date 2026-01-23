@@ -38,3 +38,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Active nav link based on scroll position
+const navLinks = document.querySelectorAll('.nav__link') as NodeListOf<HTMLAnchorElement>;
+const sections = document.querySelectorAll('section[id]');
+
+if (navLinks.length > 0 && sections.length > 0) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+            }
+        });
+    }, { threshold: 0.3, rootMargin: '-20% 0px -50% 0px' });
+
+    sections.forEach(section => sectionObserver.observe(section));
+}
