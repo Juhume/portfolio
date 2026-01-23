@@ -12,33 +12,52 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
     revealObserver.observe(el);
 });
 
-// Hero parallax
+// Hero parallax with depth layers
 const heroShapes = document.querySelectorAll('.hero__shape') as NodeListOf<HTMLElement>;
 const heroContent = document.querySelector('.hero__content') as HTMLElement;
 const heroScroll = document.querySelector('.hero__scroll') as HTMLElement;
+const heroMesh = document.querySelector('.hero__mesh') as HTMLElement;
 
 if (heroShapes.length > 0) {
+    let ticking = false;
+
     window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const heroHeight = window.innerHeight;
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
+                const heroHeight = window.innerHeight;
 
-        if (scrollY < heroHeight) {
-            heroShapes.forEach((shape, i) => {
-                const speed = 0.3 + i * 0.15;
-                shape.style.transform = `translateY(${scrollY * speed}px)`;
+                if (scrollY < heroHeight) {
+                    const progress = scrollY / heroHeight;
+
+                    heroShapes.forEach((shape, i) => {
+                        const speed = 0.2 + i * 0.18;
+                        const rotate = (i % 2 === 0 ? 1 : -1) * progress * 8;
+                        const scale = 1 - progress * 0.1 * (i + 1) * 0.3;
+                        shape.style.transform = `translateY(${scrollY * speed}px) rotate(${rotate}deg) scale(${scale})`;
+                    });
+
+                    if (heroContent) {
+                        heroContent.style.transform = `translateY(${scrollY * 0.12}px)`;
+                        heroContent.style.opacity = `${1 - progress * 1.2}`;
+                    }
+
+                    if (heroMesh) {
+                        heroMesh.style.opacity = `${0.4 * (1 - progress * 0.6)}`;
+                    }
+                }
+
+                if (heroScroll) {
+                    if (scrollY > 80) {
+                        heroScroll.classList.add('hidden');
+                    } else {
+                        heroScroll.classList.remove('hidden');
+                    }
+                }
+
+                ticking = false;
             });
-            if (heroContent) {
-                heroContent.style.transform = `translateY(${scrollY * 0.1}px)`;
-                heroContent.style.opacity = `${1 - scrollY / heroHeight}`;
-            }
-        }
-
-        if (heroScroll) {
-            if (scrollY > 80) {
-                heroScroll.classList.add('hidden');
-            } else {
-                heroScroll.classList.remove('hidden');
-            }
+            ticking = true;
         }
     });
 }
