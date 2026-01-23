@@ -1,0 +1,18 @@
+---
+const technologies = ['TypeScript', 'React', 'Next.js', 'Node.js', 'Docker', 'APIs'];
+---
+
+<div class="marquee">
+    <div class="marquee__track">
+        {[0, 1].map(() => (
+            <div class="marquee__content">
+                {technologies.map(tech => (
+                    <>
+                        <span class="marquee__item">{tech}</span>
+                        <span class="marquee__dot"></span>
+                    </>
+                ))}
+            </div>
+        ))}
+    </div>
+</div>

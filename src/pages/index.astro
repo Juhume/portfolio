@@ -4,6 +4,11 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Projects from '../components/Projects.astro';
 import CaseStudy from '../components/CaseStudy.astro';
+import About from '../components/About.astro';
+import Process from '../components/Process.astro';
+import TechMarquee from '../components/TechMarquee.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout>
@@ -11,141 +16,9 @@ import CaseStudy from '../components/CaseStudy.astro';
     <Hero />
     <Projects />
     <CaseStudy />
-
-    <!-- About -->
-    <section class="section" id="sobre-mi">
-        <div class="container">
-            <header class="section__header reveal">
-                <span class="section__number">03</span>
-                <h2 class="section__title">Sobre mi</h2>
-            </header>
-
-            <div class="about__grid">
-                <div class="about__text reveal">
-                    <p>
-                        Trabajo en <strong>aplicaciones de banca</strong> utilizadas por clientes empresa, donde el codigo esta en produccion, los errores importan y los cambios se hacen con cabeza.
-                    </p>
-                    <p>
-                        Mi dia a dia incluye resolver incidencias tecnicas complejas: autenticacion, estado de aplicacion, rendimiento, conectividad. Trabajo con infraestructuras reales, gestion de trafico con Akamai, sistemas Legacy conviviendo con plataformas NextGen.
-                    </p>
-                    <p>
-                        Esta experiencia influye en como programo: <strong>menos magia, mas claridad; menos promesas, mas fiabilidad</strong>.
-                    </p>
-                </div>
-                <blockquote class="about__quote reveal">
-                    No me interesa el codigo como fin en si mismo, sino como herramienta para crear sistemas claros, robustos y bien pensados.
-                </blockquote>
-            </div>
-        </div>
-    </section>
-
-    <!-- Process -->
-    <section class="section process" id="proceso">
-        <div class="container">
-            <header class="section__header reveal">
-                <span class="section__number">04</span>
-                <h2 class="section__title">Como trabajo</h2>
-            </header>
-
-            <div class="process__grid reveal-stagger reveal">
-                <div class="process__item">
-                    <span class="process__marker"></span>
-                    <p class="process__text">Codigo legible antes que ingenioso</p>
-                </div>
-                <div class="process__item">
-                    <span class="process__marker"></span>
-                    <p class="process__text">Tipado fuerte para reducir errores y friccion</p>
-                </div>
-                <div class="process__item">
-                    <span class="process__marker"></span>
-                    <p class="process__text">Componentes y servicios con responsabilidades claras</p>
-                </div>
-                <div class="process__item">
-                    <span class="process__marker"></span>
-                    <p class="process__text">Vision de sistema: frontend, backend, infra y usuario</p>
-                </div>
-            </div>
-
-            <div class="process__note reveal">
-                <p>Pensar en el mantenimiento desde el primer commit. Software pensado para durar.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Marquee -->
-    <div class="marquee">
-        <div class="marquee__track">
-            <div class="marquee__content">
-                <span class="marquee__item">TypeScript</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">React</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">Next.js</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">Node.js</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">Docker</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">APIs</span>
-                <span class="marquee__dot"></span>
-            </div>
-            <div class="marquee__content">
-                <span class="marquee__item">TypeScript</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">React</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">Next.js</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">Node.js</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">Docker</span>
-                <span class="marquee__dot"></span>
-                <span class="marquee__item">APIs</span>
-                <span class="marquee__dot"></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact -->
-    <section class="section" id="contacto">
-        <div class="container">
-            <header class="section__header reveal">
-                <span class="section__number">05</span>
-                <h2 class="section__title">Contacto</h2>
-            </header>
-
-            <div class="contact__text reveal">
-                <p>Busco proyectos donde pueda aportar vision de sistema y codigo que dure. Si encaja, hablemos.</p>
-            </div>
-
-            <a href="mailto:juhume.exe@gmail.com" class="contact__email reveal" data-hover>
-                juhume.exe@gmail.com
-            </a>
-
-            <div class="contact__social reveal">
-                <a href="https://linkedin.com/in/juhume" target="_blank" rel="noopener" class="social-link" data-hover>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                        <rect x="2" y="9" width="4" height="12"/>
-                        <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                    LinkedIn
-                </a>
-                <a href="https://github.com/juhume" target="_blank" rel="noopener" class="social-link" data-hover>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                    </svg>
-                    GitHub
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer__inner">
-            <span class="footer__copy">Julio Huerta</span>
-            <span class="footer__status">Disponible para proyectos</span>
-        </div>
-    </footer>
+    <About />
+    <Process />
+    <TechMarquee />
+    <Contact />
+    <Footer />
 </BaseLayout>
