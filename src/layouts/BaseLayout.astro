@@ -10,6 +10,8 @@ const {
     title = 'Julio Huerta | Desarrollador Web · Frontend / Full-Stack',
     description = 'Aplicaciones web modernas con React, Next.js, TypeScript, Node.js y Docker. Codigo claro, sistemas robustos.',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -19,8 +21,39 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Julio Huerta" />
+    <meta name="keywords" content="desarrollador web, frontend, full-stack, React, Next.js, TypeScript, Node.js, Docker" />
     <meta name="theme-color" content="#0a0a0a" />
+    <link rel="canonical" href={canonicalURL} />
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Julio Huerta" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Julio Huerta",
+        "url": "https://juliohuerta.dev",
+        "jobTitle": "Desarrollador Web Full-Stack",
+        "knowsAbout": ["React", "Next.js", "TypeScript", "Node.js", "Docker"],
+        "sameAs": [
+            "https://linkedin.com/in/juhume",
+            "https://github.com/juhume"
+        ]
+    })} />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
