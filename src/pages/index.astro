@@ -1,0 +1,413 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav__inner">
+            <a href="#" class="nav__logo" data-hover>Julio Huerta</a>
+            <div class="nav__right">
+                <ul class="nav__links">
+                    <li><a href="#proyectos" class="nav__link" data-hover>Proyectos</a></li>
+                    <li><a href="#caso" class="nav__link" data-hover>Caso</a></li>
+                    <li><a href="#sobre-mi" class="nav__link" data-hover>Sobre mi</a></li>
+                    <li><a href="#contacto" class="nav__link" data-hover>Contacto</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" data-hover>
+                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <button class="nav__menu-btn" id="menuBtn" aria-label="Menu" data-hover>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#proyectos" class="mobile-menu__link" data-hover>Proyectos</a>
+        <a href="#caso" class="mobile-menu__link" data-hover>Caso</a>
+        <a href="#sobre-mi" class="mobile-menu__link" data-hover>Sobre mi</a>
+        <a href="#contacto" class="mobile-menu__link" data-hover>Contacto</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero__bg">
+            <div class="hero__shape hero__shape--1"></div>
+            <div class="hero__shape hero__shape--2"></div>
+        </div>
+
+        <div class="container hero__content">
+            <span class="hero__label">Frontend / Full-Stack</span>
+            <h1 class="hero__title">
+                Aplicaciones web que llegan a <em>produccion</em>.
+            </h1>
+            <p class="hero__subtitle">
+                React, Next.js, TypeScript, Node.js, Docker. Experiencia en banca me dio criterio tecnico real sobre lo que implica que el software funcione cuando hay usuarios y responsabilidad.
+            </p>
+            <div class="hero__cta">
+                <a href="#proyectos" class="btn btn--primary" data-hover>
+                    Ver proyectos
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 8h10M9 4l4 4-4 4"/>
+                    </svg>
+                </a>
+                <a href="#caso" class="btn btn--secondary" data-hover>Leer caso Espejo</a>
+            </div>
+        </div>
+
+        <div class="hero__scroll">
+            <div class="hero__scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="proyectos">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">01</span>
+                <h2 class="section__title">Proyectos</h2>
+                <p class="section__subtitle">Pocos. Profundos. Con criterio.</p>
+            </header>
+
+            <div class="projects-grid">
+                <!-- Espejo -->
+                <article class="project reveal">
+                    <div class="project__visual">
+                        <div class="project__gradient project__gradient--coral"></div>
+                        <div class="project__visual-inner">
+                            <div class="project__icon">
+                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 20h9"/>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project__content">
+                        <div class="project__meta">
+                            <span class="project__category">Producto</span>
+                            <span class="project__badge">Caso principal</span>
+                        </div>
+                        <h3 class="project__title">Espejo</h3>
+                        <p class="project__description">
+                            App de journaling privado con cifrado E2E. Proyecto end-to-end: diseno tecnico, frontend, backend y despliegue con Docker.
+                        </p>
+                        <div class="project__tags">
+                            <span class="project__tag">Next.js</span>
+                            <span class="project__tag">Node.js</span>
+                            <span class="project__tag">TypeScript</span>
+                            <span class="project__tag">Docker</span>
+                            <span class="project__tag">E2E Encryption</span>
+                        </div>
+                        <p class="project__role">Full-Stack · Arquitectura completa</p>
+                        <a href="#caso" class="project__link" data-hover>
+                            Ver caso completo
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 8h10M9 4l4 4-4 4"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Homelab -->
+                <article class="project reveal">
+                    <div class="project__visual">
+                        <div class="project__gradient project__gradient--blue"></div>
+                        <div class="project__visual-inner">
+                            <div class="project__icon">
+                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--blue);">
+                                    <rect x="2" y="2" width="20" height="8" rx="2"/>
+                                    <rect x="2" y="14" width="20" height="8" rx="2"/>
+                                    <circle cx="6" cy="6" r="1" fill="currentColor"/>
+                                    <circle cx="6" cy="18" r="1" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project__content">
+                        <div class="project__meta">
+                            <span class="project__category" style="color: var(--blue);">DevOps</span>
+                        </div>
+                        <h3 class="project__title">Homelab</h3>
+                        <p class="project__description">
+                            Infraestructura personal con Docker Compose. Frontend, backend, servicios auxiliares. Entornos reproducibles y controlados.
+                        </p>
+                        <div class="project__tags">
+                            <span class="project__tag">Docker</span>
+                            <span class="project__tag">Docker Compose</span>
+                            <span class="project__tag">Linux</span>
+                            <span class="project__tag">Networking</span>
+                        </div>
+                        <p class="project__role">Infraestructura + Despliegue</p>
+                    </div>
+                </article>
+
+                <!-- Microinteracciones -->
+                <article class="project reveal">
+                    <div class="project__visual">
+                        <div class="project__gradient project__gradient--gold"></div>
+                        <div class="project__visual-inner">
+                            <div class="project__icon">
+                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--gold);">
+                                    <path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project__content">
+                        <div class="project__meta">
+                            <span class="project__category" style="color: var(--gold);">Experimento</span>
+                        </div>
+                        <h3 class="project__title">Microinteracciones</h3>
+                        <p class="project__description">
+                            Laboratorio de UX. Animaciones, transiciones, detalles que importan. Alcance limitado, ejecucion cuidada.
+                        </p>
+                        <p class="project__role">Diseno + Desarrollo</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="section case-study" id="caso">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">02</span>
+                <h2 class="section__title">Caso: Espejo</h2>
+            </header>
+
+            <p class="case-study__question reveal">
+                "Proyecto end-to-end: desde el diseno tecnico hasta el despliegue."
+            </p>
+
+            <div class="case-blocks">
+                <div class="case-block reveal">
+                    <div class="case-block__label">Problema</div>
+                    <div class="case-block__content">
+                        <p>Las apps de journaling priorizan rachas y gamificacion. Eso genera presion, no introspeccion.</p>
+                        <p>Los usuarios escriben para mantener una racha, no para reflexionar.</p>
+                    </div>
+                </div>
+
+                <div class="case-block reveal">
+                    <div class="case-block__label">Decisiones</div>
+                    <div class="case-block__content">
+                        <ul class="case-block__list">
+                            <li>Privacidad por defecto, no como opcion avanzada</li>
+                            <li>Cifrado E2E real, aunque complique el desarrollo</li>
+                            <li>Interfaz silenciosa, sin estimulos innecesarios</li>
+                            <li>Funciones solo si no rompen el ritual de escribir</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="case-block reveal">
+                    <div class="case-block__label">Renuncias</div>
+                    <div class="case-block__content">
+                        <p>Tan importante como lo que construyes es lo que decides no hacer:</p>
+                        <div class="renuncias">
+                            <div class="renuncia">
+                                <span class="renuncia__label">No hay</span>
+                                <span class="renuncia__value">feed</span>
+                            </div>
+                            <div class="renuncia">
+                                <span class="renuncia__label">No hay</span>
+                                <span class="renuncia__value">social</span>
+                            </div>
+                            <div class="renuncia">
+                                <span class="renuncia__label">No hay</span>
+                                <span class="renuncia__value">algoritmos</span>
+                            </div>
+                            <div class="renuncia">
+                                <span class="renuncia__label">No hay</span>
+                                <span class="renuncia__value">growth hacks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-block reveal">
+                    <div class="case-block__label">Stack</div>
+                    <div class="case-block__content">
+                        <p>Frontend en Next.js, backend en Node.js, cifrado en cliente, despliegue con Docker.</p>
+                        <div class="stack-tags">
+                            <span class="stack-tag">Next.js</span>
+                            <span class="stack-tag">React</span>
+                            <span class="stack-tag">Node.js</span>
+                            <span class="stack-tag">TypeScript</span>
+                            <span class="stack-tag">Docker</span>
+                            <span class="stack-tag">E2E Encryption</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-block reveal">
+                    <div class="case-block__label">Aprendizaje</div>
+                    <div class="case-block__content">
+                        <p class="case-block__highlight">Tomar decisiones tecnicas completas, no solo escribir codigo.</p>
+                        <p>Disenar la arquitectura, elegir el stack, implementar frontend y backend, configurar el despliegue. Ver el sistema completo.</p>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <div class="highlight-box">
+                        <h4 class="highlight-box__title">Enfoque</h4>
+                        <p class="highlight-box__text">
+                            Proyecto pensado como producto real, con codigo que puede evolucionar. No solo "que funcione", sino que se entienda y se mantenga.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="sobre-mi">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">03</span>
+                <h2 class="section__title">Sobre mi</h2>
+            </header>
+
+            <div class="about__grid">
+                <div class="about__text reveal">
+                    <p>
+                        Trabajo en <strong>aplicaciones de banca</strong> utilizadas por clientes empresa, donde el codigo esta en produccion, los errores importan y los cambios se hacen con cabeza.
+                    </p>
+                    <p>
+                        Mi dia a dia incluye resolver incidencias tecnicas complejas: autenticacion, estado de aplicacion, rendimiento, conectividad. Trabajo con infraestructuras reales, gestion de trafico con Akamai, sistemas Legacy conviviendo con plataformas NextGen.
+                    </p>
+                    <p>
+                        Esta experiencia influye en como programo: <strong>menos magia, mas claridad; menos promesas, mas fiabilidad</strong>.
+                    </p>
+                </div>
+                <blockquote class="about__quote reveal">
+                    No me interesa el codigo como fin en si mismo, sino como herramienta para crear sistemas claros, robustos y bien pensados.
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section process" id="proceso">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">04</span>
+                <h2 class="section__title">Como trabajo</h2>
+            </header>
+
+            <div class="process__grid reveal-stagger reveal">
+                <div class="process__item">
+                    <span class="process__marker"></span>
+                    <p class="process__text">Codigo legible antes que ingenioso</p>
+                </div>
+                <div class="process__item">
+                    <span class="process__marker"></span>
+                    <p class="process__text">Tipado fuerte para reducir errores y friccion</p>
+                </div>
+                <div class="process__item">
+                    <span class="process__marker"></span>
+                    <p class="process__text">Componentes y servicios con responsabilidades claras</p>
+                </div>
+                <div class="process__item">
+                    <span class="process__marker"></span>
+                    <p class="process__text">Vision de sistema: frontend, backend, infra y usuario</p>
+                </div>
+            </div>
+
+            <div class="process__note reveal">
+                <p>Pensar en el mantenimiento desde el primer commit. Software pensado para durar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee__track">
+            <div class="marquee__content">
+                <span class="marquee__item">TypeScript</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">React</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">Next.js</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">Node.js</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">Docker</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">APIs</span>
+                <span class="marquee__dot"></span>
+            </div>
+            <div class="marquee__content">
+                <span class="marquee__item">TypeScript</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">React</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">Next.js</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">Node.js</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">Docker</span>
+                <span class="marquee__dot"></span>
+                <span class="marquee__item">APIs</span>
+                <span class="marquee__dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <section class="section" id="contacto">
+        <div class="container">
+            <header class="section__header reveal">
+                <span class="section__number">05</span>
+                <h2 class="section__title">Contacto</h2>
+            </header>
+
+            <div class="contact__text reveal">
+                <p>Busco proyectos donde pueda aportar vision de sistema y codigo que dure. Si encaja, hablemos.</p>
+            </div>
+
+            <a href="mailto:juhume.exe@gmail.com" class="contact__email reveal" data-hover>
+                juhume.exe@gmail.com
+            </a>
+
+            <div class="contact__social reveal">
+                <a href="https://linkedin.com/in/juhume" target="_blank" rel="noopener" class="social-link" data-hover>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/juhume" target="_blank" rel="noopener" class="social-link" data-hover>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <span class="footer__copy">Julio Huerta</span>
+            <span class="footer__status">Disponible para proyectos</span>
+        </div>
+    </footer>
+</BaseLayout>
