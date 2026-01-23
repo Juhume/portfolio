@@ -212,6 +212,23 @@ button {
 }
 
 /* ==========================================
+   Scroll Progress
+   ========================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
+    background-size: 200% 100%;
+    animation: gradientSlide 3s ease-in-out infinite;
+    z-index: 10001;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+}
+
+/* ==========================================
    Navigation
    ========================================== */
 .nav {
@@ -249,8 +266,17 @@ button {
 }
 
 .nav__logo:hover {
-    letter-spacing: 0.08em;
-    opacity: 0.8;
+    letter-spacing: 0.06em;
+    animation: logoGlitch 0.3s ease-out;
+}
+
+@keyframes logoGlitch {
+    0% { text-shadow: none; }
+    20% { text-shadow: -2px 0 var(--accent), 2px 0 var(--blue); }
+    40% { text-shadow: 2px 0 var(--accent), -2px 0 var(--blue); }
+    60% { text-shadow: -1px 0 var(--gold), 1px 0 var(--accent); }
+    80% { text-shadow: 1px 0 var(--blue), -1px 0 var(--gold); }
+    100% { text-shadow: none; }
 }
 
 .nav__right {
@@ -385,23 +411,25 @@ button {
     position: fixed;
     inset: 0;
     z-index: 99;
-    background-color: color-mix(in srgb, var(--bg-primary) 92%, transparent);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background-color: color-mix(in srgb, var(--bg-primary) 95%, transparent);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: var(--space-lg);
-    opacity: 0;
+    clip-path: circle(0% at calc(100% - 40px) 40px);
     visibility: hidden;
-    transition: opacity var(--duration-normal) ease,
-                visibility var(--duration-normal) ease;
+    transition: clip-path 0.6s var(--ease-out),
+                visibility 0s 0.6s;
 }
 
 .mobile-menu.active {
-    opacity: 1;
+    clip-path: circle(150% at calc(100% - 40px) 40px);
     visibility: visible;
+    transition: clip-path 0.6s var(--ease-out),
+                visibility 0s 0s;
 }
 
 .mobile-menu__link {
@@ -411,25 +439,26 @@ button {
     letter-spacing: -0.02em;
     font-feature-settings: 'liga' 1, 'kern' 1;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity var(--duration-normal) ease,
-                transform var(--duration-normal) var(--ease-out),
-                color var(--duration-fast) ease;
+    transform: translateX(-30px) rotate(-2deg);
+    transition: opacity 0.4s ease,
+                transform 0.5s var(--ease-out),
+                color var(--duration-fast) ease,
+                letter-spacing var(--duration-normal) var(--ease-out);
 }
 
 .mobile-menu.active .mobile-menu__link {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0) rotate(0deg);
 }
 
-.mobile-menu.active .mobile-menu__link:nth-child(1) { transition-delay: 0.1s; }
-.mobile-menu.active .mobile-menu__link:nth-child(2) { transition-delay: 0.15s; }
-.mobile-menu.active .mobile-menu__link:nth-child(3) { transition-delay: 0.2s; }
-.mobile-menu.active .mobile-menu__link:nth-child(4) { transition-delay: 0.25s; }
-.mobile-menu.active .mobile-menu__link:nth-child(5) { transition-delay: 0.3s; }
+.mobile-menu.active .mobile-menu__link:nth-child(1) { transition-delay: 0.2s; }
+.mobile-menu.active .mobile-menu__link:nth-child(2) { transition-delay: 0.28s; }
+.mobile-menu.active .mobile-menu__link:nth-child(3) { transition-delay: 0.36s; }
+.mobile-menu.active .mobile-menu__link:nth-child(4) { transition-delay: 0.44s; }
 
 .mobile-menu__link:hover {
     color: var(--accent);
+    letter-spacing: 0.05em;
 }
 
 /* ==========================================
@@ -942,6 +971,22 @@ button {
     opacity: 0.6;
 }
 
+.project__visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.3;
+    background-image: radial-gradient(circle, var(--text-muted) 1px, transparent 1px);
+    background-size: 24px 24px;
+    transition: opacity var(--duration-normal) ease;
+    pointer-events: none;
+}
+
+.project:hover .project__visual::before {
+    opacity: 0.15;
+}
+
 .project__gradient--coral {
     background:
         radial-gradient(ellipse at 30% 20%, color-mix(in srgb, var(--accent) 25%, transparent) 0%, transparent 60%),
@@ -1160,10 +1205,11 @@ button {
 }
 
 .case-block__label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: 'DM Mono', 'SF Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
     color: var(--accent);
     position: relative;
     padding-top: var(--space-md);
@@ -1171,26 +1217,28 @@ button {
 }
 
 .case-block__label::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 24px;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 1px;
-}
-
-.case-block__label::after {
-    content: '›';
+    content: '//';
     position: absolute;
     left: 0;
     top: var(--space-md);
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 0.7rem;
     color: var(--accent);
-    opacity: 0.6;
-    line-height: 1;
+    opacity: 0.5;
+}
+
+.case-block__label::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 0.85em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
 
 .case-block__content {
@@ -1435,17 +1483,18 @@ button {
 .about__photo::after {
     content: '';
     position: absolute;
-    inset: -6px;
+    inset: -8px;
     border-radius: 1.75rem;
-    border: 1px solid var(--border);
+    border: 1.5px dashed color-mix(in srgb, var(--accent) 30%, transparent);
     pointer-events: none;
     transition: border-color var(--duration-normal) ease,
-                transform var(--duration-normal) var(--ease-out);
+                transform 8s linear;
+    transform: rotate(0deg);
 }
 
 .about__photo:hover::after {
-    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-    transform: rotate(2deg) scale(1.01);
+    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+    transform: rotate(360deg);
 }
 
 .about__text {
@@ -1480,21 +1529,46 @@ button {
     letter-spacing: -0.01em;
     font-feature-settings: 'liga' 1, 'kern' 1;
     color: var(--text-primary);
-    padding-left: var(--space-lg);
-    border-left: 3px solid var(--accent);
+    padding: var(--space-md) var(--space-lg);
+    border-left: 3px solid transparent;
     position: relative;
+    overflow: hidden;
+}
+
+.about__quote::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent), var(--gold));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.8s var(--ease-out) 0.5s;
+}
+
+.reveal.visible ~ .about__aside .about__quote::after,
+.about__aside .about__quote::after {
+    transform: scaleY(1);
 }
 
 .about__quote::before {
     content: '\201C';
     font-family: var(--font-display);
-    font-size: 4rem;
+    font-size: 5rem;
     color: var(--accent);
-    opacity: 0.25;
+    opacity: 0.12;
     position: absolute;
-    top: -0.75rem;
+    top: -0.5rem;
     left: var(--space-sm);
     line-height: 1;
+    transition: opacity 0.6s ease, transform 0.6s var(--ease-out);
+}
+
+.about__quote:hover::before {
+    opacity: 0.3;
+    transform: scale(1.1) rotate(-5deg);
 }
 
 /* ==========================================

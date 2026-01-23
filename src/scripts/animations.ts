@@ -1,3 +1,13 @@
+// Scroll progress indicator
+const scrollProgress = document.querySelector('.scroll-progress') as HTMLElement;
+if (scrollProgress) {
+    window.addEventListener('scroll', () => {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (window.scrollY / docHeight) * 100;
+        scrollProgress.style.width = `${Math.min(progress, 100)}%`;
+    }, { passive: true });
+}
+
 // Scroll reveal with IntersectionObserver
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
