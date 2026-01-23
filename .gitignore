@@ -1,0 +1,23 @@
+# IDE & editor
+.vscode/
+.idea/
+
+# Claude / tooling
+.claude/
+PRD.md
+progress.txt
+
+# Dependencies
+node_modules/
+.astro/
+
+# Build
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
