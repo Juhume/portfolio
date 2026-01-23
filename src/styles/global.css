@@ -148,6 +148,15 @@ button {
         mix-blend-mode: difference;
     }
 
+    .cursor.cursor--project {
+        width: 80px;
+        height: 80px;
+        background-color: var(--accent);
+        opacity: 0.1;
+        mix-blend-mode: difference;
+        border-color: transparent;
+    }
+
     .cursor.clicking {
         transform: translate(-50%, -50%) scale(0.7);
     }
@@ -541,6 +550,39 @@ button {
 .hero__title em {
     font-style: italic;
     color: var(--accent);
+}
+
+.hero__rotate {
+    display: inline-block;
+    position: relative;
+    font-style: italic;
+    color: var(--accent);
+    overflow: hidden;
+    vertical-align: bottom;
+    height: 1.1em;
+}
+
+.hero__rotate-word {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s var(--ease-out),
+                transform 0.5s var(--ease-out);
+    white-space: nowrap;
+}
+
+.hero__rotate-word.active {
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero__rotate-word.exit {
+    opacity: 0;
+    transform: translateY(-100%);
 }
 
 .hero__subtitle {
@@ -1213,6 +1255,23 @@ button {
     transform: scale(1.02);
 }
 
+.about__photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, var(--accent), var(--blue));
+    opacity: 0;
+    mix-blend-mode: overlay;
+    transition: opacity var(--duration-normal) ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.about__photo:hover::before {
+    opacity: 0.3;
+}
+
 .about__photo::after {
     content: '';
     position: absolute;
@@ -1220,11 +1279,13 @@ button {
     border-radius: 1.75rem;
     border: 1px solid var(--border);
     pointer-events: none;
-    transition: border-color var(--duration-normal) ease;
+    transition: border-color var(--duration-normal) ease,
+                transform var(--duration-normal) var(--ease-out);
 }
 
 .about__photo:hover::after {
     border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: rotate(2deg) scale(1.01);
 }
 
 .about__text {
@@ -1240,6 +1301,15 @@ button {
 .about__text strong {
     color: var(--text-primary);
     font-weight: 600;
+    background-image: linear-gradient(var(--accent-light), var(--accent-light));
+    background-size: 0% 40%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.6s var(--ease-out);
+}
+
+.reveal.visible .about__text strong {
+    background-size: 100% 40%;
 }
 
 .about__quote {
@@ -1535,6 +1605,33 @@ button {
     0% { opacity: 0.6; transform: translate(-4px, -50%) scale(0.8); }
     50% { opacity: 0; transform: translate(-4px, -50%) scale(1.4); }
     100% { opacity: 0; transform: translate(-4px, -50%) scale(1.4); }
+}
+
+/* ==========================================
+   Section Dividers
+   ========================================== */
+.divider {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    margin: calc(-1 * var(--space-sm)) 0;
+    pointer-events: none;
+}
+
+.divider svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.divider svg path {
+    fill: var(--bg-secondary);
+    opacity: 0.4;
+}
+
+.divider--flip {
+    transform: rotate(180deg);
 }
 
 /* ==========================================
