@@ -1291,6 +1291,67 @@ button {
 }
 
 /* ==========================================
+   Small screen fixes (320px)
+   ========================================== */
+@media (max-width: 374px) {
+    .container {
+        padding: 0 var(--space-sm);
+    }
+
+    .hero__title {
+        font-size: 2.25rem;
+    }
+
+    .contact__email {
+        font-size: 1.25rem;
+    }
+
+    .renuncias {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ==========================================
+   Accessibility
+   ========================================== */
+.skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: white;
+    border-radius: 0 0 0.5rem 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 10000;
+    transition: top var(--duration-fast) ease;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ==========================================
    Utility Classes
    ========================================== */
 .sr-only {

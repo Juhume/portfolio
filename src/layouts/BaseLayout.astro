@@ -62,13 +62,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
 </head>
 <body>
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-to-content">Saltar al contenido</a>
+
     <!-- Grain Overlay -->
-    <div class="grain"></div>
+    <div class="grain" aria-hidden="true"></div>
 
     <!-- Custom Cursor -->
-    <div class="cursor"></div>
+    <div class="cursor" aria-hidden="true"></div>
 
-    <slot />
+    <main id="main-content">
+        <slot />
+    </main>
 
     <script>
         import '../scripts/theme';
