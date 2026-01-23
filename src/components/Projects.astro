@@ -1,0 +1,54 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+const projects = [
+    {
+        title: 'Espejo',
+        description: 'App de journaling privado con cifrado E2E. Proyecto end-to-end: diseno tecnico, frontend, backend y despliegue con Docker.',
+        category: 'Producto',
+        badge: 'Caso principal',
+        technologies: ['Next.js', 'Node.js', 'TypeScript', 'Docker', 'E2E Encryption'],
+        role: 'Full-Stack · Arquitectura completa',
+        gradient: 'coral' as const,
+        icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
+        link: { href: '#caso', label: 'Ver caso completo' },
+    },
+    {
+        title: 'Homelab',
+        description: 'Infraestructura personal con Docker Compose. Frontend, backend, servicios auxiliares. Entornos reproducibles y controlados.',
+        category: 'DevOps',
+        categoryColor: 'blue',
+        technologies: ['Docker', 'Docker Compose', 'Linux', 'Networking'],
+        role: 'Infraestructura + Despliegue',
+        gradient: 'blue' as const,
+        icon: '<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/>',
+        iconColor: 'blue',
+    },
+    {
+        title: 'Microinteracciones',
+        description: 'Laboratorio de UX. Animaciones, transiciones, detalles que importan. Alcance limitado, ejecucion cuidada.',
+        category: 'Experimento',
+        categoryColor: 'gold',
+        role: 'Diseno + Desarrollo',
+        gradient: 'gold' as const,
+        icon: '<path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/>',
+        iconColor: 'gold',
+    },
+];
+---
+
+<section class="section" id="proyectos">
+    <div class="container">
+        <header class="section__header reveal">
+            <span class="section__number">01</span>
+            <h2 class="section__title">Proyectos</h2>
+            <p class="section__subtitle">Pocos. Profundos. Con criterio.</p>
+        </header>
+
+        <div class="projects-grid">
+            {projects.map(project => (
+                <ProjectCard {...project} />
+            ))}
+        </div>
+    </div>
+</section>

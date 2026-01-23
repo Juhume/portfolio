@@ -1,0 +1,73 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    category: string;
+    categoryColor?: string;
+    badge?: string;
+    technologies?: string[];
+    role: string;
+    gradient: 'coral' | 'blue' | 'gold';
+    icon: string;
+    iconColor?: string;
+    link?: { href: string; label: string };
+}
+
+const {
+    title,
+    description,
+    category,
+    categoryColor,
+    badge,
+    technologies = [],
+    role,
+    gradient,
+    icon,
+    iconColor,
+    link,
+} = Astro.props;
+---
+
+<article class="project reveal">
+    <div class="project__visual">
+        <div class={`project__gradient project__gradient--${gradient}`}></div>
+        <div class="project__visual-inner">
+            <div class="project__icon">
+                <svg
+                    viewBox="0 0 24 24"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style={iconColor ? `stroke: var(--${iconColor});` : undefined}
+                >
+                    <Fragment set:html={icon} />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="project__content">
+        <div class="project__meta">
+            <span class="project__category" style={categoryColor ? `color: var(--${categoryColor});` : undefined}>
+                {category}
+            </span>
+            {badge && <span class="project__badge">{badge}</span>}
+        </div>
+        <h3 class="project__title">{title}</h3>
+        <p class="project__description">{description}</p>
+        {technologies.length > 0 && (
+            <div class="project__tags">
+                {technologies.map(tech => (
+                    <span class="project__tag">{tech}</span>
+                ))}
+            </div>
+        )}
+        <p class="project__role">{role}</p>
+        {link && (
+            <a href={link.href} class="project__link" data-hover>
+                {link.label}
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+            </a>
+        )}
+    </div>
+</article>
