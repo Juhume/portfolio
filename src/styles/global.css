@@ -17,6 +17,7 @@
     --sage: #7a8f7a;
     --blue: #5a7a9a;
     --gold: #c4944a;
+    --accent-subtle: rgba(196, 77, 56, 0.06);
 
     /* Typography */
     --font-display: 'Instrument Serif', Georgia, serif;
@@ -41,16 +42,17 @@
 
 [data-theme="dark"] {
     --bg-primary: #0a0a0a;
-    --bg-secondary: #141414;
+    --bg-secondary: #121212;
     --bg-tertiary: #1a1a1a;
     --text-primary: #f5f5f5;
-    --text-secondary: #a0a0a0;
-    --text-muted: #666666;
-    --accent: #e86550;
-    --accent-hover: #ff7a66;
+    --text-secondary: #b0b0b0;
+    --text-muted: #707070;
+    --accent: #ed6b58;
+    --accent-hover: #ff8a78;
     --accent-light: #2a1a18;
-    --border: rgba(255, 255, 255, 0.08);
-    --shadow: rgba(0, 0, 0, 0.3);
+    --accent-subtle: rgba(237, 107, 88, 0.08);
+    --border: rgba(255, 255, 255, 0.1);
+    --shadow: rgba(20, 40, 80, 0.25);
 }
 
 /* ==========================================
@@ -77,8 +79,17 @@ body {
     letter-spacing: 0.01em;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    transition: background-color var(--duration-normal) ease,
-                color var(--duration-normal) ease;
+}
+
+/* Smooth theme transition for all elements */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+    transition: background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease !important;
 }
 
 ::selection {

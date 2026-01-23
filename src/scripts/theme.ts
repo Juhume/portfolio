@@ -11,10 +11,12 @@ if (savedTheme) {
 }
 
 themeToggle?.addEventListener('click', () => {
+    html.classList.add('theme-transitioning');
     const newTheme = html.dataset.theme === 'dark' ? 'light' : 'dark';
     html.dataset.theme = newTheme;
     localStorage.setItem('theme', newTheme);
     themeToggle.setAttribute('aria-label',
         newTheme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'
     );
+    setTimeout(() => html.classList.remove('theme-transitioning'), 350);
 });
