@@ -687,13 +687,24 @@ button {
 .project {
     display: grid;
     gap: var(--space-lg);
+    padding: var(--space-lg);
     padding-bottom: var(--space-xl);
-    border-bottom: 1px solid var(--border);
-    transition: transform var(--duration-normal) var(--ease-out);
+    border: 1px solid transparent;
+    border-radius: 1.5rem;
+    transition: transform var(--duration-normal) var(--ease-out),
+                border-color var(--duration-normal) ease,
+                box-shadow var(--duration-normal) ease;
+}
+
+.project + .project {
+    border-top: 1px solid var(--border);
+    border-radius: 1.5rem;
 }
 
 .project:hover {
     transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+    box-shadow: 0 8px 40px var(--shadow);
 }
 
 @media (min-width: 768px) {
@@ -709,8 +720,7 @@ button {
 }
 
 .project:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    padding-bottom: var(--space-lg);
 }
 
 .project__visual {
@@ -767,21 +777,41 @@ button {
 }
 
 .project__gradient--coral {
-    background: linear-gradient(135deg,
-        color-mix(in srgb, var(--accent) 20%, transparent) 0%,
-        color-mix(in srgb, var(--sage) 15%, transparent) 100%);
+    background:
+        radial-gradient(ellipse at 30% 20%, color-mix(in srgb, var(--accent) 25%, transparent) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, color-mix(in srgb, var(--sage) 15%, transparent) 0%, transparent 50%),
+        linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent) 0%, color-mix(in srgb, var(--sage) 8%, transparent) 100%);
 }
 
 .project__gradient--blue {
-    background: linear-gradient(135deg,
-        color-mix(in srgb, var(--blue) 20%, transparent) 0%,
-        color-mix(in srgb, var(--sage) 15%, transparent) 100%);
+    background:
+        radial-gradient(ellipse at 25% 75%, color-mix(in srgb, var(--blue) 25%, transparent) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 25%, color-mix(in srgb, var(--sage) 15%, transparent) 0%, transparent 50%),
+        linear-gradient(135deg, color-mix(in srgb, var(--blue) 12%, transparent) 0%, color-mix(in srgb, var(--sage) 8%, transparent) 100%);
 }
 
 .project__gradient--gold {
-    background: linear-gradient(135deg,
-        color-mix(in srgb, var(--gold) 20%, transparent) 0%,
-        color-mix(in srgb, var(--accent) 10%, transparent) 100%);
+    background:
+        radial-gradient(ellipse at 60% 30%, color-mix(in srgb, var(--gold) 25%, transparent) 0%, transparent 55%),
+        radial-gradient(ellipse at 30% 70%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 50%),
+        linear-gradient(135deg, color-mix(in srgb, var(--gold) 12%, transparent) 0%, color-mix(in srgb, var(--accent) 6%, transparent) 100%);
+}
+
+/* Shine effect on hover */
+.project__visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.08) 55%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s var(--ease-out);
+    z-index: 2;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.project:hover .project__visual::after {
+    transform: translateX(100%);
 }
 
 .project__content {
@@ -845,6 +875,13 @@ button {
     background: var(--bg-secondary);
     border-radius: 100px;
     color: var(--text-secondary);
+    transition: transform var(--duration-fast) var(--ease-out),
+                background-color var(--duration-fast) ease;
+}
+
+.project__tag:hover {
+    transform: scale(1.05);
+    background: var(--accent-subtle);
 }
 
 .project__role {
@@ -859,11 +896,30 @@ button {
     font-size: 0.9375rem;
     font-weight: 500;
     color: var(--text-primary);
+    position: relative;
     transition: color var(--duration-fast) ease;
+}
+
+.project__link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--duration-normal) var(--ease-out);
 }
 
 .project__link:hover {
     color: var(--accent);
+}
+
+.project__link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .project__link svg {
