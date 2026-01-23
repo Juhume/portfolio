@@ -1658,6 +1658,12 @@ button {
     height: 6px;
     background: var(--accent);
     border-radius: 50%;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
 }
 
 @keyframes marquee {
@@ -2045,6 +2051,33 @@ a:focus-visible {
 /* Remove focus outline for mouse users */
 :focus:not(:focus-visible) {
     outline: none;
+}
+
+/* ==========================================
+   Reduced Motion
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .hero__label, .hero__title, .hero__subtitle,
+    .hero__cta, .hero__scroll {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    .reveal, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1;
+        transform: none;
+    }
+
+    .marquee__track {
+        animation: none;
+    }
 }
 
 /* ==========================================
