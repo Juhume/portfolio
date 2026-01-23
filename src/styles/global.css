@@ -1258,15 +1258,30 @@ button {
     border-radius: 0.75rem;
     text-align: center;
     border: 1px solid transparent;
-    transition: transform var(--duration-fast) var(--ease-out),
-                border-color var(--duration-fast) ease,
-                box-shadow var(--duration-fast) ease;
+    transition: transform var(--duration-normal) var(--ease-out),
+                border-color var(--duration-normal) ease,
+                box-shadow var(--duration-normal) ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.renuncia::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-subtle), transparent 60%);
+    opacity: 0;
+    transition: opacity var(--duration-normal) ease;
 }
 
 .renuncia:hover {
-    transform: translateY(-2px);
-    border-color: var(--border);
-    box-shadow: 0 8px 24px var(--shadow);
+    transform: translateY(-4px) scale(1.02);
+    border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+    box-shadow: 0 12px 32px var(--shadow);
+}
+
+.renuncia:hover::after {
+    opacity: 1;
 }
 
 .renuncia__label {
@@ -1274,6 +1289,8 @@ button {
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
 }
 
 .renuncia__value {
@@ -1281,6 +1298,13 @@ button {
     font-size: 1rem;
     color: var(--text-primary);
     margin-top: 0.25rem;
+    position: relative;
+    z-index: 1;
+    transition: color var(--duration-fast) ease;
+}
+
+.renuncia:hover .renuncia__value {
+    color: var(--accent);
 }
 
 /* Stack */
@@ -1315,6 +1339,25 @@ button {
     border-radius: 1rem;
     margin-top: var(--space-lg);
     border-left: 3px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent), var(--gold));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s var(--ease-out) 0.3s;
+}
+
+.reveal.visible .highlight-box::before {
+    transform: scaleY(1);
 }
 
 .highlight-box__title {
@@ -1496,6 +1539,13 @@ button {
     flex-shrink: 0;
     line-height: 1;
     margin-top: 0.1rem;
+    transition: opacity var(--duration-normal) ease,
+                transform var(--duration-normal) var(--ease-out);
+}
+
+.process__item:hover .process__number {
+    opacity: 0.7;
+    transform: scale(1.1);
 }
 
 .process__marker {
@@ -1504,12 +1554,30 @@ button {
     border-radius: 50%;
     flex-shrink: 0;
     margin-top: 0.45rem;
+    position: relative;
 }
 
-.process__item:nth-child(1) .process__marker { background: var(--accent); }
-.process__item:nth-child(2) .process__marker { background: var(--sage); }
-.process__item:nth-child(3) .process__marker { background: var(--gold); }
-.process__item:nth-child(4) .process__marker { background: var(--blue); }
+.process__marker::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity var(--duration-normal) ease,
+                transform var(--duration-normal) var(--ease-out);
+}
+
+.process__item:hover .process__marker::after {
+    opacity: 0.4;
+    transform: scale(1.8);
+}
+
+.process__item:nth-child(1) .process__marker { background: var(--accent); color: var(--accent); }
+.process__item:nth-child(2) .process__marker { background: var(--sage); color: var(--sage); }
+.process__item:nth-child(3) .process__marker { background: var(--gold); color: var(--gold); }
+.process__item:nth-child(4) .process__marker { background: var(--blue); color: var(--blue); }
 
 .process__text {
     color: var(--text-secondary);
@@ -1522,7 +1590,21 @@ button {
     background: var(--bg-tertiary);
     border-radius: 1rem;
     text-align: center;
-    border-top: 2px solid var(--accent);
+    border-top: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.process__note::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--gold), var(--accent), transparent);
+    background-size: 200% 100%;
+    animation: gradientSlide 4s ease-in-out infinite;
 }
 
 .process__note p {
