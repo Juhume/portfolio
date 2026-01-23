@@ -11,6 +11,7 @@ interface Props {
     icon: string;
     iconColor?: string;
     link?: { href: string; label: string };
+    index?: number;
 }
 
 const {
@@ -25,10 +26,13 @@ const {
     icon,
     iconColor,
     link,
+    index = 0,
 } = Astro.props;
+
+const revealClass = index % 2 === 0 ? 'reveal-left' : 'reveal-right';
 ---
 
-<article class="project reveal">
+<article class={`project ${revealClass}`}>
     <div class="project__visual">
         <div class={`project__gradient project__gradient--${gradient}`}></div>
         <div class="project__visual-inner">
