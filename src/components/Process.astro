@@ -15,8 +15,9 @@ const principles = [
         </header>
 
         <div class="process__grid reveal-stagger reveal">
-            {principles.map(text => (
+            {principles.map((text, i) => (
                 <div class="process__item">
+                    <span class="process__number">{String(i + 1).padStart(2, '0')}</span>
                     <span class="process__marker"></span>
                     <p class="process__text">{text}</p>
                 </div>
