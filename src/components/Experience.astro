@@ -1,0 +1,52 @@
+---
+import type { Translations, SectionIds } from '../i18n';
+
+interface Props {
+    t: Translations;
+    ids: SectionIds;
+}
+
+const { t, ids } = Astro.props;
+---
+
+<section class="section experience" id={ids.experience}>
+    <div class="container">
+        <header class="section__header reveal">
+            <span class="section__number">{t.experience.sectionNumber}</span>
+            <h2 class="section__title">{t.experience.title}</h2>
+        </header>
+
+        <div class="experience__timeline">
+            <div class="experience__item reveal">
+                <div class="experience__header">
+                    <div class="experience__company">
+                        <h3 class="experience__company-name">{t.experience.company}</h3>
+                        <span class="experience__period">{t.experience.period}</span>
+                    </div>
+                    <span class="experience__role">{t.experience.role}</span>
+                </div>
+
+                <div class="experience__body">
+                    <p class="experience__context">
+                        {t.experience.context}
+                    </p>
+
+                    <div class="experience__achievements">
+                        <h4 class="experience__achievements-title">{t.experience.achievementsTitle}</h4>
+                        <ul class="experience__list">
+                            {t.experience.achievements.map(item => (
+                                <li>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="experience__stack">
+                        {t.experience.stack.map(tag => (
+                            <span class="experience__stack-tag">{tag}</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

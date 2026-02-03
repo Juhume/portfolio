@@ -15,8 +15,9 @@ themeToggle?.addEventListener('click', () => {
     const newTheme = html.dataset.theme === 'dark' ? 'light' : 'dark';
     html.dataset.theme = newTheme;
     localStorage.setItem('theme', newTheme);
-    themeToggle.setAttribute('aria-label',
-        newTheme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'
-    );
+    const label = newTheme === 'dark'
+        ? themeToggle.dataset.labelLight
+        : themeToggle.dataset.labelDark;
+    if (label) themeToggle.setAttribute('aria-label', label);
     setTimeout(() => html.classList.remove('theme-transitioning'), 350);
 });

@@ -1,22 +1,41 @@
 ---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import type { Locale, Translations, SectionIds } from '../i18n';
+
+interface Props {
+    lang: Locale;
+    t: Translations;
+    ids: SectionIds;
+}
+
+const { lang, t, ids } = Astro.props;
+
 const navLinks = [
-    { href: '#proyectos', label: 'Proyectos' },
-    { href: '#caso', label: 'Caso' },
-    { href: '#sobre-mi', label: 'Sobre mi' },
-    { href: '#contacto', label: 'Contacto' },
+    { href: `#${ids.experience}`, label: t.nav.experience },
+    { href: `#${ids.projects}`, label: t.nav.projects },
+    { href: `#${ids.caseStudy}`, label: t.nav.caseStudy },
+    { href: `#${ids.about}`, label: t.nav.about },
+    { href: `#${ids.contact}`, label: t.nav.contact },
 ];
 ---
 
 <nav class="nav" id="nav">
     <div class="container nav__inner">
-        <a href="#" class="nav__logo" data-hover>Julio Huerta</a>
+        <a href={`/${lang}/`} class="nav__logo">Julio Huerta</a>
         <div class="nav__right">
             <ul class="nav__links">
                 {navLinks.map(link => (
-                    <li><a href={link.href} class="nav__link" data-hover>{link.label}</a></li>
+                    <li><a href={link.href} class="nav__link">{link.label}</a></li>
                 ))}
             </ul>
-            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar a tema oscuro" data-hover>
+            <LanguageSwitcher lang={lang} />
+            <button
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label={t.a11y.themeToggleDark}
+                data-label-dark={t.a11y.themeToggleDark}
+                data-label-light={t.a11y.themeToggleLight}
+            >
                 <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="5"/>
                     <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -25,7 +44,7 @@ const navLinks = [
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                 </svg>
             </button>
-            <button class="nav__menu-btn" id="menuBtn" aria-label="Menu" data-hover>
+            <button class="nav__menu-btn" id="menuBtn" aria-label={t.a11y.menuButton}>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -37,6 +56,6 @@ const navLinks = [
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
     {navLinks.map(link => (
-        <a href={link.href} class="mobile-menu__link" data-hover>{link.label}</a>
+        <a href={link.href} class="mobile-menu__link">{link.label}</a>
     ))}
 </div>

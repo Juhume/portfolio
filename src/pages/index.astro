@@ -1,27 +1,16 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import Projects from '../components/Projects.astro';
-import CaseStudy from '../components/CaseStudy.astro';
-import About from '../components/About.astro';
-import Process from '../components/Process.astro';
-import TechMarquee from '../components/TechMarquee.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
-import Divider from '../components/Divider.astro';
+export const prerender = false;
 ---
 
-<BaseLayout>
-    <Header />
-    <Hero />
-    <Projects />
-    <Divider />
-    <CaseStudy />
-    <Divider flip />
-    <About />
-    <Process />
-    <TechMarquee />
-    <Contact />
-    <Footer />
-</BaseLayout>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0;url=/es/" />
+    <link rel="canonical" href="https://juliohuerta.dev/es/" />
+    <title>Redirecting…</title>
+</head>
+<body>
+    <p><a href="/es/">juliohuerta.dev</a></p>
+</body>
+</html>

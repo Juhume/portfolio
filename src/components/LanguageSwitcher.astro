@@ -1,0 +1,58 @@
+---
+import type { Locale } from '../i18n';
+import { locales } from '../i18n';
+
+interface Props {
+    lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="lang-switcher">
+    {locales.map((loc, i) => (
+        <>
+            {i > 0 && <span class="lang-switcher__sep">|</span>}
+            <a
+                href={`/${loc}/`}
+                class:list={['lang-switcher__link', { active: loc === lang }]}
+                aria-current={loc === lang ? 'page' : undefined}
+            >
+                {loc.toUpperCase()}
+            </a>
+        </>
+    ))}
+</div>
+
+<style>
+    .lang-switcher {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+    }
+
+    .lang-switcher__sep {
+        color: var(--text-muted);
+        user-select: none;
+    }
+
+    .lang-switcher__link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        padding: 0.25rem 0.35rem;
+        border-radius: 4px;
+        transition: color 0.2s, background-color 0.2s;
+    }
+
+    .lang-switcher__link:hover {
+        color: var(--text-primary);
+    }
+
+    .lang-switcher__link.active {
+        color: var(--accent);
+        font-weight: 600;
+    }
+</style>

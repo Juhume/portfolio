@@ -1,43 +1,47 @@
 ---
 import '../styles/global.css';
+import type { Locale, Translations } from '../i18n';
+import { locales } from '../i18n';
 
 interface Props {
-    title?: string;
-    description?: string;
+    lang: Locale;
+    t: Translations;
 }
 
-const {
-    title = 'Julio Huerta | Desarrollador Web · Frontend / Full-Stack',
-    description = 'Aplicaciones web modernas con React, Next.js, TypeScript, Node.js y Docker. Codigo claro, sistemas robustos.',
-} = Astro.props;
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { lang, t } = Astro.props;
+const canonicalURL = new URL(`/${lang}/`, 'https://juliohuerta.dev');
 ---
 
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang={lang} data-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
     <meta name="author" content="Julio Huerta" />
-    <meta name="keywords" content="desarrollador web, frontend, full-stack, React, Next.js, TypeScript, Node.js, Docker" />
+    <meta name="keywords" content={t.meta.keywords} />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Hreflang alternates -->
+    {locales.map(loc => (
+        <link rel="alternate" hreflang={loc} href={`https://juliohuerta.dev/${loc}/`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href="https://juliohuerta.dev/es/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:locale" content={t.meta.ogLocale} />
     <meta property="og:site_name" content="Julio Huerta" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={t.meta.title} />
+    <meta name="twitter:description" content={t.meta.description} />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -45,8 +49,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "@type": "Person",
         "name": "Julio Huerta",
         "url": "https://juliohuerta.dev",
-        "jobTitle": "Desarrollador Web Full-Stack",
-        "knowsAbout": ["React", "Next.js", "TypeScript", "Node.js", "Docker"],
+        "jobTitle": t.meta.jobTitle,
+        "worksFor": {
+            "@type": "Organization",
+            "name": "BBVA"
+        },
+        "knowsAbout": ["Web Components", "Lit", "TypeScript", "React", "Next.js", "Node.js", "Docker"],
         "sameAs": [
             "https://linkedin.com/in/juhume",
             "https://github.com/juhume"
@@ -63,16 +71,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </head>
 <body>
     <!-- Skip to content -->
-    <a href="#main-content" class="skip-to-content">Saltar al contenido</a>
+    <a href="#main-content" class="skip-to-content">{t.a11y.skipToContent}</a>
 
     <!-- Scroll Progress -->
     <div class="scroll-progress" aria-hidden="true"></div>
-
-    <!-- Grain Overlay -->
-    <div class="grain" aria-hidden="true"></div>
-
-    <!-- Custom Cursor -->
-    <div class="cursor" aria-hidden="true"></div>
 
     <main id="main-content">
         <slot />

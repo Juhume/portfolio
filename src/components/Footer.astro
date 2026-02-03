@@ -1,10 +1,17 @@
 ---
+import type { Translations } from '../i18n';
+
+interface Props {
+    t: Translations;
+}
+
+const { t } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
     <div class="container footer__inner">
         <span class="footer__copy">&copy; {year} Julio Huerta</span>
-        <span class="footer__status">Disponible para proyectos</span>
+        <span class="footer__status">{t.footer.status}</span>
     </div>
 </footer>
