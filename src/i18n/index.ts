@@ -20,6 +20,19 @@ export function getLocaleFromUrl(url: URL): Locale {
     return defaultLocale;
 }
 
+export function replaceLocaleInPath(pathname: string, locale: Locale): string {
+    const segments = pathname.split('/').filter(Boolean);
+    if (segments.length === 0) return `/${locale}/`;
+    if (locales.includes(segments[0] as Locale)) {
+        segments[0] = locale;
+    } else {
+        segments.unshift(locale);
+    }
+
+    const trailingSlash = pathname.endsWith('/') ? '/' : '';
+    return `/${segments.join('/')}${trailingSlash || '/'}`;
+}
+
 const sectionIdsMap: Record<Locale, SectionIds> = {
     es: {
         experience: 'experiencia',

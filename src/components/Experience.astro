@@ -11,12 +11,12 @@ const { t, ids } = Astro.props;
 
 <section class="section experience" id={ids.experience}>
     <div class="container">
-        <header class="section__header reveal">
-            <span class="section__number">{t.experience.sectionNumber}</span>
-            <h2 class="section__title">{t.experience.title}</h2>
-        </header>
+        <div class="experience__layout">
+            <header class="section__header experience__intro reveal">
+                <h2 class="section__title">{t.experience.title}</h2>
+                <p class="section__subtitle">{t.experience.context}</p>
+            </header>
 
-        <div class="experience__timeline">
             <div class="experience__item reveal">
                 <div class="experience__header">
                     <div class="experience__company">
@@ -27,9 +27,14 @@ const { t, ids } = Astro.props;
                 </div>
 
                 <div class="experience__body">
-                    <p class="experience__context">
-                        {t.experience.context}
-                    </p>
+                    <div class="experience__signals">
+                        <h4 class="experience__signals-title">{t.experience.signalsTitle}</h4>
+                        <div class="experience__signals-grid">
+                            {t.experience.signals.map(signal => (
+                                <p class="experience__signal">{signal}</p>
+                            ))}
+                        </div>
+                    </div>
 
                     <div class="experience__achievements">
                         <h4 class="experience__achievements-title">{t.experience.achievementsTitle}</h4>
@@ -41,7 +46,7 @@ const { t, ids } = Astro.props;
                     </div>
 
                     <div class="experience__stack">
-                        {t.experience.stack.map(tag => (
+                        {t.experience.stack.slice(0, 4).map(tag => (
                             <span class="experience__stack-tag">{tag}</span>
                         ))}
                     </div>

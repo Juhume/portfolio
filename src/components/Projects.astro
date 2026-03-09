@@ -1,34 +1,30 @@
 ---
 import ProjectCard from './ProjectCard.astro';
-import type { Translations, SectionIds } from '../i18n';
+import type { Locale, Translations, SectionIds } from '../i18n';
 
 interface Props {
     t: Translations;
     ids: SectionIds;
+    lang: Locale;
 }
 
-const { t, ids } = Astro.props;
+const { t, ids, lang } = Astro.props;
 
 const projectMeta = [
     {
         technologies: ['Next.js', 'React', 'TypeScript', 'Supabase', 'Dexie', 'E2EE'],
         gradient: 'coral' as const,
-        icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>',
-        hasLink: true,
+        visual: 'journal' as const,
     },
     {
         technologies: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
         gradient: 'blue' as const,
-        icon: '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
-        iconColor: 'blue',
-        hasLink: false,
+        visual: 'dashboard' as const,
     },
     {
         technologies: ['Docker', 'Docker Compose', 'Linux', 'Nginx', 'Networking'],
         gradient: 'gold' as const,
-        icon: '<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/>',
-        iconColor: 'gold',
-        hasLink: false,
+        visual: 'infra' as const,
     },
 ];
 
@@ -38,23 +34,33 @@ const projects = t.projects.items.map((item, i) => ({
     category: item.category,
     badge: item.badge,
     role: item.role,
-    link: item.linkLabel ? { href: `#${ids.caseStudy}`, label: item.linkLabel } : undefined,
+    proof: item.proof,
+    highlights: item.highlights,
+    link: item.linkLabel ? {
+        href: item.linkUrl || (i === 0 ? `/${lang}/projects/espejo/` : `#${ids.caseStudy}`),
+        label: item.linkLabel,
+    } : undefined,
+    external: !!item.linkUrl,
     ...projectMeta[i],
 }));
+
+const [featuredProject, ...otherProjects] = projects;
 ---
 
 <section class="section" id={ids.projects}>
     <div class="container">
         <header class="section__header reveal">
-            <span class="section__number">{t.projects.sectionNumber}</span>
             <h2 class="section__title">{t.projects.title}</h2>
             <p class="section__subtitle">{t.projects.subtitle}</p>
         </header>
 
-        <div class="projects-grid">
-            {projects.map((project, i) => (
-                <ProjectCard {...project} index={i} />
-            ))}
+        <div class="projects-showcase reveal">
+            {featuredProject && <ProjectCard {...featuredProject} index={0} variant="feature" />}
+            <div class="projects-list">
+                {otherProjects.map((project, i) => (
+                    <ProjectCard {...project} index={i + 1} variant="row" />
+                ))}
+            </div>
         </div>
     </div>
 </section>

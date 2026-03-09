@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { locales, getTranslations, getSectionIds } from '../../../i18n';
+import type { Locale } from '../../../i18n';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.flatMap(post =>
+        locales.map(lang => ({
+            params: { lang, slug: post.id },
+            props: { post },
+        }))
+    );
+}
+
+const { post } = Astro.props;
+const { lang } = Astro.params as { lang: Locale };
+const t = getTranslations(lang);
+const ids = getSectionIds(lang);
+const isOriginalLocale = lang === post.data.lang;
+
+const { Content } = await render(post);
+const readTime = Math.max(1, Math.ceil(post.body!.split(/\s+/).length / 200));
+const originalArticlePath = `/${post.data.lang}/blog/${post.id}/`;
+const canonicalPath = isOriginalLocale ? `/${lang}/blog/${post.id}/` : originalArticlePath;
+const articleUrl = `https://juliohuerta.dev${canonicalPath}`;
+const articleStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.date.toISOString(),
+    author: {
+        '@type': 'Person',
+        name: 'Julio Huerta',
+    },
+    inLanguage: isOriginalLocale ? lang : post.data.lang,
+    mainEntityOfPage: articleUrl,
+};
+---
+
+<BaseLayout
+    lang={lang}
+    t={t}
+    title={`${post.data.title} | Julio Huerta`}
+    description={post.data.description}
+    canonicalPath={canonicalPath}
+    pageType="article"
+    noindex={!isOriginalLocale}
+    structuredData={articleStructuredData}
+>
+    <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
+
+    <article class="blog-post">
+        <div class="container">
+            <a href={`/${lang}/blog/`} class="blog-post__back">← {t.blog.backToBlog}</a>
+
+            <header class="blog-post__header">
+                <time class="blog-post__date" datetime={post.data.date.toISOString()}>
+                    {t.blog.publishedOn} {post.data.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+                <h1 class="blog-post__title">{post.data.title}</h1>
+                <p class="blog-post__description">{post.data.description}</p>
+                <span class="blog-post__readtime">{readTime} {t.blog.minRead}</span>
+            </header>
+
+            {isOriginalLocale ? (
+                <div class="blog-post__content prose">
+                    <Content />
+                </div>
+            ) : (
+                <div class="blog-locale-note blog-locale-note--post">
+                    <p class="blog-locale-note__text">{t.blog.unavailableInLocale}</p>
+                    <a href={originalArticlePath} class="btn btn--primary">{t.blog.readInSpanish}</a>
+                </div>
+            )}
+
+            <a href={`/${lang}/blog/`} class="blog-post__back blog-post__back--bottom">← {t.blog.backToBlog}</a>
+        </div>
+    </article>
+
+    <Footer t={t} />
+</BaseLayout>

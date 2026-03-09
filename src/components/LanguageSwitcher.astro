@@ -1,12 +1,13 @@
 ---
 import type { Locale } from '../i18n';
-import { locales } from '../i18n';
+import { locales, replaceLocaleInPath } from '../i18n';
 
 interface Props {
     lang: Locale;
+    currentPath: string;
 }
 
-const { lang } = Astro.props;
+const { lang, currentPath } = Astro.props;
 ---
 
 <div class="lang-switcher">
@@ -14,7 +15,7 @@ const { lang } = Astro.props;
         <>
             {i > 0 && <span class="lang-switcher__sep">|</span>}
             <a
-                href={`/${loc}/`}
+                href={replaceLocaleInPath(currentPath, loc)}
                 class:list={['lang-switcher__link', { active: loc === lang }]}
                 aria-current={loc === lang ? 'page' : undefined}
             >
@@ -42,7 +43,12 @@ const { lang } = Astro.props;
     .lang-switcher__link {
         color: var(--text-secondary);
         text-decoration: none;
-        padding: 0.25rem 0.35rem;
+        padding: 0.625rem 0.5rem;
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 4px;
         transition: color 0.2s, background-color 0.2s;
     }

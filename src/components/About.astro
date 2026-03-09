@@ -7,30 +7,27 @@ interface Props {
 }
 
 const { t, ids } = Astro.props;
+const introParagraphs = t.about.paragraphs.slice(0, 2);
 ---
 
 <section class="section" id={ids.about}>
     <div class="container">
-        <header class="section__header reveal">
-            <span class="section__number">{t.about.sectionNumber}</span>
-            <h2 class="section__title">{t.about.title}</h2>
-        </header>
-
-        <div class="about__grid">
-            <div class="about__text reveal">
-                {t.about.paragraphs.map(p => (
+        <div class="about reveal">
+            <header class="section__header about__header">
+                <h2 class="section__title">{t.about.title}</h2>
+            </header>
+            <div class="about__body">
+                {introParagraphs.map(p => (
                     <p set:html={p} />
                 ))}
             </div>
-            <div class="about__aside reveal">
-                <div class="about__principles">
-                    <h4 class="about__principles-title">{t.about.principlesTitle}</h4>
-                    <ul class="about__principles-list">
-                        {t.about.principles.map(p => (
-                            <li>{p}</li>
-                        ))}
-                    </ul>
-                </div>
+            <div class="about__principles about__principles--minimal">
+                <h3 class="about__principles-title">{t.about.principlesTitle}</h3>
+                <ul class="about__principles-list about__principles-list--inline">
+                    {t.about.principles.map(p => (
+                        <li>{p}</li>
+                    ))}
+                </ul>
             </div>
         </div>
     </div>

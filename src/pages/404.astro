@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+import { getTranslations } from '../i18n';
+
+const t = getTranslations('es');
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <script is:inline>
+        (function() {
+            var t = localStorage.getItem('theme') ||
+                (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Julio Huerta</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+        media="print"
+        onload="this.media='all'"
+    />
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </noscript>
+</head>
+<body>
+    <main class="not-found">
+        <h1 class="not-found__title">{t.notFound.title}</h1>
+        <p class="not-found__text">{t.notFound.text}</p>
+        <a href="/es/" class="not-found__link">{t.notFound.backHome}</a>
+    </main>
+</body>
+</html>

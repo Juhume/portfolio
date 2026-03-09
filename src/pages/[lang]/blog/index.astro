@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { locales, getTranslations, getSectionIds } from '../../../i18n';
+import type { Locale } from '../../../i18n';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+    return locales.map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const t = getTranslations(lang);
+const ids = getSectionIds(lang);
+const isSpanishBlog = lang === 'es';
+
+const posts = (await getCollection('blog'))
+    .filter(post => post.data.lang === 'es')
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+    lang={lang}
+    t={t}
+    title={`${t.blog.title} | Julio Huerta`}
+    description={isSpanishBlog ? t.blog.subtitle : t.blog.spanishOnlyText}
+    canonicalPath={`/${lang}/blog/`}
+    noindex={!isSpanishBlog}
+>
+    <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
+
+    <section class="blog">
+        <div class="container">
+            <header class="blog__header">
+                <h1 class="blog__title">{t.blog.title}</h1>
+                <p class="blog__subtitle">{isSpanishBlog ? t.blog.subtitle : t.blog.spanishOnlyTitle}</p>
+            </header>
+
+            {!isSpanishBlog ? (
+                <div class="blog-locale-note">
+                    <p class="blog-locale-note__text">{t.blog.spanishOnlyText}</p>
+                    <a href="/es/blog/" class="btn btn--primary">{t.blog.readInSpanish}</a>
+                </div>
+            ) : posts.length === 0 ? (
+                <p class="blog__empty">{t.blog.noPosts}</p>
+            ) : (
+                <div class="blog__list">
+                    {posts.map(post => {
+                        const readTime = Math.max(1, Math.ceil(post.body!.split(/\s+/).length / 200));
+                        return (
+                            <a href={`/${lang}/blog/${post.id}/`} class="blog-card">
+                                <time class="blog-card__date" datetime={post.data.date.toISOString()}>
+                                    {post.data.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
+                                </time>
+                                <h2 class="blog-card__title">{post.data.title}</h2>
+                                <p class="blog-card__description">{post.data.description}</p>
+                                <div class="blog-card__meta">
+                                    <span>{readTime} {t.blog.minRead}</span>
+                                    {post.data.tags && (
+                                        <div class="blog-card__tags">
+                                            {post.data.tags.map(tag => (
+                                                <span class="blog-card__tag">{tag}</span>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </a>
+                        );
+                    })}
+                </div>
+            )}
+
+            <a href={`/${lang}/`} class="blog__back">← {t.notFound.backHome}</a>
+        </div>
+    </section>
+
+    <Footer t={t} />
+</BaseLayout>

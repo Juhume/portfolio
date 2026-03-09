@@ -1,12 +1,13 @@
 ---
-import type { Translations, SectionIds } from '../i18n';
+import type { Locale, Translations, SectionIds } from '../i18n';
 
 interface Props {
     t: Translations;
     ids: SectionIds;
+    lang: Locale;
 }
 
-const { t, ids } = Astro.props;
+const { t, ids, lang } = Astro.props;
 ---
 
 <section class="hero">
@@ -15,26 +16,40 @@ const { t, ids } = Astro.props;
     </div>
 
     <div class="container hero__content">
-        <span class="hero__label">{t.hero.label}</span>
-        <h1 class="hero__title">
-            {t.hero.title}
-        </h1>
-        <p class="hero__subtitle">
-            {t.hero.subtitle}
-        </p>
-        <div class="hero__cta">
-            <a href={`#${ids.experience}`} class="btn btn--primary">
-                {t.hero.ctaPrimary}
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 8h10M9 4l4 4-4 4"/>
-                </svg>
-            </a>
-            <a href={`#${ids.projects}`} class="btn btn--secondary">{t.hero.ctaSecondary}</a>
-        </div>
-    </div>
+        <div class="hero__frame">
+            <div class="hero__main">
+                <span class="hero__label">{t.hero.label}</span>
+                <h1 class="hero__title">
+                    {t.hero.title}
+                </h1>
+                <p class="hero__subtitle">
+                    {t.hero.subtitle}
+                </p>
+                <p class="hero__current">
+                    <span>{t.hero.noteTitle}</span>
+                    {t.hero.noteText}
+                </p>
+                <ul class="hero__proofs">
+                    {t.hero.proofs.map((proof) => (
+                        <li class="hero__proof">{proof}</li>
+                    ))}
+                </ul>
+                <div class="hero__cta">
+                    <a href={`#${ids.contact}`} class="btn btn--primary">
+                        {t.hero.ctaPrimary}
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 8h10M9 4l4 4-4 4"/>
+                        </svg>
+                    </a>
+                    <a href={`#${ids.projects}`} class="btn btn--secondary">{t.hero.ctaSecondary}</a>
+                </div>
+            </div>
 
-    <div class="hero__scroll">
-        <div class="hero__scroll-line"></div>
-        <span>{t.hero.scroll}</span>
+            <div class="hero__aside">
+                <div class="hero__photo">
+                    <img src="/julio-huerta.jpg" alt={t.about.photoAlt} width="320" height="320" />
+                </div>
+            </div>
+        </div>
     </div>
 </section>

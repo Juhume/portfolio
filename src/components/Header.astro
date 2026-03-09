@@ -6,20 +6,24 @@ interface Props {
     lang: Locale;
     t: Translations;
     ids: SectionIds;
+    currentPath: string;
 }
 
-const { lang, t, ids } = Astro.props;
+const { lang, t, ids, currentPath } = Astro.props;
+const isHome = currentPath === `/${lang}/`;
+const homePrefix = isHome ? '' : `/${lang}/`;
 
 const navLinks = [
-    { href: `#${ids.experience}`, label: t.nav.experience },
-    { href: `#${ids.projects}`, label: t.nav.projects },
-    { href: `#${ids.caseStudy}`, label: t.nav.caseStudy },
-    { href: `#${ids.about}`, label: t.nav.about },
-    { href: `#${ids.contact}`, label: t.nav.contact },
+    { href: `${homePrefix}#${ids.projects}`, label: t.nav.projects },
+    { href: `${homePrefix}#${ids.about}`, label: t.nav.about },
+    { href: `${homePrefix}#${ids.contact}`, label: t.nav.contact },
 ];
+
+const blogLink = { href: `/${lang}/blog/`, label: t.nav.blog };
+navLinks.push(blogLink);
 ---
 
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label={t.a11y.mainNavigation}>
     <div class="container nav__inner">
         <a href={`/${lang}/`} class="nav__logo">Julio Huerta</a>
         <div class="nav__right">
@@ -28,7 +32,7 @@ const navLinks = [
                     <li><a href={link.href} class="nav__link">{link.label}</a></li>
                 ))}
             </ul>
-            <LanguageSwitcher lang={lang} />
+            <LanguageSwitcher lang={lang} currentPath={currentPath} />
             <button
                 class="theme-toggle"
                 id="themeToggle"
@@ -44,7 +48,7 @@ const navLinks = [
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                 </svg>
             </button>
-            <button class="nav__menu-btn" id="menuBtn" aria-label={t.a11y.menuButton}>
+            <button class="nav__menu-btn" id="menuBtn" aria-label={t.a11y.menuButton} aria-expanded="false" aria-controls="mobileMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -54,7 +58,7 @@ const navLinks = [
 </nav>
 
 <!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label={t.a11y.mobileMenuLabel}>
     {navLinks.map(link => (
         <a href={link.href} class="mobile-menu__link">{link.label}</a>
     ))}

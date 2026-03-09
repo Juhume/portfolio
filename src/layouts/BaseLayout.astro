@@ -1,73 +1,130 @@
 ---
 import '../styles/global.css';
 import type { Locale, Translations } from '../i18n';
-import { locales } from '../i18n';
+import { locales, replaceLocaleInPath } from '../i18n';
 
 interface Props {
     lang: Locale;
     t: Translations;
+    title?: string;
+    description?: string;
+    canonicalPath?: string;
+    ogImage?: string;
+    pageType?: 'website' | 'article';
+    noindex?: boolean;
+    structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { lang, t } = Astro.props;
-const canonicalURL = new URL(`/${lang}/`, 'https://juliohuerta.dev');
+const {
+    lang,
+    t,
+    title = t.meta.title,
+    description = t.meta.description,
+    canonicalPath = `/${lang}/`,
+    ogImage = '/og.png',
+    pageType = 'website',
+    noindex = false,
+    structuredData,
+} = Astro.props;
+
+const siteURL = 'https://juliohuerta.dev';
+const canonicalURL = new URL(canonicalPath, siteURL);
+const alternatePaths = locales.map((loc) => ({
+    locale: loc,
+    href: new URL(replaceLocaleInPath(canonicalPath, loc), siteURL),
+}));
+const defaultStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Julio Huerta",
+    "url": siteURL,
+    "jobTitle": t.meta.jobTitle,
+    "worksFor": {
+        "@type": "Organization",
+        "name": "BBVA"
+    },
+    "knowsAbout": ["Web Components", "Lit", "TypeScript", "React", "Next.js", "Node.js", "Docker"],
+    "sameAs": [
+        "https://linkedin.com/in/juhume",
+        "https://github.com/juhume"
+    ]
+};
+const structuredDataValue = structuredData ?? defaultStructuredData;
+const structuredDataList = Array.isArray(structuredDataValue) ? structuredDataValue : [structuredDataValue];
+const ogImageURL = new URL(ogImage, siteURL);
 ---
 
 <!DOCTYPE html>
-<html lang={lang} data-theme="light">
+<html lang={lang} class="no-js">
 <head>
     <meta charset="utf-8" />
+    <script is:inline>
+        (function() {
+            document.documentElement.classList.remove('no-js');
+            document.documentElement.classList.add('js');
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{t.meta.title}</title>
-    <meta name="description" content={t.meta.description} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta name="author" content="Julio Huerta" />
     <meta name="keywords" content={t.meta.keywords} />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#eef2ea" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151b18" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
 
     <!-- Hreflang alternates -->
-    {locales.map(loc => (
-        <link rel="alternate" hreflang={loc} href={`https://juliohuerta.dev/${loc}/`} />
+    {alternatePaths.map(({ locale, href }) => (
+        <link rel="alternate" hreflang={locale} href={href} />
     ))}
-    <link rel="alternate" hreflang="x-default" href="https://juliohuerta.dev/es/" />
+    <link rel="alternate" hreflang="x-default" href={new URL(replaceLocaleInPath(canonicalPath, 'es'), siteURL)} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={t.meta.title} />
-    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:locale" content={t.meta.ogLocale} />
     <meta property="og:site_name" content="Julio Huerta" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={t.meta.title} />
-    <meta name="twitter:description" content={t.meta.description} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Julio Huerta",
-        "url": "https://juliohuerta.dev",
-        "jobTitle": t.meta.jobTitle,
-        "worksFor": {
-            "@type": "Organization",
-            "name": "BBVA"
-        },
-        "knowsAbout": ["Web Components", "Lit", "TypeScript", "React", "Next.js", "Node.js", "Docker"],
-        "sameAs": [
-            "https://linkedin.com/in/juhume",
-            "https://github.com/juhume"
-        ]
-    })} />
+    {structuredDataList.map((item) => (
+        <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
 
-    <!-- Fonts -->
+    <!-- Fonts (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"
-        rel="stylesheet"
+        rel="preload"
+        as="style"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+        media="print"
+        onload="this.media='all'"
+    />
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </noscript>
 </head>
 <body>
     <!-- Skip to content -->

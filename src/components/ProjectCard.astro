@@ -3,75 +3,93 @@ interface Props {
     title: string;
     description: string;
     category: string;
-    categoryColor?: string;
     badge?: string;
     technologies?: string[];
     role: string;
+    proof: string;
+    highlights: string[];
     gradient: 'coral' | 'blue' | 'gold';
-    icon: string;
-    iconColor?: string;
+    visual: 'journal' | 'dashboard' | 'infra';
     link?: { href: string; label: string };
+    external?: boolean;
     index?: number;
+    variant?: 'feature' | 'row';
 }
 
 const {
     title,
     description,
     category,
-    categoryColor,
     badge,
     technologies = [],
     role,
+    proof,
+    highlights,
     gradient,
-    icon,
-    iconColor,
+    visual,
     link,
+    external = false,
     index = 0,
+    variant = 'row',
 } = Astro.props;
 
 const revealClass = index % 2 === 0 ? 'reveal-left' : 'reveal-right';
+const visualClass = `project--${visual}`;
+const variantClass = `project--${variant}`;
+const visibleHighlights = variant === 'feature' ? highlights.slice(0, 3) : highlights.slice(0, 1);
 ---
 
-<article class={`project ${revealClass}`}>
-    <div class="project__visual">
-        <div class={`project__gradient project__gradient--${gradient}`}></div>
-        <div class="project__visual-inner">
-            <div class="project__icon">
-                <svg
-                    viewBox="0 0 24 24"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    style={iconColor ? `stroke: var(--${iconColor});` : undefined}
-                >
-                    <Fragment set:html={icon} />
-                </svg>
-            </div>
-        </div>
-    </div>
-    <div class="project__content">
+<article class={`project ${visualClass} ${variantClass} ${revealClass}`}>
+    <div class="project__header">
         <div class="project__meta">
-            <span class="project__category" style={categoryColor ? `color: var(--${categoryColor});` : undefined}>
-                {category}
-            </span>
-            {badge && <span class="project__badge">{badge}</span>}
+            <span class="project__category">{category}</span>
         </div>
-        <h3 class="project__title">{title}</h3>
-        <p class="project__description">{description}</p>
-        {technologies.length > 0 && (
-            <div class="project__tags">
-                {technologies.map(tech => (
-                    <span class="project__tag">{tech}</span>
+        {badge && <span class="project__badge">{badge}</span>}
+    </div>
+
+    <div class="project__content">
+        <div class="project__head">
+            <span class="project__mark" aria-hidden="true">{title}</span>
+            <h3 class="project__title">{title}</h3>
+            <p class="project__description">{description}</p>
+        </div>
+
+        <p class="project__proof">{proof}</p>
+
+        {variant === 'feature' ? (
+            <div class="project__notes">
+                {visibleHighlights.map((item) => (
+                    <span class="project__note">{item}</span>
                 ))}
             </div>
+        ) : (
+            highlights[0] && <p class="project__aside">{highlights[0]}</p>
         )}
-        <p class="project__role">{role}</p>
-        {link && (
-            <a href={link.href} class="project__link" data-hover>
-                {link.label}
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 8h10M9 4l4 4-4 4"/>
-                </svg>
-            </a>
-        )}
+
+        <div class="project__footer">
+            <div class="project__micro">
+                <span class="project__role">{role}</span>
+                <div class="project__tags">
+                    {technologies.slice(0, 3).map(tech => (
+                        <span class="project__tag">{tech}</span>
+                    ))}
+                </div>
+            </div>
+            {link && (
+                <a
+                    href={link.href}
+                    class="project__link"
+                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                    {link.label}
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        {external
+                            ? <path d="M5 3h8v8M13 3L5 11"/>
+                            : <path d="M3 8h10M9 4l4 4-4 4"/>
+                        }
+                    </svg>
+                </a>
+            )}
+        </div>
     </div>
 </article>
