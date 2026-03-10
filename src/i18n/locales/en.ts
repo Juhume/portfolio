@@ -228,7 +228,7 @@ export const en: Translations = {
     },
     blog: {
         title: 'Blog',
-        subtitle: 'What I learn, what I break and what I think. No corporate filter.',
+        subtitle: 'What I learn, what I break, what I read, what I listen to and what I think.',
         homeIntro: 'I also write a blog about the things I come across while building and breaking stuff. Technical and personal.',
         homeLink: 'Read the blog →',
         readMore: 'Read more',

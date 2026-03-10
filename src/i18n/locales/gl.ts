@@ -228,7 +228,7 @@ export const gl: Translations = {
     },
     blog: {
         title: 'Blog',
-        subtitle: 'O que aprendo, o que rompo e o que opino. Sen filtro de empresa.',
+        subtitle: 'O que aprendo, o que rompo, o que leo, o que escoito e o que opino.',
         homeIntro: 'Tamén escribo un blog onde falo das cousas que me vou atopando mentres construo e rompo cousas. Técnicas e persoais.',
         homeLink: 'Ler o blog →',
         readMore: 'Ler máis',
