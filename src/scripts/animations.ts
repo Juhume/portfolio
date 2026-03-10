@@ -127,15 +127,26 @@ if (!prefersReducedMotion) {
         nameEl.textContent = '';
         nameEl.classList.add('char-reveal');
 
-        // Wrap each character in a span
+        // Wrap each character in a span, grouping by word to prevent mid-word breaks
         const chars: HTMLSpanElement[] = [];
-        for (const char of text) {
-            const span = document.createElement('span');
-            span.className = 'char-reveal__char';
-            span.textContent = char === ' ' ? '\u00A0' : char;
-            nameEl.appendChild(span);
-            chars.push(span);
-        }
+        const words = text.split(' ');
+        words.forEach((word, wordIdx) => {
+            const wordWrap = document.createElement('span');
+            wordWrap.style.whiteSpace = 'nowrap';
+            wordWrap.style.display = 'inline-block';
+            for (const char of word) {
+                const span = document.createElement('span');
+                span.className = 'char-reveal__char';
+                span.textContent = char;
+                wordWrap.appendChild(span);
+                chars.push(span);
+            }
+            // Add right margin for word spacing (since inline-block collapses whitespace)
+            if (wordIdx < words.length - 1) {
+                wordWrap.style.marginRight = '0.3em';
+            }
+            nameEl.appendChild(wordWrap);
+        });
 
         const nameObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

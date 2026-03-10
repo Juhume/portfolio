@@ -188,13 +188,13 @@ const projects = [
         }
         .home__header { gap: var(--space-sm); margin-bottom: var(--space-lg); }
         .home__photo { width: 72px; height: 72px; }
-        .home__name { font-size: clamp(1.35rem, 5vw, 1.8rem); overflow-wrap: break-word; }
+        .home__name { font-size: clamp(1.35rem, 5vw, 1.8rem); overflow-wrap: normal; word-break: keep-all; }
         .home__role { font-size: 0.85rem; }
         .home__bio { margin-bottom: var(--space-lg); }
         .home__bio p:first-child { font-size: 1rem; }
         .home__exp-header { flex-direction: column; gap: 0.15rem; }
         .home__exp-entry { padding: var(--space-sm); }
-        .home__email { font-size: 1rem; word-break: break-all; }
+        .home__email { font-size: 1rem; overflow-wrap: break-word; word-break: normal; }
         .home__project { padding: var(--space-sm); }
         .home__project-desc { font-size: 0.8rem; }
         .home__project-arrow { font-size: 1rem; }
@@ -235,6 +235,8 @@ const projects = [
         color: var(--text-primary);
         line-height: 1.15;
         letter-spacing: -0.03em;
+        overflow-wrap: normal;
+        word-break: keep-all;
     }
     .home__role {
         font-size: 0.95rem;
