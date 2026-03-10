@@ -143,6 +143,8 @@ export interface Translations {
     blog: {
         title: string;
         subtitle: string;
+        homeIntro: string;
+        homeLink: string;
         readMore: string;
         backToBlog: string;
         publishedOn: string;

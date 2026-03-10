@@ -105,6 +105,12 @@ const projects = [
                 </a>
             ))}
         </section>
+        <section class="home__blog">
+            <h2 class="home__section-title">{t.blog.title}</h2>
+            <p class="home__blog-intro">{t.blog.homeIntro}</p>
+            <a href={`/${lang}/blog/`} class="home__blog-link">{t.blog.homeLink}</a>
+        </section>
+
         <section class="home__contact" id={ids.contact}>
             <h2 class="home__section-title">{t.contact.title}</h2>
             <p class="home__contact-intro">{t.contact.text}</p>
@@ -484,6 +490,30 @@ const projects = [
         flex-shrink: 0;
         margin-left: var(--space-sm);
     }
+
+    /* Blog */
+    .home__blog {
+        margin-bottom: var(--space-xl);
+        padding-top: var(--space-lg);
+        border-top: 1px solid var(--border);
+    }
+    .home__blog-intro {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: var(--space-md);
+        max-width: 55ch;
+    }
+    .home__blog-link {
+        display: inline-block;
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--accent-text, #2B9B6A);
+        text-decoration: none;
+        transition: opacity var(--duration-fast) var(--ease-out);
+    }
+    .home__blog-link:hover { opacity: 0.7; }
 
     /* Contact */
     .home__contact {
