@@ -5,6 +5,7 @@ import Footer from '../../../components/Footer.astro';
 import { locales, getTranslations, getSectionIds } from '../../../i18n';
 import type { Locale } from '../../../i18n';
 import { getCollection } from 'astro:content';
+import { groupPostsBySlug, resolvePost, getReadTime } from '../../../utils/blog';
 
 export function getStaticPaths() {
     return locales.map(lang => ({ params: { lang } }));
@@ -13,20 +14,23 @@ export function getStaticPaths() {
 const { lang } = Astro.params as { lang: Locale };
 const t = getTranslations(lang);
 const ids = getSectionIds(lang);
-const isSpanishBlog = lang === 'es';
+const allPosts = await getCollection('blog');
+const postsBySlug = groupPostsBySlug(allPosts);
 
-const posts = (await getCollection('blog'))
-    .filter(post => post.data.lang === 'es')
+const posts = [...postsBySlug.values()]
+    .map(slugPosts => resolvePost(slugPosts, lang))
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const hasTranslations = posts.some(p => p.data.lang === lang);
 ---
 
 <BaseLayout
     lang={lang}
     t={t}
     title={`${t.blog.title} | Julio Huerta`}
-    description={isSpanishBlog ? t.blog.subtitle : t.blog.spanishOnlyText}
+    description={hasTranslations || lang === 'es' ? t.blog.subtitle : t.blog.spanishOnlyText}
     canonicalPath={`/${lang}/blog/`}
-    noindex={!isSpanishBlog}
+    noindex={!hasTranslations && lang !== 'es'}
 >
     <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
 
@@ -34,10 +38,10 @@ const posts = (await getCollection('blog'))
         <div class="container">
             <header class="blog__header">
                 <h1 class="blog__title">{t.blog.title}</h1>
-                <p class="blog__subtitle">{isSpanishBlog ? t.blog.subtitle : t.blog.spanishOnlyTitle}</p>
+                <p class="blog__subtitle">{hasTranslations || lang === 'es' ? t.blog.subtitle : t.blog.spanishOnlyTitle}</p>
             </header>
 
-            {!isSpanishBlog ? (
+            {!hasTranslations && lang !== 'es' ? (
                 <div class="blog-locale-note">
                     <p class="blog-locale-note__text">{t.blog.spanishOnlyText}</p>
                     <a href="/es/blog/" class="btn btn--primary">{t.blog.readInSpanish}</a>
@@ -47,9 +51,9 @@ const posts = (await getCollection('blog'))
             ) : (
                 <div class="blog__list">
                     {posts.map(post => {
-                        const readTime = Math.max(1, Math.ceil(post.body!.split(/\s+/).length / 200));
+                        const readTime = getReadTime(post.body);
                         return (
-                            <a href={`/${lang}/blog/${post.id}/`} class="blog-card">
+                            <a href={`/${lang}/blog/${post.data.canonicalSlug || post.id}/`} class="blog-card">
                                 <time class="blog-card__date" datetime={post.data.date.toISOString()}>
                                     {post.data.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
                                 </time>
@@ -60,7 +64,7 @@ const posts = (await getCollection('blog'))
                                     {post.data.tags && (
                                         <div class="blog-card__tags">
                                             {post.data.tags.map(tag => (
-                                                <span class="blog-card__tag">{tag}</span>
+                                                <span class="blog-card__tag" data-tag={tag}>{tag}</span>
                                             ))}
                                         </div>
                                     )}
@@ -71,7 +75,7 @@ const posts = (await getCollection('blog'))
                 </div>
             )}
 
-            <a href={`/${lang}/`} class="blog__back">← {t.notFound.backHome}</a>
+            <a href={`/${lang}/`} class="blog__back">← {t.blog.backToHome}</a>
         </div>
     </section>
 

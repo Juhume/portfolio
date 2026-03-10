@@ -5,27 +5,61 @@ import Footer from '../../../components/Footer.astro';
 import { locales, getTranslations, getSectionIds } from '../../../i18n';
 import type { Locale } from '../../../i18n';
 import { getCollection, render } from 'astro:content';
+import { groupPostsBySlug, resolvePost, getReadTime } from '../../../utils/blog';
+
+// Tag-to-case-study mapping for cross-linking
+const TAG_TO_PROJECT: Record<string, { name: string; path: string }> = {
+    'offline-first': { name: 'Espejo', path: '/projects/espejo/' },
+    'indexeddb': { name: 'Espejo', path: '/projects/espejo/' },
+    'arquitectura': { name: 'Espejo', path: '/projects/espejo/' },
+    'producto': { name: 'Espejo', path: '/projects/espejo/' },
+    'infra': { name: 'Homelab', path: '/projects/homelab/' },
+};
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
-    return posts.flatMap(post =>
-        locales.map(lang => ({
-            params: { lang, slug: post.id },
-            props: { post },
-        }))
+    const postsBySlug = groupPostsBySlug(posts);
+
+    // Build sorted post list per locale for prev/next navigation
+    const sortedByLocale = new Map<string, { slug: string; title: string }[]>();
+    for (const loc of locales) {
+        const resolved = [...postsBySlug.entries()]
+            .map(([slug, slugPosts]) => ({
+                slug,
+                post: resolvePost(slugPosts, loc as Locale),
+            }))
+            .sort((a, b) => b.post.data.date.getTime() - a.post.data.date.getTime());
+        sortedByLocale.set(loc, resolved.map((r) => ({ slug: r.slug, title: r.post.data.title })));
+    }
+
+    return [...postsBySlug.entries()].flatMap(([slug, slugPosts]) =>
+        locales.map((lang) => {
+            const post = resolvePost(slugPosts, lang as Locale);
+            const sorted = sortedByLocale.get(lang)!;
+            const idx = sorted.findIndex((p) => p.slug === slug);
+            // sorted is newest-first: previous (older) = idx+1, next (newer) = idx-1
+            const prevPost = idx < sorted.length - 1 ? sorted[idx + 1] : null;
+            const nextPost = idx > 0 ? sorted[idx - 1] : null;
+
+            return {
+                params: { lang, slug },
+                props: { post, prevPost, nextPost },
+            };
+        })
     );
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { lang } = Astro.params as { lang: Locale };
 const t = getTranslations(lang);
 const ids = getSectionIds(lang);
 const isOriginalLocale = lang === post.data.lang;
 
 const { Content } = await render(post);
-const readTime = Math.max(1, Math.ceil(post.body!.split(/\s+/).length / 200));
-const originalArticlePath = `/${post.data.lang}/blog/${post.id}/`;
-const canonicalPath = isOriginalLocale ? `/${lang}/blog/${post.id}/` : originalArticlePath;
+const readTime = getReadTime(post.body);
+const effectiveSlug = post.data.canonicalSlug || post.id;
+const originalArticlePath = `/${post.data.lang}/blog/${effectiveSlug}/`;
+const canonicalPath = isOriginalLocale ? `/${lang}/blog/${effectiveSlug}/` : originalArticlePath;
 const articleUrl = `https://juliohuerta.dev${canonicalPath}`;
 const articleStructuredData = {
     '@context': 'https://schema.org',
@@ -40,6 +74,17 @@ const articleStructuredData = {
     inLanguage: isOriginalLocale ? lang : post.data.lang,
     mainEntityOfPage: articleUrl,
 };
+
+// Determine related case study from tags
+const postTags = post.data.tags ?? [];
+const relatedProjects = new Map<string, { name: string; path: string }>();
+for (const tag of postTags) {
+    const project = TAG_TO_PROJECT[tag];
+    if (project && !relatedProjects.has(project.name)) {
+        relatedProjects.set(project.name, project);
+    }
+}
+const relatedList = [...relatedProjects.values()];
 ---
 
 <BaseLayout
@@ -78,9 +123,139 @@ const articleStructuredData = {
                 </div>
             )}
 
+            {/* Related case studies */}
+            {relatedList.length > 0 && (
+                <aside class="blog-post__related">
+                    <h2 class="blog-post__related-title">{t.blog.relatedProject}</h2>
+                    <div class="blog-post__related-links">
+                        {relatedList.map((project) => (
+                            <a href={`/${lang}${project.path}`} class="blog-post__related-link">
+                                {project.name}
+                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                                </svg>
+                            </a>
+                        ))}
+                    </div>
+                </aside>
+            )}
+
+            {/* Prev / Next navigation */}
+            <nav class="blog-post__nav" aria-label="Blog post navigation">
+                <div class="blog-post__nav-prev">
+                    {prevPost && (
+                        <a href={`/${lang}/blog/${prevPost.slug}/`} class="blog-post__nav-link">
+                            <span class="blog-post__nav-label">{t.blog.prevPost}</span>
+                            <span class="blog-post__nav-title">{prevPost.title}</span>
+                        </a>
+                    )}
+                </div>
+                <div class="blog-post__nav-next">
+                    {nextPost && (
+                        <a href={`/${lang}/blog/${nextPost.slug}/`} class="blog-post__nav-link blog-post__nav-link--next">
+                            <span class="blog-post__nav-label">{t.blog.nextPost}</span>
+                            <span class="blog-post__nav-title">{nextPost.title}</span>
+                        </a>
+                    )}
+                </div>
+            </nav>
+
             <a href={`/${lang}/blog/`} class="blog-post__back blog-post__back--bottom">← {t.blog.backToBlog}</a>
         </div>
     </article>
 
     <Footer t={t} />
 </BaseLayout>
+
+<style>
+    .blog-post__related {
+        margin-top: var(--space-xl);
+        padding-top: var(--space-lg);
+        border-top: 1px solid var(--border);
+    }
+
+    .blog-post__related-title {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        margin-bottom: var(--space-md);
+    }
+
+    .blog-post__related-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .blog-post__related-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid var(--border);
+        border-radius: 0.75rem;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+    .blog-post__related-link:hover {
+        border-color: var(--accent);
+        background: var(--bg-primary);
+    }
+
+    .blog-post__nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+        margin-top: var(--space-xl);
+        padding-top: var(--space-lg);
+        border-top: 1px solid var(--border);
+    }
+
+    .blog-post__nav-prev {
+        text-align: left;
+    }
+
+    .blog-post__nav-next {
+        text-align: right;
+    }
+
+    .blog-post__nav-link {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-primary);
+        transition: color 0.2s;
+    }
+
+    .blog-post__nav-link:hover {
+        color: var(--accent);
+    }
+
+    .blog-post__nav-label {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .blog-post__nav-title {
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .blog-post__nav-link--next {
+        align-items: flex-end;
+    }
+
+    @media (max-width: 600px) {
+        .blog-post__nav {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
