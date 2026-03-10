@@ -1,0 +1,402 @@
+---
+import type { Locale, Translations } from '../i18n';
+
+import { getSectionIds } from '../i18n';
+import type { SectionIds } from '../i18n';
+
+interface Props {
+    t: Translations;
+    lang: Locale;
+}
+
+const { t, lang } = Astro.props;
+const ids = getSectionIds(lang);
+const email = t.contact.text;
+const projects = [
+    {
+        title: t.projects.items[0].title,
+        desc: t.projects.items[0].description,
+        href: `/${lang}/projects/espejo/`,
+        icon: '/espejo-logo.jpg',
+        url: 'espejo.day',
+        urlHref: 'https://espejo.day',
+    },
+    {
+        title: t.projects.items[1].title,
+        desc: t.projects.items[1].description,
+        href: 'https://diplotest.es',
+        external: true,
+        icon: null,
+        url: 'diplotest.es',
+    },
+    {
+        title: t.projects.items[2].title,
+        desc: t.projects.items[2].description,
+        href: `/${lang}/projects/homelab/`,
+        icon: null,
+        url: null,
+    },
+];
+---
+
+<main class="home">
+    <div class="home__container">
+        <header class="home__header">
+            <img src="/julio-huerta.jpg" alt={t.about.photoAlt} class="home__photo" width="96" height="96" />
+            <div>
+                <h1 class="home__name">Julio Huerta</h1>
+                <p class="home__role">{t.home.role}</p>
+            </div>
+        </header>
+        <div class="home__bio" id={ids.about}>
+            {t.about.paragraphs.slice(0, 2).map(p => <p set:html={p} />)}
+        </div>
+        <section class="home__experience" id={ids.experience}>
+            <h2 class="home__section-title">{t.experience.title}</h2>
+            <p class="home__subtitle">{t.hero.subtitle}</p>
+            <div class="home__exp-entry">
+                <div class="home__exp-header">
+                    <span class="home__exp-company">{t.experience.company}</span>
+                    <span class="home__exp-period">{t.experience.period}</span>
+                </div>
+                <p class="home__exp-role">{t.experience.role}</p>
+                <p class="home__exp-context">{t.experience.context}</p>
+                <div class="home__exp-stack">
+                    {t.experience.stack.map(tech => (
+                        <span class="home__tag">{tech}</span>
+                    ))}
+                </div>
+            </div>
+        </section>
+        <section class="home__projects" id={ids.projects}>
+            <h2 class="home__section-title">{t.projects.title}</h2>
+            {projects.map(project => (
+                <a
+                    href={project.href}
+                    class="home__project"
+                    {...(project.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                    <div class="home__project-info">
+                        {project.icon && <img src={project.icon} alt="" class="home__project-icon" width="32" height="32" />}
+                        <div>
+                            <div class="home__project-top">
+                                <h3 class="home__project-name">{project.title}</h3>
+                                {project.url && (
+                                    <span
+                                        class="home__project-url"
+                                        data-href={project.urlHref || `https://${project.url}`}
+                                        role="link"
+                                        tabindex="0"
+                                    >
+                                        {project.url} ↗
+                                    </span>
+                                )}
+                            </div>
+                            <p class="home__project-desc">{project.desc}</p>
+                        </div>
+                    </div>
+                    <span class="home__project-arrow">→</span>
+                </a>
+            ))}
+        </section>
+        <section class="home__contact" id={ids.contact}>
+            <h2 class="home__section-title">{t.contact.title}</h2>
+            <a href={`mailto:${email}`} class="home__email">{email}</a>
+            {t.contact.cta && <p class="home__contact-cta">{t.contact.cta}</p>}
+            <div class="home__social">
+                <a href="https://linkedin.com/in/juhume" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    {t.contact.linkedin}
+                </a>
+                <a href="https://github.com/juhume" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    {t.contact.github}
+                </a>
+            </div>
+            <nav class="home__footer-nav" aria-label="Footer navigation">
+                <a href={`/${lang}/blog/`}>{t.nav.blog}</a>
+                <span class="home__footer-sep">·</span>
+                <a href={`/${lang}/projects/espejo/`}>{t.projects.items[0].title}</a>
+                <span class="home__footer-sep">·</span>
+                <a href={`/${lang}/projects/homelab/`}>{t.projects.items[2].title}</a>
+            </nav>
+        </section>
+    </div>
+</main>
+
+<script>
+    document.querySelectorAll('.home__project-url[data-href]').forEach(el => {
+        const open = () => window.open((el as HTMLElement).dataset.href!, '_blank');
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            open();
+        });
+        el.addEventListener('keydown', (e) => {
+            if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+                e.preventDefault();
+                e.stopPropagation();
+                open();
+            }
+        });
+    });
+</script>
+
+<style>
+    .home { padding: var(--space-xl) var(--space-md); padding-top: calc(var(--space-3xl) + 2rem); }
+    .home__container { max-width: 680px; margin: 0 auto; }
+
+    @media (min-width: 768px) {
+        .home__container { max-width: 920px; }
+        .home__photo { width: 96px !important; height: 96px !important; }
+    }
+
+    .home__header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-lg);
+    }
+    .home__photo {
+        width: 80px; height: 80px;
+        border-radius: 30% 70% 53% 47% / 52% 35% 65% 48%;
+        object-fit: cover;
+        transition: border-radius 0.6s ease;
+    }
+    .home__photo:hover {
+        border-radius: 58% 42% 36% 64% / 43% 68% 32% 57%;
+    }
+    .home__name {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+    }
+    .home__role {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-top: 0.125rem;
+    }
+    .home__bio { margin-bottom: var(--space-xl); }
+    .home__bio p {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: var(--space-sm);
+    }
+    .home__bio p:last-child { margin-bottom: 0; }
+
+    /* Section titles — accent underline */
+    .home__section-title {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--text-muted);
+        margin-bottom: var(--space-sm);
+        padding-bottom: 0.4rem;
+        border-bottom: 2px solid var(--accent-text, #2B9B6A);
+        display: inline-block;
+    }
+
+    /* Experience section */
+    .home__experience { margin-bottom: var(--space-xl); }
+    .home__subtitle {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: var(--space-md);
+    }
+    .home__exp-entry {
+        padding: var(--space-sm) 0;
+    }
+    .home__exp-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+        margin-bottom: 0.25rem;
+    }
+    .home__exp-company {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+    .home__exp-period {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-family: var(--font-display);
+        letter-spacing: 0.02em;
+    }
+    .home__exp-role {
+        font-size: 0.9rem;
+        color: var(--accent-text, #2B9B6A);
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+    }
+    .home__exp-context {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 0.75rem;
+    }
+    .home__exp-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+    }
+    .home__tag {
+        font-size: 0.65rem;
+        font-family: var(--font-display);
+        padding: 0.15rem 0.5rem;
+        border-radius: 3px;
+        background: var(--accent-subtle, rgba(43, 155, 106, 0.08));
+        color: var(--accent-text, #2B9B6A);
+        letter-spacing: 0.03em;
+        font-weight: 600;
+    }
+
+    /* Projects */
+    .home__projects { margin-bottom: var(--space-xl); }
+    .home__project {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-sm) 0;
+        border-bottom: 1px solid var(--border);
+        text-decoration: none;
+        color: inherit;
+        transition: color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), margin var(--duration-fast) var(--ease-out), padding var(--duration-fast) var(--ease-out);
+    }
+    .home__project:first-of-type { border-top: 1px solid var(--border); }
+    .home__project:hover .home__project-name { color: var(--accent-text, #2B9B6A); }
+    .home__project:hover .home__project-arrow { transform: translateX(6px); color: var(--accent-text, #2B9B6A); }
+    .home__project:hover { background: var(--accent-subtle); margin: 0 -0.75rem; padding-left: 0.75rem; padding-right: 0.75rem; border-radius: 6px; }
+    .home__project-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .home__project-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+    .home__project-top {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    .home__project-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        line-height: 1.4;
+        transition: color var(--duration-fast) var(--ease-out);
+    }
+    .home__project-desc {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-top: 0.125rem;
+    }
+    .home__project-url {
+        font-size: 0.7rem;
+        color: var(--accent-text, #2B9B6A);
+        font-family: var(--font-display);
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        transition: opacity var(--duration-fast) var(--ease-out);
+    }
+    .home__project-url:hover {
+        opacity: 0.7;
+    }
+    .home__project-url:focus-visible {
+        outline: 2px solid var(--accent-text, #2B9B6A);
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+    .home__project-arrow {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        transition: transform var(--duration-fast) var(--ease-out);
+        flex-shrink: 0;
+        margin-left: var(--space-sm);
+    }
+
+    /* Contact */
+    .home__contact { margin-bottom: var(--space-lg); }
+    .home__email {
+        display: inline-block;
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--accent-text, #2B9B6A);
+        text-decoration: none;
+        margin-bottom: var(--space-sm);
+        letter-spacing: -0.01em;
+        transition: color var(--duration-fast) var(--ease-out), letter-spacing var(--duration-fast) var(--ease-out);
+    }
+    .home__email:hover { color: var(--accent-hover); letter-spacing: 0.02em; }
+    .home__personal { margin-bottom: var(--space-xl); }
+    .home__personal-text {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 0.5rem;
+    }
+    .home__personal-text:last-child { margin-bottom: 0; }
+    .home__contact-cta {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-bottom: var(--space-sm);
+        font-style: italic;
+    }
+    .home__social { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); }
+    .home__social a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color var(--duration-fast) var(--ease-out);
+    }
+    .home__social a:hover { color: var(--accent-text, #2B9B6A); }
+    .home__social svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    /* Footer nav */
+    .home__footer-nav {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--border);
+    }
+    .home__footer-nav a {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color var(--duration-fast) var(--ease-out);
+    }
+    .home__footer-nav a:hover {
+        color: var(--accent-text, #2B9B6A);
+    }
+    .home__footer-sep {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        opacity: 0.4;
+    }
+</style>
