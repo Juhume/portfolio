@@ -5,6 +5,7 @@ date: 2025-12-04
 lang: gl
 canonicalSlug: "lo-que-aprendi-dirigiendo-agentes-de-ia"
 tags: ["produto", "aprendizaxe", "ia"]
+category: "profesional"
 ---
 
 Vou contar algo que non é cómodo de admitir: durante meses, construín proxectos de software reais—un framework completo, un dashboard de control, ferramentas de automatización—sen escribir unha soa liña de código eu mesmo.

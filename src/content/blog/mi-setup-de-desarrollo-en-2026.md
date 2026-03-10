@@ -4,6 +4,7 @@ description: "Un repaso rápido y honesto de las herramientas que uso para desar
 date: 2026-03-01
 lang: es
 tags: ["infra", "código", "herramientas"]
+category: "profesional"
 ---
 
 Me gusta ver los setups de otros desarrolladores. No por el hardware. que también. sino por descubrir herramientas o flujos que no conocía. Así que aquí va el mío, sin adornos.

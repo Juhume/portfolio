@@ -5,6 +5,7 @@ date: 2025-09-18
 lang: en
 canonicalSlug: "por-que-tengo-un-servidor-en-casa"
 tags: ["infra", "vida", "homelab"]
+category: "personal"
 ---
 
 It all started because Plex kept crashing on a friend's server every two weeks. One day I got fed up, searched "build home server" on YouTube, and three hours later I had a NAS in my Amazon cart. That was the excuse. The real reason was something else.

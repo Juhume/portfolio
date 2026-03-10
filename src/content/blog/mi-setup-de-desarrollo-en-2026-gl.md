@@ -5,6 +5,7 @@ date: 2026-03-01
 lang: gl
 canonicalSlug: "mi-setup-de-desarrollo-en-2026"
 tags: ["infra", "código", "ferramentas"]
+category: "profesional"
 ---
 
 Gústame ver os setups doutros desenvolvedores. Non polo hardware—que tamén—senón por descubrir ferramentas ou fluxos que non coñecía. Así que aquí vai o meu, sen adornos.

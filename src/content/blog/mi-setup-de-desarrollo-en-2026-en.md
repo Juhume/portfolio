@@ -5,6 +5,7 @@ date: 2026-03-01
 lang: en
 canonicalSlug: "mi-setup-de-desarrollo-en-2026"
 tags: ["infra", "código", "herramientas"]
+category: "profesional"
 ---
 
 I like seeing other developers' setups. Not just for the hardware—though that too—but to discover tools or workflows I didn't know about. So here's mine, no frills.

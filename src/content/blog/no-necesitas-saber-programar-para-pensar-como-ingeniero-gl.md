@@ -5,6 +5,7 @@ date: 2026-01-10
 lang: gl
 canonicalSlug: "no-necesitas-saber-programar-para-pensar-como-ingeniero"
 tags: ["vida", "aprendizaxe", "opinión"]
+category: "personal"
 ---
 
 Durante anos xestionei proxectos técnicos, revisei arquitecturas e tomei decisións sobre como debían funcionar sistemas complexos—sen saber programar. E non o digo con orgullo nin con vergoña. Dígoo porque creo que demostra algo importante: **a mentalidade de enxeñeiro non require saber escribir código**.

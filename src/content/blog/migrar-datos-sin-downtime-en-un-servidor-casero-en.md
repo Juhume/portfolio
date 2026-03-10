@@ -5,6 +5,7 @@ date: 2025-12-20
 lang: en
 canonicalSlug: "migrar-datos-sin-downtime-en-un-servidor-casero"
 tags: ["infra", "homelab", "devops"]
+category: "profesional"
 ---
 
 My NAS had one rule: never go down. Then I needed to move its most critical data to a new drive.

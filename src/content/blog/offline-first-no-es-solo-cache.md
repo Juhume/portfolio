@@ -4,6 +4,7 @@ description: "Lo que aprendí construyendo una app que funciona sin conexión de
 date: 2025-03-01
 lang: es
 tags: ["arquitectura", "offline-first", "indexeddb"]
+category: "profesional"
 ---
 
 Cuando empecé Espejo, pensaba que "offline-first" era poner un service worker y cachear las respuestas del API. Estaba equivocado.

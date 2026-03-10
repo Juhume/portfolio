@@ -5,6 +5,7 @@ date: 2025-11-15
 lang: en
 canonicalSlug: "la-noche-que-mi-dns-se-peleo-consigo-mismo"
 tags: ["infra", "homelab", "debugging"]
+category: "profesional"
 ---
 
 Everything worked until it didn't. At 2AM, no device in my house could resolve a domain.

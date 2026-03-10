@@ -5,6 +5,7 @@ date: 2025-03-01
 lang: gl
 canonicalSlug: "offline-first-no-es-solo-cache"
 tags: ["arquitectura", "offline-first", "indexeddb"]
+category: "profesional"
 ---
 
 Cando comecei Espejo, pensaba que "offline-first" era poñer un service worker e cachear as respostas da API. Estaba equivocado.

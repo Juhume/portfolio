@@ -4,6 +4,7 @@ description: "Después de trabajar con ambos en BBVA para apps nativas, estas so
 date: 2025-07-22
 lang: es
 tags: ["código", "mobile"]
+category: "profesional"
 ---
 
 En BBVA trabajé con Kotlin y Swift para desarrollo nativo. No voy a hacer la típica tabla comparativa de features. eso lo encuentras en cualquier artículo de Medium. Voy a contar las diferencias que notas cuando llevas meses trabajando con ambos.

@@ -5,6 +5,7 @@ date: 2026-01-10
 lang: en
 canonicalSlug: "no-necesitas-saber-programar-para-pensar-como-ingeniero"
 tags: ["vida", "aprendizaje", "opinión"]
+category: "personal"
 ---
 
 For years I managed technical projects, reviewed architectures, and made decisions about how complex systems should work—without knowing how to code. I don't say this with pride or shame. I say it because I think it proves something important: **the engineering mindset doesn't require knowing how to write code**.

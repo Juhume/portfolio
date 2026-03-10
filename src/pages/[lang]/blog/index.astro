@@ -41,6 +41,18 @@ const hasTranslations = posts.some(p => p.data.lang === lang);
                 <p class="blog__subtitle">{hasTranslations || lang === 'es' ? t.blog.subtitle : t.blog.spanishOnlyTitle}</p>
             </header>
 
+            <div class="blog__toggle" role="tablist">
+                <button class="blog__toggle-btn blog__toggle-btn--active" role="tab" aria-selected="true" data-filter="all">
+                    {lang === 'es' ? 'Todo' : lang === 'en' ? 'All' : 'Todo'}
+                </button>
+                <button class="blog__toggle-btn" role="tab" aria-selected="false" data-filter="profesional">
+                    {lang === 'es' ? 'Profesional' : lang === 'en' ? 'Professional' : 'Profesional'}
+                </button>
+                <button class="blog__toggle-btn" role="tab" aria-selected="false" data-filter="personal">
+                    {lang === 'es' ? 'Personal' : lang === 'en' ? 'Personal' : 'Persoal'}
+                </button>
+            </div>
+
             {!hasTranslations && lang !== 'es' ? (
                 <div class="blog-locale-note">
                     <p class="blog-locale-note__text">{t.blog.spanishOnlyText}</p>
@@ -53,7 +65,7 @@ const hasTranslations = posts.some(p => p.data.lang === lang);
                     {posts.map(post => {
                         const readTime = getReadTime(post.body);
                         return (
-                            <a href={`/${lang}/blog/${post.data.canonicalSlug || post.id}/`} class="blog-card">
+                            <a href={`/${lang}/blog/${post.data.canonicalSlug || post.id}/`} class="blog-card" data-category={post.data.category || 'profesional'}>
                                 <time class="blog-card__date" datetime={post.data.date.toISOString()}>
                                     {post.data.date.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}
                                 </time>
@@ -80,4 +92,66 @@ const hasTranslations = posts.some(p => p.data.lang === lang);
     </section>
 
     <Footer t={t} />
+
+    <style>
+        .blog__toggle {
+            display: flex;
+            gap: 0;
+            margin-bottom: var(--space-xl);
+            background: var(--bg-secondary);
+            border-radius: 999px;
+            padding: 4px;
+            width: fit-content;
+        }
+        .blog__toggle-btn {
+            padding: 0.5rem 1.25rem;
+            border: none;
+            border-radius: 999px;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+        .blog__toggle-btn--active {
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+        .blog__toggle-btn:hover:not(.blog__toggle-btn--active) {
+            color: var(--text-primary);
+        }
+        .blog-card[data-category] { transition: opacity var(--duration-fast) var(--ease-out); }
+        .blog-card.hidden { display: none; }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.blog__toggle-btn');
+            const cards = document.querySelectorAll('.blog-card[data-category]');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = (btn as HTMLElement).dataset.filter;
+                    buttons.forEach(b => {
+                        b.classList.remove('blog__toggle-btn--active');
+                        b.setAttribute('aria-selected', 'false');
+                    });
+                    btn.classList.add('blog__toggle-btn--active');
+                    btn.setAttribute('aria-selected', 'true');
+
+                    cards.forEach(card => {
+                        const cat = (card as HTMLElement).dataset.category;
+                        if (filter === 'all' || cat === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </BaseLayout>

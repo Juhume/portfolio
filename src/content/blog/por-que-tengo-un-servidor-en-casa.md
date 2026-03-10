@@ -4,6 +4,7 @@ description: "No es un tutorial. Es la historia de por qué decidí montar un ho
 date: 2025-09-18
 lang: es
 tags: ["infra", "vida", "homelab"]
+category: "personal"
 ---
 
 Todo empezó porque Plex se caía en el servidor de un amigo cada dos semanas. Un día me harté, busqué "build home server" en YouTube, y tres horas después tenía un NAS en el carrito de Amazon. Esa fue la excusa. La razón real era otra.

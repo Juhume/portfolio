@@ -4,6 +4,7 @@ description: "Dirigí un sistema multi-agente para construir proyectos reales si
 date: 2025-12-04
 lang: es
 tags: ["producto", "aprendizaje", "ia"]
+category: "profesional"
 ---
 
 Voy a contar algo que no es cómodo de admitir: durante meses, construí proyectos de software reales. un framework completo, un dashboard de control, herramientas de automatización. sin escribir una sola línea de código yo mismo.

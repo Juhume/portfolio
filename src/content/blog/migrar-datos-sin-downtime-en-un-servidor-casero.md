@@ -4,6 +4,7 @@ description: "Mi NAS tenía una regla: nunca apagarse. Entonces necesité mover 
 date: 2025-12-20
 lang: es
 tags: ["infra", "homelab", "devops"]
+category: "profesional"
 ---
 
 Mi NAS tenía una regla: nunca apagarse. Y entonces necesité mover sus datos más críticos a un disco nuevo.

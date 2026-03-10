@@ -5,6 +5,7 @@ date: 2025-07-22
 lang: gl
 canonicalSlug: "kotlin-vs-swift-lo-que-nadie-te-cuenta"
 tags: ["código", "mobile"]
+category: "profesional"
 ---
 
 En BBVA traballei con Kotlin e Swift para desenvolvemento nativo. Non vou facer a típica táboa comparativa de features—iso atópalo en calquera artigo de Medium. Vou contar as diferenzas que notas cando levas meses traballando con ambos.

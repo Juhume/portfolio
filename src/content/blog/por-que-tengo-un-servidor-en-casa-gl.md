@@ -5,6 +5,7 @@ date: 2025-09-18
 lang: gl
 canonicalSlug: "por-que-tengo-un-servidor-en-casa"
 tags: ["infra", "vida", "homelab"]
+category: "personal"
 ---
 
 Todo comezou porque Plex caía no servidor dun amigo cada dúas semanas. Un día farteime, busquei "build home server" en YouTube, e tres horas despois tiña un NAS no carriño de Amazon. Esa foi a escusa. A razón real era outra.

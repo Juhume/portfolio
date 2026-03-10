@@ -4,6 +4,7 @@ description: "Todo funcionaba hasta que dejó de funcionar. A las 2AM, ningún d
 date: 2025-11-15
 lang: es
 tags: ["infra", "homelab", "debugging"]
+category: "profesional"
 ---
 
 Todo funcionaba hasta que dejó de funcionar. A las 2AM, ningún dispositivo de mi casa podía resolver un dominio.

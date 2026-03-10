@@ -4,6 +4,7 @@ description: "El pensamiento de sistemas, descomponer problemas y debuggear son 
 date: 2026-01-10
 lang: es
 tags: ["vida", "aprendizaje", "opinión"]
+category: "personal"
 ---
 
 Durante años gestioné proyectos técnicos, revisé arquitecturas, y tomé decisiones sobre cómo debían funcionar sistemas complejos. sin saber programar. Y no lo digo con orgullo ni con vergüenza. Lo digo porque creo que demuestra algo importante: **la mentalidad de ingeniero no requiere saber escribir código**.
