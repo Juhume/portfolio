@@ -14,6 +14,7 @@ interface Props {
     external?: boolean;
     index?: number;
     variant?: 'feature' | 'row';
+    homepage?: boolean;
 }
 
 const {
@@ -31,50 +32,56 @@ const {
     external = false,
     index = 0,
     variant = 'row',
+    homepage = false,
 } = Astro.props;
 
 const revealClass = index % 2 === 0 ? 'reveal-left' : 'reveal-right';
 const visualClass = `project--${visual}`;
 const variantClass = `project--${variant}`;
+const homepageClass = homepage ? 'project--homepage' : '';
 const visibleHighlights = variant === 'feature' ? highlights.slice(0, 3) : highlights.slice(0, 1);
 ---
 
-<article class={`project ${visualClass} ${variantClass} ${revealClass}`}>
+<article class={`project ${visualClass} ${variantClass} ${homepageClass} ${revealClass}`}>
     <div class="project__header">
         <div class="project__meta">
             <span class="project__category">{category}</span>
         </div>
-        {badge && <span class="project__badge">{badge}</span>}
+        {!homepage && badge && <span class="project__badge">{badge}</span>}
     </div>
 
     <div class="project__content">
         <div class="project__head">
-            <span class="project__mark" aria-hidden="true">{title}</span>
+            {!homepage && <span class="project__mark" aria-hidden="true">{title}</span>}
             <h3 class="project__title">{title}</h3>
             <p class="project__description">{description}</p>
         </div>
 
-        <p class="project__proof">{proof}</p>
+        {!homepage && <p class="project__proof">{proof}</p>}
 
-        {variant === 'feature' ? (
-            <div class="project__notes">
-                {visibleHighlights.map((item) => (
-                    <span class="project__note">{item}</span>
-                ))}
-            </div>
-        ) : (
-            highlights[0] && <p class="project__aside">{highlights[0]}</p>
+        {!homepage && (
+            variant === 'feature' ? (
+                <div class="project__notes">
+                    {visibleHighlights.map((item) => (
+                        <span class="project__note">{item}</span>
+                    ))}
+                </div>
+            ) : (
+                highlights[0] && <p class="project__aside">{highlights[0]}</p>
+            )
         )}
 
         <div class="project__footer">
-            <div class="project__micro">
-                <span class="project__role">{role}</span>
-                <div class="project__tags">
-                    {technologies.slice(0, 3).map(tech => (
-                        <span class="project__tag">{tech}</span>
-                    ))}
+            {!homepage && (
+                <div class="project__micro">
+                    <span class="project__role">{role}</span>
+                    <div class="project__tags">
+                        {technologies.slice(0, 3).map(tech => (
+                            <span class="project__tag">{tech}</span>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
             {link && (
                 <a
                     href={link.href}

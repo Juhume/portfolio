@@ -37,6 +37,7 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
             </a>
         ) : (
             <header class="case-study-page__hero">
+                <img src="/espejo-logo.jpg" alt="Espejo" class="case-study-page__cover" />
                 <span class="case-study-page__eyebrow">{t.caseStudy.pageEyebrow}</span>
                 <h1 class="case-study-page__title">{t.caseStudy.title}</h1>
                 <p class="case-study-page__summary">{t.caseStudy.pageSummary}</p>
@@ -45,6 +46,9 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
                         <span class="case-study-page__highlight">{item}</span>
                     ))}
                 </div>
+                <a href="https://espejo.day" target="_blank" rel="noopener noreferrer" class="case-study-page__cta">
+                    espejo.day ↗
+                </a>
             </header>
         )}
 
@@ -56,6 +60,11 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
                         <div class="case-block__content">
                             {block.highlight && <p class="case-block__highlight">{block.highlight}</p>}
                             {block.content && <p>{block.content}</p>}
+                            {block.image && (
+                                <div class="case-block__image-wrap">
+                                    <img src={block.image} alt={block.label} class="case-block__image" loading="lazy" />
+                                </div>
+                            )}
                             {block.list && (
                                 <ul class="case-block__list">
                                     {block.list.map(item => <li>{item}</li>)}
@@ -71,5 +80,70 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
                 ))}
             </div>
         )}
+
+        {/* Cross-navigation to Homelab case study */}
+        {variant === 'full' && (
+            <aside class="case-study-cross-nav">
+                <span class="case-study-cross-nav__label">{t.caseStudy.alsoSee}</span>
+                <a href={`/${lang}/projects/homelab/`} class="case-study-cross-nav__link">
+                    {t.homeLab.title}
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <path d="M3 8h10M9 4l4 4-4 4"/>
+                    </svg>
+                </a>
+            </aside>
+        )}
     </div>
 </section>
+
+<style>
+    .case-block__image-wrap {
+        margin: var(--space-md) 0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 1px solid var(--border);
+    }
+
+    .case-block__image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .case-study-cross-nav {
+        margin-top: var(--space-2xl);
+        padding-top: var(--space-lg);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        flex-wrap: wrap;
+    }
+
+    .case-study-cross-nav__label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+    }
+
+    .case-study-cross-nav__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid var(--border);
+        border-radius: 0.75rem;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+    .case-study-cross-nav__link:hover {
+        border-color: var(--accent);
+        background: var(--bg-primary);
+    }
+</style>

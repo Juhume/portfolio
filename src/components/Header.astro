@@ -23,7 +23,7 @@ const blogLink = { href: `/${lang}/blog/`, label: t.nav.blog };
 navLinks.push(blogLink);
 ---
 
-<nav class="nav" id="nav" aria-label={t.a11y.mainNavigation}>
+<nav class={`nav ${isHome ? 'nav--home' : ''}`} id="nav" aria-label={t.a11y.mainNavigation}>
     <div class="container nav__inner">
         <a href={`/${lang}/`} class="nav__logo">Julio Huerta</a>
         <div class="nav__right">

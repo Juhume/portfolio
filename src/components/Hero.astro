@@ -25,15 +25,11 @@ const { t, ids, lang } = Astro.props;
                 <p class="hero__subtitle">
                     {t.hero.subtitle}
                 </p>
-                <p class="hero__current">
-                    <span>{t.hero.noteTitle}</span>
-                    {t.hero.noteText}
-                </p>
-                <ul class="hero__proofs">
-                    {t.hero.proofs.map((proof) => (
-                        <li class="hero__proof">{proof}</li>
+                <p class="hero__proofs-inline">
+                    {t.hero.proofs.map((proof, i) => (
+                        <>{i > 0 && <span class="hero__proof-sep" aria-hidden="true">·</span>}{proof}</>
                     ))}
-                </ul>
+                </p>
                 <div class="hero__cta">
                     <a href={`#${ids.contact}`} class="btn btn--primary">
                         {t.hero.ctaPrimary}

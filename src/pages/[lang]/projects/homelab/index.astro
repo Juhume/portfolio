@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import HomelabCaseStudy from '../../../../components/HomelabCaseStudy.astro';
+import Footer from '../../../../components/Footer.astro';
+import { locales, getTranslations, getSectionIds } from '../../../../i18n';
+import type { Locale } from '../../../../i18n';
+
+export function getStaticPaths() {
+    return locales.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const t = getTranslations(lang);
+const ids = getSectionIds(lang);
+const canonicalPath = `/${lang}/projects/homelab/`;
+const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: t.homeLab.pageMetaTitle,
+    description: t.homeLab.pageMetaDescription,
+    url: `https://juliohuerta.dev${canonicalPath}`,
+    inLanguage: lang,
+    about: {
+        '@type': 'Thing',
+        name: 'Homelab',
+        description: 'Personal infrastructure with Docker, Home Assistant and AI agents',
+    },
+    author: {
+        '@type': 'Person',
+        name: 'Julio Huerta',
+    },
+};
+---
+
+<BaseLayout
+    lang={lang}
+    t={t}
+    title={t.homeLab.pageMetaTitle}
+    description={t.homeLab.pageMetaDescription}
+    canonicalPath={canonicalPath}
+    structuredData={structuredData}
+>
+    <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
+
+    <div class="case-study-page-shell">
+        <div class="container">
+            <a href={`/${lang}/#${ids.projects}`} class="case-study-page__back">← {t.homeLab.backToHome}</a>
+        </div>
+        <HomelabCaseStudy t={t} ids={ids} lang={lang} />
+    </div>
+
+    <Footer t={t} />
+</BaseLayout>

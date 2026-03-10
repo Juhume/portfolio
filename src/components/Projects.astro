@@ -6,9 +6,10 @@ interface Props {
     t: Translations;
     ids: SectionIds;
     lang: Locale;
+    homepage?: boolean;
 }
 
-const { t, ids, lang } = Astro.props;
+const { t, ids, lang, homepage = false } = Astro.props;
 
 const projectMeta = [
     {
@@ -55,10 +56,10 @@ const [featuredProject, ...otherProjects] = projects;
         </header>
 
         <div class="projects-showcase reveal">
-            {featuredProject && <ProjectCard {...featuredProject} index={0} variant="feature" />}
+            {featuredProject && <ProjectCard {...featuredProject} index={0} variant="feature" homepage={homepage} />}
             <div class="projects-list">
                 {otherProjects.map((project, i) => (
-                    <ProjectCard {...project} index={i + 1} variant="row" />
+                    <ProjectCard {...project} index={i + 1} variant="row" homepage={homepage} />
                 ))}
             </div>
         </div>
