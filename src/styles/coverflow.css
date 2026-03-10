@@ -16,6 +16,23 @@
     -webkit-touch-callout: none;
 }
 
+/* Apple-style floor gradient for 3D depth */
+.cf-viewport::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 0, 0, 0.1)
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
 .cf-track {
     position: relative;
     width: 100%;
@@ -30,8 +47,8 @@
 .cf-item {
     position: absolute;
     width: var(--cf-card-width, 320px);
-    aspect-ratio: 4 / 3.5;
-    border-radius: 16px;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
     padding: var(--space-lg, 1.5rem);
     display: flex;
     flex-direction: column;
@@ -47,12 +64,11 @@
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 
-    /* Smooth transitions */
+    /* Apple-like smooth transitions */
     transition:
-        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.5s ease-out,
-        filter 0.5s ease-out,
-        box-shadow 0.3s ease-out;
+        transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+        opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+        box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
     transform-origin: center center;
 }
@@ -60,8 +76,9 @@
 .cf-item--active {
     cursor: default;
     box-shadow:
-        0 12px 48px rgba(0, 0, 0, 0.3),
-        0 0 0 1px color-mix(in srgb, var(--accent, #83DEB5) 20%, transparent);
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 8px 24px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 /* ---- Card content ---- */
@@ -130,25 +147,25 @@
     color: var(--accent-text, #2B9B6A);
 }
 
-/* ---- Reflection (subtle) ---- */
+/* ---- Apple-style reflection ---- */
 .cf-item::after {
     content: '';
     position: absolute;
     bottom: -1px;
-    left: 8%;
-    right: 8%;
-    height: 40%;
+    left: 5%;
+    right: 5%;
+    height: 50%;
     background: linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--bg-secondary, #1a1f1c) 30%, transparent),
+        color-mix(in srgb, var(--bg-secondary, #1a1f1c) 40%, transparent),
         transparent
     );
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 12px 12px;
     transform: scaleY(-1) translateY(-100%);
-    opacity: 0.12;
+    opacity: 0.25;
     pointer-events: none;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
 }
 
 /* ---- Dot indicators ---- */
@@ -215,33 +232,33 @@
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
     .cf-viewport {
-        height: 300px;
+        height: 280px;
         perspective: 700px;
     }
 
     .cf-item {
-        --cf-card-width: 240px;
+        --cf-card-width: 200px;
         padding: 1rem;
-        border-radius: 14px;
-        aspect-ratio: 3 / 3.2;
+        border-radius: 10px;
+        aspect-ratio: 1 / 1;
     }
 
     .cf-item__name {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .cf-item__desc {
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         -webkit-line-clamp: 2;
     }
 
     .cf-item__tag {
-        font-size: 0.55rem;
-        padding: 0.15rem 0.4rem;
+        font-size: 0.5rem;
+        padding: 0.15rem 0.35rem;
     }
 
     .cf-info__title {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
     }
 
     .cf-dots {
@@ -255,10 +272,11 @@
 
 @media (min-width: 1024px) {
     .cf-viewport {
-        height: 420px;
+        height: 440px;
+        perspective: 1000px;
     }
 
     .cf-item {
-        --cf-card-width: 340px;
+        --cf-card-width: 360px;
     }
 }

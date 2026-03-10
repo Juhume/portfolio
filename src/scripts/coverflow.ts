@@ -40,15 +40,15 @@ export function initCoverFlow(
     function triggerHaptic() {
         if (!hapticsInstance) return;
         try {
-            // Short nudge vibration — 15ms is a quick, subtle tick
-            hapticsInstance.trigger(15);
+            // Very subtle "click wheel" haptic — premium, barely-there feel
+            hapticsInstance.trigger([{ duration: 8, intensity: 0.3 }]);
         } catch { /* ignore */ }
     }
 
-    // ---- Apply transforms ----
+    // ---- Apply transforms (Apple Cover Flow style) ----
     function applyTransforms() {
         const isMobile = window.innerWidth < 600;
-        const spacing = isMobile ? 140 : 200;
+        const spacing = isMobile ? 60 : 80;
 
         items.forEach((item, i) => {
             const offset = i - current;
@@ -57,28 +57,33 @@ export function initCoverFlow(
             item.classList.remove('cf-item--active', 'cf-item--left', 'cf-item--right');
 
             if (offset === 0) {
+                // Center card: flat, front-facing, elevated
                 item.classList.add('cf-item--active');
-                item.style.transform = 'translateX(0) translateZ(60px) rotateY(0deg) scale(1)';
+                item.style.transform = 'translateX(0) translateZ(90px) rotateY(0deg) scale(1)';
                 item.style.zIndex = String(items.length + 1);
                 item.style.opacity = '1';
-                item.style.filter = 'brightness(1)';
                 item.style.pointerEvents = 'auto';
             } else {
+                // Side cards: constant ±70° rotation, tightly spaced
                 const dir = offset > 0 ? 'right' : 'left';
                 item.classList.add(`cf-item--${dir}`);
 
-                const sign = offset > 0 ? -1 : 1;
-                const rotate = sign * Math.min(50, 35 + absOffset * 8);
+                const sign = offset > 0 ? 1 : -1;
+                const rotate = sign * 70; // Constant 70° angle for all side cards
                 const shift = offset * spacing;
-                const scale = Math.max(0.55, 0.78 - (absOffset - 1) * 0.1);
-                const opacity = Math.max(0.15, 0.85 - absOffset * 0.3);
-                const brightness = Math.max(0.5, 0.85 - absOffset * 0.15);
-                const zShift = -absOffset * 80;
+                
+                // Scale: 0.85 for immediate neighbors, smaller for further
+                const scale = absOffset === 1 ? 0.85 : Math.max(0.6, 0.85 - (absOffset - 1) * 0.12);
+                
+                // Opacity: center 1, immediate side 0.7, further down to 0.2
+                const opacity = absOffset === 1 ? 0.7 : Math.max(0.2, 0.7 - (absOffset - 1) * 0.25);
+                
+                // Z-recession: immediate neighbors -120px, further -200px+
+                const zShift = absOffset === 1 ? -120 : -200 - (absOffset - 2) * 50;
 
                 item.style.transform = `translateX(${shift}px) translateZ(${zShift}px) rotateY(${rotate}deg) scale(${scale})`;
                 item.style.zIndex = String(items.length - absOffset);
                 item.style.opacity = String(opacity);
-                item.style.filter = `brightness(${brightness})`;
                 item.style.pointerEvents = absOffset <= 1 ? 'auto' : 'none';
             }
         });
