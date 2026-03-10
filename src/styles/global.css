@@ -1,4 +1,15 @@
 /* ==========================================
+   Custom Fonts
+   ========================================== */
+@font-face {
+    font-family: 'Gallaecia';
+    src: url('/fonts/gallaecia.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ==========================================
    CSS Variables & Theming
    ========================================== */
 :root {
