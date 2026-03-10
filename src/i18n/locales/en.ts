@@ -2,10 +2,10 @@ import type { Translations } from '../types';
 
 export const en: Translations = {
     meta: {
-        title: 'Julio Huerta | Frontend & Mobile Developer',
+        title: 'Julio Huerta | Frontend Web & Mobile Developer',
         description: 'Developer with 5+ years at BBVA Business. Apps used by thousands of businesses, projects with real encryption, and too many Docker containers.',
         keywords: 'developer, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
-        jobTitle: 'Frontend & Mobile Developer',
+        jobTitle: 'Frontend Web & Mobile Developer',
         ogLocale: 'en_US',
     },
     a11y: {
@@ -244,7 +244,7 @@ export const en: Translations = {
         relatedProject: 'Related project',
     },
     home: {
-        role: 'Frontend & Mobile Developer',
+        role: 'Frontend Web & Mobile Developer',
     },
     notFound: {
         title: '404',

@@ -2,10 +2,10 @@ import type { Translations } from '../types';
 
 export const es: Translations = {
     meta: {
-        title: 'Julio Huerta | Desarrollador Frontend & Mobile',
+        title: 'Julio Huerta | Desarrollador Frontend Web & Mobile',
         description: 'Desarrollador con +5 años en BBVA Empresas. Apps usadas por miles de empresas, proyectos con cifrado real, y demasiados contenedores Docker.',
         keywords: 'desarrollador, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
-        jobTitle: 'Desarrollador Frontend & Mobile',
+        jobTitle: 'Desarrollador Frontend Web & Mobile',
         ogLocale: 'es_ES',
     },
     a11y: {
@@ -244,7 +244,7 @@ export const es: Translations = {
         relatedProject: 'Proyecto relacionado',
     },
     home: {
-        role: 'Desarrollador Frontend & Mobile',
+        role: 'Desarrollador Frontend Web & Mobile',
     },
     notFound: {
         title: '404',
