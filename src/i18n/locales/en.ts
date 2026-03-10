@@ -60,6 +60,26 @@ export const en: Translations = {
             'Leading hybrid stack migration',
         ],
         stack: ['Kotlin', 'Swift', 'LitElement', 'TypeScript', 'Java', 'Objective-C'],
+        entries: [
+            {
+                role: 'Team Lead · BBVA Business',
+                period: '2026 – Present',
+                context: 'Leading maintenance and development of the new BBVA Business app. Stack migration towards greater webview coverage.',
+                stack: ['LitElement', 'TypeScript', 'Kotlin', 'Swift'],
+            },
+            {
+                role: 'Mobile Developer · BBVA Business',
+                period: '2020 – 2025',
+                context: 'Developing for iOS and Android simultaneously. Native apps with webviews based on an internal LitElement framework for shared flows.',
+                stack: ['Kotlin', 'Java', 'Swift', 'Objective-C', 'LitElement'],
+            },
+            {
+                role: 'Web Developer & Release Manager · BBVA Retail',
+                period: '2019 – 2020',
+                context: 'Web development in the retail banking core. Coordinating releases for the entire factory.',
+                stack: ['Backbone.js'],
+            },
+        ],
     },
     projects: {
         sectionNumber: '02',
@@ -179,7 +199,7 @@ export const en: Translations = {
         photoAlt: 'Julio Huerta',
         paragraphs: [
             'I\'ve been building and breaking things on the web since I had to ask permission to use the computer.',
-            'Now I don\'t just build and break on the web, also on mobile and infra. Without taking down production, though. Software with common sense.',
+            'Now I don\'t just build and break on the web, also on mobile and infra. Without taking down production, though.',
         ],
         personalTitle: 'Outside the editor',
         personal: [
@@ -204,7 +224,7 @@ export const en: Translations = {
         github: 'GitHub',
     },
     footer: {
-        status: 'Open to projects',
+        status: 'Software con sentidiño.',
     },
     blog: {
         title: 'Blog',

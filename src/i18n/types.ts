@@ -43,6 +43,13 @@ export interface HomelabTranslations {
     blocks: HomelabBlock[];
 }
 
+export interface ExperienceEntry {
+    role: string;
+    period: string;
+    context: string;
+    stack: string[];
+}
+
 export interface Translations {
     meta: {
         title: string;
@@ -90,6 +97,7 @@ export interface Translations {
         achievementsTitle: string;
         achievements: string[];
         stack: string[];
+        entries: ExperienceEntry[];
     };
     projects: {
         sectionNumber: string;

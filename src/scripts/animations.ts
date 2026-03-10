@@ -29,7 +29,7 @@ const isDesktop = window.innerWidth > 768;
                 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
                 if (docHeight > 0) {
                     const progress = (window.scrollY / docHeight) * 100;
-                    scrollProgress.style.width = `${Math.min(progress, 100)}%`;
+                    scrollProgress.style.transform = `scaleX(${Math.min(progress / 100, 1)})`;
                 }
                 ticking = false;
             });
@@ -143,7 +143,7 @@ if (!prefersReducedMotion) {
                     chars.forEach((span, i) => {
                         setTimeout(() => {
                             span.classList.add('char-reveal__char--visible');
-                        }, i * 45);
+                        }, i * 38);
                     });
                     nameObserver.unobserve(entry.target);
                 }
@@ -158,7 +158,7 @@ if (!prefersReducedMotion) {
 // 6. Smooth Section Transitions (fade + slide from below)
 // ==========================================
 if (!prefersReducedMotion) {
-    const sections = document.querySelectorAll('.home__projects, .home__contact') as NodeListOf<HTMLElement>;
+    const sections = document.querySelectorAll('.home__experience, .home__projects, .home__contact') as NodeListOf<HTMLElement>;
 
     sections.forEach(section => {
         section.classList.add('section-reveal');

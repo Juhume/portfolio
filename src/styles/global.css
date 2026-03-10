@@ -796,24 +796,7 @@ button {
     color: var(--text-muted);
 }
 
-.footer__status::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: var(--sage);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-    animation-play-state: paused;
-}
-
-.footer__status.in-view::before {
-    animation-play-state: running;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(0.9); }
-}
+/* Octopus replaces the old status dot — animation is in Footer.astro */
 
 /* ==========================================
    Scroll Animations

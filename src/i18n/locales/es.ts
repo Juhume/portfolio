@@ -60,6 +60,26 @@ export const es: Translations = {
             'Liderando migración a stack híbrido',
         ],
         stack: ['Kotlin', 'Swift', 'LitElement', 'TypeScript', 'Java', 'Objective-C'],
+        entries: [
+            {
+                role: 'Team Lead · BBVA Empresas',
+                period: '2026 – Presente',
+                context: 'Liderando el equipo de mantenimiento y desarrollo de la nueva aplicación de BBVA Empresas. Migración de stack hacia mayor carga de webview.',
+                stack: ['LitElement', 'TypeScript', 'Kotlin', 'Swift'],
+            },
+            {
+                role: 'Desarrollador Mobile · BBVA Empresas',
+                period: '2020 – 2025',
+                context: 'Desarrollo en iOS y Android simultáneamente. Apps nativas con webviews basadas en un framework interno de LitElement para operativas compartidas.',
+                stack: ['Kotlin', 'Java', 'Swift', 'Objective-C', 'LitElement'],
+            },
+            {
+                role: 'Desarrollador Web & Release Manager · BBVA Particulares',
+                period: '2019 – 2020',
+                context: 'Desarrollo web en el core de banca de particulares. Coordinación de releases de toda la factoría.',
+                stack: ['Backbone.js'],
+            },
+        ],
     },
     projects: {
         sectionNumber: '02',
@@ -179,7 +199,7 @@ export const es: Translations = {
         photoAlt: 'Julio Huerta',
         paragraphs: [
             'Llevo construyendo y rompiendo cosas en la web desde que tenía que pedir permiso para usar el ordenador.',
-            'Ahora ya no solo construyo y rompo en web, también en móviles y en infra. Aunque sin cargarme la producción. Software con sentidiño.',
+            'Ahora ya no solo construyo y rompo en web, también en móviles y en infra. Aunque sin cargarme la producción.',
         ],
         personalTitle: 'Fuera del editor',
         personal: [
@@ -204,7 +224,7 @@ export const es: Translations = {
         github: 'GitHub',
     },
     footer: {
-        status: 'Abierto a proyectos',
+        status: 'Software con sentidiño.',
     },
     blog: {
         title: 'Blog',
