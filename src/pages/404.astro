@@ -1,44 +1,103 @@
 ---
-import '../styles/global.css';
-import { getTranslations } from '../i18n';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getTranslations, getSectionIds, locales } from '../i18n';
+import type { Locale } from '../i18n';
 
-const t = getTranslations('es');
+const lang: Locale = 'es';
+const t = getTranslations(lang);
+const ids = getSectionIds(lang);
+
+// Prepare all locale translations for client-side language detection
+const allNotFound = Object.fromEntries(
+    locales.map((loc) => {
+        const tr = getTranslations(loc);
+        return [loc, { title: tr.notFound.title, text: tr.notFound.text, backHome: tr.notFound.backHome }];
+    })
+);
 ---
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <script is:inline>
-        (function() {
-            var t = localStorage.getItem('theme') ||
-                (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-            document.documentElement.dataset.theme = t;
-        })();
-    </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 — Julio Huerta</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-        media="print"
-        onload="this.media='all'"
-    />
-    <noscript>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
-    </noscript>
-</head>
-<body>
-    <main class="not-found">
-        <h1 class="not-found__title">{t.notFound.title}</h1>
-        <p class="not-found__text">{t.notFound.text}</p>
-        <a href="/es/" class="not-found__link">{t.notFound.backHome}</a>
-    </main>
-</body>
-</html>
+<BaseLayout
+    lang={lang}
+    t={t}
+    title={`404 — Julio Huerta`}
+    description={t.notFound.text}
+    noindex={true}
+>
+    <Header lang={lang} t={t} ids={ids} currentPath="/404" />
+
+    <section class="not-found">
+        <div class="container not-found__container">
+            <h1 class="not-found__title" id="nf-title">{t.notFound.title}</h1>
+            <p class="not-found__text" id="nf-text">{t.notFound.text}</p>
+            <a href={`/${lang}/`} class="not-found__link" id="nf-link">← {t.notFound.backHome}</a>
+        </div>
+    </section>
+
+    <Footer t={t} />
+</BaseLayout>
+
+<style>
+    .not-found {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .not-found__container {
+        text-align: center;
+        padding: var(--space-2xl) 0;
+    }
+
+    .not-found__title {
+        font-family: var(--font-display);
+        font-size: clamp(4rem, 10vw, 8rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        margin-bottom: var(--space-md);
+    }
+
+    .not-found__text {
+        color: var(--text-secondary);
+        font-size: clamp(1rem, 1.4vw + 0.55rem, 1.2rem);
+        max-width: 40ch;
+        margin: 0 auto var(--space-xl);
+    }
+
+    .not-found__link {
+        color: var(--accent);
+        font-weight: 500;
+        text-decoration: none;
+        transition: opacity 0.2s;
+    }
+
+    .not-found__link:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<script define:vars={{ allNotFound, locales }}>
+    (function () {
+        const path = window.location.pathname;
+        const segment = path.split('/')[1];
+        const detectedLang = locales.includes(segment) ? segment : 'es';
+
+        if (detectedLang !== 'es') {
+            const tr = allNotFound[detectedLang];
+            document.documentElement.lang = detectedLang;
+
+            const titleEl = document.getElementById('nf-title');
+            const textEl = document.getElementById('nf-text');
+            const linkEl = document.getElementById('nf-link');
+
+            if (titleEl) titleEl.textContent = tr.title;
+            if (textEl) textEl.textContent = tr.text;
+            if (linkEl) {
+                linkEl.textContent = '\u2190 ' + tr.backHome;
+                linkEl.href = '/' + detectedLang + '/';
+            }
+        }
+    })();
+</script>
