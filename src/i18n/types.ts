@@ -18,6 +18,29 @@ export interface CaseBlock {
     highlight?: string;
     list?: string[];
     stack?: string[];
+    image?: string;
+}
+
+export interface HomelabBlock {
+    label: string;
+    content: string;
+    highlight?: string;
+    list?: string[];
+    stack?: string[];
+    image?: string;
+}
+
+export interface HomelabTranslations {
+    pageEyebrow: string;
+    title: string;
+    pageSummary: string;
+    pageHighlights: string[];
+    pageMetaTitle: string;
+    pageMetaDescription: string;
+    backToHome: string;
+    diagramTitle: string;
+    alsoSee: string;
+    blocks: HomelabBlock[];
 }
 
 export interface Translations {
@@ -85,6 +108,7 @@ export interface Translations {
         pageMetaTitle: string;
         pageMetaDescription: string;
         backToHome: string;
+        alsoSee: string;
         blocks: CaseBlock[];
     };
     about: {
@@ -92,6 +116,8 @@ export interface Translations {
         title: string;
         photoAlt: string;
         paragraphs: string[];
+        personalTitle: string;
+        personal: string[];
         principlesTitle: string;
         principles: string[];
     };
@@ -99,6 +125,7 @@ export interface Translations {
         sectionNumber: string;
         title: string;
         text: string;
+        cta: string;
         linkedin: string;
         github: string;
     };
@@ -117,12 +144,20 @@ export interface Translations {
         spanishOnlyText: string;
         readInSpanish: string;
         unavailableInLocale: string;
+        backToHome: string;
+        prevPost: string;
+        nextPost: string;
+        relatedProject: string;
+    };
+    home: {
+        role: string;
     };
     notFound: {
         title: string;
         text: string;
         backHome: string;
     };
+    homeLab: HomelabTranslations;
 }
 
 export interface SectionIds {
