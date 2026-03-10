@@ -23,3 +23,6 @@ Thumbs.db
 .env.*
 .vercel/
 reviews/
+
+# Blog admin
+admin/node_modules/

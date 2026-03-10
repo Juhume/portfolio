@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Admin</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2128;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --blue: #58a6ff;
+    --orange: #d29922;
+    --radius: 8px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  header h1 span { color: var(--accent); }
+
+  .btn {
+    border: none;
+    border-radius: var(--radius);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .btn:hover { opacity: 0.85; }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-green { background: var(--green); color: #fff; }
+  .btn-red { background: var(--red); color: #fff; }
+  .btn-blue { background: var(--accent); color: #fff; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    height: calc(100vh - 49px);
+  }
+
+  /* --- Sidebar --- */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 12px;
+  }
+
+  .sidebar-search {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .sidebar-search:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .post-item {
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin-bottom: 2px;
+    transition: background 0.1s;
+  }
+
+  .post-item:hover { background: var(--surface2); }
+  .post-item.active { background: var(--surface2); border-left: 3px solid var(--accent); }
+
+  .post-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+  }
+
+  .post-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-pro { background: rgba(63,185,80,0.15); color: var(--green); }
+  .badge-personal { background: rgba(88,166,255,0.15); color: var(--blue); }
+  .badge-es { background: rgba(210,153,34,0.15); color: var(--orange); }
+  .badge-en { background: rgba(248,81,73,0.15); color: var(--red); }
+  .badge-gl { background: rgba(139,148,158,0.15); color: var(--text-muted); }
+
+  /* --- Main --- */
+  .main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .toolbar .spacer { flex: 1; }
+
+  .status-msg {
+    font-size: 12px;
+    color: var(--green);
+    transition: opacity 0.3s;
+  }
+
+  .editor-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  /* --- Form --- */
+  .form-panel {
+    padding: 20px;
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+  }
+
+  .form-row {
+    margin-bottom: 14px;
+  }
+
+  .form-row label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .form-row input,
+  .form-row textarea,
+  .form-row select {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  .form-row input:focus,
+  .form-row textarea:focus,
+  .form-row select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .form-row textarea {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    resize: vertical;
+    min-height: 300px;
+    line-height: 1.6;
+  }
+
+  .form-inline {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  .toggle-group {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .toggle-group button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .toggle-group button.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* --- Preview --- */
+  .preview-panel {
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .preview-panel h3 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .preview-content {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .preview-content h1 { font-size: 28px; margin: 20px 0 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .preview-content h2 { font-size: 22px; margin: 18px 0 8px; }
+  .preview-content h3 { font-size: 18px; margin: 16px 0 6px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--text); }
+  .preview-content p { margin: 8px 0; }
+  .preview-content a { color: var(--accent); text-decoration: none; }
+  .preview-content a:hover { text-decoration: underline; }
+  .preview-content code {
+    background: var(--surface2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'SF Mono', monospace;
+    font-size: 13px;
+  }
+  .preview-content pre {
+    background: var(--surface2);
+    padding: 14px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  .preview-content pre code {
+    background: none;
+    padding: 0;
+  }
+  .preview-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 14px;
+    color: var(--text-muted);
+    margin: 10px 0;
+  }
+  .preview-content ul, .preview-content ol { padding-left: 24px; margin: 8px 0; }
+  .preview-content li { margin: 4px 0; }
+  .preview-content strong { font-weight: 600; }
+  .preview-content em { font-style: italic; color: var(--text-muted); }
+
+  /* --- Responsive --- */
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+    .sidebar {
+      max-height: 35vh;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .editor-area {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+    .form-panel {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .form-inline {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📝 <span>Blog</span> Admin</h1>
+  <span class="status-msg" id="statusMsg"></span>
+</header>
+
+<div class="layout">
+  <div class="sidebar">
+    <input type="text" class="sidebar-search" id="searchInput" placeholder="Search posts...">
+    <div id="postList"></div>
+  </div>
+
+  <div class="main">
+    <div class="toolbar">
+      <button class="btn btn-blue" onclick="newPost()">+ New Post</button>
+      <button class="btn btn-green" onclick="savePost()">💾 Save</button>
+      <button class="btn btn-red" onclick="deletePost()">🗑 Delete</button>
+      <div class="spacer"></div>
+      <span style="font-size:12px;color:var(--text-muted)" id="editingLabel"></span>
+    </div>
+
+    <div class="editor-area">
+      <div class="form-panel">
+        <div class="form-row">
+          <label>Title</label>
+          <input type="text" id="fTitle" placeholder="Post title">
+        </div>
+
+        <div class="form-row">
+          <label>Description</label>
+          <input type="text" id="fDesc" placeholder="Short description">
+        </div>
+
+        <div class="form-inline">
+          <div class="form-row">
+            <label>Date</label>
+            <input type="date" id="fDate">
+          </div>
+
+          <div class="form-row">
+            <label>Category</label>
+            <div class="toggle-group" id="categoryToggle">
+              <button class="active" data-val="profesional" onclick="setCategory('profesional')">Profesional</button>
+              <button data-val="personal" onclick="setCategory('personal')">Personal</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label>Language</label>
+            <select id="fLang">
+              <option value="es">ES 🇪🇸</option>
+              <option value="en">EN 🇬🇧</option>
+              <option value="gl">GL 🏴</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Tags (comma-separated)</label>
+          <input type="text" id="fTags" placeholder="infra, docker, homelab">
+        </div>
+
+        <div class="form-row">
+          <label>Canonical Slug (for translations)</label>
+          <input type="text" id="fCanonical" placeholder="original-post-slug (optional)">
+        </div>
+
+        <div class="form-row">
+          <label>Content (Markdown)</label>
+          <textarea id="fContent" rows="20" placeholder="Write your post in markdown..."></textarea>
+        </div>
+      </div>
+
+      <div class="preview-panel">
+        <h3>Preview</h3>
+        <div class="preview-content" id="previewContent">
+          <p style="color:var(--text-muted)">Start typing to see a preview...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // --- State ---
+  let posts = [];
+  let currentId = null;
+  let category = 'profesional';
+
+  // --- Init ---
+  document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date().toISOString().slice(0, 10);
+    document.getElementById('fDate').value = today;
+    loadPosts();
+
+    // Live preview
+    document.getElementById('fContent').addEventListener('input', updatePreview);
+    document.getElementById('fTitle').addEventListener('input', updatePreview);
+    document.getElementById('searchInput').addEventListener('input', renderPostList);
+  });
+
+  // --- API ---
+  async function api(url, opts = {}) {
+    const res = await fetch(url, {
+      headers: { 'Content-Type': 'application/json' },
+      ...opts,
+    });
+    return res.json();
+  }
+
+  async function loadPosts() {
+    posts = await api('/api/posts');
+    renderPostList();
+  }
+
+  async function loadPost(id) {
+    const post = await api('/api/posts/' + id);
+    currentId = id;
+    document.getElementById('fTitle').value = post.title;
+    document.getElementById('fDesc').value = post.description;
+    document.getElementById('fDate').value = post.date;
+    document.getElementById('fLang').value = post.lang || 'es';
+    document.getElementById('fTags').value = (post.tags || []).join(', ');
+    document.getElementById('fCanonical').value = post.canonicalSlug || '';
+    document.getElementById('fContent').value = post.body;
+    setCategory(post.category || 'profesional');
+    document.getElementById('editingLabel').textContent = 'Editing: ' + id;
+    updatePreview();
+    renderPostList();
+  }
+
+  // --- Render ---
+  function renderPostList() {
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = posts.filter(p =>
+      p.title.toLowerCase().includes(search) ||
+      (p.tags || []).some(t => t.toLowerCase().includes(search))
+    );
+
+    const html = filtered.map(p => {
+      const catClass = p.category === 'personal' ? 'badge-personal' : 'badge-pro';
+      const catLabel = p.category === 'personal' ? 'Personal' : 'Pro';
+      const langClass = 'badge-' + (p.lang || 'es');
+      const active = p.id === currentId ? ' active' : '';
+      return `
+        <div class="post-item${active}" onclick="loadPost('${p.id}')">
+          <div class="post-item-title">${escHtml(p.title)}</div>
+          <div class="post-item-meta">
+            <span>${p.date}</span>
+            <span class="badge ${catClass}">${catLabel}</span>
+            <span class="badge ${langClass}">${(p.lang || 'es').toUpperCase()}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('postList').innerHTML = html || '<p style="color:var(--text-muted);padding:12px;font-size:13px">No posts found</p>';
+  }
+
+  function setCategory(val) {
+    category = val;
+    document.querySelectorAll('#categoryToggle button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.val === val);
+    });
+  }
+
+  function showStatus(msg) {
+    const el = document.getElementById('statusMsg');
+    el.textContent = msg;
+    el.style.opacity = 1;
+    setTimeout(() => { el.style.opacity = 0; }, 3000);
+  }
+
+  // --- Actions ---
+  function newPost() {
+    currentId = null;
+    document.getElementById('fTitle').value = '';
+    document.getElementById('fDesc').value = '';
+    document.getElementById('fDate').value = new Date().toISOString().slice(0, 10);
+    document.getElementById('fLang').value = 'es';
+    document.getElementById('fTags').value = '';
+    document.getElementById('fCanonical').value = '';
+    document.getElementById('fContent').value = '';
+    setCategory('profesional');
+    document.getElementById('editingLabel').textContent = 'New post';
+    document.getElementById('previewContent').innerHTML = '<p style="color:var(--text-muted)">Start typing to see a preview...</p>';
+    renderPostList();
+  }
+
+  async function savePost() {
+    const data = {
+      title: document.getElementById('fTitle').value.trim(),
+      description: document.getElementById('fDesc').value.trim(),
+      date: document.getElementById('fDate').value,
+      lang: document.getElementById('fLang').value,
+      tags: document.getElementById('fTags').value.split(',').map(s => s.trim()).filter(Boolean),
+      category: category,
+      canonicalSlug: document.getElementById('fCanonical').value.trim() || undefined,
+      body: document.getElementById('fContent').value,
+    };
+
+    if (!data.title) { alert('Title is required'); return; }
+
+    try {
+      if (currentId) {
+        await api('/api/posts/' + currentId, { method: 'PUT', body: JSON.stringify(data) });
+        showStatus('✓ Post updated');
+      } else {
+        const result = await api('/api/posts', { method: 'POST', body: JSON.stringify(data) });
+        currentId = result.id;
+        showStatus('✓ Post created');
+      }
+      await loadPosts();
+      if (currentId) {
+        document.getElementById('editingLabel').textContent = 'Editing: ' + currentId;
+        renderPostList();
+      }
+    } catch (err) {
+      alert('Error saving: ' + err.message);
+    }
+  }
+
+  async function deletePost() {
+    if (!currentId) { alert('No post selected'); return; }
+    if (!confirm('Delete "' + document.getElementById('fTitle').value + '"? This cannot be undone.')) return;
+
+    try {
+      await api('/api/posts/' + currentId, { method: 'DELETE' });
+      showStatus('✓ Post deleted');
+      newPost();
+      await loadPosts();
+    } catch (err) {
+      alert('Error deleting: ' + err.message);
+    }
+  }
+
+  // --- Markdown Preview ---
+  function updatePreview() {
+    const md = document.getElementById('fContent').value;
+    const title = document.getElementById('fTitle').value;
+    let html = '';
+    if (title) html += '<h1>' + escHtml(title) + '</h1>';
+    html += renderMarkdown(md);
+    document.getElementById('previewContent').innerHTML = html || '<p style="color:var(--text-muted)">Start typing to see a preview...</p>';
+  }
+
+  function renderMarkdown(md) {
+    if (!md) return '';
+
+    // Code blocks (```...```)
+    md = md.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
+      return '<pre><code>' + escHtml(code.trim()) + '</code></pre>';
+    });
+
+    const lines = md.split('\n');
+    let html = '';
+    let inList = false;
+    let inBlockquote = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
+
+      // Skip if it's part of a pre block (already processed)
+      if (line.includes('<pre>') || line.includes('</pre>')) {
+        html += line + '\n';
+        continue;
+      }
+
+      // Headers
+      if (line.startsWith('### ')) {
+        if (inList) { html += '</ul>'; inList = false; }
+        if (inBlockquote) { html += '</blockquote>'; inBlockquote = false; }
+        html += '<h3>' + inlineFormat(line.slice(4)) + '</h3>';
+        continue;
+      }
+      if (line.startsWith('## ')) {
+        if (inList) { html += '</ul>'; inList = false; }
+        if (inBlockquote) { html += '</blockquote>'; inBlockquote = false; }
+        html += '<h2>' + inlineFormat(line.slice(3)) + '</h2>';
+        continue;
+      }
+      if (line.startsWith('# ')) {
+        if (inList) { html += '</ul>'; inList = false; }
+        if (inBlockquote) { html += '</blockquote>'; inBlockquote = false; }
+        html += '<h1>' + inlineFormat(line.slice(2)) + '</h1>';
+        continue;
+      }
+
+      // Blockquote
+      if (line.startsWith('> ')) {
+        if (inList) { html += '</ul>'; inList = false; }
+        if (!inBlockquote) { html += '<blockquote>'; inBlockquote = true; }
+        html += '<p>' + inlineFormat(line.slice(2)) + '</p>';
+        continue;
+      } else if (inBlockquote) {
+        html += '</blockquote>';
+        inBlockquote = false;
+      }
+
+      // List items
+      if (line.match(/^[-*] /)) {
+        if (!inList) { html += '<ul>'; inList = true; }
+        html += '<li>' + inlineFormat(line.slice(2)) + '</li>';
+        continue;
+      } else if (inList) {
+        html += '</ul>';
+        inList = false;
+      }
+
+      // Numbered list
+      if (line.match(/^\d+\. /)) {
+        const text = line.replace(/^\d+\. /, '');
+        html += '<li>' + inlineFormat(text) + '</li>';
+        continue;
+      }
+
+      // Empty line
+      if (line.trim() === '') {
+        continue;
+      }
+
+      // Paragraph
+      html += '<p>' + inlineFormat(line) + '</p>';
+    }
+
+    if (inList) html += '</ul>';
+    if (inBlockquote) html += '</blockquote>';
+
+    return html;
+  }
+
+  function inlineFormat(text) {
+    // Inline code
+    text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+    // Bold
+    text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    // Italic
+    text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    // Links
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+    return text;
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+</script>
+
+</body>
+</html>
