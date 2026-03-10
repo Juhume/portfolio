@@ -59,13 +59,13 @@ export const en: Translations = {
             '2 native apps published to production (Kotlin + Swift)',
             'Leading hybrid stack migration',
         ],
-        stack: ['Kotlin', 'Swift', 'LitElement', 'TypeScript', 'Java', 'Objective-C'],
+        stack: ['LitElement', 'TypeScript', 'Kotlin', 'Java'],
         entries: [
             {
                 role: 'Team Lead · BBVA Business',
                 period: '2026 – Present',
                 context: 'Leading maintenance and development of the new BBVA Business app. Stack migration towards greater webview coverage.',
-                stack: ['LitElement', 'TypeScript', 'Kotlin', 'Swift'],
+                stack: ['LitElement', 'TypeScript', 'Kotlin'],
             },
             {
                 role: 'Mobile Developer · BBVA Business',
