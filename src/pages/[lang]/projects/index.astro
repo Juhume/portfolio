@@ -19,22 +19,22 @@ const canonicalPath = `/${lang}/projects/`;
 const projectLinks: string[] = [
     `/${lang}/projects/espejo/`,
     'https://diplotest.es',
-    `/${lang}/projects/homelab/`,
     'https://github.com/Juhume/HeyHaiku',
+    `/${lang}/projects/homelab/`,
 ];
 
 const projectStacks: string[][] = [
     ['Next.js', 'React', 'TypeScript', 'Supabase', 'IndexedDB'],
     ['Next.js', 'Supabase', 'Auth', 'Analytics'],
-    ['Docker', 'Compose', 'Home Assistant', 'AI Agents'],
     ['Next.js 15', 'TypeScript', 'Turso', 'Drizzle', 'Better Auth'],
+    ['Docker', 'Compose', 'Home Assistant', 'AI Agents'],
 ];
 
 const projectThemes = [
-    { gradient: 'linear-gradient(145deg, #fce4dc 0%, #f5c4b5 50%, #f0a890 100%)', accent: '#c4553a', textColor: '#3d1510', icon: '🔒' },
-    { gradient: 'linear-gradient(145deg, #dce8fc 0%, #b8d0f5 50%, #95b8ee 100%)', accent: '#3a62a8', textColor: '#112040', icon: '📖' },
-    { gradient: 'linear-gradient(145deg, #d4f0e2 0%, #b0e0c8 50%, #88cfae 100%)', accent: '#1e7a4d', textColor: '#0a2618', icon: '⚡' },
+    { gradient: 'linear-gradient(145deg, #fce4dc 0%, #f5c4b5 50%, #f0a890 100%)', accent: '#c4553a', textColor: '#3d1510', image: '/espejo-icon.png' },
+    { gradient: 'linear-gradient(145deg, #dce8fc 0%, #b8d0f5 50%, #95b8ee 100%)', accent: '#3a62a8', textColor: '#112040', image: '/diplotest-icon.png' },
     { gradient: 'linear-gradient(145deg, #ecdcf0 0%, #d8bee0 50%, #c4a0d0 100%)', accent: '#6e3a82', textColor: '#28102e', icon: '🖊️' },
+    { gradient: 'linear-gradient(145deg, #d4f0e2 0%, #b0e0c8 50%, #88cfae 100%)', accent: '#1e7a4d', textColor: '#0a2618', icon: '⚡' },
 ];
 
 const projects = t.projects.items.map((item, i) => ({
@@ -87,18 +87,18 @@ const projects = t.projects.items.map((item, i) => ({
         align-items: center;
         justify-content: center;
         min-height: 100vh;
-        padding: calc(4rem + var(--space-xl, 2rem)) var(--space-md, 1rem) var(--space-xl, 2rem);
+        padding: calc(3.5rem + 1rem) var(--space-md, 1rem) 1rem;
         overflow-x: hidden;
     }
 
     .projects-page__header {
         text-align: center;
-        margin-bottom: var(--space-lg);
+        margin-bottom: 0.4rem;
     }
 
     .projects-page__title {
         font-family: var(--font-display);
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
         font-weight: 800;
         color: var(--text-primary);
         letter-spacing: -0.03em;
@@ -116,7 +116,7 @@ const projects = t.projects.items.map((item, i) => ({
             padding-right: var(--space-sm, 0.5rem);
         }
         .projects-page__header {
-            margin-bottom: var(--space-md);
+            margin-bottom: 0.5rem;
         }
     }
 </style>

@@ -702,11 +702,11 @@ button {
 }
 
 .case-study-page__cover {
+    display: block;
     width: 100%;
-    max-width: 480px;
+    max-width: 280px;
     border-radius: 16px;
-    margin-bottom: var(--space-md);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    margin: 0 auto var(--space-md);
 }
 
 @media (max-width: 480px) {
@@ -799,16 +799,10 @@ button {
 
 .footer__inner {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: var(--space-md);
-}
-
-@media (min-width: 600px) {
-    .footer__inner {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
 }
 
 .footer__copy {
