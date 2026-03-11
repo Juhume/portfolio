@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useRef, type FC } from 'react';
+import { useWebHaptics } from 'web-haptics/react';
 
 /* ═══════════════════════════════════════════
    Types
@@ -76,9 +77,6 @@ function valuesToStyle(v: CardValues): string {
   return `translateX(${v.tx}px) translateZ(${v.tz}px) rotateY(${v.ry}deg) scale(${v.sc})`;
 }
 
-function hapticTick() {
-  try { navigator?.vibrate?.(8); } catch { /* no-op */ }
-}
 
 /* ═══════════════════════════════════════════
    Google Font loader — Playfair Display
@@ -212,6 +210,9 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
   const [isFading, setIsFading] = useState(false);
   const [isSnapping, setIsSnapping] = useState(true);
   const [width, setWidth] = useState(1024);
+
+  const { trigger } = useWebHaptics();
+  const hapticTick = useCallback(() => trigger('nudge'), [trigger]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
