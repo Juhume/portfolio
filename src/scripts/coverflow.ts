@@ -37,11 +37,19 @@ export function initCoverFlow(
         } catch { /* not supported */ }
     }
 
-    function triggerHaptic() {
+    function triggerSelection() {
         if (!hapticsInstance) return;
         try {
-            // Very subtle "click wheel" haptic — premium, barely-there feel
-            hapticsInstance.trigger([{ duration: 8, intensity: 0.3 }]);
+            // Light tick on navigation — subtle, like scrolling a picker
+            hapticsInstance.trigger([{ duration: 12, intensity: 0.4 }]);
+        } catch { /* ignore */ }
+    }
+
+    function triggerConfirm() {
+        if (!hapticsInstance) return;
+        try {
+            // "Success" on opening project detail — the meaningful moment
+            hapticsInstance.trigger('success');
         } catch { /* ignore */ }
     }
 
@@ -97,9 +105,24 @@ export function initCoverFlow(
         applyTransforms();
 
         if (changed) {
-            if (!silent) triggerHaptic();
-            onChange?.(current);
-            container.dispatchEvent(new CustomEvent('coverflow:change', { detail: { index: current } }));
+            if (!silent) triggerSelection();
+
+            // Animate info text transition (fade out → update → fade in)
+            const infoTitle = document.getElementById('cf-title');
+            const infoLink = document.getElementById('cf-link');
+            if (infoTitle) infoTitle.classList.add('cf-info--transitioning');
+            if (infoLink) infoLink.classList.add('cf-info--transitioning');
+
+            setTimeout(() => {
+                onChange?.(current);
+                container.dispatchEvent(new CustomEvent('coverflow:change', { detail: { index: current } }));
+
+                // Fade back in after content updates
+                requestAnimationFrame(() => {
+                    if (infoTitle) infoTitle.classList.remove('cf-info--transitioning');
+                    if (infoLink) infoLink.classList.remove('cf-info--transitioning');
+                });
+            }, 150);
         }
     }
 
@@ -188,5 +211,6 @@ export function initCoverFlow(
         goTo: (i: number) => goTo(i),
         destroy,
         getIndex: () => current,
+        hapticConfirm: triggerConfirm,
     };
 }

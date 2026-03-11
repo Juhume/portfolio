@@ -212,7 +212,17 @@
     font-weight: 700;
     color: var(--text-primary, #fff);
     margin-bottom: 0.5rem;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cf-info__title.cf-info--transitioning {
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+.cf-info__link.cf-info--transitioning {
+    opacity: 0;
+    transform: translateY(4px);
 }
 
 .cf-info__link {
@@ -222,7 +232,7 @@
     font-weight: 600;
     color: var(--accent-text, #2B9B6A);
     text-decoration: none;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .cf-info__link:hover {

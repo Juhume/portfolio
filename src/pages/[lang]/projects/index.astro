@@ -2,7 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
-import '../../../styles/coverflow.css';
+import CoverFlow from '../../../components/CoverFlow';
 import { locales, getTranslations, getSectionIds } from '../../../i18n';
 import type { Locale } from '../../../i18n';
 
@@ -15,25 +15,33 @@ const t = getTranslations(lang);
 const ids = getSectionIds(lang);
 const canonicalPath = `/${lang}/projects/`;
 
-const ctaLabel: Record<string, string> = {
+const ctaLabels: Record<string, string> = {
     es: 'Ver caso de estudio →',
     en: 'View case study →',
     gl: 'Ver caso de estudo →',
 };
 
-// Map projects to their detail pages
+// Map projects to CoverFlow props
 const projectLinks: string[] = [
     `/${lang}/projects/espejo/`,
     'https://diplotest.es',
     `/${lang}/projects/homelab/`,
 ];
 
-// Extract stack/tech from the proof field for tags
-const projectTags: string[][] = [
+const projectStacks: string[][] = [
     ['Next.js', 'React', 'TypeScript', 'Supabase', 'IndexedDB'],
     ['Next.js', 'Supabase', 'Auth', 'Analytics'],
     ['Docker', 'Compose', 'Home Assistant', 'AI Agents'],
 ];
+
+const projects = t.projects.items.map((item, i) => ({
+    title: item.title,
+    description: item.description,
+    stack: projectStacks[i],
+    url: projectLinks[i],
+    badge: item.badge,
+    category: item.category,
+}));
 ---
 
 <BaseLayout
@@ -47,122 +55,16 @@ const projectTags: string[][] = [
 
     <main class="projects-page">
         <div class="projects-page__inner">
-            <div class="cf-viewport" id="coverflow">
-                <div class="cf-track">
-                    {t.projects.items.map((project, i) => (
-                        <div
-                            class="cf-item"
-                            data-index={i}
-                            data-href={projectLinks[i]}
-                            data-external={projectLinks[i].startsWith('http') ? 'true' : 'false'}
-                        >
-                            {project.badge && (
-                                <span class="cf-item__badge">{project.badge}</span>
-                            )}
-                            <div>
-                                <h2 class="cf-item__name">{project.title}</h2>
-                                <p class="cf-item__desc">{project.description}</p>
-                            </div>
-                            <div class="cf-item__tags">
-                                {projectTags[i].map(tag => (
-                                    <span class="cf-item__tag">{tag}</span>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <div class="cf-dots" id="cf-dots">
-                {t.projects.items.map((_, i) => (
-                    <button
-                        class={`cf-dot ${i === 0 ? 'cf-dot--active' : ''}`}
-                        data-index={i}
-                        aria-label={`Project ${i + 1}`}
-                    />
-                ))}
-            </div>
-
-            <div class="cf-info" id="cf-info">
-                <h3 class="cf-info__title" id="cf-title">{t.projects.items[0].title}</h3>
-                <a
-                    class="cf-info__link"
-                    id="cf-link"
-                    href={projectLinks[0]}
-                >
-                    {ctaLabel[lang]}
-                </a>
-            </div>
+            <CoverFlow
+                client:load
+                projects={projects}
+                ctaLabel={ctaLabels[lang]}
+            />
         </div>
     </main>
 
     <Footer t={t} />
 </BaseLayout>
-
-<script>
-    import { initCoverFlow } from '../../../scripts/coverflow';
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('coverflow');
-        if (!container) return;
-
-        const items = Array.from(container.querySelectorAll<HTMLElement>('.cf-item'));
-        const dots = Array.from(document.querySelectorAll<HTMLElement>('.cf-dot'));
-        const titleEl = document.getElementById('cf-title');
-        const linkEl = document.getElementById('cf-link') as HTMLAnchorElement | null;
-
-        // Extract data from items
-        const names = items.map(el => el.querySelector('.cf-item__name')?.textContent || '');
-        const hrefs = items.map(el => el.dataset.href || '#');
-        const externals = items.map(el => el.dataset.external === 'true');
-
-        const cf = initCoverFlow(container, {
-            startIndex: 0,
-            onChange(index) {
-                // Update dots
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('cf-dot--active', i === index);
-                });
-
-                // Update info
-                if (titleEl) titleEl.textContent = names[index];
-                if (linkEl) {
-                    linkEl.href = hrefs[index];
-                    if (externals[index]) {
-                        linkEl.target = '_blank';
-                        linkEl.rel = 'noopener noreferrer';
-                    } else {
-                        linkEl.removeAttribute('target');
-                        linkEl.removeAttribute('rel');
-                    }
-                }
-            },
-        });
-
-        // Dot click navigation
-        dots.forEach((dot) => {
-            dot.addEventListener('click', () => {
-                const idx = parseInt(dot.dataset.index || '0', 10);
-                cf.goTo(idx);
-            });
-        });
-
-        // Click on center card navigates to its detail page
-        items.forEach((item) => {
-            item.addEventListener('click', (e) => {
-                const idx = parseInt(item.dataset.index || '0', 10);
-                if (idx === cf.getIndex()) {
-                    const href = hrefs[idx];
-                    if (externals[idx]) {
-                        window.open(href, '_blank', 'noopener,noreferrer');
-                    } else {
-                        window.location.href = href;
-                    }
-                }
-            });
-        });
-    });
-</script>
 
 <style>
     .projects-page {
@@ -171,6 +73,7 @@ const projectTags: string[][] = [
         justify-content: center;
         min-height: 100vh;
         padding: calc(4rem + var(--space-xl, 2rem)) var(--space-md, 1rem) var(--space-xl, 2rem);
+        overflow-x: hidden;
     }
 
     .projects-page__inner {

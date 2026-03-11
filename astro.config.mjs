@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
+import react from '@astrojs/react';
 
 export default defineConfig({
     site: 'https://juliohuerta.dev',
@@ -14,6 +15,7 @@ export default defineConfig({
         },
     },
     integrations: [
+        react(),
         sitemap({
             i18n: {
                 defaultLocale: 'es',
