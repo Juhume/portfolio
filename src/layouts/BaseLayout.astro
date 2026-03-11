@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 import type { Locale, Translations } from '../i18n';
 import { locales, replaceLocaleInPath, getTranslations } from '../i18n';
 
@@ -112,28 +113,31 @@ const ogImageURL = new URL(ogImage, siteURL);
         <script type="application/ld+json" set:html={JSON.stringify(item)} />
     ))}
 
+    <!-- Astro View Transitions -->
+    <ViewTransitions />
+
     <!-- Fonts (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         rel="preload"
         as="style"
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap"
     />
     <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap"
         rel="stylesheet"
         media="print"
         onload="this.media='all'"
     />
     <noscript>
         <link
-            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap"
             rel="stylesheet"
         />
     </noscript>
 </head>
-<body>
+<body transition:persist>
     <!-- Skip to content -->
     <a href="#main-content" class="skip-to-content">{t.a11y.skipToContent}</a>
 
@@ -146,8 +150,134 @@ const ogImageURL = new URL(ogImage, siteURL);
 
     <script>
         import '../scripts/theme';
-        import '../scripts/navigation';
-        import '../scripts/animations';
+        
+        // Function to initialize navigation
+        function initNavigation() {
+            // Navigation scroll effect (rAF-throttled)
+            const nav = document.getElementById('nav');
+            let navTicking = false;
+            window.addEventListener('scroll', () => {
+                if (!navTicking) {
+                    requestAnimationFrame(() => {
+                        if (window.scrollY > 50) {
+                            nav?.classList.add('scrolled');
+                        } else {
+                            nav?.classList.remove('scrolled');
+                        }
+                        navTicking = false;
+                    });
+                    navTicking = true;
+                }
+            }, { passive: true });
+
+            // Mobile Menu
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileLinks = mobileMenu?.querySelectorAll('.mobile-menu__link');
+
+            function openMenu() {
+                menuBtn?.classList.add('active');
+                menuBtn?.setAttribute('aria-expanded', 'true');
+                mobileMenu?.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                // Focus first link after transition
+                const firstLink = mobileMenu?.querySelector('.mobile-menu__link') as HTMLElement;
+                setTimeout(() => firstLink?.focus(), 100);
+            }
+
+            function closeMenu() {
+                menuBtn?.classList.remove('active');
+                menuBtn?.setAttribute('aria-expanded', 'false');
+                mobileMenu?.classList.remove('active');
+                document.body.style.overflow = '';
+                menuBtn?.focus();
+            }
+
+            menuBtn?.addEventListener('click', () => {
+                const isOpen = mobileMenu?.classList.contains('active');
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            mobileLinks?.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileMenu?.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+
+            // Focus trap within mobile menu
+            mobileMenu?.addEventListener('keydown', (e) => {
+                if (e.key !== 'Tab' || !mobileLinks?.length) return;
+
+                const firstLink = mobileLinks[0] as HTMLElement;
+                const lastLink = mobileLinks[mobileLinks.length - 1] as HTMLElement;
+
+                if (e.shiftKey && document.activeElement === firstLink) {
+                    e.preventDefault();
+                    lastLink.focus();
+                } else if (!e.shiftKey && document.activeElement === lastLink) {
+                    e.preventDefault();
+                    firstLink.focus();
+                }
+            });
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+                    if (href) {
+                        const target = document.querySelector(href);
+                        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Active nav link based on scroll position
+            const navLinks = document.querySelectorAll('.nav__link') as NodeListOf<HTMLAnchorElement>;
+            const sections = document.querySelectorAll('section[id]');
+
+            if (navLinks.length > 0 && sections.length > 0) {
+                let currentActiveId = '';
+
+                const sectionObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            currentActiveId = entry.target.getAttribute('id') || '';
+                            navLinks.forEach(link => {
+                                const href = link.getAttribute('href') || '';
+                                const linkTarget = href.includes('#') ? href.split('#')[1] : '';
+                                link.classList.toggle('active', linkTarget === currentActiveId);
+                            });
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '-10% 0px -40% 0px' });
+
+                sections.forEach(section => sectionObserver.observe(section));
+            }
+        }
+
+        function initAnimations() {
+            import('../scripts/animations');
+        }
+
+        // Initial load
+        initNavigation();
+        initAnimations();
+        
+        // Re-run on page transitions
+        document.addEventListener('astro:page-load', () => {
+            initNavigation();
+            initAnimations();
+        });
     </script>
 
     <!-- Cloudflare Web Analytics -->

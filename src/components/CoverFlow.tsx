@@ -79,17 +79,10 @@ function valuesToStyle(v: CardValues): string {
 
 
 /* ═══════════════════════════════════════════
-   Google Font loader — Playfair Display
-   ═══════════════════════════════════════════ */
-
-const FONT_URL = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap';
-
-/* ═══════════════════════════════════════════
    CSS
    ═══════════════════════════════════════════ */
 
 const STYLES = `
-  @import url('${FONT_URL}');
 
   .cflow-card {
     position: absolute;
@@ -155,7 +148,7 @@ const STYLES = `
   .cflow-dot:hover { opacity: 0.7 !important; }
 
   .cflow-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display);
     color: var(--text-primary);
   }
 
@@ -435,7 +428,7 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                   {/* Bottom */}
                   <div>
                     <h3 style={{
-                      fontFamily: "'Playfair Display', Georgia, serif",
+                      fontFamily: 'var(--font-display)',
                       fontSize: mob ? '1.3rem' : '1.65rem',
                       fontWeight: 800,
                       color: txt,

@@ -16,7 +16,7 @@ const { lang, currentPath } = Astro.props;
             {i > 0 && <span class="lang-switcher__sep">|</span>}
             <a
                 href={replaceLocaleInPath(currentPath, loc)}
-                class:list={['lang-switcher__link', { active: loc === lang }]}
+                class:list={['lang-switcher__link', 'lang-link', { active: loc === lang }]}
                 aria-current={loc === lang ? 'page' : undefined}
             >
                 {loc.toUpperCase()}
@@ -62,3 +62,14 @@ const { lang, currentPath } = Astro.props;
         font-weight: 600;
     }
 </style>
+
+<script>
+    document.querySelectorAll('.lang-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (window.location.hash) {
+                e.preventDefault();
+                window.location.href = link.getAttribute('href') + window.location.hash;
+            }
+        });
+    });
+</script>

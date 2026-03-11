@@ -2,6 +2,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Header from '../../../../components/Header.astro';
 import CaseStudy from '../../../../components/CaseStudy.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
 import Footer from '../../../../components/Footer.astro';
 import { locales, getTranslations, getSectionIds } from '../../../../i18n';
 import type { Locale } from '../../../../i18n';
@@ -45,7 +46,12 @@ const structuredData = {
 
     <div class="case-study-page-shell">
         <div class="container">
-            <a href={`/${lang}/#${ids.projects}`} class="case-study-page__back">← {t.caseStudy.backToHome}</a>
+            <a href={`/${lang}/projects/`} class="case-study-page__back">← {t.caseStudy.backToProjects}</a>
+            <Breadcrumb items={[
+                { label: lang === 'en' ? 'Home' : lang === 'es' ? 'Inicio' : 'Inicio', href: `/${lang}/` },
+                { label: t.nav.projects, href: `/${lang}/projects/` },
+                { label: 'Espejo' }
+            ]} />
         </div>
         <CaseStudy t={t} ids={ids} lang={lang} variant="full" />
     </div>

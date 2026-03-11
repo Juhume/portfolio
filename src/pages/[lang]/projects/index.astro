@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CoverFlow from '../../../components/CoverFlow';
 import { locales, getTranslations, getSectionIds } from '../../../i18n';
 import type { Locale } from '../../../i18n';
@@ -59,6 +60,12 @@ const projects = t.projects.items.map((item, i) => ({
     <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
 
     <main class="projects-page">
+        <div class="container">
+            <Breadcrumb items={[
+                { label: lang === 'en' ? 'Home' : lang === 'es' ? 'Inicio' : 'Inicio', href: `/${lang}/` },
+                { label: t.nav.projects }
+            ]} />
+        </div>
         <header class="projects-page__header">
             <h1 class="projects-page__title">{t.projects.title}</h1>
         </header>
