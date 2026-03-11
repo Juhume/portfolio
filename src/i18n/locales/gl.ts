@@ -129,6 +129,21 @@ export const gl: Translations = {
                 ],
                 linkLabel: 'Ver caso de estudo',
             },
+            {
+                title: 'Hey Haiku',
+                description: 'Rede social para crear e compartir haikus con validación de sílabas en tempo real.',
+                category: 'App web',
+                badge: 'Arquivo',
+                role: 'Full-Stack',
+                proof: 'Next.js 15, Turso, Drizzle ORM, Better Auth.',
+                highlights: [
+                    'Validación 5-7-5 en tempo real',
+                    'Colección persoal e comunidade',
+                    'Proxecto de bootcamp reconstruído desde cero',
+                ],
+                linkLabel: 'Ver en GitHub',
+                linkUrl: 'https://github.com/Juhume/HeyHaiku',
+            },
         ],
     },
     caseStudy: {
@@ -247,6 +262,21 @@ export const gl: Translations = {
     },
     home: {
         role: 'Desenvolvedor Frontend Web & Mobile',
+        tagline: 'Software con sentidiño.',
+        navCards: {
+            projects: {
+                title: 'Proxectos',
+                description: 'Produto propio, problemas reais.',
+            },
+            blog: {
+                title: 'Blog',
+                description: 'O que aprendo, rompo e opino.',
+            },
+            about: {
+                title: 'Sobre min',
+                description: 'Como traballo e que me move.',
+            },
+        },
     },
     notFound: {
         title: '404',

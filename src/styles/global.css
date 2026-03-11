@@ -9,6 +9,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Vila Morena';
+    src: url('/fonts/vilamorena.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ==========================================
    CSS Variables & Theming
    ========================================== */
@@ -814,6 +822,10 @@ button {
     gap: 0.75rem;
     font-size: 0.875rem;
     color: var(--text-muted);
+}
+
+.footer__sentidino {
+    font-family: 'Vila Morena', Georgia, serif;
 }
 
 /* Octopus replaces the old status dot — animation is in Footer.astro */

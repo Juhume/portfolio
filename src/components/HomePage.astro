@@ -7,48 +7,65 @@ interface Props {
 }
 
 const { t, lang } = Astro.props;
-
-const aboutLabel: Record<string, string> = {
-    es: 'Sobre mí',
-    en: 'About me',
-    gl: 'Sobre min',
-};
-
-const sentidinoLabel: Record<string, string> = {
-    es: 'Software con sentidiño.',
-    en: 'Software con sentidiño.',
-    gl: 'Software con sentidiño.',
-};
 ---
 
 <main class="card">
-    <div class="card__inner">
-        <img
-            src="/julio-huerta.jpg"
-            alt={t.about.photoAlt}
-            class="card__photo"
-            width="120"
-            height="120"
-        />
+    <div class="card__glow" aria-hidden="true"></div>
 
-        <h1 class="card__name home__name">Julio Huerta Medina</h1>
+    <div class="card__inner">
+        <div class="card__photo-ring">
+            <img
+                src="/julio-huerta.jpg"
+                alt={t.about.photoAlt}
+                class="card__photo"
+                width="160"
+                height="160"
+            />
+        </div>
+
+        <h1 class="card__name home__name">JULIO HUERTA MEDINA</h1>
         <p class="card__role">{t.home.role}</p>
+
+        <div class="card__proofs">
+            {t.hero.proofs.map(proof => (
+                <span class="card__proof">{proof}</span>
+            ))}
+        </div>
 
         <div class="card__bio">
             <p>{t.about.paragraphs[0]}</p>
-            <p>{t.about.paragraphs[1]} {sentidinoLabel[lang]}</p>
+            <p>{t.about.paragraphs[1]}</p>
         </div>
 
         <nav class="card__links" aria-label="Main navigation">
             <a href={`/${lang}/projects/`} class="card__link">{t.nav.projects}</a>
             <a href={`/${lang}/blog/`} class="card__link">{t.nav.blog}</a>
-            <a href={`/${lang}/#about`} class="card__link">{aboutLabel[lang]}</a>
+            <a href={`/${lang}/#about`} class="card__link">{t.nav.about}</a>
         </nav>
+
+        <div class="card__social">
+            <a href="https://github.com/juhume" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                </svg>
+            </a>
+            <a href="https://linkedin.com/in/juhume" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                </svg>
+            </a>
+        </div>
     </div>
 </main>
 
 <style>
+    /* ==========================================
+       Card Container
+       ========================================== */
     .card {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -57,47 +74,85 @@ const sentidinoLabel: Record<string, string> = {
     }
 
     .card__inner {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         max-width: 560px;
         gap: 0;
+        z-index: 1;
     }
 
-    /* Photo — blob shape with hover morph */
-    .card__photo {
-        width: 120px;
-        height: 120px;
+    /* ==========================================
+       Ambient Glow
+       ========================================== */
+    .card__glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -55%);
+        width: 550px;
+        height: 550px;
+        border-radius: 50%;
+        background: radial-gradient(
+            circle,
+            color-mix(in srgb, var(--accent) 8%, transparent) 0%,
+            color-mix(in srgb, var(--gold) 4%, transparent) 40%,
+            transparent 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(40px);
+    }
+
+    :global([data-theme="dark"]) .card__glow {
+        background: radial-gradient(
+            circle,
+            color-mix(in srgb, var(--accent) 12%, transparent) 0%,
+            color-mix(in srgb, var(--accent) 5%, transparent) 40%,
+            transparent 70%
+        );
+    }
+
+    /* ==========================================
+       Photo with gradient ring
+       ========================================== */
+    .card__photo-ring {
+        position: relative;
+        padding: 3px;
         border-radius: 30% 70% 53% 47% / 52% 35% 65% 48%;
-        object-fit: cover;
-        flex-shrink: 0;
+        background: linear-gradient(135deg, var(--accent), var(--gold), var(--accent));
         margin-bottom: var(--space-lg);
         transition: border-radius 0.6s ease, box-shadow 0.6s ease;
-        box-shadow:
-            0 0 0 2px var(--bg-primary),
-            0 0 0 3.5px color-mix(in srgb, var(--accent) 35%, transparent);
+        box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 15%, transparent);
     }
-    .card__photo:hover {
+
+    .card__photo-ring:hover {
         border-radius: 58% 42% 36% 64% / 43% 68% 32% 57%;
-        box-shadow:
-            0 0 0 2px var(--bg-primary),
-            0 0 0 3.5px var(--accent),
-            0 8px 24px var(--shadow);
+        box-shadow: 0 12px 40px color-mix(in srgb, var(--accent) 25%, transparent);
     }
 
-    /* Entrance animation for photo */
-    :global(.js) .card__photo {
+    .card__photo {
+        width: 140px;
+        height: 140px;
+        border-radius: inherit;
+        object-fit: cover;
+        display: block;
+        border: 3px solid var(--bg-primary);
+        flex-shrink: 0;
+    }
+
+    :global(.js) .card__photo-ring {
         opacity: 0;
-        animation: photoFadeIn 0.8s var(--ease-out) 0.1s forwards;
-    }
-    @keyframes photoFadeIn {
-        to { opacity: 1; }
+        animation: fadeIn 0.8s var(--ease-out) 0.1s forwards;
     }
 
-    /* Name — Gallaecia font, char-reveal animation picks up .home__name */
+    /* ==========================================
+       Name
+       ========================================== */
     .card__name {
-        font-family: 'Gallaecia', var(--font-display);
+        font-family: 'Vila Morena', var(--font-display);
         font-size: clamp(2rem, 5vw, 3.2rem);
         font-weight: normal;
         color: var(--text-primary);
@@ -108,54 +163,93 @@ const sentidinoLabel: Record<string, string> = {
         word-break: keep-all;
     }
 
-    /* Role */
+    /* ==========================================
+       Role
+       ========================================== */
     .card__role {
         font-size: 0.95rem;
-        color: var(--accent-text, #2B9B6A);
+        color: var(--accent-text);
         font-weight: 500;
-        margin-bottom: var(--space-lg);
-    }
-    :global(.js) .card__role {
-        opacity: 0;
-        animation: roleFadeIn 0.5s var(--ease-out) 0.55s forwards;
-    }
-    @keyframes roleFadeIn {
-        from { opacity: 0; transform: translateY(6px); }
-        to { opacity: 1; transform: translateY(0); }
+        margin-bottom: var(--space-sm);
     }
 
-    /* Bio quotes */
-    .card__bio {
-        margin-bottom: var(--space-xl);
+    :global(.js) .card__role {
+        opacity: 0;
+        animation: fadeSlideUp 0.5s var(--ease-out) 0.55s forwards;
     }
+
+    /* ==========================================
+       Proof Badges
+       ========================================== */
+    .card__proofs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-xs);
+        margin-bottom: var(--space-lg);
+    }
+
+    .card__proof {
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 0.3rem 0.75rem;
+        border-radius: 100px;
+        border: 1px solid var(--border);
+        background: color-mix(in srgb, var(--bg-secondary) 60%, transparent);
+        color: var(--text-secondary);
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+    }
+
+    :global(.js) .card__proofs {
+        opacity: 0;
+        animation: fadeSlideUp 0.5s var(--ease-out) 0.7s forwards;
+    }
+
+    /* ==========================================
+       Bio
+       ========================================== */
+    .card__bio {
+        margin-bottom: var(--space-sm);
+    }
+
     .card__bio p {
         font-size: 0.95rem;
         color: var(--text-secondary);
-        line-height: 1.7;
-        font-style: italic;
+        line-height: 1.75;
         max-width: 48ch;
         margin: 0 auto var(--space-xs);
     }
+
     .card__bio p:last-child {
         margin-bottom: 0;
     }
 
-    /* 3 links in a row */
+    :global(.js) .card__bio {
+        opacity: 0;
+        animation: fadeSlideUp 0.5s var(--ease-out) 0.85s forwards;
+    }
+
+/* ==========================================
+       Navigation Links
+       ========================================== */
     .card__links {
         display: flex;
         align-items: center;
         gap: var(--space-lg);
     }
+
     .card__link {
         font-family: var(--font-display);
         font-size: 0.9rem;
         font-weight: 600;
-        color: var(--accent-text, #2B9B6A);
+        color: var(--accent-text);
         text-decoration: none;
         letter-spacing: 0.01em;
         position: relative;
         transition: opacity var(--duration-fast) var(--ease-out);
     }
+
     .card__link::after {
         content: '';
         position: absolute;
@@ -166,45 +260,139 @@ const sentidinoLabel: Record<string, string> = {
         background: var(--accent);
         transition: width 0.3s var(--ease-out);
     }
+
     .card__link:hover::after {
         width: 100%;
     }
+
     .card__link:hover {
         opacity: 0.85;
     }
 
-    /* Responsive */
+    :global(.js) .card__links {
+        opacity: 0;
+        animation: fadeSlideUp 0.5s var(--ease-out) 1.1s forwards;
+    }
+
+    /* ==========================================
+       Social Links
+       ========================================== */
+    .card__social {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: var(--space-lg);
+    }
+
+    .card__social a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: var(--text-muted);
+        transition: color var(--duration-fast) ease,
+                    background-color var(--duration-fast) ease;
+    }
+
+    .card__social a:hover {
+        color: var(--accent-text);
+        background: var(--accent-subtle);
+    }
+
+    .card__social svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    :global(.js) .card__social {
+        opacity: 0;
+        animation: fadeSlideUp 0.4s var(--ease-out) 1.25s forwards;
+    }
+
+    /* ==========================================
+       Animations
+       ========================================== */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes fadeSlideUp {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================
+       Responsive
+       ========================================== */
     @media (max-width: 480px) {
         .card {
             padding: var(--space-md) var(--space-sm);
         }
-        .card__photo {
-            width: 96px;
-            height: 96px;
+
+        .card__glow {
+            width: 320px;
+            height: 320px;
+        }
+
+        .card__photo-ring {
             margin-bottom: var(--space-md);
         }
+
+        .card__photo {
+            width: 110px;
+            height: 110px;
+        }
+
         .card__name {
             font-size: clamp(1.6rem, 6vw, 2.2rem);
         }
+
         .card__role {
             font-size: 0.85rem;
+        }
+
+        .card__proofs {
             margin-bottom: var(--space-md);
         }
+
+        .card__proof {
+            font-size: 0.65rem;
+            padding: 0.25rem 0.6rem;
+        }
+
         .card__bio p {
             font-size: 0.875rem;
         }
+
+        .card__tagline {
+            font-size: 0.8rem;
+            margin-bottom: var(--space-lg);
+        }
+
         .card__links {
             gap: var(--space-md);
         }
+
         .card__link {
             font-size: 0.85rem;
+        }
+
+        .card__social {
+            margin-top: var(--space-md);
         }
     }
 
     @media (min-width: 768px) {
         .card__photo {
-            width: 140px;
-            height: 140px;
+            width: 170px;
+            height: 170px;
         }
+
+        .card__photo-ring {
+            padding: 3.5px;
+        }
+
     }
 </style>

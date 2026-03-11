@@ -15,23 +15,25 @@ const t = getTranslations(lang);
 const ids = getSectionIds(lang);
 const canonicalPath = `/${lang}/projects/`;
 
-const ctaLabels: Record<string, string> = {
-    es: 'Ver caso de estudio →',
-    en: 'View case study →',
-    gl: 'Ver caso de estudo →',
-};
-
-// Map projects to CoverFlow props
 const projectLinks: string[] = [
     `/${lang}/projects/espejo/`,
     'https://diplotest.es',
     `/${lang}/projects/homelab/`,
+    'https://github.com/Juhume/HeyHaiku',
 ];
 
 const projectStacks: string[][] = [
     ['Next.js', 'React', 'TypeScript', 'Supabase', 'IndexedDB'],
     ['Next.js', 'Supabase', 'Auth', 'Analytics'],
     ['Docker', 'Compose', 'Home Assistant', 'AI Agents'],
+    ['Next.js 15', 'TypeScript', 'Turso', 'Drizzle', 'Better Auth'],
+];
+
+const projectThemes = [
+    { gradient: 'linear-gradient(145deg, #fce4dc 0%, #f5c4b5 50%, #f0a890 100%)', accent: '#c4553a', textColor: '#3d1510', icon: '🔒' },
+    { gradient: 'linear-gradient(145deg, #dce8fc 0%, #b8d0f5 50%, #95b8ee 100%)', accent: '#3a62a8', textColor: '#112040', icon: '📖' },
+    { gradient: 'linear-gradient(145deg, #d4f0e2 0%, #b0e0c8 50%, #88cfae 100%)', accent: '#1e7a4d', textColor: '#0a2618', icon: '⚡' },
+    { gradient: 'linear-gradient(145deg, #ecdcf0 0%, #d8bee0 50%, #c4a0d0 100%)', accent: '#6e3a82', textColor: '#28102e', icon: '🖊️' },
 ];
 
 const projects = t.projects.items.map((item, i) => ({
@@ -41,6 +43,9 @@ const projects = t.projects.items.map((item, i) => ({
     url: projectLinks[i],
     badge: item.badge,
     category: item.category,
+    ctaLabel: item.linkLabel + (projectLinks[i].startsWith('http') ? ' ↗' : ' →'),
+    external: projectLinks[i].startsWith('http'),
+    ...projectThemes[i],
 }));
 ---
 
@@ -54,11 +59,13 @@ const projects = t.projects.items.map((item, i) => ({
     <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
 
     <main class="projects-page">
+        <header class="projects-page__header">
+            <h1 class="projects-page__title">{t.projects.title}</h1>
+        </header>
         <div class="projects-page__inner">
             <CoverFlow
                 client:load
                 projects={projects}
-                ctaLabel={ctaLabels[lang]}
             />
         </div>
     </main>
@@ -69,11 +76,25 @@ const projects = t.projects.items.map((item, i) => ({
 <style>
     .projects-page {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
         padding: calc(4rem + var(--space-xl, 2rem)) var(--space-md, 1rem) var(--space-xl, 2rem);
         overflow-x: hidden;
+    }
+
+    .projects-page__header {
+        text-align: center;
+        margin-bottom: var(--space-lg);
+    }
+
+    .projects-page__title {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 800;
+        color: var(--text-primary);
+        letter-spacing: -0.03em;
     }
 
     .projects-page__inner {
@@ -86,6 +107,9 @@ const projects = t.projects.items.map((item, i) => ({
         .projects-page {
             padding-left: var(--space-sm, 0.5rem);
             padding-right: var(--space-sm, 0.5rem);
+        }
+        .projects-page__header {
+            margin-bottom: var(--space-md);
         }
     }
 </style>

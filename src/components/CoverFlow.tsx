@@ -1,25 +1,28 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef, type FC, type CSSProperties } from 'react';
-import { WebHaptics } from 'web-haptics';
+import { useState, useCallback, useEffect, useRef, type FC } from 'react';
 
 /* ═══════════════════════════════════════════
    Types
    ═══════════════════════════════════════════ */
 
 export interface Project {
-  image?: string;
   title: string;
   description: string;
   stack: string[];
   url: string;
   badge?: string;
   category?: string;
+  ctaLabel?: string;
+  external?: boolean;
+  gradient?: string;
+  accent?: string;
+  textColor?: string;
+  icon?: string;
 }
 
 export interface CoverFlowProps {
   projects: Project[];
-  ctaLabel?: string;
 }
 
 /* ═══════════════════════════════════════════
@@ -30,12 +33,11 @@ const ANGLE = 55;
 const SPRING = 'cubic-bezier(0.16, 1, 0.3, 1)';
 const DURATION = '600ms';
 const WHEEL_COOLDOWN = 280;
-const SWIPE_THRESHOLD = 0.2; // 20% of card width = switch
+const SWIPE_THRESHOLD = 0.2;
 const INFO_FADE_MS = 180;
 
 /* ═══════════════════════════════════════════
-   Smooth transform calculator
-   Returns numeric values for any fractional offset
+   Transform calculator
    ═══════════════════════════════════════════ */
 
 interface CardValues { tx: number; tz: number; ry: number; sc: number; op: number; z: number }
@@ -45,24 +47,21 @@ function getCardValues(offset: number, w: number): CardValues {
   const sign = offset > 0 ? 1 : offset < 0 ? -1 : 0;
   const mob = w < 640;
   const tab = w < 1024;
-
   const base = mob ? 130 : tab ? 160 : 190;
   const gap = mob ? 100 : tab ? 150 : 190;
 
   if (abs < 1) {
-    // Smooth interpolation from center → first side position
     const t = abs;
     return {
       tx: sign * base * t,
-      tz: 80 * (1 - t) + (-110) * t,           // 80 → -110
-      ry: sign * ANGLE * t,                      // 0 → ±55
-      sc: 1 - (1 - 0.82) * t,                    // 1 → 0.82
-      op: 1 - (1 - 0.85) * t,                    // 1 → 0.85
+      tz: 80 * (1 - t) + (-110) * t,
+      ry: sign * ANGLE * t,
+      sc: 1 - (1 - 0.82) * t,
+      op: 1 - (1 - 0.85) * t,
       z: Math.round(100 - abs * 10),
     };
   }
 
-  // Side positions (abs >= 1)
   return {
     tx: sign * (base + (abs - 1) * gap),
     tz: -60 - abs * 50,
@@ -77,59 +76,48 @@ function valuesToStyle(v: CardValues): string {
   return `translateX(${v.tx}px) translateZ(${v.tz}px) rotateY(${v.ry}deg) scale(${v.sc})`;
 }
 
-/* ═══════════════════════════════════════════
-   Haptics — singleton, lazy-created on first trigger
-   This guarantees the instance exists within user
-   gesture context (required for iOS vibrate + fallback)
-   
-   Presets from source (not all documented):
-     selection (8ms, 0.3) — lightest, for scrolling
-     light (15ms, 0.4) — for dot nav  
-     success (30+40ms) — for opening project
-   ═══════════════════════════════════════════ */
-
-let _haptics: WebHaptics | null = null;
-
-function hapticTrigger(preset: string) {
-  try {
-    if (!_haptics) _haptics = new WebHaptics();
-    _haptics.trigger(preset);
-  } catch { /* graceful no-op */ }
+function hapticTick() {
+  try { navigator?.vibrate?.(8); } catch { /* no-op */ }
 }
 
 /* ═══════════════════════════════════════════
-   Injected CSS
+   Google Font loader — Playfair Display
+   ═══════════════════════════════════════════ */
+
+const FONT_URL = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap';
+
+/* ═══════════════════════════════════════════
+   CSS
    ═══════════════════════════════════════════ */
 
 const STYLES = `
+  @import url('${FONT_URL}');
+
   .cflow-card {
     position: absolute;
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
-    border: 1px solid var(--border, rgba(255,255,255,0.08));
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px var(--shadow, rgba(0,0,0,0.15));
     transform-style: preserve-3d;
     will-change: transform, opacity;
-    -webkit-box-reflect: below 4px
-      linear-gradient(transparent 60%, rgba(128,128,128,0.06));
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
   }
 
   .cflow-card--snapping {
     transition:
       transform ${DURATION} ${SPRING},
       opacity ${DURATION} ${SPRING},
-      box-shadow 0.3s ease;
+      box-shadow 0.4s ease;
   }
 
   .cflow-card--active {
     box-shadow:
-      0 16px 50px var(--shadow, rgba(0,0,0,0.25)),
-      0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+      0 24px 64px -16px var(--card-shadow, rgba(0,0,0,0.18)),
+      0 8px 20px -8px rgba(0,0,0,0.08);
+    border-color: rgba(255,255,255,0.7);
   }
 
   .cflow-stage {
@@ -159,26 +147,6 @@ const STYLES = `
     transform: translateY(6px) !important;
   }
 
-  .cflow-tag {
-    font-family: var(--font-display, 'Syne', sans-serif);
-    font-weight: 600;
-    border-radius: 4px;
-    background: var(--accent-subtle, rgba(43, 155, 106, 0.1));
-    color: var(--accent-text);
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-  }
-
-  .cflow-badge {
-    font-family: var(--font-display, 'Syne', sans-serif);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    border-radius: 4px;
-    background: color-mix(in srgb, var(--accent) 15%, transparent);
-    color: var(--accent-text);
-  }
-
   .cflow-dot {
     border-radius: 9999px;
     border: none;
@@ -186,27 +154,59 @@ const STYLES = `
     cursor: pointer;
     transition: all 0.3s ease;
   }
+  .cflow-dot:hover { opacity: 0.7 !important; }
 
   .cflow-title {
-    font-family: var(--font-display, 'Syne', sans-serif);
+    font-family: 'Playfair Display', Georgia, serif;
     color: var(--text-primary);
   }
 
   .cflow-cta {
     font-family: var(--font-display, 'Syne', sans-serif);
-    color: var(--accent-text);
     text-decoration: none;
+    transition: opacity 0.2s ease;
   }
-  .cflow-cta:hover {
-    opacity: 0.7;
+  .cflow-cta:hover { opacity: 0.7; }
+
+  /* Subtle grain */
+  .cflow-noise {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    opacity: 0.04;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+    mix-blend-mode: multiply;
+  }
+
+  /* Glyph watermark */
+  .cflow-glyph {
+    position: absolute;
+    font-size: 5.5rem;
+    line-height: 1;
+    pointer-events: none;
+    opacity: 0.07;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+
+  /* Top light */
+  .cflow-sheen {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 45%;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, transparent 100%);
+    pointer-events: none;
   }
 `;
 
 /* ═══════════════════════════════════════════
-   CoverFlow Component
+   Component
    ═══════════════════════════════════════════ */
 
-const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estudio →' }) => {
+const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
   const [active, setActive] = useState(0);
   const [displayIdx, setDisplayIdx] = useState(0);
   const [isFading, setIsFading] = useState(false);
@@ -221,13 +221,11 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
   const activeRef = useRef(0);
 
   const mob = width < 640;
-  const cardW = mob ? 220 : width < 1024 ? 290 : 340;
-  const stageH = mob ? 280 : width < 1024 ? 360 : 420;
+  const cardW = mob ? 230 : width < 1024 ? 300 : 360;
+  const stageH = mob ? 300 : width < 1024 ? 380 : 440;
 
-  // Keep activeRef in sync
   useEffect(() => { activeRef.current = active; }, [active]);
 
-  // Measure
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -237,7 +235,6 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
     return () => ro.disconnect();
   }, []);
 
-  /* ── Direct DOM update during drag ── */
   const updateCardsDirect = useCallback((progress: number) => {
     const curr = activeRef.current;
     cardRefs.current.forEach((el, i) => {
@@ -250,17 +247,15 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
     });
   }, [width]);
 
-  /* ── Navigate (with snap animation) ── */
   const goTo = useCallback(
     (i: number) => {
       const next = Math.max(0, Math.min(i, projects.length - 1));
       if (next === activeRef.current) {
-        // Snap back to current position
         setIsSnapping(true);
         requestAnimationFrame(() => updateCardsDirect(0));
         return;
       }
-      hapticTrigger('selection');
+      hapticTick();
       setActive(next);
       setIsSnapping(true);
       setIsFading(true);
@@ -272,7 +267,6 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
     [projects.length, updateCardsDirect],
   );
 
-  /* ── Keyboard ── */
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1); }
@@ -282,74 +276,45 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
     return () => window.removeEventListener('keydown', handler);
   }, [active, goTo]);
 
-  /* ── Touch: continuous drag ── */
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-
     const onStart = (e: TouchEvent) => {
-      touchRef.current = {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
-        t: Date.now(),
-      };
+      touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now() };
       dragRef.current = { progress: 0, isDragging: false, locked: false };
     };
-
     const onMove = (e: TouchEvent) => {
       const dx = e.touches[0].clientX - touchRef.current.x;
       const dy = e.touches[0].clientY - touchRef.current.y;
-
-      // Lock direction after initial movement
       if (!dragRef.current.locked && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
         dragRef.current.locked = true;
         dragRef.current.isDragging = Math.abs(dx) > Math.abs(dy);
       }
-
       if (!dragRef.current.isDragging) return;
       e.preventDefault();
-
-      // Disable CSS transitions during drag
       if (isSnapping) setIsSnapping(false);
-
-      // Calculate drag progress (fraction of card width)
       let progress = dx / cardW;
-
-      // Clamp: can't drag past first/last card
       const curr = activeRef.current;
-      const maxRight = curr;                          // drag right reveals prev
-      const maxLeft = -(projects.length - 1 - curr);  // drag left reveals next
-      progress = Math.max(maxLeft - 0.15, Math.min(maxRight + 0.15, progress));
-
+      progress = Math.max(-(projects.length - 1 - curr) - 0.15, Math.min(curr + 0.15, progress));
       dragRef.current.progress = progress;
       updateCardsDirect(progress);
     };
-
-    const onEnd = (e: TouchEvent) => {
+    const onEnd = () => {
       if (!dragRef.current.isDragging) return;
-
       const progress = dragRef.current.progress;
       const dt = Date.now() - touchRef.current.t;
-      const velocity = Math.abs(progress) / (dt / 1000); // progress/second
-
+      const velocity = Math.abs(progress) / (dt / 1000);
       dragRef.current.isDragging = false;
-
-      // Determine target: snap if enough drag or fast flick
       if (Math.abs(progress) > SWIPE_THRESHOLD || velocity > 1.5) {
-        // Haptic DIRECTLY in touch handler (user activation context)
-        hapticTrigger('selection');
-        if (progress > 0) goTo(activeRef.current - 1);
-        else goTo(activeRef.current + 1);
+        hapticTick();
+        progress > 0 ? goTo(activeRef.current - 1) : goTo(activeRef.current + 1);
       } else {
-        // Snap back
         goTo(activeRef.current);
       }
     };
-
     el.addEventListener('touchstart', onStart, { passive: true });
     el.addEventListener('touchmove', onMove, { passive: false });
     el.addEventListener('touchend', onEnd, { passive: true });
-
     return () => {
       el.removeEventListener('touchstart', onStart);
       el.removeEventListener('touchmove', onMove);
@@ -357,7 +322,6 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
     };
   }, [cardW, projects.length, goTo, updateCardsDirect, isSnapping]);
 
-  /* ── Wheel ── */
   const onWheel = (e: React.WheelEvent) => {
     const now = Date.now();
     if (now - wheelTs.current < WHEEL_COOLDOWN) return;
@@ -367,7 +331,6 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
   };
 
   const displayed = projects[displayIdx];
-
   if (projects.length === 0) return null;
 
   return (
@@ -383,13 +346,16 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
         aria-label="Project showcase"
         aria-roledescription="carousel"
       >
-        {/* 3D Stage */}
         <div className="cflow-stage" style={{ height: stageH, width: '100%' }}>
           {projects.map((proj, i) => {
             const offset = i - active;
             const isCenter = offset === 0;
             const abs = Math.abs(offset);
             const v = getCardValues(offset, width);
+            const accent = proj.accent || '#2B9B6A';
+            const txt = proj.textColor || '#1a1a1a';
+            const txtSoft = txt + 'aa';
+            const pad = mob ? '1.1rem' : '1.6rem';
 
             return (
               <div
@@ -402,21 +368,19 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
                 ].join(' ')}
                 style={{
                   width: cardW,
-                  aspectRatio: '4 / 3.2',
-                  background: 'color-mix(in srgb, var(--bg-secondary) 85%, transparent)',
+                  aspectRatio: '3 / 2.4',
+                  background: proj.gradient || '#eef2ea',
                   transform: valuesToStyle(v),
                   opacity: v.op,
                   zIndex: v.z,
                   pointerEvents: abs <= 1 ? 'auto' : 'none',
+                  ['--card-shadow' as string]: `${accent}30`,
                 }}
                 onClick={() => {
                   if (isCenter) {
-                    hapticTrigger('success');
-                    if (proj.url.startsWith('http')) {
-                      window.open(proj.url, '_blank', 'noopener,noreferrer');
-                    } else {
-                      window.location.href = proj.url;
-                    }
+                    hapticTick();
+                    if (proj.external) window.open(proj.url, '_blank', 'noopener,noreferrer');
+                    else window.location.href = proj.url;
                   } else {
                     goTo(i);
                   }
@@ -425,65 +389,88 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
                 aria-roledescription="slide"
                 aria-label={proj.title}
               >
-                {proj.image && (
-                  <img
-                    src={proj.image}
-                    alt=""
-                    style={{
-                      position: 'absolute', inset: 0,
-                      width: '100%', height: '100%', objectFit: 'cover',
-                    }}
-                    draggable={false}
-                    loading="lazy"
-                  />
-                )}
+                <div className="cflow-noise" />
+                <div className="cflow-sheen" />
+                {proj.icon && <span className="cflow-glyph">{proj.icon}</span>}
 
                 <div style={{
                   position: 'relative', height: '100%',
                   display: 'flex', flexDirection: 'column',
                   justifyContent: 'space-between',
-                  padding: mob ? '0.75rem' : '1.25rem',
+                  padding: pad,
                 }}>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  {/* Top row */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    {proj.category && (
+                      <span style={{
+                        fontFamily: 'var(--font-display, "Syne", sans-serif)',
+                        fontSize: '0.6rem',
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.12em',
+                        color: accent,
+                      }}>
+                        {proj.category}
+                      </span>
+                    )}
                     {proj.badge && (
-                      <span className="cflow-badge"
-                        style={{ fontSize: '0.55rem', padding: '0.2rem 0.5rem' }}>
+                      <span style={{
+                        fontFamily: 'var(--font-display, "Syne", sans-serif)',
+                        fontSize: '0.5rem',
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '20px',
+                        background: `${accent}18`,
+                        color: accent,
+                        border: `1px solid ${accent}25`,
+                      }}>
                         {proj.badge}
                       </span>
                     )}
                   </div>
 
+                  {/* Bottom */}
                   <div>
                     <h3 style={{
-                      fontFamily: 'var(--font-display, "Syne", sans-serif)',
-                      fontSize: mob ? '1rem' : '1.25rem',
-                      fontWeight: 700,
-                      color: 'var(--text-primary)',
-                      lineHeight: 1.25,
-                      marginBottom: '0.4rem',
+                      fontFamily: "'Playfair Display', Georgia, serif",
+                      fontSize: mob ? '1.3rem' : '1.65rem',
+                      fontWeight: 800,
+                      color: txt,
+                      lineHeight: 1.15,
+                      marginBottom: '0.5rem',
+                      letterSpacing: '-0.01em',
                     }}>
                       {proj.title}
                     </h3>
 
-                    {isCenter && (
-                      <p style={{
-                        fontSize: mob ? '0.72rem' : '0.82rem',
-                        color: 'var(--text-secondary)',
-                        lineHeight: 1.55,
-                        marginBottom: '0.6rem',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}>
-                        {proj.description}
-                      </p>
-                    )}
+                    <p style={{
+                      fontSize: mob ? '0.72rem' : '0.8rem',
+                      color: txtSoft,
+                      lineHeight: 1.6,
+                      marginBottom: '0.75rem',
+                      display: '-webkit-box',
+                      WebkitLineClamp: isCenter ? 3 : 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}>
+                      {proj.description}
+                    </p>
 
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
                       {proj.stack.slice(0, isCenter ? 5 : 3).map((tech) => (
-                        <span key={tech} className="cflow-tag"
-                          style={{ fontSize: mob ? '0.5rem' : '0.6rem', padding: '0.15rem 0.45rem' }}>
+                        <span key={tech} style={{
+                          fontFamily: 'var(--font-display, "Syne", sans-serif)',
+                          fontSize: mob ? '0.48rem' : '0.56rem',
+                          fontWeight: 600,
+                          padding: '0.18rem 0.5rem',
+                          borderRadius: '20px',
+                          background: `${accent}15`,
+                          color: accent,
+                          letterSpacing: '0.02em',
+                          border: `1px solid ${accent}20`,
+                        }}>
                           {tech}
                         </span>
                       ))}
@@ -498,16 +485,16 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
         {/* Dots */}
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          gap: '0.5rem', marginTop: '1.25rem',
+          gap: '0.5rem', marginTop: '1.5rem',
         }} role="tablist">
-          {projects.map((_, i) => (
+          {projects.map((proj, i) => (
             <button key={i} onClick={() => goTo(i)} className="cflow-dot"
               role="tab" aria-selected={i === active}
-              aria-label={`Project ${i + 1}`}
+              aria-label={proj.title}
               style={{
-                width: i === active ? 24 : 8, height: 8,
-                background: i === active ? 'var(--accent, #83DEB5)' : 'var(--text-muted, #666)',
-                opacity: i === active ? 1 : 0.3,
+                width: i === active ? 28 : 8, height: 8,
+                background: i === active ? (proj.accent || '#2B9B6A') : 'var(--text-muted, #aaa)',
+                opacity: i === active ? 1 : 0.25,
               }}
             />
           ))}
@@ -517,16 +504,27 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects, ctaLabel = 'Ver caso de estud
         <div className={`cflow-info ${isFading ? 'cflow-info--fading' : ''}`}
           style={{ marginTop: '1.25rem' }}>
           <h2 className="cflow-title"
-            style={{ fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', fontWeight: 700, marginBottom: '0.35rem' }}>
+            style={{
+              fontSize: 'clamp(1.4rem, 3vw, 2rem)',
+              fontWeight: 800,
+              marginBottom: '0.4rem',
+              letterSpacing: '-0.02em',
+            }}>
             {displayed?.title}
           </h2>
-          <a href={displayed?.url}
-            target={displayed?.url.startsWith('http') ? '_blank' : undefined}
-            rel={displayed?.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="cflow-cta"
-            style={{ fontSize: '0.85rem', fontWeight: 600 }}>
-            {ctaLabel}
-          </a>
+          {displayed?.ctaLabel && (
+            <a href={displayed.url}
+              target={displayed.external ? '_blank' : undefined}
+              rel={displayed.external ? 'noopener noreferrer' : undefined}
+              className="cflow-cta"
+              style={{
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                color: displayed.accent || 'var(--accent-text)',
+              }}>
+              {displayed.ctaLabel}
+            </a>
+          )}
         </div>
       </div>
     </>

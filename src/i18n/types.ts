@@ -161,6 +161,12 @@ export interface Translations {
     };
     home: {
         role: string;
+        tagline: string;
+        navCards: {
+            projects: { title: string; description: string };
+            blog: { title: string; description: string };
+            about: { title: string; description: string };
+        };
     };
     notFound: {
         title: string;
