@@ -653,7 +653,7 @@ button {
 }
 
 .case-study-page-shell {
-    padding-top: calc(var(--space-3xl) + 2rem);
+    padding-top: calc(3.5rem + 1rem);
 }
 
 .case-study-page__back {
@@ -661,7 +661,8 @@ button {
     align-items: center;
     gap: 0.5rem;
     min-height: 44px;
-    padding: 0.5rem 0;
+    padding: 0.25rem 0;
+    margin-bottom: 0;
     color: var(--text-secondary);
     font-size: 0.875rem;
     transition: color var(--duration-fast) ease;
@@ -679,14 +680,14 @@ button {
 .case-study-page__cover {
     display: block;
     width: 100%;
-    max-width: 280px;
-    border-radius: 16px;
-    margin: 0 auto var(--space-md);
+    max-width: 200px;
+    border-radius: 12px;
+    margin: 0 auto var(--space-sm);
 }
 
 @media (max-width: 480px) {
-    .case-study-page__hero { margin-bottom: var(--space-lg); }
-    .case-study-page__cover { max-width: 240px; border-radius: 12px; margin-bottom: var(--space-sm); }
+    .case-study-page__hero { margin-bottom: var(--space-md); }
+    .case-study-page__cover { max-width: 160px; border-radius: 10px; margin-bottom: var(--space-xs); }
     .case-study-page__title { margin-bottom: var(--space-sm); }
     .case-study-page__eyebrow { margin-bottom: var(--space-sm); }
     .case-study-page__highlights { margin-top: var(--space-md); gap: 0.5rem; }
@@ -1490,22 +1491,26 @@ a:focus-visible {
 /* ==========================================
    View Transitions
    ========================================== */
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes vt-fade-out {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-@keyframes fade-out {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(-8px); }
+@keyframes vt-fade-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
+/* Cross-fade: old snapshot stays on top covering new DOM.
+   New page fades in only after styles have applied. */
 ::view-transition-old(root) {
-  animation: fade-out 200ms ease-in;
+  animation: vt-fade-out 220ms ease-in 80ms both;
+  z-index: 2;
 }
 
 ::view-transition-new(root) {
-  animation: fade-in 300ms ease-out;
+  animation: vt-fade-in 200ms ease-out 100ms both;
+  z-index: 1;
 }
 
 /* Keep header stable during transitions */
