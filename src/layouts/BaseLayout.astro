@@ -149,7 +149,26 @@ const ogImageURL = new URL(ogImage, siteURL);
     </main>
 
     <script>
-        import '../scripts/theme';
+        // Theme toggle — must re-bind on every page transition
+        function initTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            if (!themeToggle) return;
+            // Remove old listener by cloning
+            const fresh = themeToggle.cloneNode(true) as HTMLElement;
+            themeToggle.replaceWith(fresh);
+            fresh.addEventListener('click', () => {
+                html.classList.add('theme-transitioning');
+                const newTheme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+                html.dataset.theme = newTheme;
+                localStorage.setItem('theme', newTheme);
+                const label = newTheme === 'dark'
+                    ? fresh.dataset.labelLight
+                    : fresh.dataset.labelDark;
+                if (label) fresh.setAttribute('aria-label', label);
+                setTimeout(() => html.classList.remove('theme-transitioning'), 350);
+            });
+        }
         
         // Function to initialize navigation
         function initNavigation() {
@@ -270,11 +289,13 @@ const ogImageURL = new URL(ogImage, siteURL);
         }
 
         // Initial load
+        initTheme();
         initNavigation();
         initAnimations();
         
         // Re-run on page transitions
         document.addEventListener('astro:page-load', () => {
+            initTheme();
             initNavigation();
             initAnimations();
         });

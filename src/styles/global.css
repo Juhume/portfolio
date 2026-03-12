@@ -268,9 +268,7 @@ button {
     transition: opacity var(--duration-fast) ease;
 }
 
-.nav__logo:hover {
-    opacity: 0.7;
-}
+/* hover moved to @media (hover: hover) block */
 
 .nav__right {
     display: flex;
@@ -325,14 +323,7 @@ button {
     transform-origin: left;
 }
 
-.nav__link:hover {
-    color: var(--text-primary);
-}
-
-.nav__link:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
+/* nav__link hover moved to @media (hover: hover) block */
 
 /* Theme Toggle */
 .theme-toggle {
@@ -347,9 +338,7 @@ button {
                 transform var(--duration-fast) var(--ease-bounce);
 }
 
-.theme-toggle:hover {
-    transform: scale(1.1);
-}
+/* theme-toggle hover moved to @media (hover: hover) block */
 
 .theme-toggle:active {
     transform: scale(0.95);
@@ -362,9 +351,7 @@ button {
     transition: transform 0.5s var(--ease-bounce);
 }
 
-.theme-toggle:hover svg {
-    transform: rotate(20deg);
-}
+/* theme-toggle:hover svg moved to @media (hover: hover) block */
 
 .theme-toggle .sun { display: none; }
 .theme-toggle .moon { display: block; }
@@ -463,9 +450,7 @@ button {
 .mobile-menu.active .mobile-menu__link:nth-child(4) { transition-delay: 0.44s; }
 .mobile-menu.active .mobile-menu__link:nth-child(5) { transition-delay: 0.52s; }
 
-.mobile-menu__link:hover {
-    color: var(--accent);
-}
+/* mobile-menu__link hover moved to @media (hover: hover) block */
 
 /* ==========================================
    Buttons
@@ -492,11 +477,7 @@ button {
     color: var(--bg-primary);
 }
 
-.btn--primary:hover {
-    background-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px var(--shadow);
-}
+/* btn--primary hover moved to @media (hover: hover) block */
 
 .btn--primary:active {
     transform: translateY(0) scale(0.97);
@@ -508,11 +489,7 @@ button {
     border: 1px solid var(--border);
 }
 
-.btn--secondary:hover {
-    background-color: var(--bg-secondary);
-    border-color: var(--text-muted);
-    transform: translateY(-1px);
-}
+/* btn--secondary hover moved to @media (hover: hover) block */
 
 .btn--secondary:active {
     transform: translateY(0) scale(0.97);
@@ -524,9 +501,7 @@ button {
     transition: transform var(--duration-fast) var(--ease-out);
 }
 
-.btn:hover svg {
-    transform: translateX(4px);
-}
+/* btn:hover svg moved to @media (hover: hover) block */
 
 /* ==========================================
    Section Headers
@@ -1054,10 +1029,7 @@ a:focus-visible {
     transition: border-color var(--duration-fast) ease, transform var(--duration-fast) ease;
 }
 
-.blog-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-}
+/* blog-card hover moved to @media (hover: hover) block */
 
 .blog-card__date {
     font-size: 0.75rem;
@@ -1326,11 +1298,7 @@ a:focus-visible {
                 box-shadow var(--duration-normal) ease;
 }
 
-.case-study-teaser:hover {
-    transform: translateY(-3px);
-    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
-    box-shadow: 0 18px 60px var(--shadow);
-}
+/* case-study-teaser hover moved to @media (hover: hover) block */
 
 .case-study-teaser__eyebrow {
     display: inline-flex;
@@ -1562,4 +1530,90 @@ a:focus-visible {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
+/* ==========================================
+   Interaction Polish (practical tips)
+   ========================================== */
+
+/* 1. All interactive elements: press feedback */
+a:active,
+button:active {
+    transform: scale(0.97);
+}
+
+/* 2. Hover effects only on devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+    .nav__logo:hover { opacity: 0.7; }
+    .nav__link:hover { color: var(--text-primary); }
+    .nav__link:hover::after { transform: scaleX(1); transform-origin: left; }
+    .theme-toggle:hover { transform: scale(1.1); }
+    .theme-toggle:hover svg { transform: rotate(20deg); }
+    .mobile-menu__link:hover { color: var(--accent); }
+    .btn--primary:hover {
+        background-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px var(--shadow);
+    }
+    .btn--secondary:hover {
+        background-color: var(--bg-secondary);
+        border-color: var(--text-muted);
+        transform: translateY(-1px);
+    }
+    .btn:hover svg { transform: translateX(4px); }
+    .case-study-teaser:hover {
+        transform: translateY(-3px);
+        border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+        box-shadow: 0 18px 60px var(--shadow);
+    }
+    .blog-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--shadow); }
+    .case-study-page__back:hover { color: var(--text-primary); }
+    .case-study-page__cta:hover { opacity: 0.85; }
+    .cflow-dot:hover { opacity: 0.7 !important; }
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) {
+    .nav__logo:hover,
+    .nav__link:hover,
+    .theme-toggle:hover,
+    .btn--primary:hover,
+    .btn--secondary:hover,
+    .case-study-teaser:hover,
+    .blog-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* 3. will-change on animated elements */
+.btn,
+.case-study-teaser,
+.blog-card,
+.theme-toggle,
+.nav__menu-btn {
+    will-change: transform;
+}
+
+/* 4. Minimum 44px hit area on small interactive elements */
+.nav__link {
+    position: relative;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.case-study-page__back,
+.blog__back,
+.blog-post__back {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* 5. Subtle blur to mask imperfections on animated cards */
+.case-study-teaser,
+.blog-card {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
