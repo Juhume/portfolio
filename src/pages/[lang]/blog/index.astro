@@ -133,19 +133,22 @@ const hasTranslations = posts.some(p => p.data.lang === lang);
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        function initBlogToggle() {
             const buttons = document.querySelectorAll('.blog__toggle-btn');
             const cards = document.querySelectorAll('.blog-card[data-category]');
+            if (!buttons.length) return;
 
             buttons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const filter = (btn as HTMLElement).dataset.filter;
-                    buttons.forEach(b => {
+                const fresh = btn.cloneNode(true) as HTMLElement;
+                btn.replaceWith(fresh);
+                fresh.addEventListener('click', () => {
+                    const filter = fresh.dataset.filter;
+                    document.querySelectorAll('.blog__toggle-btn').forEach(b => {
                         b.classList.remove('blog__toggle-btn--active');
                         b.setAttribute('aria-selected', 'false');
                     });
-                    btn.classList.add('blog__toggle-btn--active');
-                    btn.setAttribute('aria-selected', 'true');
+                    fresh.classList.add('blog__toggle-btn--active');
+                    fresh.setAttribute('aria-selected', 'true');
 
                     cards.forEach(card => {
                         const cat = (card as HTMLElement).dataset.category;
@@ -157,6 +160,10 @@ const hasTranslations = posts.some(p => p.data.lang === lang);
                     });
                 });
             });
-        });
+        }
+
+        // Works on first load AND after View Transitions
+        initBlogToggle();
+        document.addEventListener('astro:page-load', initBlogToggle);
     </script>
 </BaseLayout>
