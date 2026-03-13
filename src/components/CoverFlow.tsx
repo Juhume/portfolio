@@ -17,8 +17,11 @@ export interface Project {
   ctaLabel?: string;
   external?: boolean;
   gradient?: string;
+  gradientDark?: string;
   accent?: string;
+  accentDark?: string;
   textColor?: string;
+  textColorDark?: string;
   icon?: string;
   image?: string;
 }
@@ -145,6 +148,11 @@ const STYLES = `
     pointer-events: none;
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.12) 0%, transparent 70%);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,0.12) 0%, transparent 70%);
+  }
+
+  [data-theme="dark"] .cflow-reflection {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, transparent 50%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, transparent 50%);
   }
 
   .cflow-stage {
@@ -276,6 +284,15 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
   const wheelTs = useRef(0);
   const activeRef = useRef(0);
   const zTimers = useRef<number[]>([]);
+
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDark(document.documentElement.dataset.theme === 'dark');
+    check();
+    const obs = new MutationObserver(check);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => obs.disconnect();
+  }, []);
 
   const mob = width < 640;
   const cardW = mob ? 230 : width < 1024 ? 300 : 360;
@@ -449,8 +466,9 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
             const isCenter = offset === 0;
             const abs = Math.abs(offset);
             const v = getCardValues(offset, width);
-            const accent = proj.accent || '#2B9B6A';
-            const txt = proj.textColor || '#1a1a1a';
+            const accent = isDark ? (proj.accentDark || proj.accent || '#2B9B6A') : (proj.accent || '#2B9B6A');
+            const txt = isDark ? (proj.textColorDark || proj.textColor || '#eef3ea') : (proj.textColor || '#1a1a1a');
+            const bg = isDark ? (proj.gradientDark || proj.gradient || '#1c2320') : (proj.gradient || '#eef2ea');
             const txtSoft = txt + 'aa';
             const pad = mob ? '1.1rem' : '1.6rem';
 
@@ -487,7 +505,7 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
               >
                 {/* Card face */}
                 <div className="cflow-card__face" style={{
-                  background: proj.gradient || '#eef2ea',
+                  background: bg,
                 }}>
                   <div className="cflow-noise" />
                   <div className="cflow-sheen" />
@@ -584,7 +602,7 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
 
                 {/* Reflection — mirrored copy of face */}
                 <div className="cflow-reflection" style={{
-                  background: proj.gradient || '#eef2ea',
+                  background: bg,
                   borderRadius: '20px',
                 }}>
                   <div style={{
@@ -623,7 +641,7 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
               aria-label={proj.title}
               style={{
                 width: i === active ? 28 : 8, height: 8,
-                background: i === active ? (proj.accent || '#2B9B6A') : 'var(--text-muted, #aaa)',
+                background: i === active ? (isDark ? (proj.accentDark || proj.accent || '#2B9B6A') : (proj.accent || '#2B9B6A')) : 'var(--text-muted, #aaa)',
                 opacity: i === active ? 1 : 0.25,
               }}
             />
