@@ -214,7 +214,7 @@ export const es: Translations = {
         title: 'Sobre mí',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'Llevo 5 años en BBVA trabajando en productos que usan miles de empresas cada día. Me muevo entre desarrollo, soporte técnico, operaciones y evolución de plataforma, en entornos donde la complejidad es real y la fiabilidad importa.',
+            'Trabajo en entornos donde desarrollo, soporte técnico, operaciones y evolución de plataforma van de la mano. Fuera del trabajo sigo construyendo productos propios, automatizaciones e infraestructura.',
             'Me interesa especialmente trabajar sobre sistemas que no solo hay que construir, sino también entender, mantener y mejorar. Código, producto, operación y criterio técnico, todo junto.',
             'Fuera del trabajo sigo construyendo cosas por curiosidad y por gusto: productos propios, automatizaciones, infraestructura en casa y experimentos con IA.',
             'No me define un stack concreto. Me define una forma de trabajar: entender bien el sistema, detectar dónde está el problema y dejar las cosas mejor de como estaban.',
@@ -265,7 +265,7 @@ export const es: Translations = {
         relatedProject: 'Proyecto relacionado',
     },
     home: {
-        role: 'Desarrollador Frontend Web & Mobile',
+        role: 'Frontend web y mobile, con experiencia en producto y sistemas complejos.',
         tagline: 'Software con sentidiño.',
         navCards: {
             projects: {

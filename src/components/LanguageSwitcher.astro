@@ -64,12 +64,9 @@ const { lang, currentPath } = Astro.props;
 </style>
 
 <script>
-    document.querySelectorAll('.lang-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            if (window.location.hash) {
-                e.preventDefault();
-                window.location.href = link.getAttribute('href') + window.location.hash;
-            }
+    document.addEventListener('astro:page-load', () => {
+        document.querySelectorAll('.lang-link').forEach(link => {
+            link.setAttribute('data-astro-reload', '');
         });
     });
 </script>
