@@ -38,7 +38,7 @@ const hasTranslations = posts.some(p => p.data.lang === lang);
     <section class="blog">
         <div class="container">
             <Breadcrumb items={[
-                { label: lang === 'en' ? 'Home' : lang === 'es' ? 'Inicio' : 'Inicio', href: `/${lang}/` },
+                { label: t.nav.home || (lang === 'en' ? 'Home' : 'Inicio'), href: `/${lang}/` },
                 { label: t.nav.blog }
             ]} />
             <header class="blog__header">

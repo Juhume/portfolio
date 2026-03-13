@@ -23,6 +23,7 @@ export const gl: Translations = {
         about: 'Sobre min',
         contact: 'Contacto',
         blog: 'Blog',
+        home: 'Inicio',
     },
     hero: {
         label: 'Julio Huerta',
@@ -118,7 +119,7 @@ export const gl: Translations = {
             },
             {
                 title: 'Hey Haiku',
-                description: 'Rede social para crear e compartir haikus con validación de sílabas en tempo real.',
+                description: 'Plataforma para crear e compartir haikus con validación de sílabas en tempo real.',
                 category: 'App web',
                 badge: 'Arquivo',
                 role: 'Full-Stack',
@@ -126,7 +127,7 @@ export const gl: Translations = {
                 highlights: [
                     'Validación 5-7-5 en tempo real',
                     'Colección persoal e comunidade',
-                    'Proxecto de bootcamp reconstruído desde cero',
+                    'Exploración de Turso, Drizzle ORM e Better Auth',
                 ],
                 linkLabel: 'Ver en GitHub',
                 linkUrl: 'https://github.com/Juhume/HeyHaiku',
@@ -213,8 +214,8 @@ export const gl: Translations = {
         title: 'Sobre min',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'Levo construíndo e rompendo cousas na web dende que tiña que pedir permiso para usar o ordenador.',
-            'Agora xa non só construo e rompo na web, tamén en móbiles e en infra. Aínda que sen cargarme a produción.',
+            'En BBVA levo 5 anos construíndo as apps que usan miles de empresas cada día. Tres plataformas, dúas apps nativas, unha migración de stack en marcha.',
+            'Fóra, construo o que me interesa: unha app de journaling con cifrado que nin eu podo romper, e un NAS no salón con 5 axentes de IA que se coordinan sós.',
         ],
         personalTitle: 'Fóra do editor',
         personal: [
@@ -252,7 +253,7 @@ export const gl: Translations = {
         minRead: 'min de lectura',
         noPosts: 'Primeira entrada polo camiño.',
         spanishOnlyTitle: 'Blog en español',
-        spanishOnlyText: 'Polo de agora o blog escríboo só en español. Esta ruta mantense para que o cambio de idioma non rompa a navegación.',
+        spanishOnlyText: 'Polo de agora o blog escribo só en español. Esta ruta mantense para que o cambio de idioma non rompa a navegación.',
         readInSpanish: 'Ler en español',
         unavailableInLocale: 'Esta entrada non está traducida. Podes ler a versión orixinal en español.',
         backToHome: 'Volver ao inicio',
@@ -338,6 +339,54 @@ export const gl: Translations = {
                     'Coordinación autónoma sen intervención humana',
                     'Servizos persistentes con arranque automático',
                 ],
+            },
+        ],
+    },
+    diploTest: {
+        pageEyebrow: 'Caso de estudo',
+        title: 'DiploTest',
+        pageSummary: 'Unha plataforma de estudo para as oposicións diplomáticas con tres modos de práctica, estatísticas detalladas e usuarios reais preparando os seus exames.',
+        pageHighlights: [
+            '3 modos de práctica',
+            'Estatísticas por tema',
+            'Auth con Supabase',
+            'Usuarios activos',
+        ],
+        pageMetaTitle: 'DiploTest | Caso de estudo | Julio Huerta',
+        pageMetaDescription: 'DiploTest por dentro: plataforma de estudo para oposicións diplomáticas con estatísticas, auth e usuarios reais.',
+        backToHome: 'Volver a proxectos',
+        alsoSee: 'Tamén podes ver',
+        blocks: [
+            {
+                label: 'Problema',
+                content: 'Preparar unha oposición diplomática significa memorizar miles de preguntas de lexislación, historia e dereito internacional. Os métodos tradicionais non che din onde fallas ata que é demasiado tarde.',
+            },
+            {
+                label: 'Solución',
+                highlight: 'Tres modos de práctica con estatísticas que che din exactamente onde fallas.',
+                content: '',
+                list: [
+                    'Modo repaso: preguntas por tema con feedback inmediato',
+                    'Modo exame: simulacro cronometrado con condicións reais',
+                    'Modo resistencia: preguntas ata fallar, mide a túa racha máxima',
+                    'Dashboard con estatísticas por tema, acertos e evolución',
+                ],
+            },
+            {
+                label: 'Stack',
+                content: '',
+                list: [
+                    'Next.js (App Router) + TypeScript',
+                    'Supabase (auth + base de datos + row-level security)',
+                    'Sistema de estatísticas con agregacións en tempo real',
+                    'Despregamento en Vercel con dominio propio',
+                ],
+                stack: ['Next.js', 'TypeScript', 'Supabase', 'Vercel'],
+            },
+            {
+                label: 'Aprendizaxe',
+                highlight: 'Construír para usuarios reais cambia as túas prioridades.',
+                content: 'Cando hai xente real usando a túa app para preparar un exame importante, priorizas distinto. A fiabilidade dos datos pasa por diante de features novas. Os edge cases deixan de ser teóricos. E aprendes que ás veces o mellor que podes facer é non tocar nada.',
             },
         ],
     },

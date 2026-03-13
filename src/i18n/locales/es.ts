@@ -23,6 +23,7 @@ export const es: Translations = {
         about: 'Sobre mí',
         contact: 'Contacto',
         blog: 'Blog',
+        home: 'Inicio',
     },
     hero: {
         label: 'Julio Huerta',
@@ -118,7 +119,7 @@ export const es: Translations = {
             },
             {
                 title: 'Hey Haiku',
-                description: 'Red social para crear y compartir haikus con validación de sílabas en tiempo real.',
+                description: 'Plataforma para crear y compartir haikus con validación de sílabas en tiempo real.',
                 category: 'App web',
                 badge: 'Archivo',
                 role: 'Full-Stack',
@@ -126,7 +127,7 @@ export const es: Translations = {
                 highlights: [
                     'Validación 5-7-5 en tiempo real',
                     'Colección personal y comunidad',
-                    'Proyecto de bootcamp reconstruido desde cero',
+                    'Exploración de Turso, Drizzle ORM y Better Auth',
                 ],
                 linkLabel: 'Ver en GitHub',
                 linkUrl: 'https://github.com/Juhume/HeyHaiku',
@@ -213,8 +214,8 @@ export const es: Translations = {
         title: 'Sobre mí',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'Llevo construyendo y rompiendo cosas en la web desde que tenía que pedir permiso para usar el ordenador.',
-            'Ahora ya no solo construyo y rompo en web, también en móviles y en infra. Aunque sin cargarme la producción.',
+            'En BBVA llevo 5 años construyendo las apps que usan miles de empresas cada día. Tres plataformas, dos apps nativas, una migración de stack en marcha.',
+            'Fuera, construyo lo que me interesa: una app de journaling con cifrado que ni yo puedo romper, y un NAS en el salón con 5 agentes de IA que se coordinan solos.',
         ],
         personalTitle: 'Fuera del editor',
         personal: [
@@ -338,6 +339,54 @@ export const es: Translations = {
                     'Coordinación autónoma sin intervención humana',
                     'Servicios persistentes con arranque automático',
                 ],
+            },
+        ],
+    },
+    diploTest: {
+        pageEyebrow: 'Caso de estudio',
+        title: 'DiploTest',
+        pageSummary: 'Una plataforma de estudio para las oposiciones diplomáticas con tres modos de práctica, estadísticas detalladas y usuarios reales preparando sus exámenes.',
+        pageHighlights: [
+            '3 modos de práctica',
+            'Estadísticas por tema',
+            'Auth con Supabase',
+            'Usuarios activos',
+        ],
+        pageMetaTitle: 'DiploTest | Caso de estudio | Julio Huerta',
+        pageMetaDescription: 'DiploTest por dentro: plataforma de estudio para oposiciones diplomáticas con estadísticas, auth y usuarios reales.',
+        backToHome: 'Volver a proyectos',
+        alsoSee: 'También puedes ver',
+        blocks: [
+            {
+                label: 'Problema',
+                content: 'Preparar una oposición diplomática significa memorizar miles de preguntas de legislación, historia y derecho internacional. Los métodos tradicionales no te dicen dónde fallas hasta que es demasiado tarde.',
+            },
+            {
+                label: 'Solución',
+                highlight: 'Tres modos de práctica con estadísticas que te dicen exactamente dónde fallas.',
+                content: '',
+                list: [
+                    'Modo repaso: preguntas por tema con feedback inmediato',
+                    'Modo examen: simulacro cronometrado con condiciones reales',
+                    'Modo resistencia: preguntas hasta fallar, mide tu racha máxima',
+                    'Dashboard con estadísticas por tema, aciertos y evolución',
+                ],
+            },
+            {
+                label: 'Stack',
+                content: '',
+                list: [
+                    'Next.js (App Router) + TypeScript',
+                    'Supabase (auth + base de datos + row-level security)',
+                    'Sistema de estadísticas con agregaciones en tiempo real',
+                    'Despliegue en Vercel con dominio propio',
+                ],
+                stack: ['Next.js', 'TypeScript', 'Supabase', 'Vercel'],
+            },
+            {
+                label: 'Aprendizaje',
+                highlight: 'Construir para usuarios reales cambia tus prioridades.',
+                content: 'Cuando hay gente real usando tu app para preparar un examen importante, priorizas distinto. La fiabilidad de los datos pasa por delante de features nuevas. Los edge cases dejan de ser teóricos. Y aprendes que a veces lo mejor que puedes hacer es no tocar nada.',
             },
         ],
     },

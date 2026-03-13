@@ -62,7 +62,7 @@ const projects = t.projects.items.map((item, i) => ({
     <main class="projects-page">
         <div class="container">
             <Breadcrumb items={[
-                { label: lang === 'en' ? 'Home' : lang === 'es' ? 'Inicio' : 'Inicio', href: `/${lang}/` },
+                { label: t.nav.home || (lang === 'en' ? 'Home' : 'Inicio'), href: `/${lang}/` },
                 { label: t.nav.projects }
             ]} />
         </div>

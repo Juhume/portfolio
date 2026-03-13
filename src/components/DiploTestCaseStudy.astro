@@ -1,0 +1,197 @@
+---
+import type { Locale, Translations, SectionIds } from '../i18n';
+
+interface Props {
+    t: Translations;
+    ids: SectionIds;
+    lang: Locale;
+}
+
+const { t, ids, lang } = Astro.props;
+const dt = t.diploTest;
+const blocks = dt.blocks;
+---
+
+<section class="section case-study--page diplotest">
+    <div class="container">
+        <header class="diplotest__hero">
+            <span class="diplotest__eyebrow">{dt.pageEyebrow}</span>
+            <h1 class="diplotest__title">{dt.title}</h1>
+            <p class="diplotest__summary">{dt.pageSummary}</p>
+            <div class="diplotest__highlights">
+                {dt.pageHighlights.map((item) => (
+                    <span class="diplotest__highlight">{item}</span>
+                ))}
+            </div>
+            <a href="https://diplotest.es" target="_blank" rel="noopener noreferrer" class="diplotest__cta">
+                diplotest.es ↗
+            </a>
+        </header>
+
+        <div class="case-blocks">
+            {blocks.map(block => (
+                <div class="case-block">
+                    <div class="case-block__label">{block.label}</div>
+                    <div class="case-block__content">
+                        {block.highlight && <p class="case-block__highlight">{block.highlight}</p>}
+                        {block.content && <p>{block.content}</p>}
+                        {block.image && (
+                            <div class="case-block__image-wrap">
+                                <img src={block.image} alt={block.label} class="case-block__image" loading="lazy" />
+                            </div>
+                        )}
+                        {block.list && (
+                            <ul class="case-block__list">
+                                {block.list.map(item => <li>{item}</li>)}
+                            </ul>
+                        )}
+                        {block.stack && (
+                            <div class="stack-tags">
+                                {block.stack.map(tag => <span class="stack-tag">{tag}</span>)}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        {/* Cross-navigation to Espejo case study */}
+        <aside class="case-study-cross-nav">
+            <span class="case-study-cross-nav__label">{dt.alsoSee}</span>
+            <a href={`/${lang}/projects/espejo/`} class="case-study-cross-nav__link">
+                {t.caseStudy.title}
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+            </a>
+        </aside>
+    </div>
+</section>
+
+<style>
+    .diplotest__hero {
+        max-width: 900px;
+        margin-bottom: var(--space-2xl);
+    }
+
+    .diplotest__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-md);
+    }
+
+    .diplotest__eyebrow::before {
+        content: '';
+        width: 36px;
+        height: 1px;
+        background: currentColor;
+    }
+
+    .diplotest__title {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        margin-bottom: var(--space-md);
+    }
+
+    .diplotest__summary {
+        max-width: 62ch;
+        color: var(--text-secondary);
+        font-size: clamp(1rem, 1.4vw + 0.55rem, 1.2rem);
+        line-height: 1.8;
+    }
+
+    .diplotest__highlights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.75rem;
+        margin: var(--space-xl) 0;
+    }
+
+    .diplotest__highlight {
+        padding: 1rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        line-height: 1.55;
+    }
+
+    .diplotest__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border: 2px solid var(--accent);
+        border-radius: 0.75rem;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+        margin-top: var(--space-md);
+    }
+
+    .diplotest__cta:hover {
+        background: transparent;
+        color: var(--accent);
+    }
+
+    .case-block__image-wrap {
+        margin: var(--space-md) 0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 1px solid var(--border);
+    }
+
+    .case-block__image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .case-study-cross-nav {
+        margin-top: var(--space-2xl);
+        padding-top: var(--space-lg);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        flex-wrap: wrap;
+    }
+
+    .case-study-cross-nav__label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+    }
+
+    .case-study-cross-nav__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid var(--border);
+        border-radius: 0.75rem;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+    .case-study-cross-nav__link:hover {
+        border-color: var(--accent);
+        background: var(--bg-primary);
+    }
+</style>

@@ -48,7 +48,7 @@ const structuredData = {
         <div class="container">
             <a href={`/${lang}/projects/`} class="case-study-page__back">← {t.homeLab.backToProjects}</a>
             <Breadcrumb items={[
-                { label: lang === 'en' ? 'Home' : lang === 'es' ? 'Inicio' : 'Inicio', href: `/${lang}/` },
+                { label: t.nav.home || (lang === 'en' ? 'Home' : 'Inicio'), href: `/${lang}/` },
                 { label: t.nav.projects, href: `/${lang}/projects/` },
                 { label: 'Homelab' }
             ]} />

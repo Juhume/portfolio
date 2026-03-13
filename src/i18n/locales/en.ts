@@ -23,6 +23,7 @@ export const en: Translations = {
         about: 'About',
         contact: 'Contact',
         blog: 'Blog',
+        home: 'Home',
     },
     hero: {
         label: 'Julio Huerta',
@@ -118,7 +119,7 @@ export const en: Translations = {
             },
             {
                 title: 'Hey Haiku',
-                description: 'Social platform for creating and sharing haikus with real-time syllable validation.',
+                description: 'Platform for creating and sharing haikus with real-time syllable validation.',
                 category: 'Web app',
                 badge: 'Archive',
                 role: 'Full-Stack',
@@ -126,7 +127,7 @@ export const en: Translations = {
                 highlights: [
                     'Real-time 5-7-5 validation',
                     'Personal collection and community',
-                    'Bootcamp project rebuilt from scratch',
+                    'Exploration of Turso, Drizzle ORM and Better Auth',
                 ],
                 linkLabel: 'View on GitHub',
                 linkUrl: 'https://github.com/Juhume/HeyHaiku',
@@ -213,8 +214,8 @@ export const en: Translations = {
         title: 'About',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'I\'ve been building and breaking things on the web since I had to ask permission to use the computer.',
-            'Now I don\'t just build and break on the web, also on mobile and infra. Without taking down production, though.',
+            'At BBVA I\'ve spent 5 years building the apps thousands of businesses use every day. Three platforms, two native apps, one stack migration in progress.',
+            'Outside work, I build what interests me: a journaling app with encryption even I can\'t break, and a NAS in my living room with 5 AI agents that coordinate on their own.',
         ],
         personalTitle: 'Outside the editor',
         personal: [
@@ -338,6 +339,54 @@ export const en: Translations = {
                     'Autonomous coordination without human intervention',
                     'Persistent services with automatic startup',
                 ],
+            },
+        ],
+    },
+    diploTest: {
+        pageEyebrow: 'Case study',
+        title: 'DiploTest',
+        pageSummary: 'A study platform for Spain\'s diplomatic service entrance exams with three practice modes, detailed statistics and real users preparing their exams.',
+        pageHighlights: [
+            '3 practice modes',
+            'Per-topic statistics',
+            'Auth with Supabase',
+            'Active users',
+        ],
+        pageMetaTitle: 'DiploTest | Case Study | Julio Huerta',
+        pageMetaDescription: 'Inside DiploTest: study platform for diplomatic exams with statistics, auth and real users.',
+        backToHome: 'Back to projects',
+        alsoSee: 'Also see',
+        blocks: [
+            {
+                label: 'Problem',
+                content: 'Preparing for Spain\'s diplomatic service exam means memorizing thousands of questions on legislation, history and international law. Traditional methods don\'t tell you where you\'re failing until it\'s too late.',
+            },
+            {
+                label: 'Solution',
+                highlight: 'Three practice modes with statistics that tell you exactly where you fail.',
+                content: '',
+                list: [
+                    'Review mode: questions by topic with immediate feedback',
+                    'Exam mode: timed simulation under real conditions',
+                    'Endurance mode: questions until you fail, tracks your best streak',
+                    'Dashboard with per-topic statistics, accuracy and progress',
+                ],
+            },
+            {
+                label: 'Stack',
+                content: '',
+                list: [
+                    'Next.js (App Router) + TypeScript',
+                    'Supabase (auth + database + row-level security)',
+                    'Statistics system with real-time aggregations',
+                    'Deployed on Vercel with custom domain',
+                ],
+                stack: ['Next.js', 'TypeScript', 'Supabase', 'Vercel'],
+            },
+            {
+                label: 'Learnings',
+                highlight: 'Building for real users changes your priorities.',
+                content: 'When real people use your app to prepare for an important exam, you prioritize differently. Data reliability comes before new features. Edge cases stop being theoretical. And you learn that sometimes the best thing you can do is not touch anything.',
             },
         ],
     },

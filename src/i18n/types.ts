@@ -43,6 +43,18 @@ export interface HomelabTranslations {
     blocks: HomelabBlock[];
 }
 
+export interface DiploTestTranslations {
+    pageEyebrow: string;
+    title: string;
+    pageSummary: string;
+    pageHighlights: string[];
+    pageMetaTitle: string;
+    pageMetaDescription: string;
+    backToHome: string;
+    alsoSee: string;
+    blocks: CaseBlock[];
+}
+
 export interface ExperienceEntry {
     role: string;
     period: string;
@@ -73,6 +85,7 @@ export interface Translations {
         about: string;
         contact: string;
         blog: string;
+        home: string;
     };
     hero: {
         label: string;
@@ -174,6 +187,7 @@ export interface Translations {
         backHome: string;
     };
     homeLab: HomelabTranslations;
+    diploTest: DiploTestTranslations;
 }
 
 export interface SectionIds {

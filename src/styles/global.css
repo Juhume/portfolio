@@ -40,7 +40,7 @@
     --accent-subtle: rgba(131, 222, 181, 0.1);
 
     /* Typography */
-    --font-display: 'Syne', system-ui, sans-serif;
+    --font-display: 'Vila Morena', system-ui, sans-serif;
     --font-body: 'DM Sans', system-ui, sans-serif;
 
     /* Spacing */
@@ -913,17 +913,44 @@ a:focus-visible {
 }
 
 /* ==========================================
+   External Link Indicator
+   ========================================== */
+/* External link indicator */
+a[target="_blank"]::after {
+    content: ' ↗';
+    font-size: 0.75em;
+    vertical-align: super;
+    opacity: 0.6;
+}
+
+/* Don't add indicator to icon-only links or buttons */
+a[target="_blank"][aria-label]::after,
+a[target="_blank"].card__social-link::after,
+a[target="_blank"].btn::after,
+.card__social a[target="_blank"]::after {
+    content: none;
+}
+
+/* ==========================================
    Reduced Motion
    ========================================== */
 @media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none !important;
+    }
+
+    html {
+        scroll-behavior: auto;
     }
 
     .js .reveal, .js .reveal-left, .js .reveal-right, .js .reveal-scale {

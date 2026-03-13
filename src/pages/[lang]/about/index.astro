@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Footer from '../../../components/Footer.astro';
+import { locales, getTranslations, getSectionIds } from '../../../i18n';
+import type { Locale } from '../../../i18n';
+
+export function getStaticPaths() {
+    return locales.map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const t = getTranslations(lang);
+const ids = getSectionIds(lang);
+const canonicalPath = `/${lang}/about/`;
+---
+
+<BaseLayout
+    lang={lang}
+    t={t}
+    title={`${t.about.title} | Julio Huerta`}
+    description={t.meta.description}
+    canonicalPath={canonicalPath}
+>
+    <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
+
+    <div class="about-page">
+        <div class="container">
+            <Breadcrumb items={[
+                { label: t.nav.home || (lang === 'en' ? 'Home' : 'Inicio'), href: `/${lang}/` },
+                { label: t.about.title }
+            ]} />
+        </div>
+
+        <div class="container about-page__content">
+            <div class="about-page__hero">
+                <div class="about-page__photo-ring">
+                    <img
+                        src="/julio-huerta.jpg"
+                        alt={t.about.photoAlt}
+                        class="about-page__photo"
+                        width="200"
+                        height="200"
+                    />
+                </div>
+                <h1 class="about-page__title">{t.about.title}</h1>
+            </div>
+
+            <div class="about-page__bio">
+                {t.about.paragraphs.map(p => <p>{p}</p>)}
+            </div>
+
+            <section class="about-page__section">
+                <h2 class="about-page__section-title">{t.about.personalTitle}</h2>
+                {t.about.personal.map(p => <p>{p}</p>)}
+            </section>
+
+            <section class="about-page__section">
+                <h2 class="about-page__section-title">{t.about.principlesTitle}</h2>
+                <ul class="about-page__principles">
+                    {t.about.principles.map(p => <li>{p}</li>)}
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <Footer t={t} />
+</BaseLayout>
+
+<style>
+.about-page {
+    padding-top: calc(3.5rem + 1rem);
+}
+
+.about-page__content {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.about-page__hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.about-page__photo-ring {
+    padding: 3px;
+    border-radius: 30% 70% 53% 47% / 52% 35% 65% 48%;
+    background: linear-gradient(135deg, var(--accent), var(--gold), var(--accent));
+    margin-bottom: var(--space-md);
+    box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.about-page__photo {
+    width: 160px;
+    height: 160px;
+    border-radius: inherit;
+    object-fit: cover;
+    display: block;
+    border: 3px solid var(--bg-primary);
+}
+
+.about-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.03em;
+}
+
+.about-page__bio {
+    margin-bottom: var(--space-xl);
+}
+
+.about-page__bio p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.about-page__section {
+    margin-bottom: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+}
+
+.about-page__section-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+}
+
+.about-page__section p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.about-page__principles {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.about-page__principles li {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.about-page__principles li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-text);
+}
+
+@media (min-width: 768px) {
+    .about-page__photo {
+        width: 200px;
+        height: 200px;
+    }
+}
+</style>
