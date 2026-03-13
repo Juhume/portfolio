@@ -284,8 +284,7 @@ const STYLES = `
   }
 
   [data-theme="dark"] .cflow-logo {
-    opacity: 0.18;
-    filter: brightness(1.8) saturate(0.7);
+    opacity: 0.12;
   }
 
   [data-theme="dark"] .cflow-glyph {
