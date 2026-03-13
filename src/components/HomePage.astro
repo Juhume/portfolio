@@ -26,19 +26,6 @@ const { t, lang } = Astro.props;
         <h1 class="card__name home__name">JULIO HUERTA MEDINA</h1>
         <p class="card__role">{t.home.role}</p>
 
-        <div class="card__proofs">
-            {t.hero.proofs.map(proof => (
-                <span class="card__proof">{proof}</span>
-            ))}
-        </div>
-
-        <div class="card__live" aria-label="Homelab status">
-            <span class="card__live-dot" aria-hidden="true"></span>
-            <span class="card__live-text">
-                {lang === 'en' ? 'In production · 5 AI agents' : lang === 'gl' ? 'En produción · 5 axentes IA' : 'En producción · 5 agentes IA'}
-            </span>
-        </div>
-
         <div class="card__bio">
             <p>{t.about.paragraphs[0]}</p>
         </div>

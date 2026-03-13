@@ -214,7 +214,7 @@ export const en: Translations = {
         title: 'About',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'I work in environments where development, technical support, operations and platform evolution go hand in hand. Outside work, I keep building my own products, automations and infrastructure.',
+            'Currently working at BBVA on web and mobile products, technical support and platform evolution.',
             'I\'m especially interested in working on systems that don\'t just need to be built, but also understood, maintained and improved. Code, product, operations and technical judgment, all together.',
             'Outside work, I keep building things out of curiosity and enjoyment: my own products, automations, home infrastructure and AI experiments.',
             'I\'m not defined by a specific stack. I\'m defined by a way of working: understand the system well, identify where the problem is, and leave things better than I found them.',
@@ -265,7 +265,7 @@ export const en: Translations = {
         relatedProject: 'Related project',
     },
     home: {
-        role: 'Frontend web & mobile, with experience in product and complex systems.',
+        role: 'I like building products, tools and infrastructure with software.',
         tagline: 'Software con sentidiño.',
         navCards: {
             projects: {

@@ -214,7 +214,7 @@ export const gl: Translations = {
         title: 'Sobre min',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'Traballo en contornos onde desenvolvemento, soporte técnico, operacións e evolución de plataforma van da man. Fóra do traballo sigo construíndo produtos propios, automatizacións e infraestrutura.',
+            'Actualmente traballo en BBVA en produtos web e mobile, soporte técnico e evolución de plataforma.',
             'Interésame especialmente traballar sobre sistemas que non só hai que construír, senón tamén entender, manter e mellorar. Código, produto, operación e criterio técnico, todo xunto.',
             'Fóra do traballo sigo construíndo cousas por curiosidade e por gusto: produtos propios, automatizacións, infraestrutura na casa e experimentos con IA.',
             'Non me define un stack concreto. Defíneme unha forma de traballar: entender ben o sistema, detectar onde está o problema e deixar as cousas mellor do que estaban.',
@@ -265,7 +265,7 @@ export const gl: Translations = {
         relatedProject: 'Proxecto relacionado',
     },
     home: {
-        role: 'Frontend web e mobile, con experiencia en produto e sistemas complexos.',
+        role: 'Gústame construír produtos, ferramentas e infraestrutura con software.',
         tagline: 'Software con sentidiño.',
         navCards: {
             projects: {
