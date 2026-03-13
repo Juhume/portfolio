@@ -266,6 +266,7 @@ export const en: Translations = {
     home: {
         role: 'I like building products, tools and infrastructure with software.',
         tagline: 'Software con sentidiño.',
+        cvDownload: 'Download CV',
         navCards: {
             projects: {
                 title: 'Projects',

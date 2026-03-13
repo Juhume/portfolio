@@ -34,6 +34,7 @@ const { t, lang } = Astro.props;
             <a href={`/${lang}/projects/`} class="card__link">{t.nav.projects}</a>
             <a href={`/${lang}/blog/`} class="card__link">{t.nav.blog}</a>
             <a href={`/${lang}/about/`} class="card__link">{t.nav.about}</a>
+            <a href={`/cv/julio-huerta-cv-${lang === 'en' ? 'en' : 'es'}.pdf`} class="card__link card__link--cv" download>{t.home.cvDownload}</a>
         </nav>
 
         <div class="card__social">

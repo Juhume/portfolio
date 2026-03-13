@@ -175,6 +175,7 @@ export interface Translations {
     home: {
         role: string;
         tagline: string;
+        cvDownload: string;
         navCards: {
             projects: { title: string; description: string };
             blog: { title: string; description: string };

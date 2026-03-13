@@ -266,6 +266,7 @@ export const es: Translations = {
     home: {
         role: 'Me gusta construir productos, herramientas e infraestructura con software.',
         tagline: 'Software con sentidiño.',
+        cvDownload: 'Descargar CV',
         navCards: {
             projects: {
                 title: 'Proyectos',

@@ -266,6 +266,7 @@ export const gl: Translations = {
     home: {
         role: 'Gústame construír produtos, ferramentas e infraestrutura con software.',
         tagline: 'Software con sentidiño.',
+        cvDownload: 'Descargar CV',
         navCards: {
             projects: {
                 title: 'Proxectos',
