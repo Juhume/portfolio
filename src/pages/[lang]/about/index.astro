@@ -53,7 +53,7 @@ const canonicalPath = `/${lang}/about/`;
 
             <section class="about-page__section">
                 <h2 class="about-page__section-title">{t.about.personalTitle}</h2>
-                {t.about.personal.map(p => <p>{p}</p>)}
+                {t.about.personal.map(p => <p set:html={p} />)}
             </section>
 
             <section class="about-page__section">
