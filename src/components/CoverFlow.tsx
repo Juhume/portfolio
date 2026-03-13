@@ -117,16 +117,29 @@ const STYLES = `
     height: 100%;
     border-radius: 20px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.45);
     box-shadow: 0 4px 16px rgba(0,0,0,0.06);
     transition: box-shadow var(--snap-dur, ${DUR_SLOW}ms) ${SPRING}, border-color var(--snap-dur, ${DUR_SLOW}ms) ${SPRING};
   }
 
   .cflow-card--active .cflow-card__face {
-    border-color: rgba(255,255,255,0.7);
+    border-color: rgba(255,255,255,0.65);
     box-shadow:
       0 24px 64px -16px var(--card-shadow, rgba(0,0,0,0.18)),
       0 8px 20px -8px rgba(0,0,0,0.08);
+  }
+
+  [data-theme="dark"] .cflow-card__face {
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  [data-theme="dark"] .cflow-card--active .cflow-card__face {
+    border-color: rgba(255,255,255,0.14);
+    box-shadow:
+      0 24px 64px -16px var(--card-shadow, rgba(0,0,0,0.5)),
+      0 8px 20px -8px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.06);
   }
 
   .cflow-card--snapping {
@@ -259,6 +272,24 @@ const STYLES = `
     border-radius: 20px 20px 0 0;
     background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, transparent 100%);
     pointer-events: none;
+  }
+
+  [data-theme="dark"] .cflow-sheen {
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%);
+  }
+
+  [data-theme="dark"] .cflow-noise {
+    opacity: 0.06;
+    mix-blend-mode: soft-light;
+  }
+
+  [data-theme="dark"] .cflow-logo {
+    opacity: 0.18;
+    filter: brightness(1.8) saturate(0.7);
+  }
+
+  [data-theme="dark"] .cflow-glyph {
+    opacity: 0.12;
   }
 `;
 
