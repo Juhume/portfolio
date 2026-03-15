@@ -303,5 +303,9 @@ const ogImageURL = new URL(ogImage, siteURL);
 
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "CLOUDFLARE_TOKEN"}'></script>
+    <!-- Global haptic feedback (iOS) -->
+    <script>
+    import '../scripts/haptics.ts';
+    </script>
 </body>
 </html>
