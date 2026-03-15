@@ -2,6 +2,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Header from '../../../../components/Header.astro';
 import HomelabCaseStudy from '../../../../components/HomelabCaseStudy.astro';
+import HomelabDiagram from '../../../../components/HomelabDiagram.tsx';
 import Breadcrumb from '../../../../components/Breadcrumb.astro';
 import Footer from '../../../../components/Footer.astro';
 import { locales, getTranslations, getSectionIds } from '../../../../i18n';
@@ -54,6 +55,9 @@ const structuredData = {
             ]} />
         </div>
         <HomelabCaseStudy t={t} ids={ids} lang={lang} />
+        <div class="container">
+            <HomelabDiagram lang={lang} client:visible />
+        </div>
     </div>
 
     <Footer t={t} />
