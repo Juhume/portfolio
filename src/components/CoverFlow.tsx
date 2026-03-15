@@ -311,13 +311,13 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
     const id = 'cflow-haptic-' + Math.random().toString(36).slice(2, 8);
     const label = document.createElement('label');
     label.setAttribute('for', id);
-    label.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);pointer-events:none;';
+    label.style.cssText = 'position:fixed;bottom:0;left:0;opacity:0.01;pointer-events:none;z-index:-1;';
     label.setAttribute('aria-hidden', 'true');
+    label.textContent = 'Haptic feedback';
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.setAttribute('switch', '');
     input.id = id;
-    input.style.cssText = 'all:initial;appearance:auto;';
     label.appendChild(input);
     document.body.appendChild(label);
     hapticLabelRef.current = label;
