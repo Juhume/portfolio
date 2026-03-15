@@ -283,12 +283,11 @@ const STYLES = `
     mix-blend-mode: soft-light;
   }
 
-  [data-theme="dark"] .cflow-logo {
-    opacity: 0.12;
-  }
 
+
+  [data-theme="dark"] .cflow-logo,
   [data-theme="dark"] .cflow-glyph {
-    opacity: 0.12;
+    opacity: 0;
   }
 `;
 
