@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback, useEffect, useRef, type FC } from 'react';
-import { useWebHaptics } from 'web-haptics/react';
 
 /* ═══════════════════════════════════════════
    Types
@@ -303,8 +302,30 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
   const [isSnapping, setIsSnapping] = useState(true);
   const [width, setWidth] = useState(1024);
 
-  const { trigger } = useWebHaptics();
-  const hapticTick = useCallback(() => trigger('nudge'), [trigger]);
+  // iOS haptic: <label> wrapping <input type="checkbox" switch>
+  // Clicking the LABEL toggles the switch → iOS produces native haptic feedback
+  // Must be in DOM, not display:none, label must be the click target
+  const hapticLabelRef = useRef<HTMLLabelElement | null>(null);
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const id = 'cflow-haptic-' + Math.random().toString(36).slice(2, 8);
+    const label = document.createElement('label');
+    label.setAttribute('for', id);
+    label.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);pointer-events:none;';
+    label.setAttribute('aria-hidden', 'true');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.setAttribute('switch', '');
+    input.id = id;
+    input.style.cssText = 'all:initial;appearance:auto;';
+    label.appendChild(input);
+    document.body.appendChild(label);
+    hapticLabelRef.current = label;
+    return () => { label.remove(); hapticLabelRef.current = null; };
+  }, []);
+  const hapticTick = useCallback(() => {
+    hapticLabelRef.current?.click();
+  }, []);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -396,7 +417,6 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
         requestAnimationFrame(() => updateCardsDirect(0, true));
         return;
       }
-      hapticTick();
       setSnapDuration(velocity);
       setIsFading(true);
       setActive(next);
@@ -448,7 +468,6 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
       const velocity = Math.abs(progress) / (dt / 1000);
       dragRef.current.isDragging = false;
       if (Math.abs(progress) > SWIPE_THRESHOLD || velocity > 1.5) {
-        hapticTick();
         progress > 0 ? goTo(activeRef.current - 1, velocity) : goTo(activeRef.current + 1, velocity);
       } else {
         goTo(activeRef.current, velocity);
@@ -525,6 +544,7 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                     if (proj.external) window.open(proj.url, '_blank', 'noopener,noreferrer');
                     else window.location.href = proj.url;
                   } else {
+                    hapticTick();
                     goTo(i);
                   }
                 }}
