@@ -134,20 +134,16 @@ const c = content[lang] || content.es;
                     ))}
                 </div>
 
-                <aside class="case-study-cross-nav">
-                    <span class="case-study-cross-nav__label">{lang === 'en' ? 'Also see' : lang === 'gl' ? 'Tamén podes ver' : 'También puedes ver'}</span>
-                    <a href={`/${lang}/projects/homelab/`} class="case-study-cross-nav__link">
-                        Homelab
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                            <path d="M3 8h10M9 4l4 4-4 4"/>
-                        </svg>
-                    </a>
-                    <a href={`/${lang}/projects/espejo/`} class="case-study-cross-nav__link">
-                        Espejo
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                            <path d="M3 8h10M9 4l4 4-4 4"/>
-                        </svg>
-                    </a>
+                <aside class="pf-cross-nav">
+                    <span class="pf-cross-nav__label">{lang === 'en' ? 'Also see' : lang === 'gl' ? 'Tamén podes ver' : 'También puedes ver'}</span>
+                    <div class="pf-cross-nav__links">
+                        <a href={`/${lang}/projects/homelab/`} class="pf-cross-nav__link">
+                            Homelab →
+                        </a>
+                        <a href={`/${lang}/projects/espejo/`} class="pf-cross-nav__link">
+                            Espejo →
+                        </a>
+                    </div>
                 </aside>
             </div>
         </section>
@@ -171,5 +167,53 @@ const c = content[lang] || content.es;
         margin-bottom: 1rem;
         max-width: 32rem;
         line-height: 1.5;
+    }
+
+    .pf-cross-nav {
+        margin-top: var(--space-2xl, 3rem);
+        padding-top: var(--space-lg, 1.5rem);
+        border-top: 1px solid var(--border, #333);
+    }
+
+    .pf-cross-nav__label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent, #83DEB5);
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .pf-cross-nav__links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .pf-cross-nav__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid var(--border, #333);
+        border-radius: 0.75rem;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: border-color 0.2s, background 0.2s;
+        width: fit-content;
+    }
+
+    .pf-cross-nav__link:hover {
+        border-color: var(--accent, #83DEB5);
+        background: var(--bg-primary);
+    }
+
+    @media (min-width: 640px) {
+        .pf-cross-nav__links {
+            flex-direction: row;
+        }
     }
 </style>
