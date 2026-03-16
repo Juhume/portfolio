@@ -16,28 +16,29 @@ const t = getTranslations(lang);
 const ids = getSectionIds(lang);
 const canonicalPath = `/${lang}/projects/`;
 
+// Order: Espejo, Pichurri Fitness, Homelab, DiploTest, HeyHaiku
 const projectLinks: string[] = [
     `/${lang}/projects/espejo/`,
-    'https://diplo-test.vercel.app/',
-    'https://github.com/Juhume/HeyHaiku',
     `/${lang}/projects/pichurri-fitness/`,
     `/${lang}/projects/homelab/`,
+    'https://diplo-test.vercel.app/',
+    'https://github.com/Juhume/HeyHaiku',
 ];
 
 const projectStacks: string[][] = [
     ['Next.js', 'React', 'TypeScript', 'Supabase', 'IndexedDB'],
-    ['Next.js', 'Supabase', 'Auth', 'Analytics'],
-    ['Next.js 15', 'TypeScript', 'Turso', 'Drizzle', 'Better Auth'],
     ['OpenClaw', 'Claude', 'Telegram', 'Node.js', 'Cron'],
     ['Docker', 'Compose', 'Home Assistant', 'AI Agents'],
+    ['Next.js', 'Supabase', 'Auth', 'Analytics'],
+    ['Next.js 15', 'TypeScript', 'Turso', 'Drizzle', 'Better Auth'],
 ];
 
 const projectThemes = [
     { gradient: 'linear-gradient(145deg, #fce4dc 0%, #f5c4b5 50%, #f0a890 100%)', gradientDark: 'linear-gradient(145deg, #2d1a16 0%, #3a211c 50%, #452820 100%)', accent: '#c4553a', accentDark: '#e8866e', textColor: '#3d1510', textColorDark: '#ecd0c8', image: '/espejo-icon.png' },
-    { gradient: 'linear-gradient(145deg, #dce8fc 0%, #b8d0f5 50%, #95b8ee 100%)', gradientDark: 'linear-gradient(145deg, #141e32 0%, #1a2840 50%, #20304d 100%)', accent: '#3a62a8', accentDark: '#7ba4e8', textColor: '#112040', textColorDark: '#c8d8f0', image: '/diplotest-icon.png' },
-    { gradient: 'linear-gradient(145deg, #ecdcf0 0%, #d8bee0 50%, #c4a0d0 100%)', gradientDark: 'linear-gradient(145deg, #221828 0%, #2c2036 50%, #362844 100%)', accent: '#6e3a82', accentDark: '#b88acc', textColor: '#28102e', textColorDark: '#d8c4e0', icon: '🖊️' },
     { gradient: 'linear-gradient(145deg, #fce8d0 0%, #f5d4a8 50%, #eec088 100%)', gradientDark: 'linear-gradient(145deg, #2a2010 0%, #342818 50%, #3e3020 100%)', accent: '#c48a2a', accentDark: '#e8b860', textColor: '#3a2808', textColorDark: '#f0dcc0', icon: '💪' },
     { gradient: 'linear-gradient(145deg, #d4f0e2 0%, #b0e0c8 50%, #88cfae 100%)', gradientDark: 'linear-gradient(145deg, #101e18 0%, #162820 50%, #1c3228 100%)', accent: '#1e7a4d', accentDark: '#5cc890', textColor: '#0a2618', textColorDark: '#c0e8d0', icon: '⚡' },
+    { gradient: 'linear-gradient(145deg, #dce8fc 0%, #b8d0f5 50%, #95b8ee 100%)', gradientDark: 'linear-gradient(145deg, #141e32 0%, #1a2840 50%, #20304d 100%)', accent: '#3a62a8', accentDark: '#7ba4e8', textColor: '#112040', textColorDark: '#c8d8f0', image: '/diplotest-icon.png' },
+    { gradient: 'linear-gradient(145deg, #ecdcf0 0%, #d8bee0 50%, #c4a0d0 100%)', gradientDark: 'linear-gradient(145deg, #221828 0%, #2c2036 50%, #362844 100%)', accent: '#6e3a82', accentDark: '#b88acc', textColor: '#28102e', textColorDark: '#d8c4e0', icon: '🖊️' },
 ];
 
 const projects = t.projects.items.map((item, i) => ({
