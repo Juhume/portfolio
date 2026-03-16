@@ -133,6 +133,21 @@ export const en: Translations = {
                 linkUrl: 'https://github.com/Juhume/HeyHaiku',
             },
             {
+                title: 'Pichurri Fitness',
+                description: 'Autonomous AI coach: programs workouts, tracks nutrition, analyzes running and takes no excuses.',
+                category: 'AI Agent',
+                badge: 'Active',
+                role: 'Systems design',
+                proof: 'OpenClaw, Claude, Telegram, 20+ cron jobs, persistent memory.',
+                highlights: [
+                    '24/7 coaching with real accountability',
+                    '20+ automated cron jobs (nutrition, training, supplements)',
+                    'Apple Watch analysis: splits, HR, zones, progression',
+                    '6 weeks: squat 70→110kg, running 0→7km',
+                ],
+                linkLabel: 'See case study',
+            },
+            {
                 title: 'Homelab',
                 description: 'Real infrastructure at home: a NAS running AI agents, smart home and 20+ containers.',
                 category: 'Infra',

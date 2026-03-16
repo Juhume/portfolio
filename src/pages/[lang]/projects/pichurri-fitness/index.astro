@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import Breadcrumb from '../../../../components/Breadcrumb.astro';
+import Footer from '../../../../components/Footer.astro';
+import { locales, getTranslations, getSectionIds } from '../../../../i18n';
+import type { Locale } from '../../../../i18n';
+
+export function getStaticPaths() {
+    return locales.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const t = getTranslations(lang);
+const ids = getSectionIds(lang);
+const canonicalPath = `/${lang}/projects/pichurri-fitness/`;
+
+const content = {
+    es: {
+        eyebrow: 'Caso de estudio',
+        title: 'Pichurri Fitness',
+        summary: 'Un agente de IA que funciona como coach personal real: programa, recuerda, insiste, analiza y se adapta. No es un chatbot — es un sistema.',
+        highlights: ['Coach 24/7 vía Telegram', '20+ cron jobs automáticos', 'Memoria persistente', 'Análisis de Apple Watch'],
+        metaTitle: 'Pichurri Fitness | Caso de estudio | Julio Huerta',
+        metaDesc: 'Coach de IA autónomo construido sobre OpenClaw: entrenamiento, nutrición, running y accountability.',
+        blocks: [
+            { label: 'Qué es', highlight: 'Un coach de IA que no espera a que le escribas.', content: 'Pichurri Fitness es un agente autónomo que funciona 24/7 a través de Telegram. Diseña entrenamientos, controla nutrición, analiza sesiones de running, gestiona suplementación y mantiene un sistema de accountability que no acepta excusas. Forma parte de un ecosistema multi-agente con 5 agentes especializados (desarrollo, trading, media, fitness, coordinación), cada uno con su dominio exclusivo.' },
+            { label: 'Arquitectura', highlight: 'OpenClaw + Claude + Telegram + memoria persistente.', content: '', list: ['Plataforma multi-agente OpenClaw corriendo en NAS 24/7', 'Modelo base: Claude (Anthropic) para razonamiento y análisis', 'Canal: Telegram bidireccional en tiempo real', '20+ cron jobs programados (nutrición, entreno, suplementos, hidratación, check-ins)', 'Sistema de heartbeat: detecta silencios y escribe proactivamente', 'Spawn de sub-agentes para tareas fuera de su dominio'] },
+            { label: 'Memoria', highlight: 'Cada sesión construye sobre la anterior.', content: '', list: ['Archivos diarios con ejercicios, pesos, series, nutrición y métricas', 'Memoria a largo plazo: PRs, objetivos, patrones, decisiones', 'Búsqueda semántica en todo el historial antes de responder', 'Tracking de progresión por ejercicio con historial completo', 'Detección de patrones negativos (ejercicios que se saltan, adherencia que cae)'] },
+            { label: 'Coaching en tiempo real', highlight: 'El usuario entrena y reporta. El agente responde al momento.', content: 'Durante el entrenamiento, el usuario envía resultados conforme termina ejercicios. El agente sugiere pesos basándose en el historial, registra los datos reales, y si un equipo está ocupado, reordena la sesión o sugiere alternativas. Los cambios de ejercicios se fundamentan en investigación actualizada (Maeo 2023, Schoenfeld, Israetel).', list: ['Sugerencia de pesos basada en últimas sesiones', 'Reordenación de la sesión si hay equipos ocupados', 'Alternativas equivalentes para cada ejercicio', 'Registro y comparación inmediata con sesiones anteriores'] },
+            { label: 'Running', highlight: 'Análisis automático de capturas del Apple Watch.', content: 'Después de cada carrera, el usuario envía screenshots del Apple Watch. El agente analiza automáticamente distancia, ritmo, frecuencia cardíaca por zonas, splits, cadencia y recuperación. Compara con sesiones anteriores y detecta tendencias.', list: ['Análisis de imagen: splits, FC, zonas HR, potencia', 'Comparativa sesión a sesión (más distancia, misma FC = mejora real)', 'Protocolos de intervalos con progresión estructurada', 'Zona 2 aeróbica + HIIT separados'] },
+            { label: 'Accountability', highlight: 'El modo "Sin Piedad" 💀', content: 'Cada noche a las 22:30, check-in completo: comidas, entreno, suplementos, agua, reflexión. El agente detecta patrones como ejercicios que siempre se saltan, semanas que empiezan bien y caen el jueves, o desayunos improvisados. Si el usuario dice "intentaré ir", el agente responde "No intentaré. Mañana Upper A."' },
+            { label: 'Resultados (6 semanas)', highlight: 'Datos reales, no promesas.', content: '', list: ['Sentadilla: 70kg → 110kg (+57%)', 'Peso muerto: 80kg → 110kg (+38%)', 'Prensa: 170kg → 190kg (+12%)', 'Running: 0 → 7.01km', 'Intervalos: 0 → 8 sprints', 'Sprint máximo: 3\'07"/km', 'Adherencia gym: 18/20 sesiones planificadas', 'Adherencia running: 8/10 sesiones planificadas'] },
+            { label: 'Stack', content: '', stack: ['OpenClaw', 'Claude', 'Telegram', 'Node.js', 'Cron', 'Apple Watch'] },
+        ],
+    },
+    en: {
+        eyebrow: 'Case study',
+        title: 'Pichurri Fitness',
+        summary: 'An AI agent that works as a real personal coach: programs, remembers, insists, analyzes and adapts. Not a chatbot — a system.',
+        highlights: ['24/7 coach via Telegram', '20+ automated cron jobs', 'Persistent memory', 'Apple Watch analysis'],
+        metaTitle: 'Pichurri Fitness | Case Study | Julio Huerta',
+        metaDesc: 'Autonomous AI coach built on OpenClaw: training, nutrition, running and accountability.',
+        blocks: [
+            { label: 'What it is', highlight: 'An AI coach that doesn\'t wait for you to write.', content: 'Pichurri Fitness is an autonomous agent running 24/7 via Telegram. It designs workouts, tracks nutrition, analyzes running sessions, manages supplementation and maintains an accountability system that takes no excuses. Part of a multi-agent ecosystem with 5 specialized agents (dev, trading, media, fitness, coordination), each with an exclusive domain.' },
+            { label: 'Architecture', highlight: 'OpenClaw + Claude + Telegram + persistent memory.', content: '', list: ['Multi-agent platform OpenClaw running on NAS 24/7', 'Base model: Claude (Anthropic) for reasoning and analysis', 'Channel: real-time bidirectional Telegram', '20+ scheduled cron jobs (nutrition, training, supplements, hydration, check-ins)', 'Heartbeat system: detects silence and writes proactively', 'Sub-agent spawning for tasks outside its domain'] },
+            { label: 'Memory', highlight: 'Every session builds on the previous one.', content: '', list: ['Daily files with exercises, weights, sets, nutrition and metrics', 'Long-term memory: PRs, goals, patterns, decisions', 'Semantic search across all history before responding', 'Per-exercise progression tracking with full history', 'Negative pattern detection (skipped exercises, dropping adherence)'] },
+            { label: 'Real-time coaching', highlight: 'User trains and reports. Agent responds instantly.', content: 'During training, the user sends results as they finish exercises. The agent suggests weights based on history, records actual data, and if equipment is busy, reorders the session or suggests alternatives. Exercise changes are backed by current research (Maeo 2023, Schoenfeld, Israetel).', list: ['Weight suggestions based on recent sessions', 'Session reordering if equipment is occupied', 'Equivalent alternatives for each exercise', 'Immediate recording and comparison with previous sessions'] },
+            { label: 'Running', highlight: 'Automatic analysis of Apple Watch screenshots.', content: 'After each run, the user sends Apple Watch screenshots. The agent automatically analyzes distance, pace, heart rate by zone, splits, cadence and recovery. Compares with previous sessions and detects trends.', list: ['Image analysis: splits, HR, HR zones, power', 'Session-to-session comparison (more distance, same HR = real improvement)', 'Structured interval protocols with progression', 'Separate zone 2 aerobic + HIIT'] },
+            { label: 'Accountability', highlight: '"No Mercy" mode 💀', content: 'Every night at 22:30, full check-in: meals, training, supplements, water, reflection. The agent detects patterns like consistently skipped exercises, weeks that start strong and drop on Thursday, or improvised breakfasts. If the user says "I\'ll try to go", the agent responds "No trying. Tomorrow Upper A."' },
+            { label: 'Results (6 weeks)', highlight: 'Real data, not promises.', content: '', list: ['Squat: 70kg → 110kg (+57%)', 'Deadlift: 80kg → 110kg (+38%)', 'Leg press: 170kg → 190kg (+12%)', 'Running: 0 → 7.01km', 'Intervals: 0 → 8 sprints', 'Top sprint: 3\'07"/km', 'Gym adherence: 18/20 planned sessions', 'Running adherence: 8/10 planned sessions'] },
+            { label: 'Stack', content: '', stack: ['OpenClaw', 'Claude', 'Telegram', 'Node.js', 'Cron', 'Apple Watch'] },
+        ],
+    },
+    gl: {
+        eyebrow: 'Caso de estudo',
+        title: 'Pichurri Fitness',
+        summary: 'Un axente de IA que funciona como coach persoal real: programa, lembra, insiste, analiza e adáptase. Non é un chatbot — é un sistema.',
+        highlights: ['Coach 24/7 vía Telegram', '20+ cron jobs automáticos', 'Memoria persistente', 'Análise de Apple Watch'],
+        metaTitle: 'Pichurri Fitness | Caso de estudo | Julio Huerta',
+        metaDesc: 'Coach de IA autónomo construído sobre OpenClaw: adestramento, nutrición, running e accountability.',
+        blocks: [
+            { label: 'Que é', highlight: 'Un coach de IA que non espera a que lle escribas.', content: 'Pichurri Fitness é un axente autónomo que funciona 24/7 a través de Telegram. Deseña adestramentos, controla nutrición, analiza sesións de running, xestiona suplementación e mantén un sistema de accountability que non acepta escusas. Forma parte dun ecosistema multi-axente con 5 axentes especializados (desenvolvemento, trading, media, fitness, coordinación), cada un co seu dominio exclusivo.' },
+            { label: 'Arquitectura', highlight: 'OpenClaw + Claude + Telegram + memoria persistente.', content: '', list: ['Plataforma multi-axente OpenClaw correndo en NAS 24/7', 'Modelo base: Claude (Anthropic) para razoamento e análise', 'Canal: Telegram bidireccional en tempo real', '20+ cron jobs programados (nutrición, adestramento, suplementos, hidratación, check-ins)', 'Sistema de heartbeat: detecta silencios e escribe proactivamente', 'Spawn de sub-axentes para tarefas fóra do seu dominio'] },
+            { label: 'Memoria', highlight: 'Cada sesión constrúe sobre a anterior.', content: '', list: ['Ficheiros diarios con exercicios, pesos, series, nutrición e métricas', 'Memoria a longo prazo: PRs, obxectivos, patróns, decisións', 'Busca semántica en todo o historial antes de responder', 'Tracking de progresión por exercicio con historial completo', 'Detección de patróns negativos (exercicios que se saltan, adherencia que cae)'] },
+            { label: 'Coaching en tempo real', highlight: 'O usuario adestra e reporta. O axente responde ao momento.', content: 'Durante o adestramento, o usuario envía resultados conforme remata exercicios. O axente suxire pesos baseándose no historial, rexistra os datos reais, e se un equipo está ocupado, reordena a sesión ou suxire alternativas.', list: ['Suxestión de pesos baseada nas últimas sesións', 'Reordenación da sesión se hai equipos ocupados', 'Alternativas equivalentes para cada exercicio', 'Rexistro e comparación inmediata con sesións anteriores'] },
+            { label: 'Running', highlight: 'Análise automática de capturas do Apple Watch.', content: 'Despois de cada carreira, o usuario envía screenshots do Apple Watch. O axente analiza automaticamente distancia, ritmo, frecuencia cardíaca por zonas, splits, cadencia e recuperación.', list: ['Análise de imaxe: splits, FC, zonas HR, potencia', 'Comparativa sesión a sesión', 'Protocolos de intervalos con progresión estruturada', 'Zona 2 aeróbica + HIIT separados'] },
+            { label: 'Accountability', highlight: 'O modo "Sen Piedade" 💀', content: 'Cada noite ás 22:30, check-in completo: comidas, adestramento, suplementos, auga, reflexión. O axente detecta patróns como exercicios que sempre se saltan ou semanas que comezan ben e caen o xoves.' },
+            { label: 'Resultados (6 semanas)', highlight: 'Datos reais, non promesas.', content: '', list: ['Sentadilla: 70kg → 110kg (+57%)', 'Peso morto: 80kg → 110kg (+38%)', 'Prensa: 170kg → 190kg (+12%)', 'Running: 0 → 7.01km', 'Intervalos: 0 → 8 sprints', 'Sprint máximo: 3\'07"/km'] },
+            { label: 'Stack', content: '', stack: ['OpenClaw', 'Claude', 'Telegram', 'Node.js', 'Cron', 'Apple Watch'] },
+        ],
+    },
+};
+
+const c = content[lang] || content.es;
+---
+
+<BaseLayout
+    lang={lang}
+    t={t}
+    title={c.metaTitle}
+    description={c.metaDesc}
+    canonicalPath={canonicalPath}
+>
+    <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
+
+    <div class="case-study-page-shell">
+        <div class="container">
+            <a href={`/${lang}/projects/`} class="case-study-page__back">← {lang === 'en' ? 'Back to projects' : 'Volver a proyectos'}</a>
+            <Breadcrumb items={[
+                { label: t.nav.home || (lang === 'en' ? 'Home' : 'Inicio'), href: `/${lang}/` },
+                { label: t.nav.projects, href: `/${lang}/projects/` },
+                { label: 'Pichurri Fitness' }
+            ]} />
+        </div>
+
+        <section class="section case-study case-study--page">
+            <div class="container">
+                <header class="case-study-page__hero">
+                    <span class="case-study-page__emoji">💪</span>
+                    <span class="case-study-page__eyebrow">{c.eyebrow}</span>
+                    <h1 class="case-study-page__title">{c.title}</h1>
+                    <p class="case-study-page__summary">{c.summary}</p>
+                    <div class="case-study-page__highlights">
+                        {c.highlights.map((item) => (
+                            <span class="case-study-page__highlight">{item}</span>
+                        ))}
+                    </div>
+                </header>
+
+                <div class="case-blocks">
+                    {c.blocks.map(block => (
+                        <div class="case-block">
+                            <div class="case-block__label">{block.label}</div>
+                            <div class="case-block__content">
+                                {block.highlight && <p class="case-block__highlight">{block.highlight}</p>}
+                                {block.content && <p>{block.content}</p>}
+                                {block.list && (
+                                    <ul class="case-block__list">
+                                        {block.list.map(item => <li>{item}</li>)}
+                                    </ul>
+                                )}
+                                {block.stack && (
+                                    <div class="stack-tags">
+                                        {block.stack.map(tag => <span class="stack-tag">{tag}</span>)}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <aside class="case-study-cross-nav">
+                    <span class="case-study-cross-nav__label">{lang === 'en' ? 'Also see' : 'También puedes ver'}</span>
+                    <a href={`/${lang}/projects/homelab/`} class="case-study-cross-nav__link">
+                        Homelab
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M3 8h10M9 4l4 4-4 4"/>
+                        </svg>
+                    </a>
+                    <a href={`/${lang}/projects/espejo/`} class="case-study-cross-nav__link">
+                        Espejo
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M3 8h10M9 4l4 4-4 4"/>
+                        </svg>
+                    </a>
+                </aside>
+            </div>
+        </section>
+    </div>
+
+    <Footer t={t} />
+</BaseLayout>
+
+<style>
+    .case-study-page__emoji {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+</style>

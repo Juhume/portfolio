@@ -53,7 +53,7 @@ function getCardValues(offset: number, w: number): CardValues {
   const sign = offset > 0 ? 1 : offset < 0 ? -1 : 0;
   const mob = w < 640;
   const tab = w < 1024;
-  const base = mob ? 130 : tab ? 160 : 190;
+  const base = mob ? 150 : tab ? 160 : 190;
   const gap = mob ? 100 : tab ? 150 : 190;
 
   if (abs < 1) {
@@ -375,8 +375,8 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
   }, []);
 
   const mob = width < 640;
-  const cardW = mob ? 230 : width < 1024 ? 300 : 360;
-  const cardH = mob ? 300 : width < 1024 ? 380 : 440;
+  const cardW = mob ? 270 : width < 1024 ? 300 : 360;
+  const cardH = mob ? 350 : width < 1024 ? 380 : 440;
   const stageH = Math.round(cardH * 1.12);
 
   // z-index: increases are instant, decreases are delayed (prevents flicker)
