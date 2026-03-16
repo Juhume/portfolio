@@ -214,7 +214,7 @@ export const en: Translations = {
         title: 'About',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'I currently work at BBVA, on a product used by thousands of businesses every day. Across web and mobile development, technical support and platform evolution.',
+            'I currently work at BBVA, across web and mobile development, technical support and platform evolution.',
             'I\'m especially interested in working on systems that don\'t just need to be built, but also understood, maintained and improved: that\'s where code, product, operations and technical judgment intersect.',
             'Outside work, I also build my own projects, automate things and experiment with AI.',
             'I\'m not defined by a specific technology. I\'m defined by a way of working: understand the system well, identify where the problem is, and leave things better than they were.',

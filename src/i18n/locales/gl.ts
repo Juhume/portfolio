@@ -214,7 +214,7 @@ export const gl: Translations = {
         title: 'Sobre min',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'Actualmente traballo en BBVA, nun produto que utilizan miles de empresas cada día. Entre desenvolvemento web e móbil, soporte técnico e evolución de plataforma.',
+            'Actualmente traballo en BBVA, entre desenvolvemento web e móbil, soporte técnico e evolución de plataforma.',
             'Interésame especialmente traballar sobre sistemas que non só hai que construír, senón tamén entender, manter e mellorar: aí é onde se cruzan código, produto, operación e criterio técnico.',
             'Fóra do traballo tamén fago proxectos propios, automatizo cousas e experimento con IA.',
             'Non me define unha tecnoloxía concreta. Defíneme unha forma de traballar: entender ben o sistema, detectar onde está o problema e deixar as cousas mellor do que estaban.',
