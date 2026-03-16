@@ -35,11 +35,11 @@ export interface CoverFlowProps {
 
 const ANGLE = 55;
 const SPRING = 'cubic-bezier(0.25, 1, 0.5, 1)';     // smooth deceleration, no overshoot
-const DUR_SLOW = 680;   // ms — deliberate gesture
-const DUR_FAST = 340;   // ms — quick flick
+const DUR_SLOW = 680;   // ms, deliberate gesture
+const DUR_FAST = 340;   // ms, quick flick
 const WHEEL_COOLDOWN = 280;
 const SWIPE_THRESHOLD = 0.2;
-const VEL_FAST = 2.5;   // progress/s — above this = fast flick
+const VEL_FAST = 2.5;   // progress/s, above this = fast flick
 const INFO_FADE_MS = 160;
 
 /* ═══════════════════════════════════════════
@@ -84,17 +84,10 @@ function valuesToStyle(v: CardValues): string {
 
 
 /* ═══════════════════════════════════════════
-   Google Font — Playfair Display for cards
-   ═══════════════════════════════════════════ */
-
-const FONT_URL = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap';
-
-/* ═══════════════════════════════════════════
    CSS
    ═══════════════════════════════════════════ */
 
 const STYLES = `
-  @import url('${FONT_URL}');
 
   .cflow-card {
     position: absolute;
@@ -217,12 +210,12 @@ const STYLES = `
   .cflow-dot:hover { opacity: 0.7 !important; }
 
   .cflow-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
     color: var(--text-primary);
   }
 
   .cflow-cta {
-    font-family: var(--font-display, 'Syne', sans-serif);
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
     text-decoration: none;
     transition: opacity 0.2s ease;
   }
@@ -251,7 +244,7 @@ const STYLES = `
     right: 0.5rem;
   }
 
-  /* Card logo image — watermark like the emoji glyph */
+  /* Card logo image: watermark like the emoji glyph */
   .cflow-logo {
     position: absolute;
     bottom: 0.5rem;
@@ -287,6 +280,43 @@ const STYLES = `
   [data-theme="dark"] .cflow-logo,
   [data-theme="dark"] .cflow-glyph {
     opacity: 0;
+  }
+
+  .cflow-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border, rgba(0,0,0,0.12));
+    background: color-mix(in srgb, var(--bg-primary, #eef2ea) 85%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-secondary, #5a685f);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+  }
+  .cflow-arrow:hover {
+    border-color: var(--accent, #83DEB5);
+    color: var(--accent-text, #2B9B6A);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .cflow-arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+  }
+  .cflow-arrow--prev { left: 0; }
+  .cflow-arrow--next { right: 0; }
+
+  @media (max-width: 640px) {
+    .cflow-arrow { width: 32px; height: 32px; }
   }
 `;
 
@@ -376,7 +406,7 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
     const el = containerRef.current;
     if (!el) return;
     setWidth(el.offsetWidth);
-    // Show after first layout — prevents flash of unsized cards
+    // Show after first layout. Prevents flash of unsized cards
     requestAnimationFrame(() => setMounted(true));
     const ro = new ResizeObserver(([e]) => setWidth(e.contentRect.width));
     ro.observe(el);
@@ -573,11 +603,11 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                       {proj.category && (
                         <span style={{
-                          fontFamily: 'var(--font-display, "Syne", sans-serif)',
-                          fontSize: '0.6rem',
+                          fontFamily: 'var(--font-body, "DM Sans", system-ui, sans-serif)',
+                          fontSize: mob ? '0.625rem' : '0.75rem',
                           fontWeight: 700,
                           textTransform: 'uppercase',
-                          letterSpacing: '0.12em',
+                          letterSpacing: '0.1em',
                           color: accent,
                         }}>
                           {proj.category}
@@ -585,11 +615,11 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                       )}
                       {proj.badge && (
                         <span style={{
-                          fontFamily: 'var(--font-display, "Syne", sans-serif)',
-                          fontSize: '0.5rem',
+                          fontFamily: 'var(--font-body, "DM Sans", system-ui, sans-serif)',
+                          fontSize: mob ? '0.5625rem' : '0.625rem',
                           fontWeight: 700,
                           textTransform: 'uppercase',
-                          letterSpacing: '0.08em',
+                          letterSpacing: '0.06em',
                           padding: '0.2rem 0.55rem',
                           borderRadius: '20px',
                           background: `${accent}18`,
@@ -604,13 +634,13 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                     {/* Bottom */}
                     <div>
                       <h3 style={{
-                        fontFamily: "'Playfair Display', Georgia, serif",
+                        fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
                         fontSize: mob ? '1.3rem' : '1.65rem',
                         fontWeight: 800,
                         color: txt,
-                        lineHeight: 1.15,
+                        lineHeight: 1.25,
                         marginBottom: '0.5rem',
-                        letterSpacing: '-0.01em',
+                        letterSpacing: '-0.02em',
                       }}>
                         {proj.title}
                       </h3>
@@ -631,8 +661,8 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
                         {proj.stack.slice(0, 5).map((tech) => (
                           <span key={tech} style={{
-                            fontFamily: 'var(--font-display, "Syne", sans-serif)',
-                            fontSize: mob ? '0.48rem' : '0.56rem',
+                            fontFamily: 'var(--font-body, "DM Sans", system-ui, sans-serif)',
+                            fontSize: mob ? '0.5625rem' : '0.625rem',
                             fontWeight: 600,
                             padding: '0.18rem 0.5rem',
                             borderRadius: '20px',
@@ -649,7 +679,7 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                   </div>
                 </div>
 
-                {/* Reflection — mirrored copy of face */}
+                {/* Reflection: mirrored copy of face */}
                 <div className="cflow-reflection" style={{
                   background: bg,
                   borderRadius: '20px',
@@ -663,11 +693,11 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                     <div />
                     <div>
                       <div style={{
-                        fontFamily: "'Playfair Display', Georgia, serif",
+                        fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
                         fontSize: mob ? '1.3rem' : '1.65rem',
                         fontWeight: 800,
                         color: txt,
-                        lineHeight: 1.15,
+                        lineHeight: 1.25,
                       }}>
                         {proj.title}
                       </div>
@@ -677,6 +707,30 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
               </div>
             );
           })}
+
+          {/* Navigation arrows */}
+          {active > 0 && (
+            <button
+              className="cflow-arrow cflow-arrow--prev"
+              onClick={(e) => { e.stopPropagation(); hapticTick(); goTo(active - 1); }}
+              aria-label="Previous project"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+          )}
+          {active < projects.length - 1 && (
+            <button
+              className="cflow-arrow cflow-arrow--next"
+              onClick={(e) => { e.stopPropagation(); hapticTick(); goTo(active + 1); }}
+              aria-label="Next project"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+          )}
         </div>
 
         {/* Dots */}

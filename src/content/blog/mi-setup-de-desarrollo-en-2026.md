@@ -1,7 +1,7 @@
 ---
 title: "Mi setup de desarrollo en 2026"
 description: "Un repaso rápido y honesto de las herramientas que uso para desarrollar, sin links de afiliados ni recomendaciones forzadas. Solo lo que funciona."
-date: 2026-03-01
+date: 2026-02-20
 lang: es
 tags: ["infra", "código", "herramientas"]
 category: "profesional"
@@ -27,9 +27,13 @@ Esto cambió mi forma de trabajar. Tailscale crea una VPN mesh entre todos mis d
 
 Zero config, simplemente funciona. Es de esas herramientas que una vez que las pruebas no entiendes cómo vivías sin ellas.
 
+## Sistema operativo: Linux
+
+Mi daily driver es Ubuntu. Después de años en macOS, el cambio fue más natural de lo que esperaba. Todo lo que necesito corre nativo, Docker va como un tiro sin capas de virtualización, y la libertad de configurar cada rincón del sistema sin que nadie te ponga límites se agradece. No es para todo el mundo, pero para desarrollo es difícil pedir más.
+
 ## Terminal
 
-iTerm2 en macOS con tmux para sesiones persistentes. Múltiples paneles, uno con logs de Docker, otro con el servidor de desarrollo, otro para git. Todo visible de un vistazo.
+Ghostty como emulador con tmux para sesiones persistentes. Múltiples paneles, uno con logs de Docker, otro con el servidor de desarrollo, otro para git. Todo visible de un vistazo.
 
 El shell es zsh con Oh My Zsh y un prompt mínimo. Nada de temas recargados con emojis. solo el directorio actual, el branch de git, y si el último comando fue bien o mal.
 

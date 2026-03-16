@@ -26,27 +26,27 @@ const blocks = hl.blocks;
         </header>
 
         <div class="homelab__diagram-section">
-            <h2 class="homelab__diagram-title">{hl.diagramTitle}</h2>
+            <h3 class="homelab__diagram-title">{hl.diagramTitle}</h3>
             <div class="homelab__diagram">
                 <pre><code>{`Internet
    │
-   ├── VPN ── Remote Access
+   ├── VPN ── Acceso remoto
    │
 Router
    │
    ├── NAS
-   │   ├── Containers (+20)
-   │   │   ├── Smart Home Hub
-   │   │   ├── Media Server
-   │   │   ├── DNS / Ad Blocking
-   │   │   └── Dev Tools
-   │   └── AI Agents (×5)
-   │       ├── Orchestration
-   │       ├── Development
+   │   ├── Contenedores (+20)
+   │   │   ├── Domótica
+   │   │   ├── Servidor de medios
+   │   │   ├── DNS / Bloqueo de anuncios
+   │   │   └── Herramientas de desarrollo
+   │   └── Agentes de IA (×5)
+   │       ├── Orquestación
+   │       ├── Desarrollo
    │       ├── Trading
-   │       └── Media
+   │       └── Medios
    │
-   └── IoT Devices
+   └── Dispositivos IoT
        ├── Zigbee
        ├── WiFi
        └── miio`}</code></pre>
@@ -103,8 +103,9 @@ Router
         display: inline-flex;
         align-items: center;
         gap: var(--space-sm);
+        font-family: var(--font-body);
         color: var(--accent);
-        font-size: 0.75rem;
+        font-size: var(--text-xs);
         font-weight: 600;
         letter-spacing: 0.12em;
         text-transform: uppercase;
@@ -120,16 +121,17 @@ Router
 
     .homelab__title {
         font-family: var(--font-display);
-        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-size: var(--text-3xl);
+        font-weight: 700;
         line-height: 1;
-        letter-spacing: -0.04em;
+        letter-spacing: -0.03em;
         margin-bottom: var(--space-md);
     }
 
     .homelab__summary {
         max-width: 62ch;
         color: var(--text-secondary);
-        font-size: clamp(1rem, 1.4vw + 0.55rem, 1.2rem);
+        font-size: var(--text-base);
         line-height: 1.8;
     }
 
@@ -154,7 +156,8 @@ Router
     }
 
     .homelab__diagram-title {
-        font-size: 0.75rem;
+        font-family: var(--font-body);
+        font-size: var(--text-xs);
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -208,7 +211,8 @@ Router
     }
 
     .case-study-cross-nav__label {
-        font-size: 0.75rem;
+        font-family: var(--font-body);
+        font-size: var(--text-xs);
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;

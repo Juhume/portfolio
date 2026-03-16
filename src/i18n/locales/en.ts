@@ -2,9 +2,9 @@ import type { Translations } from '../types';
 
 export const en: Translations = {
     meta: {
-        title: 'Julio Huerta | Frontend Web & Mobile Developer',
+        title: 'Julio Huerta (juhume) | Frontend Web & Mobile Developer',
         description: 'Developer with 5+ years at BBVA Business. Apps used by thousands of businesses, projects with real encryption, and too many Docker containers.',
-        keywords: 'developer, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
+        keywords: 'Julio Huerta, juhume, developer, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
         jobTitle: 'Frontend Web & Mobile Developer',
         ogLocale: 'en_US',
     },
@@ -115,7 +115,7 @@ export const en: Translations = {
                     'Active users preparing for exams',
                 ],
                 linkLabel: 'Open DiploTest',
-                linkUrl: 'https://diplotest.es',
+                linkUrl: 'https://diplo-test.vercel.app/',
             },
             {
                 title: 'Hey Haiku',
@@ -156,24 +156,24 @@ export const en: Translations = {
         pageSummary: 'I wanted a digital journal where nobody could read my entries. Not the server, not the database, not even me if I lose the password. That\'s how Espejo started.',
         pageHighlights: [
             'Offline-first with IndexedDB as source of truth',
-            'Client-side encryption — the server only sees blobs',
+            'Client-side encryption: the server only sees blobs',
             'Well-being UX, no gamification',
         ],
-        pageMetaTitle: 'Espejo | Case Study | Julio Huerta',
+        pageMetaTitle: 'Espejo | Case Study | juhume',
         pageMetaDescription: 'Inside Espejo: offline-first architecture, E2E encryption, optional sync and UX decisions.',
         backToHome: 'Back to projects',
         alsoSee: 'Also see',
         blocks: [
             {
                 label: 'Problem',
-                content: 'Journaling apps push streaks and gamification. And none offer real privacy — your entries live in plain text on someone else\'s servers.',
+                content: 'Journaling apps push streaks and gamification. And none offer real privacy: your entries live in plain text on someone else\'s servers.',
             },
             {
                 label: 'Architecture',
                 highlight: 'Offline-first with optional sync. The server never sees the content.',
                 content: '',
                 list: [
-                    'IndexedDB (Dexie) as source of truth — works without connection',
+                    'IndexedDB (Dexie) as source of truth, works without connection',
                     'AES-256-GCM + PBKDF2 (310k iterations) encryption on client',
                     'Supabase for optional cross-device sync (encrypted blobs only)',
                     'Soft-delete + last-write-wins for conflict resolution',
@@ -184,7 +184,7 @@ export const en: Translations = {
                 highlight: 'Designed from well-being psychology.',
                 content: '',
                 list: [
-                    'Emotional check-in before writing — less friction on hard days',
+                    'Emotional check-in before writing, less friction on hard days',
                     'Contemplation mode: immersive reading with serif typography',
                     'Semantic favorites (clarity, seed, anchor, victory, scar)',
                     'Year in Review, Spotify Wrapped style',
@@ -205,7 +205,7 @@ export const en: Translations = {
             {
                 label: 'Learnings',
                 highlight: 'When people actually use it, you think about code differently.',
-                content: 'Offline-first with E2EE is not trivial. Migrating schemas in IndexedDB, resolving sync conflicts without seeing the data, handling password loss when it\'s the encryption key — every problem pushes you past the happy path.',
+                content: 'Offline-first with E2EE is not trivial. Migrating schemas in IndexedDB, resolving sync conflicts without seeing the data, handling password loss when it\'s the encryption key. Every problem pushes you past the happy path.',
             },
         ],
     },
@@ -214,7 +214,7 @@ export const en: Translations = {
         title: 'About',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'I work at BBVA, across web and mobile products, technical support and platform evolution.',
+            'I currently work at BBVA, on a product used by thousands of businesses every day. Across web and mobile development, technical support and platform evolution.',
             'I\'m especially interested in working on systems that don\'t just need to be built, but also understood, maintained and improved: that\'s where code, product, operations and technical judgment intersect.',
             'Outside work, I also build my own projects, automate things and experiment with AI.',
             'I\'m not defined by a specific technology. I\'m defined by a way of working: understand the system well, identify where the problem is, and leave things better than they were.',
@@ -227,7 +227,7 @@ export const en: Translations = {
         ],
         principlesTitle: 'How I work',
         principles: [
-            'I don\'t just want a product to work — I want it to feel cared for, consistent and a good experience for the user',
+            'I don\'t just want a product to work; I want it to feel cared for, consistent and a good experience for the user',
             'I try to prioritize readability and clarity over unnecessarily complex solutions',
             'Before touching anything, I prefer to understand the context well and how it affects the whole',
             'I pay close attention to the details that make a product feel clear, solid and well-crafted',
@@ -265,6 +265,7 @@ export const en: Translations = {
     },
     home: {
         role: 'I like building products, tools and infrastructure with software.',
+        bio: 'I like building products, tools and infrastructure with software.',
         tagline: 'Software con sentidiño.',
         cvDownload: 'Download CV',
         navCards: {
@@ -297,7 +298,7 @@ export const en: Translations = {
             '3 protocols (Zigbee, WiFi, miio)',
             '5 AI agents',
         ],
-        pageMetaTitle: 'Homelab | Architecture | Julio Huerta',
+        pageMetaTitle: 'Homelab | Architecture | juhume',
         pageMetaDescription: 'Homelab architecture: NAS with Docker, multi-protocol smart home and multi-agent AI system.',
         backToHome: 'Back to projects',
         diagramTitle: 'Network topology',
@@ -313,11 +314,11 @@ export const en: Translations = {
                 highlight: 'Every decision has a why.',
                 content: '',
                 list: [
-                    'Docker Compose over Kubernetes — single node, simplicity wins',
-                    'SSD for databases, HDD for media — cost/performance tradeoff',
-                    'DNS-level ad blocking — network-wide, zero client config',
-                    'Mesh VPN for remote access — no exposed ports, no router changes',
-                    'Multi-agent AI system — specialized agents per domain',
+                    'Docker Compose over Kubernetes: single node, simplicity wins',
+                    'SSD for databases, HDD for media: cost/performance tradeoff',
+                    'DNS-level ad blocking: network-wide, zero client config',
+                    'Mesh VPN for remote access: no exposed ports, no router changes',
+                    'Multi-agent AI system: specialized agents per domain',
                 ],
             },
             {
@@ -335,7 +336,7 @@ export const en: Translations = {
             {
                 label: 'Multi-agent system',
                 highlight: 'The differentiator: specialized AI running locally.',
-                content: 'A multi-agent system runs directly on the NAS. Each agent has a clear domain — development, trading, media, orchestration — with its own tools and context. They communicate in real time and coordinate tasks autonomously.\n\nThe design decision was specialization over generalization: agents with bounded domains instead of a monolithic model. Result: contained errors, parallel coordination, and horizontal scaling by capability.',
+                content: 'A multi-agent system runs directly on the NAS. Each agent has a clear domain: development, trading, media, orchestration, each with its own tools and context. They communicate in real time and coordinate tasks autonomously.\n\nThe design decision was specialization over generalization: agents with bounded domains instead of a monolithic model. Result: contained errors, parallel coordination, and horizontal scaling by capability.',
                 list: [
                     'Specialized agents with separate domains',
                     'Real-time inter-agent communication',
@@ -355,7 +356,7 @@ export const en: Translations = {
             'Auth with Supabase',
             'Active users',
         ],
-        pageMetaTitle: 'DiploTest | Case Study | Julio Huerta',
+        pageMetaTitle: 'DiploTest | Case Study | juhume',
         pageMetaDescription: 'Inside DiploTest: study platform for diplomatic exams with statistics, auth and real users.',
         backToHome: 'Back to projects',
         alsoSee: 'Also see',

@@ -1,7 +1,7 @@
 ---
 title: "Offline-first no es solo cache"
 description: "Lo que aprendí construyendo una app que funciona sin conexión de verdad: IndexedDB, sync, conflictos y cifrado E2E."
-date: 2025-03-01
+date: 2025-10-05
 lang: es
 tags: ["arquitectura", "offline-first", "indexeddb"]
 category: "profesional"
@@ -17,7 +17,7 @@ IndexedDB (con Dexie como wrapper) se convirtió en la **fuente de verdad**. El 
 
 ## Sync + cifrado: la combinación difícil
 
-Cada entrada se cifra con AES-256-GCM antes de salir del navegador. El servidor solo ve blobs opacos. Esto significa que no puedes hacer merge en el servidor — no puede leer los datos.
+Cada entrada se cifra con AES-256-GCM antes de salir del navegador. El servidor solo ve blobs opacos. Esto significa que no puedes hacer merge en el servidor: no puede leer los datos.
 
 La solución: **last-write-wins** con soft-delete y timestamps. No es perfecta, pero para un diario personal es suficiente. El usuario siempre puede ver el historial de cambios local. Cada entrada lleva un campo `updatedAt` que se compara durante el sync. Si hay conflicto, gana el timestamp más reciente y el otro se guarda como versión anterior en local.
 
@@ -41,13 +41,13 @@ La defensa: un sistema de checksum por entrada. Cada vez que se escribe en Index
 
 Dexie maneja migraciones de IndexedDB con versiones, pero cuando los datos están cifrados, no puedes simplemente transformarlos en una migración. No tienes acceso al contenido en texto plano durante el upgrade del esquema.
 
-La solución: un campo `schemaVersion` en los metadatos (no cifrados) de cada entrada. Cuando la app detecta una entrada con versión antigua, la descifra, transforma, re-cifra, y actualiza. Es una migración lazy — ocurre entrada por entrada cuando se accede, no en bloque. Más lento en la primera carga, pero no bloquea la migración del esquema de IndexedDB.
+La solución: un campo `schemaVersion` en los metadatos (no cifrados) de cada entrada. Cuando la app detecta una entrada con versión antigua, la descifra, transforma, re-cifra, y actualiza. Es una migración lazy: ocurre entrada por entrada cuando se accede, no en bloque. Más lento en la primera carga, pero no bloquea la migración del esquema de IndexedDB.
 
 ## Lo que cambió mi forma de diseñar
 
 Después de construir esto, pienso diferente sobre cualquier app. La pregunta ya no es "¿necesita funcionar offline?" sino "¿qué estado es local y qué estado es remoto?". Incluso en apps online, esa separación produce arquitecturas más resilientes.
 
-Offline-first real no es una feature — es una arquitectura. Cambia cómo piensas sobre el estado, la persistencia y la resolución de conflictos. Es más trabajo, pero el resultado es una app que **siempre responde**, sin spinners, sin errores de red, sin "inténtalo de nuevo".
+Offline-first real no es una feature, es una arquitectura. Cambia cómo piensas sobre el estado, la persistencia y la resolución de conflictos. Es más trabajo, pero el resultado es una app que **siempre responde**, sin spinners, sin errores de red, sin "inténtalo de nuevo".
 
 ---
 

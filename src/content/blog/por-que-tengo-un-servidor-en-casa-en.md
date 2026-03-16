@@ -1,7 +1,7 @@
 ---
 title: "Why I have a server at home"
 description: "Not a tutorial. It's the story of why I set up a homelab, what I learned by breaking everything, and why docker compose up became my zen moment."
-date: 2025-09-18
+date: 2025-11-08
 lang: en
 canonicalSlug: "por-que-tengo-un-servidor-en-casa"
 tags: ["infra", "vida", "homelab"]

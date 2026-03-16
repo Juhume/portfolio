@@ -28,7 +28,7 @@ const {
     structuredData,
 } = Astro.props;
 
-const siteURL = 'https://juliohuerta.dev';
+const siteURL = 'https://juhume.com';
 const canonicalURL = new URL(canonicalPath, siteURL);
 const alternatePaths = locales.map((loc) => ({
     locale: loc,
@@ -38,6 +38,7 @@ const defaultStructuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Julio Huerta",
+    "alternateName": "juhume",
     "url": siteURL,
     "jobTitle": t.meta.jobTitle,
     "worksFor": {
@@ -63,7 +64,7 @@ const ogImageURL = new URL(ogImage, siteURL);
         (function() {
             document.documentElement.classList.remove('no-js');
             document.documentElement.classList.add('js');
-            var t = localStorage.getItem('theme') || 'light';
+            var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             document.documentElement.dataset.theme = t;
         })();
     </script>
@@ -82,7 +83,7 @@ const ogImageURL = new URL(ogImage, siteURL);
     {alternatePaths.map(({ locale, href }) => (
         <link rel="alternate" hreflang={locale} href={href} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={new URL(replaceLocaleInPath(canonicalPath, 'es'), siteURL)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(replaceLocaleInPath(canonicalPath, 'en'), siteURL)} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={pageType} />
@@ -95,7 +96,7 @@ const ogImageURL = new URL(ogImage, siteURL);
         .map(({ locale }) => (
             <meta property="og:locale:alternate" content={getTranslations(locale).meta.ogLocale} />
         ))}
-    <meta property="og:site_name" content="Julio Huerta" />
+    <meta property="og:site_name" content="juhume" />
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:image:alt" content={title} />
     <meta property="og:image:width" content="1200" />

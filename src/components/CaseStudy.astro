@@ -81,6 +81,9 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
             </div>
         )}
 
+        {/* Slot for interactive demos */}
+        {variant === 'full' && <slot />}
+
         {/* Cross-navigation to Homelab case study */}
         {variant === 'full' && (
             <aside class="case-study-cross-nav">
@@ -121,7 +124,8 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
     }
 
     .case-study-cross-nav__label {
-        font-size: 0.75rem;
+        font-family: var(--font-body);
+        font-size: var(--text-xs);
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;

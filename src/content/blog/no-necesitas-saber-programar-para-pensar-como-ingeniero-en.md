@@ -1,7 +1,7 @@
 ---
 title: "You don't need to know how to code to think like an engineer"
 description: "Systems thinking, problem decomposition, and debugging are skills that go far beyond code. Reflections from someone who managed technical projects before writing their first line."
-date: 2026-01-10
+date: 2026-01-28
 lang: en
 canonicalSlug: "no-necesitas-saber-programar-para-pensar-como-ingeniero"
 tags: ["vida", "aprendizaje", "opinión"]

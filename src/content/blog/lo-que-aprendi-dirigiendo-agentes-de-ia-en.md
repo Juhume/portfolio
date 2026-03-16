@@ -1,7 +1,7 @@
 ---
 title: "What I learned directing AI agents before knowing how to code"
 description: "I directed a multi-agent system to build real projects without writing a single line of code. What that taught me about architecture, product, and my own limitations."
-date: 2025-12-04
+date: 2025-12-10
 lang: en
 canonicalSlug: "lo-que-aprendi-dirigiendo-agentes-de-ia"
 tags: ["producto", "aprendizaje", "ia"]

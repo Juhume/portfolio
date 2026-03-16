@@ -1,7 +1,7 @@
 ---
 title: "The night my DNS fought itself"
 description: "Everything worked until it didn't. At 2AM, no device in my house could resolve a domain. This is the story of two DNS services fighting for control."
-date: 2025-11-15
+date: 2025-11-25
 lang: en
 canonicalSlug: "la-noche-que-mi-dns-se-peleo-consigo-mismo"
 tags: ["infra", "homelab", "debugging"]

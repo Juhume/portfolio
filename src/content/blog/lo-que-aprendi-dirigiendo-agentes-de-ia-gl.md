@@ -1,7 +1,7 @@
 ---
 title: "O que aprendín dirixindo axentes de IA antes de saber programar"
 description: "Dirixín un sistema multi-axente para construír proxectos reais sen escribir unha liña de código. O que iso me ensinou sobre arquitectura, produto e as miñas propias limitacións."
-date: 2025-12-04
+date: 2025-12-10
 lang: gl
 canonicalSlug: "lo-que-aprendi-dirigiendo-agentes-de-ia"
 tags: ["produto", "aprendizaxe", "ia"]

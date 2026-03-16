@@ -1,7 +1,7 @@
 ---
 title: "La noche que mi DNS se peleó consigo mismo"
 description: "Todo funcionaba hasta que dejó de funcionar. A las 2AM, ningún dispositivo de mi casa resolvía un dominio. Esta es la historia de dos servicios DNS peleándose por el control."
-date: 2025-11-15
+date: 2025-11-25
 lang: es
 tags: ["infra", "homelab", "debugging"]
 category: "profesional"

@@ -60,7 +60,7 @@ const readTime = getReadTime(post.body);
 const effectiveSlug = post.data.canonicalSlug || post.id;
 const originalArticlePath = `/${post.data.lang}/blog/${effectiveSlug}/`;
 const canonicalPath = isOriginalLocale ? `/${lang}/blog/${effectiveSlug}/` : originalArticlePath;
-const articleUrl = `https://juliohuerta.dev${canonicalPath}`;
+const articleUrl = `https://juhume.com${canonicalPath}`;
 const articleStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -90,7 +90,7 @@ const relatedList = [...relatedProjects.values()];
 <BaseLayout
     lang={lang}
     t={t}
-    title={`${post.data.title} | Julio Huerta`}
+    title={`${post.data.title} | juhume`}
     description={post.data.description}
     canonicalPath={canonicalPath}
     pageType="article"

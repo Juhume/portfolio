@@ -40,8 +40,18 @@
     --accent-subtle: rgba(131, 222, 181, 0.1);
 
     /* Typography */
-    --font-display: 'Vila Morena', system-ui, sans-serif;
+    --font-display: 'DM Sans', system-ui, sans-serif;
     --font-body: 'DM Sans', system-ui, sans-serif;
+
+    /* Type Scale (8 steps) */
+    --text-xs: 0.75rem;      /* 12px — eyebrows, dates, tags, metadata */
+    --text-sm: 0.875rem;     /* 14px — nav, captions, stack tags, footer */
+    --text-base: 1rem;       /* 16px — body text */
+    --text-md: 1.125rem;     /* 18px — lead paragraphs */
+    --text-lg: 1.375rem;     /* 22px — case highlights, sub-headings */
+    --text-xl: clamp(1.5rem, 3vw, 2rem);                  /* section sub-titles */
+    --text-2xl: clamp(2.15rem, 4vw + 0.6rem, 3.8rem);     /* section titles */
+    --text-3xl: clamp(2.5rem, 6vw, 5rem);                  /* page hero titles */
 
     /* Spacing */
     --space-xs: 0.5rem;
@@ -263,9 +273,14 @@ button {
 .nav__logo {
     font-family: var(--font-display);
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: -0.02em;
     transition: opacity var(--duration-fast) ease;
+}
+
+.nav--home .nav__logo {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* hover moved to @media (hover: hover) block */
@@ -288,14 +303,8 @@ button {
     }
 }
 
-/* Homepage: hide nav links and hamburger, keep logo + lang + theme */
-.nav--home .nav__links,
-.nav--home .nav__menu-btn {
-    display: none !important;
-}
-
 .nav__link {
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
     color: var(--text-secondary);
     transition: color var(--duration-fast) ease;
     position: relative;
@@ -430,6 +439,7 @@ button {
 .mobile-menu__link {
     font-family: var(--font-display);
     font-size: clamp(2rem, 6vw + 0.5rem, 3.5rem);
+    font-weight: 700;
     color: var(--text-primary);
     letter-spacing: -0.02em;
     opacity: 0;
@@ -461,7 +471,7 @@ button {
     justify-content: center;
     gap: var(--space-xs);
     font-family: var(--font-body);
-    font-size: 0.92rem;
+    font-size: var(--text-sm);
     font-weight: 600;
     padding: 0.9rem 1.3rem;
     border-radius: 1rem;
@@ -512,10 +522,10 @@ button {
 
 .section__title {
     font-family: var(--font-display);
-    font-size: clamp(2.15rem, 4vw + 0.6rem, 3.8rem);
-    font-weight: 400;
+    font-size: var(--text-2xl);
+    font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.035em;
 }
 
 .section__title::after {
@@ -534,7 +544,7 @@ button {
 }
 
 .section__subtitle {
-    font-size: 0.98rem;
+    font-size: var(--text-base);
     color: var(--text-secondary);
     margin-top: var(--space-sm);
 }
@@ -582,7 +592,8 @@ button {
 }
 
 .case-block__label {
-    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -601,7 +612,8 @@ button {
 
 .case-block__highlight {
     font-family: var(--font-display);
-    font-size: 1.375rem;
+    font-size: var(--text-lg);
+    font-weight: 600;
     color: var(--text-primary);
     line-height: 1.4;
     letter-spacing: -0.01em;
@@ -642,7 +654,8 @@ button {
     padding: 0.5rem 1rem;
     background: var(--bg-tertiary);
     border-radius: 0.5rem;
-    font-size: 0.875rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
     border: 1px solid var(--border);
 }
 
@@ -654,6 +667,19 @@ button {
 
 .case-study-page-shell {
     padding-top: calc(3.5rem + 1rem);
+}
+
+.crypto-demo-intro {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+}
+
+.crypto-demo-intro__text {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 42rem;
 }
 
 .case-study-page__back {
@@ -698,8 +724,9 @@ button {
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
+    font-family: var(--font-body);
     color: var(--accent-text);
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -715,16 +742,17 @@ button {
 
 .case-study-page__title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: var(--text-3xl);
+    font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     margin-bottom: var(--space-md);
 }
 
 .case-study-page__summary {
     max-width: 62ch;
     color: var(--text-secondary);
-    font-size: clamp(1rem, 1.4vw + 0.55rem, 1.2rem);
+    font-size: var(--text-base);
     line-height: 1.8;
 }
 
@@ -750,8 +778,8 @@ button {
     min-height: 44px;
     margin-top: var(--space-md);
     padding: 0.75rem 1.5rem;
-    font-family: var(--font-display);
-    font-size: 0.9rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
     font-weight: 600;
     color: var(--bg-primary);
     background: var(--accent);
@@ -775,14 +803,13 @@ button {
 
 .footer__inner {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     gap: var(--space-md);
 }
 
 .footer__copy {
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
     color: var(--text-muted);
 }
 
@@ -790,12 +817,64 @@ button {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
     color: var(--text-muted);
 }
 
 .footer__sentidino {
     font-family: 'Vila Morena', Georgia, serif;
+}
+
+.footer__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border);
+}
+
+.footer__email {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--accent-text);
+    text-decoration: none;
+    transition: opacity var(--duration-fast) ease;
+}
+.footer__email:hover {
+    opacity: 0.75;
+}
+
+.footer__social {
+    display: flex;
+    gap: 0.25rem;
+}
+.footer__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--text-muted);
+    transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+}
+.footer__social a:hover {
+    color: var(--accent-text);
+    background: var(--accent-subtle);
+}
+.footer__social svg {
+    width: 17px;
+    height: 17px;
+}
+
+.footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 /* Octopus replaces the old status dot — animation is in Footer.astro */
@@ -988,20 +1067,21 @@ a[target="_blank"].btn::after,
 
 .blog__title {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: var(--text-2xl);
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: var(--space-xs);
 }
 
 .blog__subtitle {
-    font-size: clamp(1rem, 2vw, 1.125rem);
+    font-size: var(--text-base);
     color: var(--text-secondary);
     max-width: 40ch;
 }
 
 .blog__empty {
     color: var(--text-muted);
-    font-size: 1.125rem;
+    font-size: var(--text-md);
     padding: var(--space-2xl) 0;
 }
 
@@ -1060,15 +1140,16 @@ a[target="_blank"].btn::after,
 /* blog-card hover moved to @media (hover: hover) block */
 
 .blog-card__date {
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     color: var(--text-muted);
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .blog-card__title {
-    font-family: var(--font-display);
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--text-xl);
     color: var(--text-primary);
     margin: var(--space-xs) 0;
     line-height: 1.3;
@@ -1076,7 +1157,7 @@ a[target="_blank"].btn::after,
 
 .blog-card__description {
     color: var(--text-secondary);
-    font-size: 0.9375rem;
+    font-size: var(--text-base);
     line-height: 1.6;
 }
 
@@ -1170,15 +1251,16 @@ a[target="_blank"].btn::after,
 }
 
 .blog-post__title {
-    font-family: var(--font-display);
-    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--text-2xl);
     color: var(--text-primary);
     margin: var(--space-sm) 0;
     line-height: 1.2;
 }
 
 .blog-post__description {
-    font-size: 1.125rem;
+    font-size: var(--text-md);
     color: var(--text-secondary);
     line-height: 1.6;
 }
@@ -1201,6 +1283,7 @@ a[target="_blank"].btn::after,
 .prose h2 {
     font-family: var(--font-display);
     font-size: 1.5rem;
+    font-weight: 700;
     color: var(--text-primary);
     margin: var(--space-xl) 0 var(--space-sm);
 }
@@ -1280,6 +1363,25 @@ a[target="_blank"].btn::after,
     margin: var(--space-xl) 0;
 }
 
+.prose .yt-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    margin-bottom: var(--space-md);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.prose .yt-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
 /* Blog responsive */
 @media (max-width: 720px) {
     .blog {
@@ -1349,7 +1451,8 @@ a[target="_blank"].btn::after,
 
 .case-study-teaser__title {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-size: var(--text-2xl);
+    font-weight: 700;
     line-height: 1;
     letter-spacing: -0.04em;
     margin-bottom: 0.75rem;
@@ -1423,7 +1526,7 @@ a[target="_blank"].btn::after,
 }
 
 .not-found__text {
-    font-size: 1.125rem;
+    font-size: var(--text-md);
     color: var(--text-secondary);
     margin: var(--space-sm) 0 var(--space-lg);
     max-width: 30ch;

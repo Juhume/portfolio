@@ -174,6 +174,7 @@ export interface Translations {
     };
     home: {
         role: string;
+        bio: string;
         tagline: string;
         cvDownload: string;
         navCards: {

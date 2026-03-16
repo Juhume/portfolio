@@ -1,7 +1,7 @@
 ---
 title: "A noite que o meu DNS loitou consigo mesmo"
 description: "Todo funcionaba ata que deixou de funcionar. Ás 2AM, ningún dispositivo da miña casa resolvía un dominio. Esta é a historia de dous servizos DNS loitando polo control."
-date: 2025-11-15
+date: 2025-11-25
 lang: gl
 canonicalSlug: "la-noche-que-mi-dns-se-peleo-consigo-mismo"
 tags: ["infra", "homelab", "debugging"]

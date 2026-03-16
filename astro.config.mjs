@@ -4,7 +4,7 @@ import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
 
 export default defineConfig({
-    site: 'https://juliohuerta.dev',
+    site: 'https://juhume.com',
     output: 'static',
     adapter: vercel(),
     i18n: {

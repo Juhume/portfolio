@@ -1,7 +1,7 @@
 ---
 title: "Por qué tengo un servidor en casa"
 description: "No es un tutorial. Es la historia de por qué decidí montar un homelab, qué aprendí rompiéndolo todo, y por qué docker compose up se convirtió en mi momento zen."
-date: 2025-09-18
+date: 2025-11-08
 lang: es
 tags: ["infra", "vida", "homelab"]
 category: "personal"

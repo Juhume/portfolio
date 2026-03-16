@@ -14,18 +14,15 @@ const isHome = currentPath === `/${lang}/`;
 const homePrefix = isHome ? '' : `/${lang}/`;
 
 const navLinks = [
-    { href: `${homePrefix}#${ids.projects}`, label: t.nav.projects },
+    { href: `/${lang}/projects/`, label: t.nav.projects },
     { href: `/${lang}/about/`, label: t.nav.about },
-    { href: `${homePrefix}#${ids.contact}`, label: t.nav.contact },
+    { href: `/${lang}/blog/`, label: t.nav.blog },
 ];
-
-const blogLink = { href: `/${lang}/blog/`, label: t.nav.blog };
-navLinks.push(blogLink);
 ---
 
 <nav class={`nav ${isHome ? 'nav--home' : ''}`} id="nav" aria-label={t.a11y.mainNavigation}>
     <div class="container nav__inner">
-        <a href={`/${lang}/`} class="nav__logo">Julio HM</a>
+        <a href={`/${lang}/`} class="nav__logo">juhume</a>
         <div class="nav__right">
             <ul class="nav__links">
                 {navLinks.map(link => (

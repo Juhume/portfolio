@@ -1,7 +1,7 @@
 ---
 title: "Lo que aprendí dirigiendo agentes de IA antes de saber programar"
 description: "Dirigí un sistema multi-agente para construir proyectos reales sin escribir una línea de código. Lo que eso me enseñó sobre arquitectura, producto y mis propias limitaciones."
-date: 2025-12-04
+date: 2025-12-10
 lang: es
 tags: ["producto", "aprendizaje", "ia"]
 category: "profesional"
