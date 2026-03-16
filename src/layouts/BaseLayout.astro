@@ -333,8 +333,11 @@ const ogImageURL = new URL(ogImage, siteURL);
         });
     </script>
 
-    <!-- Cloudflare Web Analytics -->
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "CLOUDFLARE_TOKEN"}'></script>
+    <!-- Vercel Analytics -->
+    <script>
+    import { inject } from '@vercel/analytics';
+    inject();
+    </script>
 
 </body>
 </html>
