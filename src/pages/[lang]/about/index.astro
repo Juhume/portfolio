@@ -19,7 +19,7 @@ const canonicalPath = `/${lang}/about/`;
 <BaseLayout
     lang={lang}
     t={t}
-    title={`${t.about.title} | Julio Huerta`}
+    title={`${t.about.title} | juhume`}
     description={t.meta.description}
     canonicalPath={canonicalPath}
 >
@@ -138,6 +138,36 @@ const canonicalPath = `/${lang}/about/`;
     line-height: 1.75;
     color: var(--text-secondary);
     margin-bottom: var(--space-sm);
+}
+
+.about-page__section :global(.about-link) {
+    color: var(--accent-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+    transition: text-decoration-color 0.2s;
+}
+
+.about-page__section :global(.about-link):hover {
+    text-decoration-color: var(--accent);
+}
+
+.about-page__section :global(.about-link)::after {
+    content: '↗';
+    position: absolute;
+    top: -0.5em;
+    right: -0.8em;
+    font-size: 0.65em;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.about-page__section :global(.about-link) {
+    position: relative;
+}
+
+.about-page__section :global(.about-link):hover::after {
+    opacity: 1;
 }
 
 .about-page__principles {

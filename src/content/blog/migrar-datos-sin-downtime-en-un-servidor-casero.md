@@ -1,7 +1,7 @@
 ---
 title: "Migrar datos sin downtime en un servidor casero"
 description: "Mi NAS tenía una regla: nunca apagarse. Entonces necesité mover sus datos más críticos a un disco nuevo. Esta es la historia de cómo lo hice sin romper nada."
-date: 2025-12-20
+date: 2026-01-05
 lang: es
 tags: ["infra", "homelab", "devops"]
 category: "profesional"

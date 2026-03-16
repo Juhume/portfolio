@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef, useEffect, type FC } from 'react';
 
 /* ═══════════════════════════════════════════
-   Crypto Demo — Interactive E2E encryption
+   Crypto Demo: Interactive E2E encryption
    Shows how Espejo encrypts journal entries
    ═══════════════════════════════════════════ */
 
@@ -29,7 +29,7 @@ const STEP_LABELS = {
     tryDecrypt: 'Ahora intenta leerlo',
     decryptPasswordPlaceholder: 'Introduce la contraseña',
     decrypted: 'Descifrado:',
-    wrongPassword: 'Contraseña incorrecta — el servidor tampoco puede',
+    wrongPassword: 'Contraseña incorrecta; el servidor tampoco puede',
     note: 'Esto es exactamente lo que hace Espejo. Todo ocurre en tu navegador.',
   },
   en: {
@@ -52,7 +52,7 @@ const STEP_LABELS = {
     tryDecrypt: 'Now try reading it',
     decryptPasswordPlaceholder: 'Enter the password',
     decrypted: 'Decrypted:',
-    wrongPassword: 'Wrong password — the server can\'t either',
+    wrongPassword: 'Wrong password; the server can\'t either',
     note: 'This is exactly what Espejo does. Everything happens in your browser.',
   },
   gl: {
@@ -75,7 +75,7 @@ const STEP_LABELS = {
     tryDecrypt: 'Agora intenta lelo',
     decryptPasswordPlaceholder: 'Introduce o contrasinal',
     decrypted: 'Descifrado:',
-    wrongPassword: 'Contrasinal incorrecta — o servidor tampouco pode',
+    wrongPassword: 'Contrasinal incorrecta; o servidor tampouco pode',
     note: 'Isto é exactamente o que fai Espejo. Todo ocorre no teu navegador.',
   },
 };
@@ -107,7 +107,7 @@ const STYLES = `
   }
 
   .crypto-demo__title {
-    font-family: var(--font-display, 'Vila Morena', serif);
+    font-family: var(--font-display, 'DM Sans', sans-serif);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -547,7 +547,7 @@ const CryptoDemo: FC<Props> = ({ lang = 'es' }) => {
           </div>
         )}
 
-        {/* Phase: Encrypted — show cipher + decrypt form */}
+        {/* Phase: Encrypted, show cipher + decrypt form */}
         {(phase === 'encrypted' || phase === 'decrypting' || phase === 'failed') && (
           <div>
             <div className="crypto-label">{l.serverSees}</div>

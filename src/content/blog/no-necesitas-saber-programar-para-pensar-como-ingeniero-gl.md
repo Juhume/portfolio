@@ -1,7 +1,7 @@
 ---
 title: "Non necesitas saber programar para pensar coma un enxeñeiro"
 description: "O pensamento de sistemas, descompoñer problemas e depurar son habilidades que van moito máis alá do código. Reflexións de alguén que xestionou proxectos técnicos antes de escribir a súa primeira liña."
-date: 2026-01-10
+date: 2026-01-28
 lang: gl
 canonicalSlug: "no-necesitas-saber-programar-para-pensar-como-ingeniero"
 tags: ["vida", "aprendizaxe", "opinión"]

@@ -2,9 +2,9 @@ import type { Translations } from '../types';
 
 export const es: Translations = {
     meta: {
-        title: 'Julio Huerta | Desarrollador Frontend Web & Mobile',
+        title: 'Julio Huerta (juhume) | Desarrollador Frontend Web & Mobile',
         description: 'Desarrollador con +5 años en BBVA Empresas. Apps usadas por miles de empresas, proyectos con cifrado real, y demasiados contenedores Docker.',
-        keywords: 'desarrollador, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
+        keywords: 'Julio Huerta, juhume, desarrollador, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
         jobTitle: 'Desarrollador Frontend Web & Mobile',
         ogLocale: 'es_ES',
     },
@@ -115,7 +115,7 @@ export const es: Translations = {
                     'Usuarios activos preparando oposiciones',
                 ],
                 linkLabel: 'Abrir DiploTest',
-                linkUrl: 'https://diplotest.es',
+                linkUrl: 'https://diplo-test.vercel.app/',
             },
             {
                 title: 'Hey Haiku',
@@ -156,10 +156,10 @@ export const es: Translations = {
         pageSummary: 'Quería un diario digital donde nadie pudiera leer mis entradas. Ni el servidor, ni la base de datos, ni yo si pierdo la contraseña. Así nació Espejo.',
         pageHighlights: [
             'Offline-first con IndexedDB como fuente de verdad',
-            'Cifrado en cliente — el servidor solo ve blobs',
+            'Cifrado en cliente: el servidor solo ve blobs',
             'UX de bienestar, sin gamificación',
         ],
-        pageMetaTitle: 'Espejo | Caso de estudio | Julio Huerta',
+        pageMetaTitle: 'Espejo | Caso de estudio | juhume',
         pageMetaDescription: 'Espejo por dentro: arquitectura offline-first, cifrado E2E, sync opcional y decisiones de UX.',
         backToHome: 'Volver a proyectos',
         alsoSee: 'También puedes ver',
@@ -173,7 +173,7 @@ export const es: Translations = {
                 highlight: 'Offline-first con sync opcional. El servidor nunca ve el contenido.',
                 content: '',
                 list: [
-                    'IndexedDB (Dexie) como fuente de verdad — funciona sin conexión',
+                    'IndexedDB (Dexie) como fuente de verdad: funciona sin conexión',
                     'Cifrado AES-256-GCM + PBKDF2 (310k iteraciones) en cliente',
                     'Supabase para sync opcional entre dispositivos (solo blobs cifrados)',
                     'Soft-delete + last-write-wins para resolución de conflictos',
@@ -184,7 +184,7 @@ export const es: Translations = {
                 highlight: 'Diseñada desde la psicología del bienestar.',
                 content: '',
                 list: [
-                    'Check-in emocional antes de escribir — menos fricción en días difíciles',
+                    'Check-in emocional antes de escribir: menos fricción en días difíciles',
                     'Modo contemplación: lectura inmersiva con tipografía serif',
                     'Favoritos semánticos (claridad, semilla, ancla, victoria, cicatriz)',
                     'Year in Review estilo Spotify Wrapped',
@@ -205,7 +205,7 @@ export const es: Translations = {
             {
                 label: 'Aprendizaje',
                 highlight: 'Cuando algo se usa de verdad, piensas el código distinto.',
-                content: 'Offline-first con E2EE no es trivial. Migrar esquemas en IndexedDB, resolver conflictos de sync sin ver los datos, gestionar la pérdida de contraseña cuando es la clave de cifrado — cada problema te obliga a pensar más allá del happy path.',
+                content: 'Offline-first con E2EE no es trivial. Migrar esquemas en IndexedDB, resolver conflictos de sync sin ver los datos, gestionar la pérdida de contraseña cuando es la clave de cifrado. Cada problema te obliga a pensar más allá del happy path.',
             },
         ],
     },
@@ -214,14 +214,14 @@ export const es: Translations = {
         title: 'Sobre mí',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'Trabajo en BBVA, entre productos web y móviles, soporte técnico y evolución de plataforma.',
+            'Actualmente trabajo en BBVA, en un producto que utilizan miles de empresas cada día. Entre desarrollo web y móvil, soporte técnico y evolución de plataforma.',
             'Me interesa especialmente trabajar sobre sistemas que no solo hay que construir, sino también entender, mantener y mejorar: ahí es donde se cruzan código, producto, operación y criterio técnico.',
             'Fuera del trabajo también hago proyectos propios, automatizo cosas y experimento con IA.',
             'No me define una tecnología concreta. Me define una forma de trabajar: entender bien el sistema, detectar dónde está el problema y dejar las cosas mejor de lo que estaban.',
         ],
         personalTitle: 'Fuera del editor',
         personal: [
-            'Soy coruñés y vivo en Madrid. Casi siempre llevo cascos conmigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer">escucho música</a> prácticamente a todas horas: en casa, saliendo a correr o por la calle. También intento ir a todos los conciertos que puedo.',
+            'Soy coruñés y vivo en Madrid. Casi siempre llevo cascos conmigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">escucho música</a> prácticamente a todas horas: en casa, saliendo a correr o por la calle. También intento ir a todos los conciertos que puedo.',
             'Estudié Derecho, aunque desde pequeño ya andaba trasteando con páginas web, montando sitios personales y levantando servidores de Habbo para jugar con mis amigos.',
             'También me da por abrir FlightRadar cuando me distraigo e intento mejorar en bricolaje, aunque por ahora sigo construyendo bastante mejor software que muebles.',
         ],
@@ -265,6 +265,7 @@ export const es: Translations = {
     },
     home: {
         role: 'Me gusta construir productos, herramientas e infraestructura con software.',
+        bio: 'Me gusta construir productos, herramientas e infraestructura con software.',
         tagline: 'Software con sentidiño.',
         cvDownload: 'Descargar CV',
         navCards: {
@@ -290,52 +291,40 @@ export const es: Translations = {
     homeLab: {
         pageEyebrow: 'Arquitectura',
         title: 'Homelab',
-        pageSummary: 'Proyecto de infraestructura personal corriendo 24/7 en un único NAS. Laboratorio de desarrollo, hub de domótica y plataforma de orquestación de agentes de IA.',
+        pageSummary: 'Un NAS, +20 servicios y 5 agentes de IA. Todo auto-alojado, todo en producción.',
         pageHighlights: [
             '+20 contenedores Docker',
-            'Uptime 24/7',
+            '4 servicios críticos',
             '3 protocolos (Zigbee, WiFi, miio)',
             '5 agentes de IA',
         ],
-        pageMetaTitle: 'Homelab | Arquitectura | Julio Huerta',
+        pageMetaTitle: 'Homelab | Arquitectura | juhume',
         pageMetaDescription: 'Arquitectura de mi homelab: NAS con Docker, domótica multi-protocolo y sistema multi-agente de IA.',
         backToHome: 'Volver a proyectos',
         diagramTitle: 'Topología de red',
         alsoSee: 'También puedes ver',
         blocks: [
             {
-                label: 'Qué es',
-                highlight: 'Infraestructura personal en producción 24/7.',
-                content: 'Un NAS como servidor central ejecutando +20 servicios containerizados. Combina laboratorio de desarrollo, hub de domótica multi-protocolo y plataforma de orquestación de agentes de IA. Todo auto-alojado, todo gestionado con Docker Compose.',
+                label: 'Por qué',
+                highlight: 'La nube no me deja tocar lo que quiero tocar.',
+                content: 'Empezó como curiosidad y se convirtió en necesidad. Quería un sitio donde experimentar con IA, domótica y DevOps sin depender de terceros ni pagar por cada contenedor. Un NAS central ejecutando +20 servicios containerizados con Docker Compose: laboratorio de desarrollo, hub de domótica multi-protocolo y plataforma de agentes de IA. Todo bajo mi control.',
             },
             {
                 label: 'Decisiones de arquitectura',
                 highlight: 'Cada decisión tiene un porqué.',
                 content: '',
                 list: [
-                    'Docker Compose sobre Kubernetes — nodo único, la simplicidad gana',
-                    'SSD para bases de datos, HDD para medios — balance coste/rendimiento',
-                    'Bloqueo de anuncios a nivel DNS — red completa, cero configuración en clientes',
-                    'VPN mesh para acceso remoto — sin exponer puertos, sin tocar el router',
-                    'Sistema multi-agente de IA — agentes especializados por dominio',
-                ],
-            },
-            {
-                label: 'Números',
-                highlight: 'La infraestructura en datos.',
-                content: '',
-                list: [
-                    '+20 contenedores en producción',
-                    'Uptime 24/7',
-                    '3 protocolos de domótica (Zigbee, WiFi, miio)',
-                    '5 agentes de IA especializados',
-                    'Acceso remoto desde cualquier red',
+                    'Docker Compose sobre Kubernetes: nodo único, la simplicidad gana',
+                    'SSD para bases de datos, HDD para medios: balance coste/rendimiento',
+                    'Bloqueo de anuncios a nivel DNS: red completa, cero configuración en clientes',
+                    'VPN mesh para acceso remoto: sin exponer puertos, sin tocar el router',
+                    'Sistema multi-agente de IA: agentes especializados por dominio',
                 ],
             },
             {
                 label: 'Sistema multi-agente',
-                highlight: 'El diferenciador: IA especializada corriendo en local.',
-                content: 'Un sistema multi-agente corre directamente en el NAS. Cada agente tiene un dominio claro — desarrollo, trading, medios, orquestación — con sus propias herramientas y contexto. Se comunican en tiempo real y coordinan tareas de forma autónoma.\n\nLa decisión de diseño fue especialización sobre generalización: agentes con dominios acotados en lugar de un modelo monolítico. Resultado: errores contenidos, coordinación paralela y escalado horizontal por capacidad.',
+                highlight: 'El diferenciador: IA especializada ejecutándose en local.',
+                content: 'Un sistema multi-agente se ejecuta directamente en el NAS. Cada agente tiene un dominio claro (desarrollo, trading, medios, orquestación) con sus propias herramientas y contexto. Se comunican en tiempo real y coordinan tareas de forma autónoma.\n\nLa decisión de diseño fue especialización sobre generalización: agentes con dominios acotados en lugar de un modelo monolítico. Resultado: errores contenidos, coordinación paralela y escalado horizontal por capacidad.',
                 list: [
                     'Agentes especializados con dominios separados',
                     'Comunicación inter-agente en tiempo real',
@@ -355,7 +344,7 @@ export const es: Translations = {
             'Auth con Supabase',
             'Usuarios activos',
         ],
-        pageMetaTitle: 'DiploTest | Caso de estudio | Julio Huerta',
+        pageMetaTitle: 'DiploTest | Caso de estudio | juhume',
         pageMetaDescription: 'DiploTest por dentro: plataforma de estudio para oposiciones diplomáticas con estadísticas, auth y usuarios reales.',
         backToHome: 'Volver a proyectos',
         alsoSee: 'También puedes ver',

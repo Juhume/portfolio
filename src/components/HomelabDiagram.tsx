@@ -70,43 +70,29 @@ const SERVICES: ServiceNode[] = [
   { id: 'nas', label: 'UGREEN NAS', icon: '🖥️', category: 'infra', x: 50, y: 8,
     desc: { es: 'Servidor central. Linux x86_64, Docker Compose, SSD+HDD. Todo corre aquí.', en: 'Central server. Linux x86_64, Docker Compose, SSD+HDD. Everything runs here.', gl: 'Servidor central. Linux x86_64, Docker Compose, SSD+HDD. Todo corre aquí.' }, status: 'running' },
   { id: 'tailscale', label: 'Tailscale', icon: '🔗', category: 'infra', x: 25, y: 8,
-    desc: { es: 'VPN mesh — acceso remoto sin abrir puertos. Conecta todos mis dispositivos.', en: 'Mesh VPN — remote access without opening ports. Connects all my devices.', gl: 'VPN mesh — acceso remoto sen abrir portos. Conecta todos os meus dispositivos.' }, status: 'running' },
+    desc: { es: 'VPN mesh: acceso remoto sin abrir puertos. Conecta todos mis dispositivos.', en: 'Mesh VPN: remote access without opening ports. Connects all my devices.', gl: 'VPN mesh: acceso remoto sen abrir portos. Conecta todos os meus dispositivos.' }, status: 'running' },
   { id: 'adguard', label: 'AdGuard', icon: '🛡️', category: 'infra', x: 75, y: 8,
-    desc: { es: 'DNS privado — bloqueo de anuncios y trackers a nivel de red para todos los dispositivos.', en: 'Private DNS — network-level ad and tracker blocking for all devices.', gl: 'DNS privado — bloqueo de anuncios e trackers a nivel de rede para todos os dispositivos.' }, status: 'running' },
+    desc: { es: 'DNS privado: bloqueo de anuncios y trackers a nivel de red para todos los dispositivos.', en: 'Private DNS: network-level ad and tracker blocking for all devices.', gl: 'DNS privado: bloqueo de anuncios e trackers a nivel de rede para todos os dispositivos.' }, status: 'running' },
   { id: 'samba', label: 'Samba', icon: '📁', category: 'infra', x: 12, y: 24,
-    desc: { es: 'Servidor de archivos — acceso compartido a media y backups desde cualquier dispositivo.', en: 'File server — shared access to media and backups from any device.', gl: 'Servidor de ficheiros — acceso compartido a media e backups desde calquera dispositivo.' }, status: 'running' },
+    desc: { es: 'Servidor de archivos: acceso compartido a media y backups desde cualquier dispositivo.', en: 'File server: shared access to media and backups from any device.', gl: 'Servidor de ficheiros: acceso compartido a media e backups desde calquera dispositivo.' }, status: 'running' },
 
   // Media layer (middle-left)
-  { id: 'plex', label: 'Plex', icon: '🎬', category: 'media', x: 25, y: 40,
-    desc: { es: 'Streaming de medios — mi Netflix personal con transcodificación hardware.', en: 'Media streaming — my personal Netflix with hardware transcoding.', gl: 'Streaming de medios — o meu Netflix persoal con transcodificación hardware.' }, status: 'running' },
-  { id: 'sonarr', label: 'Sonarr', icon: '📺', category: 'media', x: 12, y: 55,
-    desc: { es: 'Gestión automática de series — busca, descarga y organiza episodios.', en: 'Automatic TV management — searches, downloads and organizes episodes.', gl: 'Xestión automática de series — busca, descarga e organiza episodios.' }, status: 'running' },
-  { id: 'radarr', label: 'Radarr', icon: '🎥', category: 'media', x: 38, y: 55,
-    desc: { es: 'Gestión automática de películas — el mismo concepto que Sonarr para cine.', en: 'Automatic movie management — same concept as Sonarr for films.', gl: 'Xestión automática de películas — o mesmo concepto que Sonarr para cine.' }, status: 'running' },
-  { id: 'bazarr', label: 'Bazarr', icon: '💬', category: 'media', x: 25, y: 68,
-    desc: { es: 'Subtítulos automáticos — descarga y sincroniza subs para todo el catálogo.', en: 'Automatic subtitles — downloads and syncs subs for the entire catalog.', gl: 'Subtítulos automáticos — descarga e sincroniza subs para todo o catálogo.' }, status: 'running' },
-  { id: 'prowlarr', label: 'Prowlarr', icon: '🔍', category: 'media', x: 5, y: 40,
-    desc: { es: 'Indexador centralizado — conecta Sonarr y Radarr con fuentes de contenido.', en: 'Centralized indexer — connects Sonarr and Radarr to content sources.', gl: 'Indexador centralizado — conecta Sonarr e Radarr con fontes de contido.' }, status: 'running' },
-  { id: 'overseerr', label: 'Overseerr', icon: '📋', category: 'media', x: 42, y: 40,
-    desc: { es: 'Solicitudes de medios — interfaz para pedir pelis y series desde el móvil.', en: 'Media requests — interface to request movies and shows from mobile.', gl: 'Solicitudes de medios — interface para pedir pelis e series desde o móbil.' }, status: 'running' },
-  { id: 'qbittorrent', label: 'qBittorrent', icon: '⬇️', category: 'media', x: 5, y: 68,
-    desc: { es: 'Cliente de descargas — automatizado por Sonarr/Radarr, sin intervención manual.', en: 'Download client — automated by Sonarr/Radarr, zero manual intervention.', gl: 'Cliente de descargas — automatizado por Sonarr/Radarr, sen intervención manual.' }, status: 'running' },
-  { id: 'flaresolverr', label: 'FlareSolverr', icon: '🔓', category: 'media', x: 5, y: 55,
-    desc: { es: 'Bypass de Cloudflare — permite a Prowlarr acceder a indexadores protegidos.', en: 'Cloudflare bypass — allows Prowlarr to access protected indexers.', gl: 'Bypass de Cloudflare — permite a Prowlarr acceder a indexadores protexidos.' }, status: 'running' },
+  { id: 'plex', label: 'Plex', icon: '🎬', category: 'media', x: 20, y: 48,
+    desc: { es: 'Streaming de medios: mi Netflix personal con transcodificación hardware.', en: 'Media streaming: my personal Netflix with hardware transcoding.', gl: 'Streaming de medios: o meu Netflix persoal con transcodificación hardware.' }, status: 'running' },
 
   // Smart home (middle-right)
   { id: 'hass', label: 'Home Assistant', icon: '🏠', category: 'smart', x: 75, y: 40,
-    desc: { es: 'Hub de domótica — persianas, luces, sensores. 3 protocolos (Zigbee, WiFi, miio).', en: 'Smart home hub — blinds, lights, sensors. 3 protocols (Zigbee, WiFi, miio).', gl: 'Hub de domótica — persianas, luces, sensores. 3 protocolos (Zigbee, WiFi, miio).' }, status: 'running' },
+    desc: { es: 'Hub de domótica: persianas, luces, sensores. 3 protocolos (Zigbee, WiFi, miio).', en: 'Smart home hub: blinds, lights, sensors. 3 protocols (Zigbee, WiFi, miio).', gl: 'Hub de domótica: persianas, luces, sensores. 3 protocolos (Zigbee, WiFi, miio).' }, status: 'running' },
   { id: 'zigbee', label: 'Zigbee2MQTT', icon: '📡', category: 'smart', x: 90, y: 55,
-    desc: { es: 'Bridge Zigbee — conecta dispositivos Zigbee sin depender de clouds propietarios.', en: 'Zigbee bridge — connects Zigbee devices without depending on proprietary clouds.', gl: 'Bridge Zigbee — conecta dispositivos Zigbee sen depender de clouds propietarios.' }, status: 'stopped' },
+    desc: { es: 'Bridge Zigbee: conecta dispositivos Zigbee sin depender de clouds propietarios.', en: 'Zigbee bridge: connects Zigbee devices without depending on proprietary clouds.', gl: 'Bridge Zigbee: conecta dispositivos Zigbee sen depender de clouds propietarios.' }, status: 'stopped' },
   { id: 'mosquitto', label: 'Mosquitto', icon: '📬', category: 'smart', x: 65, y: 55,
-    desc: { es: 'Broker MQTT — mensajería entre Home Assistant y dispositivos IoT.', en: 'MQTT broker — messaging between Home Assistant and IoT devices.', gl: 'Broker MQTT — mensaxería entre Home Assistant e dispositivos IoT.' }, status: 'stopped' },
+    desc: { es: 'Broker MQTT: mensajería entre Home Assistant y dispositivos IoT.', en: 'MQTT broker: messaging between Home Assistant and IoT devices.', gl: 'Broker MQTT: mensaxería entre Home Assistant e dispositivos IoT.' }, status: 'stopped' },
 
   // AI layer (bottom-right)
   { id: 'openclaw', label: 'OpenClaw', icon: '🐙', category: 'ai', x: 75, y: 78,
-    desc: { es: 'Plataforma multi-agente — orquesta 5 agentes de IA especializados en tiempo real.', en: 'Multi-agent platform — orchestrates 5 specialized AI agents in real time.', gl: 'Plataforma multi-axente — orquestra 5 axentes de IA especializados en tempo real.' }, status: 'running' },
+    desc: { es: 'Plataforma multi-agente: orquesta 5 agentes de IA especializados en tiempo real.', en: 'Multi-agent platform: orchestrates 5 specialized AI agents in real time.', gl: 'Plataforma multi-axente: orquestra 5 axentes de IA especializados en tempo real.' }, status: 'running' },
   { id: 'mahoraga', label: 'Mahoraga', icon: '📊', category: 'ai', x: 90, y: 90,
-    desc: { es: 'Bot de trading — análisis de mercados y ejecución automática de operaciones.', en: 'Trading bot — market analysis and automated trade execution.', gl: 'Bot de trading — análise de mercados e execución automática de operacións.' }, status: 'stopped' },
+    desc: { es: 'Bot de trading: análisis de mercados y ejecución automática de operaciones.', en: 'Trading bot: market analysis and automated trade execution.', gl: 'Bot de trading: análise de mercados e execución automática de operacións.' }, status: 'stopped' },
 ];
 
 const CONNECTIONS: Connection[] = [
@@ -114,18 +100,8 @@ const CONNECTIONS: Connection[] = [
   { from: 'tailscale', to: 'nas' },
   { from: 'nas', to: 'adguard' },
   { from: 'nas', to: 'samba' },
-  // Media pipeline
-  { from: 'overseerr', to: 'sonarr' },
-  { from: 'overseerr', to: 'radarr' },
-  { from: 'prowlarr', to: 'sonarr' },
-  { from: 'prowlarr', to: 'radarr' },
-  { from: 'flaresolverr', to: 'prowlarr' },
-  { from: 'sonarr', to: 'qbittorrent' },
-  { from: 'radarr', to: 'qbittorrent' },
-  { from: 'sonarr', to: 'plex' },
-  { from: 'radarr', to: 'plex' },
-  { from: 'bazarr', to: 'sonarr' },
-  { from: 'bazarr', to: 'radarr' },
+  // Media
+  { from: 'nas', to: 'plex' },
   // Smart home
   { from: 'hass', to: 'mosquitto' },
   { from: 'mosquitto', to: 'zigbee' },
@@ -154,7 +130,7 @@ const STYLES = `
   }
 
   .hlab-diagram__title {
-    font-family: var(--font-display, 'Vila Morena', serif);
+    font-family: var(--font-display, 'DM Sans', sans-serif);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);

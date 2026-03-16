@@ -1,7 +1,7 @@
 ---
 title: "My development setup in 2026"
 description: "A quick, honest rundown of the tools I use for development—no affiliate links, no forced recommendations. Just what works."
-date: 2026-03-01
+date: 2026-02-20
 lang: en
 canonicalSlug: "mi-setup-de-desarrollo-en-2026"
 tags: ["infra", "código", "herramientas"]
@@ -28,9 +28,13 @@ This changed how I work. Tailscale creates a mesh VPN between all my devices—l
 
 Zero config, it just works. It's one of those tools that once you try it, you can't understand how you lived without it.
 
+## Operating system: Linux
+
+My daily driver is Ubuntu. After years on macOS, the switch was smoother than I expected. Everything I need runs natively, Docker flies without virtualization layers, and the freedom to configure every corner of the system without anyone putting up guardrails is something you learn to appreciate. Not for everyone, but for development it's hard to ask for more.
+
 ## Terminal
 
-iTerm2 on macOS with tmux for persistent sessions. Multiple panes: one with Docker logs, another with the dev server, another for git. Everything visible at a glance.
+Ghostty as the emulator with tmux for persistent sessions. Multiple panes: one with Docker logs, another with the dev server, another for git. Everything visible at a glance.
 
 The shell is zsh with Oh My Zsh and a minimal prompt. No flashy themes with emojis—just the current directory, the git branch, and whether the last command succeeded or failed.
 

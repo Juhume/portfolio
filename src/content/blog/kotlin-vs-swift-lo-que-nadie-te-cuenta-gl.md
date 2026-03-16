@@ -1,7 +1,7 @@
 ---
 title: "Kotlin vs Swift: o que ninguén che conta"
 description: "Despois de traballar con ambos en BBVA para apps nativas, estas son as diferenzas reais do día a día. Non as do titorial, senón as do 'levo tres horas con isto'."
-date: 2025-07-22
+date: 2025-10-22
 lang: gl
 canonicalSlug: "kotlin-vs-swift-lo-que-nadie-te-cuenta"
 tags: ["código", "mobile"]

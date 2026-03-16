@@ -1,7 +1,7 @@
 ---
 title: "Migrating data with zero downtime on a home server"
 description: "My NAS had one rule: never go down. Then I needed to move its most critical data to a new drive. This is how I did it without breaking anything."
-date: 2025-12-20
+date: 2026-01-05
 lang: en
 canonicalSlug: "migrar-datos-sin-downtime-en-un-servidor-casero"
 tags: ["infra", "homelab", "devops"]

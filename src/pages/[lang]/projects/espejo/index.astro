@@ -21,7 +21,7 @@ const structuredData = {
     '@type': 'WebPage',
     name: t.caseStudy.pageMetaTitle,
     description: t.caseStudy.pageMetaDescription,
-    url: `https://juliohuerta.dev${canonicalPath}`,
+    url: `https://juhume.com${canonicalPath}`,
     inLanguage: lang,
     about: {
         '@type': 'SoftwareApplication',
@@ -54,10 +54,18 @@ const structuredData = {
                 { label: 'Espejo' }
             ]} />
         </div>
-        <CaseStudy t={t} ids={ids} lang={lang} variant="full" />
-        <div class="container">
+        <CaseStudy t={t} ids={ids} lang={lang} variant="full">
+            <div class="crypto-demo-intro">
+                <p class="crypto-demo-intro__text">
+                    {lang === 'en'
+                        ? 'All of the above sounds good in theory. But you don\'t have to take my word for it — try it yourself.'
+                        : lang === 'gl'
+                        ? 'Todo o anterior soa ben na teoría. Pero non tes que crerme — próbao ti mesmo.'
+                        : 'Todo lo anterior suena bien en la teoría. Pero no tienes que creerme — pruébalo tú mismo.'}
+                </p>
+            </div>
             <CryptoDemo lang={lang} client:visible />
-        </div>
+        </CaseStudy>
     </div>
 
     <Footer t={t} />

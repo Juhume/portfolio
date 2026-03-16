@@ -2,9 +2,9 @@ import type { Translations } from '../types';
 
 export const gl: Translations = {
     meta: {
-        title: 'Julio Huerta | Desenvolvedor Frontend Web & Mobile',
+        title: 'Julio Huerta (juhume) | Desenvolvedor Frontend Web & Mobile',
         description: 'Desenvolvedor con +5 anos en BBVA Empresas. Apps usadas por miles de empresas, proxectos con cifrado real, e demasiados contedores Docker.',
-        keywords: 'desenvolvedor, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
+        keywords: 'Julio Huerta, juhume, desenvolvedor, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
         jobTitle: 'Desenvolvedor Frontend Web & Mobile',
         ogLocale: 'gl_ES',
     },
@@ -115,7 +115,7 @@ export const gl: Translations = {
                     'Usuarios activos preparando oposicións',
                 ],
                 linkLabel: 'Abrir DiploTest',
-                linkUrl: 'https://diplotest.es',
+                linkUrl: 'https://diplo-test.vercel.app/',
             },
             {
                 title: 'Hey Haiku',
@@ -156,24 +156,24 @@ export const gl: Translations = {
         pageSummary: 'Quería un diario dixital onde ninguén puidese ler as miñas entradas. Nin o servidor, nin a base de datos, nin eu se perdo o contrasinal. Así naceu Espejo.',
         pageHighlights: [
             'Offline-first con IndexedDB como fonte de verdade',
-            'Cifrado no cliente — o servidor só ve blobs',
+            'Cifrado no cliente: o servidor só ve blobs',
             'UX de benestar, sen gamificación',
         ],
-        pageMetaTitle: 'Espejo | Caso de estudo | Julio Huerta',
+        pageMetaTitle: 'Espejo | Caso de estudo | juhume',
         pageMetaDescription: 'Espejo por dentro: arquitectura offline-first, cifrado E2E, sync opcional e decisións de UX.',
         backToHome: 'Volver a proxectos',
         alsoSee: 'Tamén podes ver',
         blocks: [
             {
                 label: 'Problema',
-                content: 'As apps de journaling presionan con rachas e gamificación. E ningunha ofrece privacidade real — as túas entradas viven en texto plano en servidores alleos.',
+                content: 'As apps de journaling presionan con rachas e gamificación. E ningunha ofrece privacidade real: as túas entradas viven en texto plano en servidores alleos.',
             },
             {
                 label: 'Arquitectura',
                 highlight: 'Offline-first con sync opcional. O servidor nunca ve o contido.',
                 content: '',
                 list: [
-                    'IndexedDB (Dexie) como fonte de verdade — funciona sen conexión',
+                    'IndexedDB (Dexie) como fonte de verdade: funciona sen conexión',
                     'Cifrado AES-256-GCM + PBKDF2 (310k iteracións) no cliente',
                     'Supabase para sync opcional entre dispositivos (só blobs cifrados)',
                     'Soft-delete + last-write-wins para resolución de conflitos',
@@ -184,7 +184,7 @@ export const gl: Translations = {
                 highlight: 'Deseñada desde a psicoloxía do benestar.',
                 content: '',
                 list: [
-                    'Check-in emocional antes de escribir — menos fricción en días difíciles',
+                    'Check-in emocional antes de escribir, menos fricción en días difíciles',
                     'Modo contemplación: lectura inmersiva con tipografía serif',
                     'Favoritos semánticos (claridade, semente, áncora, vitoria, cicatriz)',
                     'Year in Review estilo Spotify Wrapped',
@@ -205,7 +205,7 @@ export const gl: Translations = {
             {
                 label: 'Aprendizaxe',
                 highlight: 'Cando a xente o usa de verdade, pensas o código doutra maneira.',
-                content: 'Offline-first con E2EE non é trivial. Migrar esquemas en IndexedDB, resolver conflitos de sync sen ver os datos, xestionar a perda do contrasinal cando é a clave de cifrado — cada problema obrígache a pensar máis alá do happy path.',
+                content: 'Offline-first con E2EE non é trivial. Migrar esquemas en IndexedDB, resolver conflitos de sync sen ver os datos, xestionar a perda do contrasinal cando é a clave de cifrado. Cada problema obrígache a pensar máis alá do happy path.',
             },
         ],
     },
@@ -214,14 +214,14 @@ export const gl: Translations = {
         title: 'Sobre min',
         photoAlt: 'Julio Huerta',
         paragraphs: [
-            'Traballo en BBVA, entre produtos web e móbiles, soporte técnico e evolución de plataforma.',
+            'Actualmente traballo en BBVA, nun produto que utilizan miles de empresas cada día. Entre desenvolvemento web e móbil, soporte técnico e evolución de plataforma.',
             'Interésame especialmente traballar sobre sistemas que non só hai que construír, senón tamén entender, manter e mellorar: aí é onde se cruzan código, produto, operación e criterio técnico.',
             'Fóra do traballo tamén fago proxectos propios, automatizo cousas e experimento con IA.',
             'Non me define unha tecnoloxía concreta. Defíneme unha forma de traballar: entender ben o sistema, detectar onde está o problema e deixar as cousas mellor do que estaban.',
         ],
         personalTitle: 'Fóra do editor',
         personal: [
-            'Son coruñés e vivo en Madrid. Case sempre levo cascos conmigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer">escoito música</a> practicamente a todas horas: na casa, saíndo a correr ou pola rúa. Tamén intento ir a todos os concertos que podo.',
+            'Son coruñés e vivo en Madrid. Case sempre levo cascos conmigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">escoito música</a> practicamente a todas horas: na casa, saíndo a correr ou pola rúa. Tamén intento ir a todos os concertos que podo.',
             'Estudei Dereito, aínda que desde pequeno xa andaba trasteando con páxinas web, montando sitios persoais e levantando servidores de Habbo para xogar cos meus amigos.',
             'Tamén me dá por abrir FlightRadar cando me distraio e intento mellorar no bricolaxe, aínda que polo de agora sigo construíndo bastante mellor software que mobles.',
         ],
@@ -265,6 +265,7 @@ export const gl: Translations = {
     },
     home: {
         role: 'Gústame construír produtos, ferramentas e infraestrutura con software.',
+        bio: 'Gústame construír produtos, ferramentas e infraestrutura con software.',
         tagline: 'Software con sentidiño.',
         cvDownload: 'Descargar CV',
         navCards: {
@@ -297,7 +298,7 @@ export const gl: Translations = {
             '3 protocolos (Zigbee, WiFi, miio)',
             '5 axentes de IA',
         ],
-        pageMetaTitle: 'Homelab | Arquitectura | Julio Huerta',
+        pageMetaTitle: 'Homelab | Arquitectura | juhume',
         pageMetaDescription: 'Arquitectura do meu homelab: NAS con Docker, domótica multi-protocolo e sistema multi-axente de IA.',
         backToHome: 'Volver a proxectos',
         diagramTitle: 'Topoloxía de rede',
@@ -313,11 +314,11 @@ export const gl: Translations = {
                 highlight: 'Cada decisión ten un porqué.',
                 content: '',
                 list: [
-                    'Docker Compose sobre Kubernetes — nodo único, a simplicidade gaña',
-                    'SSD para bases de datos, HDD para medios — balance custo/rendemento',
-                    'Bloqueo de anuncios a nivel DNS — rede completa, cero configuración en clientes',
-                    'VPN mesh para acceso remoto — sen expoñer portos, sen tocar o router',
-                    'Sistema multi-axente de IA — axentes especializados por dominio',
+                    'Docker Compose sobre Kubernetes: nodo único, a simplicidade gaña',
+                    'SSD para bases de datos, HDD para medios: balance custo/rendemento',
+                    'Bloqueo de anuncios a nivel DNS: rede completa, cero configuración en clientes',
+                    'VPN mesh para acceso remoto: sen expoñer portos, sen tocar o router',
+                    'Sistema multi-axente de IA: axentes especializados por dominio',
                 ],
             },
             {
@@ -335,7 +336,7 @@ export const gl: Translations = {
             {
                 label: 'Sistema multi-axente',
                 highlight: 'O diferenciador: IA especializada correndo en local.',
-                content: 'Un sistema multi-axente corre directamente no NAS. Cada axente ten un dominio claro — desenvolvemento, trading, medios, orquestración — coas súas propias ferramentas e contexto. Comunícanse en tempo real e coordinan tarefas de forma autónoma.\n\nA decisión de deseño foi especialización sobre xeneralización: axentes con dominios acotados en lugar dun modelo monolítico. Resultado: erros contidos, coordinación paralela e escalado horizontal por capacidade.',
+                content: 'Un sistema multi-axente corre directamente no NAS. Cada axente ten un dominio claro (desenvolvemento, trading, medios, orquestración) coas súas propias ferramentas e contexto. Comunícanse en tempo real e coordinan tarefas de forma autónoma.\n\nA decisión de deseño foi especialización sobre xeneralización: axentes con dominios acotados en lugar dun modelo monolítico. Resultado: erros contidos, coordinación paralela e escalado horizontal por capacidade.',
                 list: [
                     'Axentes especializados con dominios separados',
                     'Comunicación inter-axente en tempo real',
@@ -355,7 +356,7 @@ export const gl: Translations = {
             'Auth con Supabase',
             'Usuarios activos',
         ],
-        pageMetaTitle: 'DiploTest | Caso de estudo | Julio Huerta',
+        pageMetaTitle: 'DiploTest | Caso de estudo | juhume',
         pageMetaDescription: 'DiploTest por dentro: plataforma de estudo para oposicións diplomáticas con estatísticas, auth e usuarios reais.',
         backToHome: 'Volver a proxectos',
         alsoSee: 'Tamén podes ver',

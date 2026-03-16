@@ -28,7 +28,7 @@ const hasTranslations = posts.some(p => p.data.lang === lang);
 <BaseLayout
     lang={lang}
     t={t}
-    title={`${t.blog.title} | Julio Huerta`}
+    title={`${t.blog.title} | juhume`}
     description={hasTranslations || lang === 'es' ? t.blog.subtitle : t.blog.spanishOnlyText}
     canonicalPath={`/${lang}/blog/`}
     noindex={!hasTranslations && lang !== 'es'}

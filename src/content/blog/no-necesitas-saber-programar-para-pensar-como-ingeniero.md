@@ -1,7 +1,7 @@
 ---
 title: "No necesitas saber programar para pensar como ingeniero"
 description: "El pensamiento de sistemas, descomponer problemas y debuggear son habilidades que van mucho más allá del código. Reflexiones de alguien que gestionó proyectos técnicos antes de escribir su primera línea."
-date: 2026-01-10
+date: 2026-01-28
 lang: es
 tags: ["vida", "aprendizaje", "opinión"]
 category: "personal"

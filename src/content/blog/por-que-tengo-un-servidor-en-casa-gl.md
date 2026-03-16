@@ -1,7 +1,7 @@
 ---
 title: "Por que teño un servidor na casa"
 description: "Non é un titorial. É a historia de por que decidín montar un homelab, que aprendín rompéndoo todo, e por que docker compose up se converteu no meu momento zen."
-date: 2025-09-18
+date: 2025-11-08
 lang: gl
 canonicalSlug: "por-que-tengo-un-servidor-en-casa"
 tags: ["infra", "vida", "homelab"]

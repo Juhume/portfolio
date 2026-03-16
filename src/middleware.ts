@@ -9,7 +9,7 @@ export const onRequest = defineMiddleware(({ request, redirect, url }, next) => 
     const preferred = parseAcceptLanguage(accept);
     const matched = preferred.find(lang => locales.includes(lang as Locale)) as Locale | undefined;
 
-    return redirect(`/${matched || defaultLocale}/`, 302);
+    return redirect(`/${matched || 'en'}/`, 302);
 });
 
 function parseAcceptLanguage(header: string): string[] {

@@ -27,30 +27,17 @@ const { t, lang } = Astro.props;
         <p class="card__role">{t.home.role}</p>
 
         <div class="card__bio">
-            <p>{t.about.paragraphs[0]}</p>
+            <p>{t.home.bio}</p>
         </div>
 
-        <nav class="card__links" aria-label="Main navigation">
-            <a href={`/${lang}/projects/`} class="card__link">{t.nav.projects}</a>
-            <a href={`/${lang}/blog/`} class="card__link">{t.nav.blog}</a>
-            <a href={`/${lang}/about/`} class="card__link">{t.nav.about}</a>
-            <a href={`/cv/julio-huerta-cv-${lang === 'en' ? 'en' : 'es'}.pdf`} class="card__link card__link--cv" download>{t.home.cvDownload}</a>
-        </nav>
-
-        <div class="card__social">
-            <a href="https://github.com/juhume" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                </svg>
-            </a>
-            <a href="https://linkedin.com/in/juhume" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                    <rect x="2" y="9" width="4" height="12"/>
-                    <circle cx="4" cy="4" r="2"/>
-                </svg>
-            </a>
-        </div>
+        <a href={`/cv/julio-huerta-cv-${lang === 'en' ? 'en' : 'es'}.pdf`} class="card__cv" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            {t.home.cvDownload}
+        </a>
     </div>
 </main>
 
@@ -121,7 +108,6 @@ const { t, lang } = Astro.props;
         margin-bottom: var(--space-lg);
         transition: border-radius 0.6s ease, box-shadow 0.6s ease;
         box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 15%, transparent);
-        cursor: pointer;
     }
 
     .card__photo-ring:hover {
@@ -168,7 +154,7 @@ const { t, lang } = Astro.props;
        Role
        ========================================== */
     .card__role {
-        font-size: 0.95rem;
+        font-size: var(--text-base);
         color: var(--accent-text);
         font-weight: 500;
         margin-bottom: var(--space-sm);
@@ -249,7 +235,7 @@ const { t, lang } = Astro.props;
     }
 
     .card__bio p {
-        font-size: 0.95rem;
+        font-size: var(--text-base);
         color: var(--text-secondary);
         line-height: 1.75;
         max-width: 48ch;
@@ -288,83 +274,29 @@ const { t, lang } = Astro.props;
     }
 
 /* ==========================================
-       Navigation Links
+       CV Download Link
        ========================================== */
-    .card__links {
-        display: flex;
+    .card__cv {
+        display: inline-flex;
         align-items: center;
-        gap: var(--space-lg);
-    }
-
-    .card__link {
-        font-family: var(--font-display);
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--accent-text);
+        gap: 0.4rem;
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--text-muted);
         text-decoration: none;
-        letter-spacing: 0.01em;
-        position: relative;
-        transition: opacity var(--duration-fast) var(--ease-out);
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
     }
-
-    .card__link::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 1.5px;
-        background: var(--accent);
-        transition: width 0.3s var(--ease-out);
+    .card__cv:hover {
+        color: var(--accent-text);
+        border-color: color-mix(in srgb, var(--accent) 40%, transparent);
     }
-
-    .card__link:hover::after {
-        width: 100%;
-    }
-
-    .card__link:hover {
-        opacity: 0.85;
-    }
-
-    :global(.js) .card__links {
+    :global(.js) .card__cv {
         opacity: 0;
         animation: springIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.05s forwards;
-    }
-
-    /* ==========================================
-       Social Links
-       ========================================== */
-    .card__social {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: var(--space-lg);
-    }
-
-    .card__social a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        color: var(--text-muted);
-        transition: color var(--duration-fast) ease,
-                    background-color var(--duration-fast) ease;
-    }
-
-    .card__social a:hover {
-        color: var(--accent-text);
-        background: var(--accent-subtle);
-    }
-
-    .card__social svg {
-        width: 19px;
-        height: 19px;
-    }
-
-    :global(.js) .card__social {
-        opacity: 0;
-        animation: springIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s forwards;
     }
 
     /* ==========================================
@@ -382,21 +314,6 @@ const { t, lang } = Astro.props;
         60% { opacity: 1; transform: scale(1.05); }
         80% { transform: scale(0.98); }
         100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Easter Egg Tooltip */
-    .card__easter-tooltip {
-        position: absolute;
-        top: calc(100% + var(--space-xs));
-        left: 50%;
-        transform: translateX(-50%) translateY(-5px);
-        font-size: 0.8rem;
-        color: var(--accent-text);
-        white-space: nowrap;
-        opacity: 0;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        pointer-events: none;
-        z-index: 10;
     }
 
     /* ==========================================
@@ -447,17 +364,6 @@ const { t, lang } = Astro.props;
             margin-bottom: var(--space-lg);
         }
 
-        .card__links {
-            gap: var(--space-md);
-        }
-
-        .card__link {
-            font-size: 0.85rem;
-        }
-
-        .card__social {
-            margin-top: var(--space-md);
-        }
     }
 
     @media (min-width: 768px) {
@@ -557,59 +463,6 @@ if (prefersReducedMotion) {
                 });
             }
         }, 3200);
-    })();
-
-    // 3. EASTER EGG: TRIPLE-CLICK PHOTO
-    (() => {
-        const ring = document.querySelector('.card__photo-ring');
-        if (!ring) return;
-        
-        const facts = [
-            '✈️ FlightRadar addict',
-            '🎵 Always at concerts',
-            '🔧 DIY... in progress',
-            '🖋️ Typography opinions: too many',
-            '🏠 NAS > cloud',
-        ];
-        
-        let clickCount = 0;
-        let clickTimer = null;
-        
-        ring.addEventListener('click', () => {
-            clickCount++;
-            
-            if (clickTimer) clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
-            
-            if (clickCount >= 3) {
-                clickCount = 0;
-                ring.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                ring.style.transform = 'rotateY(360deg)';
-                
-                // Show random fact
-                let tooltip = document.querySelector('.card__easter-tooltip');
-                if (!tooltip) {
-                    tooltip = document.createElement('div');
-                    tooltip.className = 'card__easter-tooltip';
-                    ring.parentElement.insertBefore(tooltip, ring.nextSibling);
-                }
-                
-                const fact = facts[Math.floor(Math.random() * facts.length)];
-                tooltip.textContent = fact;
-                tooltip.style.opacity = '1';
-                tooltip.style.transform = 'translateX(-50%) translateY(0)';
-                
-                setTimeout(() => {
-                    ring.style.transform = '';
-                    setTimeout(() => { ring.style.transition = ''; }, 800);
-                }, 800);
-                
-                setTimeout(() => {
-                    tooltip.style.opacity = '0';
-                    tooltip.style.transform = 'translateX(-50%) translateY(-5px)';
-                }, 2500);
-            }
-        });
     })();
 
 }
