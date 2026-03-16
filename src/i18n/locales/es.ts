@@ -112,7 +112,7 @@ export const es: Translations = {
                 highlights: [
                     'Coaching 24/7 con accountability real',
                     '20+ cron jobs automáticos (nutrición, entreno, suplementos)',
-                    'Análisis de Apple Watch: splits, FC, zonas, progresión',
+                    'Tracking de progresión por ejercicio y sesión',
                 ],
                 linkLabel: 'Ver caso de estudio',
             },
