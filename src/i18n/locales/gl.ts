@@ -221,7 +221,7 @@ export const gl: Translations = {
         ],
         personalTitle: 'Fóra do editor',
         personal: [
-            'Son coruñés e vivo en Madrid. Case sempre levo cascos conmigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer">escoito música</a> practicamente a todas horas: na casa, saíndo a correr ou pola rúa. Tamén intento ir a todos os concertos que podo.',
+            'Son coruñés e vivo en Madrid. Case sempre levo cascos conmigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">escoito música</a> practicamente a todas horas: na casa, saíndo a correr ou pola rúa. Tamén intento ir a todos os concertos que podo.',
             'Estudei Dereito, aínda que desde pequeno xa andaba trasteando con páxinas web, montando sitios persoais e levantando servidores de Habbo para xogar cos meus amigos.',
             'Tamén me dá por abrir FlightRadar cando me distraio e intento mellorar no bricolaxe, aínda que polo de agora sigo construíndo bastante mellor software que mobles.',
         ],

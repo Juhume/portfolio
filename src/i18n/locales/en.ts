@@ -221,7 +221,7 @@ export const en: Translations = {
         ],
         personalTitle: 'Outside the editor',
         personal: [
-            'I\'m from A Coruña and live in Madrid. I almost always have my headphones on because I <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer">listen to music</a> practically all the time: at home, running or just walking around. I also try to go to every concert I can.',
+            'I\'m from A Coruña and live in Madrid. I almost always have my headphones on because I <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">listen to music</a> practically all the time: at home, running or just walking around. I also try to go to every concert I can.',
             'I studied Law, though since I was a kid I was already tinkering with web pages, building personal sites and setting up Habbo servers to play with my friends.',
             'I also find myself opening FlightRadar when I get distracted and I try to improve at DIY, though for now I\'m still considerably better at building software than furniture.',
         ],
