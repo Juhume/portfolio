@@ -16,7 +16,7 @@ There are songs that catch your attention, and then there are songs that stop yo
 
 <div class="yt-embed"><iframe src="https://www.youtube.com/embed/UKVDSvhIRM8" title="DON WEST - SMALL CHANGE (Official Music Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
 
-Don West is an artist from Sydney who makes soul with a disarming naturalness. His debut album, **Give Me All Your Love**, sounds like it belongs to another era, but not as a copy or a forced tribute. It sounds alive, careful and very real. ([Wikipedia][1])
+Don West is an artist from Sydney who makes soul with a disarming naturalness. His debut album, **Give Me All Your Love**, sounds like it belongs to another era, but not as a copy or a forced tribute. It sounds alive, careful and very real.
 
 ## The sound
 
@@ -59,5 +59,3 @@ Here the songs are well-written, the arrangements are intentional and everything
 Don West already has millions of monthly listeners on Spotify, but he still has something I love when discovering someone new: the feeling of having arrived before it becomes completely obvious to everyone else.
 
 And maybe that's also why recommending him feels so good.
-
-[1]: https://en.wikipedia.org/wiki/Don_West_%28singer%29 "Don West (singer)"

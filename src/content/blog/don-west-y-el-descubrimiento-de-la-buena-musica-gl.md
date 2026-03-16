@@ -16,7 +16,7 @@ Hai cancións que che chaman a atención, e logo están as que conseguen pararte
 
 <div class="yt-embed"><iframe src="https://www.youtube.com/embed/UKVDSvhIRM8" title="DON WEST - SMALL CHANGE (Official Music Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
 
-Don West é un artista de Sydney que fai soul cunha naturalidade que desarma. O seu disco debut, **Give Me All Your Love**, soa a outra época, si, pero non como unha copia nin como unha homenaxe forzada. Soa vivo, coidado e moi de verdade. ([Wikipedia][1])
+Don West é un artista de Sydney que fai soul cunha naturalidade que desarma. O seu disco debut, **Give Me All Your Love**, soa a outra época, si, pero non como unha copia nin como unha homenaxe forzada. Soa vivo, coidado e moi de verdade.
 
 ## O son
 
@@ -59,5 +59,3 @@ Aquí as cancións están ben escritas, os arranxos teñen intención e todo par
 Don West ten xa millóns de oíntes mensuais en Spotify, pero aínda conserva algo que me gusta moito cando descubro a alguén: a sensación de ter chegado antes de que sexa completamente evidente para todo o mundo.
 
 E quizais por iso tamén apetece tanto recomendalo.
-
-[1]: https://en.wikipedia.org/wiki/Don_West_%28singer%29 "Don West (singer)"
