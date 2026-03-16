@@ -309,34 +309,6 @@ const ogImageURL = new URL(ogImage, siteURL);
 
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "CLOUDFLARE_TOKEN"}'></script>
-    <!-- Global haptic feedback (iOS) -->
-    <script is:inline>
-    (function() {
-      if (typeof document === 'undefined') return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      if (!('ontouchstart' in window)) return;
-      if (document.getElementById('global-haptic-switch')) return;
 
-      var label = document.createElement('label');
-      label.setAttribute('for', 'global-haptic-switch');
-      label.textContent = 'Haptic';
-      label.style.cssText = 'position:fixed;bottom:0;left:0;opacity:0.01;pointer-events:none;z-index:-1;';
-      label.setAttribute('aria-hidden', 'true');
-
-      var input = document.createElement('input');
-      input.type = 'checkbox';
-      input.setAttribute('switch', '');
-      input.id = 'global-haptic-switch';
-      label.appendChild(input);
-      document.body.appendChild(label);
-
-      document.addEventListener('click', function(e) {
-        var t = e.target;
-        if (t && t.closest && t.closest('a, button, [role="tab"], [data-haptic], .theme-toggle, .nav__menu-btn, .lang-switcher__link, .card__link, .cflow-dot, .hlab-node, .crypto-btn')) {
-          label.click();
-        }
-      }, { passive: true });
-    })();
-    </script>
 </body>
 </html>
