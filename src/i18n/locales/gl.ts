@@ -89,7 +89,7 @@ export const gl: Translations = {
         items: [
             {
                 title: 'Espejo',
-                description: 'O teu diario onde nin o servidor pode ler o que escribes.',
+                description: 'Diario privado con cifrado de extremo a extremo e almacenamento local-first.',
                 category: 'App web',
                 badge: 'En uso',
                 role: 'Full-Stack',
@@ -104,7 +104,7 @@ export const gl: Translations = {
             },
             {
                 title: 'DiploTest',
-                description: 'Prepara a oposición diplomática con datos, non con intuición.',
+                description: 'Plataforma de estudo para as oposicións ao corpo diplomático español.',
                 category: 'App web',
                 badge: 'En uso',
                 role: 'Full-Stack',

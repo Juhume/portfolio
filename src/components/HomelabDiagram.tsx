@@ -131,7 +131,7 @@ const STYLES = `
 
   .hlab-diagram__title {
     font-family: var(--font-display, 'DM Sans', sans-serif);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.25rem;
@@ -174,8 +174,8 @@ const STYLES = `
   .hlab-canvas {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 10;
-    min-height: 300px;
+    aspect-ratio: 16 / 5;
+    min-height: 180px;
   }
 
   .hlab-canvas svg {
@@ -324,7 +324,7 @@ const STYLES = `
       font-size: 1rem;
     }
     .hlab-node__label { font-size: 0.5rem; }
-    .hlab-canvas { aspect-ratio: 4 / 5; min-height: 400px; }
+    .hlab-canvas { aspect-ratio: 3 / 4; min-height: 300px; }
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -54,10 +54,9 @@ const structuredData = {
                 { label: 'Homelab' }
             ]} />
         </div>
-        <HomelabCaseStudy t={t} ids={ids} lang={lang} />
-        <div class="container">
+        <HomelabCaseStudy t={t} ids={ids} lang={lang}>
             <HomelabDiagram lang={lang} client:visible />
-        </div>
+        </HomelabCaseStudy>
     </div>
 
     <Footer t={t} />

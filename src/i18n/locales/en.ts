@@ -89,7 +89,7 @@ export const en: Translations = {
         items: [
             {
                 title: 'Espejo',
-                description: 'A journal where not even the server can read what you write.',
+                description: 'Private journal with end-to-end encryption and local-first storage.',
                 category: 'Web app',
                 badge: 'In use',
                 role: 'Full-Stack',
