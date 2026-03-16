@@ -27,7 +27,7 @@ const { t, lang } = Astro.props;
         <p class="card__role">{t.home.role}</p>
 
         <div class="card__bio">
-            <p>{t.home.bio}</p>
+            <p>{t.about.paragraphs[0]}</p>
         </div>
 
         <a href={`/cv/julio-huerta-cv-${lang === 'en' ? 'en' : 'es'}.pdf`} class="card__cv" download>
