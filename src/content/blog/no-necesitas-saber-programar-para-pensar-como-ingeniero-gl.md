@@ -34,18 +34,24 @@ A habilidade máis importante que aprendín da enxeñaría—sen ter escrito có
 
 "Construír unha aplicación web" soa enorme. "Definir os datos que necesita a pantalla principal" soa manexábel. É o mesmo proxecto, pero un paralízate e o outro ponche en movemento.
 
-Isto useino xestionando equipos, definindo roadmaps e planificando sprints. E agora que estou aprendendo a programar, doumo conta de que é exactamente a mesma habilidade que uso para entender un problema de código: descompoñer, illar, resolver por partes.
+Isto useino xestionando equipos, definindo roadmaps e planificando sprints. E cando afondo en código, doumo conta de que é exactamente a mesma habilidade: descompoñer, illar, resolver por partes.
+
+## A IA como acelerador, non como atallo
+
+Hai conceptos técnicos que durante anos se me atascaban. Lía documentación, vía titoriais, e algo non terminaba de encaixar. Desde que uso IA como ferramenta de aprendizaxe, iso cambiou. Non porque a IA programe por min, senón porque podo preguntar "por que isto funciona así?" as veces que faga falta, sen vergoña, e recibir unha explicación adaptada ao que xa entendo.
+
+A clave é que a IA non substitúe a mentalidade de enxeñeiro. Compleméntaa. Se non sabes facer as preguntas correctas, a IA dache respostas xenéricas. Pero se xa pensas en sistemas, se sabes descompoñer un problema, se entendes que estás buscando aínda que non saibas o nome exacto, a IA convértese nun multiplicador brutal.
 
 ## Non é un substituto, é un complemento
 
-Que quede claro: pensar coma un enxeñeiro non substitúe a saber programar. Son cousas distintas. Eu podo deseñar un sistema nunha pizarra, pero se non sei implementalo, dependo doutros para executar a miña visión. E esa dependencia ten un custo.
+Que quede claro: pensar coma un enxeñeiro non substitúe a saber programar. Son cousas distintas. Podo deseñar un sistema nunha pizarra, pero se non sei implementalo, dependo doutros para executar a miña visión. E esa dependencia ten un custo.
 
-Por iso estou aprendendo agora. Non para demostrar nada, senón porque a combinación de pensamento de sistemas + capacidade de execución é moito máis potente que calquera das dúas por separado.
+A combinación de pensamento de sistemas + capacidade de execución + IA como ferramenta é moito máis potente que calquera das tres por separado.
 
 ## Para quen estea onde eu estiven
 
-Se traballas en tecnoloxía pero non programas—product manager, deseñador, QA manual, soporte técnico—non subestimes o que xa sabes. A capacidade de pensar de forma estruturada, de descompoñer problemas e de entender sistemas complexos ten un valor enorme.
+Se traballas en tecnoloxía pero non programas — product manager, deseñador, QA manual, soporte técnico — non subestimes o que xa sabes. A capacidade de pensar de forma estruturada, de descompoñer problemas e de entender sistemas complexos ten un valor enorme.
 
-E se che pica a curiosidade de aprender a programar, faino. Non porque che falte algo, senón porque che dá un superpoder novo que complementa todo o que xa tes.
+E se che pica a curiosidade de ir máis alá, faino. Non porque che falte algo, senón porque che dá un superpoder novo que complementa todo o que xa tes. Hoxe hai ferramentas que fan que o camiño sexa moito menos solitario que antes.
 
 A sintaxe apréndese. A mentalidade, non tan fácil. E ti probabelmente xa a tes.
