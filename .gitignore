@@ -26,3 +26,10 @@ reviews/
 
 # Blog admin
 admin/node_modules/
+
+# Vercel build output
+.vercel/
+
+# Secretos
+.env
+.env.*
