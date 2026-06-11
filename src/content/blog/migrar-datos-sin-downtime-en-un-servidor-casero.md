@@ -15,7 +15,7 @@ El NAS arrancó con un disco duro mecánico (volume1). Para películas, música 
 
 Y se notaba. Home Assistant tardaba cada vez más en cargar el historial. Algunas automatizaciones se disparaban con retraso. Los dashboards que tiraban de históricos iban lentos. El cuello de botella era claro: I/O de disco.
 
-Así que compré un SSD y lo monté como volume2. El plan parecía simple. mover las bases de datos del HDD al SSD. Lo que no era tan simple era hacerlo sin apagar el NAS. Porque el NAS no es solo mi servidor de archivos. Es el DNS de casa, el gestor de domótica, el media server. Si lo apago, la casa se queda a oscuras. literalmente, porque las luces inteligentes dependen de Home Assistant.
+Así que compré un SSD y lo monté como volume2. El plan parecía simple: mover las bases de datos del HDD al SSD. Lo que no era tan simple era hacerlo sin apagar el NAS. Porque el NAS no es solo mi servidor de archivos. Es el DNS de casa, el gestor de domótica, el media server. Si lo apago, la casa se queda a oscuras, literalmente, porque las luces inteligentes dependen de Home Assistant.
 
 ## El plan
 
@@ -33,9 +33,9 @@ En teoría, cada servicio estaría offline menos de 30 segundos. El resto del NA
 
 La teoría fue bonita. La práctica tuvo sus momentos.
 
-**SQLite y los locks.** Si haces rsync de una base de datos SQLite mientras el servicio escribe, puedes copiar un archivo corrupto. La primera pasada es una copia "sucia". no te puedes fiar de ella sola. Por eso necesitas parar el servicio y hacer una segunda pasada limpia. Ese rsync final es el que importa.
+**SQLite y los locks.** Si haces rsync de una base de datos SQLite mientras el servicio escribe, puedes copiar un archivo corrupto. La primera pasada es una copia "sucia": no te puedes fiar de ella sola. Por eso necesitas parar el servicio y hacer una segunda pasada limpia. Ese rsync final es el que importa.
 
-**Rutas de Docker.** Algunos servicios corrían en Docker con volúmenes montados. No basta con mover el archivo. tienes que actualizar el `docker-compose.yml` o asegurarte de que el symlink esté en el path que Docker espera. Docker no sigue symlinks dentro de bind mounts si no le dices que lo haga. Me comí un error de "file not found" hasta que lo entendí.
+**Rutas de Docker.** Algunos servicios corrían en Docker con volúmenes montados. No basta con mover el archivo: tienes que actualizar el `docker-compose.yml` o asegurarte de que el symlink esté en el path que Docker espera. Docker no sigue symlinks dentro de bind mounts si no le dices que lo haga. Me comí un error de "file not found" hasta que lo entendí.
 
 **Servicios de systemd.** OpenClaw y otros servicios corrían como servicios de systemd del usuario. Pararlos requería `systemctl --user stop`, hacer la migración, y luego `systemctl --user start`. Sencillo, pero hay que acordarse de que no es el systemd de root.
 
@@ -47,7 +47,7 @@ El rendimiento mejoró de forma brutal. El historial de Home Assistant que antes
 
 ## La lección
 
-Planifica las migraciones como si fueran deploys en producción. Ten un plan de rollback. para mí era simplemente borrar el symlink y volver a apuntar a la ruta original en el HDD. Testa los symlinks antes de cortar el tráfico. Y no tengas prisa. los 30 minutos extra que dedicas a comprobar todo te ahorran horas de debugging a las 3AM.
+Planifica las migraciones como si fueran deploys en producción. Ten un plan de rollback (para mí era simplemente borrar el symlink y volver a apuntar a la ruta original en el HDD). Testa los symlinks antes de cortar el tráfico. Y no tengas prisa: los 30 minutos extra que dedicas a comprobar todo te ahorran horas de debugging a las 3AM.
 
 ---
 

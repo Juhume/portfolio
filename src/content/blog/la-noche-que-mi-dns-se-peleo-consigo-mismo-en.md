@@ -30,7 +30,7 @@ Some domains resolved. Others didn't. Local rewrites stopped working entirely. H
 
 I noticed the problem because my phone wouldn't load a website. My first thought was "the internet is down." But no. The router had connectivity. It was DNS.
 
-From another machine, an `nslookup google.com` took forever or just timed out. A `dig @192.168.1.100 google.com` (the NAS IP) returned intermittent responses. I opened AdGuard's logs. barely any queries coming in. Something was intercepting DNS traffic before it reached AdGuard.
+From another machine, an `nslookup google.com` took forever or just timed out. A `dig @192.168.1.100 google.com` (the NAS IP) returned intermittent responses. I opened AdGuard's logs: barely any queries coming in. Something was intercepting DNS traffic before it reached AdGuard.
 
 I checked the NAS. `cat /etc/resolv.conf`. There it was: Tailscale had placed its own nameservers. The NAS, which should use AdGuard for DNS, was asking somewhere else. Two DNS services trying to be the boss. Neither winning.
 
