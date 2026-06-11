@@ -56,7 +56,7 @@ Router
         <div class="case-blocks">
             {blocks.map(block => (
                 <div class="case-block">
-                    <div class="case-block__label">{block.label}</div>
+                    <h2 class="case-block__label">{block.label}</h2>
                     <div class="case-block__content">
                         {block.highlight && <p class="case-block__highlight">{block.highlight}</p>}
                         {block.content && <p>{block.content}</p>}
@@ -82,11 +82,11 @@ Router
 
         <slot />
 
-        {/* Cross-navigation to Espejo case study */}
+        {/* Cross-navigation: homelab → diplotest (rotación espejo → homelab → diplotest → espejo) */}
         <aside class="case-study-cross-nav">
             <span class="case-study-cross-nav__label">{hl.alsoSee}</span>
-            <a href={`/${lang}/projects/espejo/`} class="case-study-cross-nav__link">
-                {t.caseStudy.title}
+            <a href={`/${lang}/projects/diplotest/`} class="case-study-cross-nav__link">
+                {t.diploTest.title}
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                     <path d="M3 8h10M9 4l4 4-4 4"/>
                 </svg>

@@ -31,7 +31,7 @@ const blocks = dt.blocks;
         <div class="case-blocks">
             {blocks.map(block => (
                 <div class="case-block">
-                    <div class="case-block__label">{block.label}</div>
+                    <h2 class="case-block__label">{block.label}</h2>
                     <div class="case-block__content">
                         {block.highlight && <p class="case-block__highlight">{block.highlight}</p>}
                         {block.content && <p>{block.content}</p>}

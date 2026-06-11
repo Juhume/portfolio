@@ -209,11 +209,6 @@ const STYLES = `
   }
   .cflow-dot:hover { opacity: 0.7 !important; }
 
-  .cflow-title {
-    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
-    color: var(--text-primary);
-  }
-
   .cflow-cta {
     font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
     text-decoration: none;
@@ -461,6 +456,9 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      // Solo cuando el foco está dentro del carrusel: las flechas no deben
+      // secuestrarse mientras se navega por el resto de la página
+      if (!containerRef.current?.contains(document.activeElement)) return;
       if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active + 1); }
     };
@@ -542,7 +540,6 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
           {projects.map((proj, i) => {
             const offset = i - active;
             const isCenter = offset === 0;
-            const abs = Math.abs(offset);
             const v = getCardValues(offset, width);
             const accent = isDark ? (proj.accentDark || proj.accent || '#2B9B6A') : (proj.accent || '#2B9B6A');
             const txt = isDark ? (proj.textColorDark || proj.textColor || '#eef3ea') : (proj.textColor || '#1a1a1a');
@@ -565,7 +562,9 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
                   transform: valuesToStyle(v),
                   opacity: v.op,
                   zIndex: v.z,
-                  pointerEvents: abs <= 1 ? 'auto' : 'none',
+                  // Toda tarjeta visible debe responder al clic: goTo() ya
+                  // soporta saltos de varias posiciones de una vez
+                  pointerEvents: v.op > 0 ? 'auto' : 'none',
                   ['--card-shadow' as string]: `${accent}30`,
                 }}
                 onClick={() => {
@@ -754,24 +753,18 @@ const CoverFlow: FC<CoverFlowProps> = ({ projects }) => {
         {/* Info */}
         <div className={`cflow-info ${isFading ? 'cflow-info--fading' : ''}`}
           style={{ marginTop: '0.25rem' }}>
-          <h2 className="cflow-title"
-            style={{
-              fontSize: 'clamp(1.4rem, 3vw, 2rem)',
-              fontWeight: 800,
-              marginBottom: '0.4rem',
-              letterSpacing: '-0.02em',
-            }}>
-            {displayed?.title}
-          </h2>
           {displayed?.ctaLabel && (
             <a href={displayed.url}
               target={displayed.external ? '_blank' : undefined}
               rel={displayed.external ? 'noopener noreferrer' : undefined}
               className="cflow-cta"
               style={{
-                fontSize: '0.85rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                minHeight: 44,
+                fontSize: '1rem',
                 fontWeight: 600,
-                color: displayed.accent || 'var(--accent-text)',
+                color: (isDark ? displayed.accentDark : displayed.accent) || 'var(--accent-text)',
               }}>
               {displayed.ctaLabel}
             </a>

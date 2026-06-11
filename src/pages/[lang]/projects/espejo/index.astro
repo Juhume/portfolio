@@ -47,7 +47,6 @@ const structuredData = {
 
     <div class="case-study-page-shell">
         <div class="container">
-            <a href={`/${lang}/projects/`} class="case-study-page__back">← {t.caseStudy.backToProjects}</a>
             <Breadcrumb items={[
                 { label: t.nav.home || (lang === 'en' ? 'Home' : 'Inicio'), href: `/${lang}/` },
                 { label: t.nav.projects, href: `/${lang}/projects/` },
@@ -58,10 +57,10 @@ const structuredData = {
             <div class="crypto-demo-intro">
                 <p class="crypto-demo-intro__text">
                     {lang === 'en'
-                        ? 'All of the above sounds good in theory. But you don\'t have to take my word for it — try it yourself.'
+                        ? 'All of the above sounds good in theory. But you don\'t have to take my word for it: try it yourself.'
                         : lang === 'gl'
-                        ? 'Todo o anterior soa ben na teoría. Pero non tes que crerme — próbao ti mesmo.'
-                        : 'Todo lo anterior suena bien en la teoría. Pero no tienes que creerme — pruébalo tú mismo.'}
+                        ? 'Todo o anterior soa ben na teoría. Pero non tes que crerme: próbao ti mesmo.'
+                        : 'Todo lo anterior suena bien en la teoría. Pero no tienes que creerme: pruébalo tú mismo.'}
                 </p>
             </div>
             <CryptoDemo lang={lang} client:visible />

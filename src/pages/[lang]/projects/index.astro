@@ -18,7 +18,7 @@ const canonicalPath = `/${lang}/projects/`;
 
 const projectLinks: string[] = [
     `/${lang}/projects/espejo/`,
-    'https://diplo-test.vercel.app/',
+    `/${lang}/projects/diplotest/`,
     'https://github.com/Juhume/HeyHaiku',
     `/${lang}/projects/homelab/`,
 ];
@@ -59,7 +59,7 @@ const projects = t.projects.items.map((item, i) => ({
 >
     <Header lang={lang} t={t} ids={ids} currentPath={Astro.url.pathname} />
 
-    <main class="projects-page">
+    <div class="projects-page">
         <div class="container">
             <Breadcrumb items={[
                 { label: t.nav.home || (lang === 'en' ? 'Home' : 'Inicio'), href: `/${lang}/` },
@@ -75,7 +75,7 @@ const projects = t.projects.items.map((item, i) => ({
                 projects={projects}
             />
         </div>
-    </main>
+    </div>
 
     <Footer t={t} />
 </BaseLayout>
