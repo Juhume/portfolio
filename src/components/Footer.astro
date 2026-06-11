@@ -10,6 +10,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
+    <span class="footer__plane" aria-hidden="true">✈︎</span>
     <div class="container footer__inner">
         <div class="footer__cta">
             <a href="mailto:hola@juhume.com" class="footer__email">hola@juhume.com</a>
@@ -30,7 +31,7 @@ const year = new Date().getFullYear();
         </div>
         <div class="footer__bottom">
             <span class="footer__copy">&copy; {year} juhume</span>
-            <span class="footer__status footer__sentidino">🐙 {t.footer.status}</span>
+            <span class="footer__status footer__sentidino"><span class="octo" role="img" aria-hidden="true">🐙</span> {t.footer.status}</span>
         </div>
     </div>
 </footer>

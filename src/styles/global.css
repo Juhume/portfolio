@@ -27,11 +27,12 @@
     --bg-tertiary: #f7faf3;
     --text-primary: #223129;
     --text-secondary: #5a685f;
-    --text-muted: #6b7566;
+    --text-muted: #5f6a5c; /* 5.0:1 sobre bg-primary (WCAG AA) */
     --accent: #83DEB5;
-    --accent-text: #2B9B6A;
+    --accent-text: #1d6f4c; /* 5.4:1 sobre bg-primary (WCAG AA) */
     --accent-hover: #6bc89e;
     --accent-light: #d9f5e8;
+    --on-accent: #1c2f25; /* texto sobre fondo --accent, oscuro en ambos temas */
     --border: rgba(34, 49, 41, 0.12);
     --shadow: rgba(41, 45, 37, 0.08);
     --sage: #78886f;
@@ -162,7 +163,7 @@ html.theme-transitioning .stack-tag {
 
 ::selection {
     background-color: var(--accent);
-    color: var(--bg-primary);
+    color: var(--on-accent);
 }
 
 img {
@@ -781,7 +782,7 @@ button {
     font-family: var(--font-body);
     font-size: var(--text-sm);
     font-weight: 600;
-    color: var(--bg-primary);
+    color: var(--on-accent);
     background: var(--accent);
     border-radius: 8px;
     text-decoration: none;
@@ -797,8 +798,102 @@ button {
    Footer
    ========================================== */
 .footer {
+    position: relative;
     padding: var(--space-lg) 0;
     border-top: 1px solid var(--border);
+    overflow: hidden;
+}
+
+/* --- Pulpo interactivo --- */
+.octo {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s var(--ease-bounce);
+}
+
+@media (hover: hover) {
+    .octo:hover {
+        transform: rotate(12deg) scale(1.15);
+    }
+}
+
+.octo::after {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--text-primary) 35%, transparent) 0%,
+        color-mix(in srgb, var(--text-primary) 12%, transparent) 45%,
+        transparent 70%
+    );
+    opacity: 0;
+    transform: scale(0.3);
+    pointer-events: none;
+}
+
+.octo--ink {
+    animation: octo-wiggle 0.7s var(--ease-bounce);
+}
+
+.octo--ink::after {
+    animation: octo-ink 0.7s var(--ease-out);
+}
+
+@keyframes octo-wiggle {
+    0% { transform: rotate(0) scale(1); }
+    25% { transform: rotate(-18deg) scale(1.25); }
+    55% { transform: rotate(14deg) scale(1.1); }
+    100% { transform: rotate(0) scale(1); }
+}
+
+@keyframes octo-ink {
+    0% { opacity: 0; transform: scale(0.3); }
+    25% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* --- Avión FlightRadar (aparece en ~1 de cada 4 visitas) --- */
+.footer__plane {
+    position: absolute;
+    top: 38%;
+    left: -6%;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.footer__plane::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 52%;
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(to left, color-mix(in srgb, var(--text-muted) 55%, transparent), transparent);
+}
+
+.footer.has-flight .footer__plane {
+    animation: plane-fly 16s linear var(--flight-delay, 2s) forwards;
+}
+
+@keyframes plane-fly {
+    0% { left: -6%; opacity: 0; transform: translateY(0); }
+    6% { opacity: 0.55; }
+    94% { opacity: 0.55; }
+    100% { left: 104%; opacity: 0; transform: translateY(-10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer.has-flight .footer__plane,
+    .octo--ink,
+    .octo--ink::after {
+        animation: none;
+    }
 }
 
 .footer__inner {
@@ -930,6 +1025,57 @@ button {
     transform: scale(1);
 }
 
+/* Scroll-driven animations: cuando el navegador las soporta, el scroll
+   es la timeline y no hace falta IntersectionObserver ni clase .visible */
+@supports (animation-timeline: view()) {
+    .js .reveal,
+    .js .reveal-left,
+    .js .reveal-right,
+    .js .reveal-scale {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        animation-duration: 1ms; /* la duración real la dicta la timeline */
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 65%;
+    }
+
+    .js .reveal { animation-name: sd-reveal-up; }
+    .js .reveal-left { animation-name: sd-reveal-left; }
+    .js .reveal-right { animation-name: sd-reveal-right; }
+    .js .reveal-scale { animation-name: sd-reveal-scale; }
+
+    @keyframes sd-reveal-up {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes sd-reveal-left {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes sd-reveal-right {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes sd-reveal-scale {
+        from { opacity: 0; transform: scale(0.97); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .js .reveal,
+        .js .reveal-left,
+        .js .reveal-right,
+        .js .reveal-scale {
+            animation: none;
+        }
+    }
+}
+
 /* ==========================================
    Small screen fixes
    ========================================== */
@@ -986,7 +1132,7 @@ button {
     transform: translateX(-50%);
     padding: 0.75rem 1.5rem;
     background: var(--accent);
-    color: var(--text-primary);
+    color: var(--on-accent);
     border-radius: 0 0 0.5rem 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
@@ -1042,7 +1188,9 @@ a[target="_blank"].btn::after,
     *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
+        animation-delay: 0ms !important;
         transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
         scroll-behavior: auto !important;
     }
 
@@ -1080,7 +1228,7 @@ a[target="_blank"].btn::after,
    Blog
    ========================================== */
 .blog {
-    padding: calc(var(--space-3xl) + 4rem) 0 var(--space-3xl);
+    padding: calc(3.5rem + var(--space-md)) 0 var(--space-3xl);
     min-height: 100vh;
 }
 
@@ -1130,7 +1278,6 @@ a[target="_blank"].btn::after,
 .blog__list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
 }
 
 .blog__back {
@@ -1149,42 +1296,58 @@ a[target="_blank"].btn::after,
     color: var(--accent);
 }
 
-/* Blog Card */
+/* Blog entry (editorial row) */
 .blog-card {
-    display: block;
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    grid-template-areas:
+        "date title"
+        ". desc"
+        ". meta";
+    column-gap: var(--space-md);
+    align-items: baseline;
     text-decoration: none;
-    padding: var(--space-lg);
-    border-radius: 1rem;
-    border: 1px solid var(--border);
-    background: var(--bg-secondary);
-    transition: border-color var(--duration-fast) ease, transform var(--duration-fast) ease;
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border);
+}
+
+.blog__list .blog-card:last-child {
+    border-bottom: 1px solid var(--border);
 }
 
 /* blog-card hover moved to @media (hover: hover) block */
 
 .blog-card__date {
+    grid-area: date;
     font-size: var(--text-xs);
     color: var(--text-muted);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
 }
 
 .blog-card__title {
-    font-family: var(--font-body);
+    grid-area: title;
+    font-family: var(--font-display);
     font-weight: 700;
-    font-size: var(--text-xl);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    letter-spacing: -0.02em;
     color: var(--text-primary);
-    margin: var(--space-xs) 0;
-    line-height: 1.3;
+    margin: 0 0 var(--space-xs);
+    line-height: 1.25;
+    transition: color var(--duration-fast) ease;
 }
 
 .blog-card__description {
+    grid-area: desc;
     color: var(--text-secondary);
     font-size: var(--text-base);
     line-height: 1.6;
+    max-width: 62ch;
 }
 
 .blog-card__meta {
+    grid-area: meta;
     display: flex;
     align-items: center;
     gap: var(--space-sm);
@@ -1242,7 +1405,12 @@ a[target="_blank"].btn::after,
 
 /* Blog Post */
 .blog-post {
-    padding: calc(var(--space-3xl) + 4rem) 0 var(--space-3xl);
+    padding: calc(3.5rem + var(--space-xl)) 0 var(--space-3xl);
+}
+
+/* Columna editorial centrada: el ancho de lectura manda */
+.blog-post > .container {
+    max-width: calc(42rem + 2 * var(--space-md));
 }
 
 .blog-post__back {
@@ -1408,15 +1576,22 @@ a[target="_blank"].btn::after,
 /* Blog responsive */
 @media (max-width: 720px) {
     .blog {
-        padding-top: calc(var(--space-2xl) + 4rem);
+        padding-top: calc(3.5rem + var(--space-sm));
     }
 
     .blog-post {
-        padding-top: calc(var(--space-2xl) + 4rem);
+        padding-top: calc(3.5rem + var(--space-lg));
     }
 
     .blog-card {
-        padding: var(--space-md);
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "date"
+            "title"
+            "desc"
+            "meta";
+        row-gap: 0.2rem;
+        padding: var(--space-md) 0;
     }
 
     .blog-card__meta {
@@ -1528,49 +1703,39 @@ a[target="_blank"].btn::after,
 }
 
 /* ==========================================
-   404 Page
+   404 Page — estilos scoped en src/pages/404.astro
    ========================================== */
-.not-found {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: var(--space-xl);
-}
 
-.not-found__title {
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 12vw, 8rem);
-    color: var(--text-primary);
-    line-height: 1;
-    opacity: 0.15;
-}
+/* ==========================================
+   Impresión: Ctrl+P en Sobre mí imprime un CV limpio
+   ========================================== */
+@media print {
+    @page {
+        margin: 1.6cm;
+    }
 
-.not-found__text {
-    font-size: var(--text-md);
-    color: var(--text-secondary);
-    margin: var(--space-sm) 0 var(--space-lg);
-    max-width: 30ch;
-}
+    .nav,
+    .mobile-menu,
+    .footer,
+    .scroll-progress,
+    .skip-to-content,
+    .breadcrumb,
+    .theme-toggle {
+        display: none !important;
+    }
 
-.not-found__link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0.75rem 1.5rem;
-    background: var(--accent);
-    color: var(--text-primary);
-    text-decoration: none;
-    border-radius: 100px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: opacity var(--duration-fast) ease;
-}
+    body {
+        background: #fff !important;
+        color: #1a1a1a !important;
+    }
 
-.not-found__link:hover {
-    opacity: 0.85;
+    body::after {
+        display: none; /* textura de ruido fuera */
+    }
+
+    a {
+        color: inherit !important;
+    }
 }
 
 /* ==========================================
@@ -1724,7 +1889,7 @@ button:active {
         border-color: color-mix(in srgb, var(--accent) 30%, transparent);
         box-shadow: 0 18px 60px var(--shadow);
     }
-    .blog-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--shadow); }
+    .blog-card:hover .blog-card__title { color: var(--accent-text); }
     .case-study-page__back:hover { color: var(--text-primary); }
     .case-study-page__cta:hover { opacity: 0.85; }
     .cflow-dot:hover { opacity: 0.7 !important; }
@@ -1737,8 +1902,7 @@ button:active {
     .theme-toggle:hover,
     .btn--primary:hover,
     .btn--secondary:hover,
-    .case-study-teaser:hover,
-    .blog-card:hover {
+    .case-study-teaser:hover {
         transform: none;
         box-shadow: none;
     }
@@ -1747,7 +1911,6 @@ button:active {
 /* 3. will-change on animated elements */
 .btn,
 .case-study-teaser,
-.blog-card,
 .theme-toggle,
 .nav__menu-btn {
     will-change: transform;
@@ -1770,8 +1933,7 @@ button:active {
 }
 
 /* 5. Subtle blur to mask imperfections on animated cards */
-.case-study-teaser,
-.blog-card {
+.case-study-teaser {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
