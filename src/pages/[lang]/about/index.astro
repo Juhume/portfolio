@@ -45,15 +45,6 @@ const personalWithEgg = t.about.personal.map(p => p.replace('Habbo', habboEgg));
             </header>
 
             <div class="about-page__hero">
-                <div class="about-page__photo-ring">
-                    <img
-                        src="/julio-huerta.jpg"
-                        alt={t.about.photoAlt}
-                        class="about-page__photo"
-                        width="200"
-                        height="200"
-                    />
-                </div>
                 <h1 class="about-page__title">{t.about.title}</h1>
                 <p class="about-page__location">{t.home.location}</p>
                 <div class="about-page__actions">
@@ -151,23 +142,6 @@ const personalWithEgg = t.about.personal.map(p => p.replace('Habbo', habboEgg));
     align-items: center;
     text-align: center;
     margin-bottom: var(--space-xl);
-}
-
-.about-page__photo-ring {
-    padding: 3px;
-    border-radius: 30% 70% 53% 47% / 52% 35% 65% 48%;
-    background: linear-gradient(135deg, var(--accent), var(--gold), var(--accent));
-    margin-bottom: var(--space-md);
-    box-shadow: 0 8px 32px color-mix(in srgb, var(--accent) 15%, transparent);
-}
-
-.about-page__photo {
-    width: 160px;
-    height: 160px;
-    border-radius: inherit;
-    object-fit: cover;
-    display: block;
-    border: 3px solid var(--bg-primary);
 }
 
 .about-page__title {
@@ -415,13 +389,6 @@ const personalWithEgg = t.about.personal.map(p => p.replace('Habbo', habboEgg));
     position: absolute;
     left: 0;
     color: var(--accent-text);
-}
-
-@media (min-width: 768px) {
-    .about-page__photo {
-        width: 200px;
-        height: 200px;
-    }
 }
 
 /* --- Easter egg Habbo (inyectado vía set:html, requiere :global) --- */

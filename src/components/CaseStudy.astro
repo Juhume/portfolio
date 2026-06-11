@@ -84,16 +84,17 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
         {/* Slot for interactive demos */}
         {variant === 'full' && <slot />}
 
-        {/* Cross-navigation to Homelab case study */}
         {variant === 'full' && (
             <aside class="case-study-cross-nav">
                 <span class="case-study-cross-nav__label">{t.caseStudy.alsoSee}</span>
-                <a href={`/${lang}/projects/homelab/`} class="case-study-cross-nav__link">
-                    {t.homeLab.title}
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                        <path d="M3 8h10M9 4l4 4-4 4"/>
-                    </svg>
-                </a>
+                <div class="case-study-cross-nav__links">
+                    <a href={`/${lang}/projects/pichurri-fitness/`} class="case-study-cross-nav__link">
+                        Pichurri Fitness →
+                    </a>
+                    <a href={`/${lang}/projects/homelab/`} class="case-study-cross-nav__link">
+                        {t.homeLab.title} →
+                    </a>
+                </div>
             </aside>
         )}
     </div>
@@ -117,10 +118,6 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
         margin-top: var(--space-2xl);
         padding-top: var(--space-lg);
         border-top: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        gap: var(--space-md);
-        flex-wrap: wrap;
     }
 
     .case-study-cross-nav__label {
@@ -130,6 +127,14 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: var(--accent);
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .case-study-cross-nav__links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
 
     .case-study-cross-nav__link {
@@ -144,10 +149,17 @@ const blocks = variant === 'full' ? t.caseStudy.blocks : [];
         text-decoration: none;
         font-weight: 500;
         transition: border-color 0.2s, background 0.2s;
+        width: fit-content;
     }
 
     .case-study-cross-nav__link:hover {
         border-color: var(--accent);
         background: var(--bg-primary);
+    }
+
+    @media (min-width: 640px) {
+        .case-study-cross-nav__links {
+            flex-direction: row;
+        }
     }
 </style>

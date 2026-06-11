@@ -65,13 +65,13 @@ export const en: Translations = {
         entries: [
             {
                 role: 'Team Lead · BBVA Business',
-                period: '2026 – Present',
+                period: '2022 – Present',
                 context: 'Leading a 4-person team maintaining and developing the new BBVA Business app. Stack migration towards greater webview coverage.',
                 stack: ['LitElement', 'TypeScript', 'Kotlin'],
             },
             {
                 role: 'Mobile Developer · BBVA Business',
-                period: '2020 – 2025',
+                period: '2020 – 2022',
                 context: 'Developing for iOS and Android simultaneously on an app with over 500,000 users. Native apps with webviews based on an internal LitElement framework for shared flows.',
                 stack: ['Kotlin', 'Java', 'Swift', 'Objective-C', 'LitElement'],
             },
@@ -104,6 +104,33 @@ export const en: Translations = {
                 linkLabel: 'How I built it',
             },
             {
+                title: 'Pichurri Fitness',
+                description: 'Autonomous AI coach: programs workouts, tracks nutrition, analyzes running and takes no excuses.',
+                category: 'AI Agent',
+                badge: 'Active',
+                role: 'Systems design',
+                proof: 'OpenClaw, Claude, Telegram, 20+ cron jobs, persistent memory.',
+                highlights: [
+                    '24/7 coaching with real accountability',
+                    '20+ automated cron jobs (nutrition, training, supplements)',
+                    'Per-exercise and per-session progression tracking',
+                ],
+                linkLabel: 'See case study',
+            },
+            {
+                title: 'Homelab',
+                description: 'Real infrastructure at home: a NAS running AI agents, smart home and 20+ containers.',
+                category: 'Infra',
+                role: 'DevOps',
+                proof: 'Docker Compose, reverse proxy, Home Assistant, backups.',
+                highlights: [
+                    '20+ services orchestrated with Docker Compose',
+                    '24/7 monitoring with automatic alerts',
+                    'Reproducible environment: one docker compose up and it works',
+                ],
+                linkLabel: 'See case study',
+            },
+            {
                 title: 'DiploTest',
                 description: 'Study platform for Spain\'s diplomatic service entrance exams.',
                 category: 'Web app',
@@ -132,19 +159,6 @@ export const en: Translations = {
                 ],
                 linkLabel: 'View on GitHub',
                 linkUrl: 'https://github.com/Juhume/HeyHaiku',
-            },
-            {
-                title: 'Homelab',
-                description: 'Real infrastructure at home: a NAS running AI agents, smart home and 20+ containers.',
-                category: 'Infra',
-                role: 'DevOps',
-                proof: 'Docker Compose, reverse proxy, Home Assistant, backups.',
-                highlights: [
-                    '20+ services orchestrated with Docker Compose',
-                    '24/7 monitoring with automatic alerts',
-                    'Reproducible environment: one docker compose up and it works',
-                ],
-                linkLabel: 'See case study',
             },
         ],
     },
@@ -222,7 +236,7 @@ export const en: Translations = {
         ],
         personalTitle: 'Outside the editor',
         personal: [
-            'I\'m from A Coruña and live in Madrid. I almost always have my headphones on because I <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">listen to music</a> practically all the time: at home, running or just walking around. I also try to go to every concert I can.',
+            'I\'m from A Coruña and live in Madrid. I almost always have my headphones on because I <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">listen to music</a> practically all the time: at home, running or just walking around. I spent 6 years at a conservatory learning piano, so music is something I\'ve carried with me my whole life. I also try to go to every concert I can.',
             'I studied Law, though since I was a kid I was already tinkering with web pages, building personal sites and setting up Habbo servers to play with my friends.',
             'I also find myself opening FlightRadar when I get distracted and I try to improve at DIY, though for now I\'m still considerably better at building software than furniture.',
         ],

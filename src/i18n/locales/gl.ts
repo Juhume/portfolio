@@ -65,13 +65,13 @@ export const gl: Translations = {
         entries: [
             {
                 role: 'Team Lead · BBVA Empresas',
-                period: '2026 – Presente',
+                period: '2022 – Presente',
                 context: 'Liderando un equipo de 4 persoas no mantemento e desenvolvemento da nova aplicación de BBVA Empresas. Migración de stack cara a unha maior carga de webview.',
                 stack: ['LitElement', 'TypeScript', 'Kotlin'],
             },
             {
                 role: 'Desenvolvedor Mobile · BBVA Empresas',
-                period: '2020 – 2025',
+                period: '2020 – 2022',
                 context: 'Desenvolvemento en iOS e Android simultaneamente para unha app con máis de 500.000 usuarios. Apps nativas con webviews baseadas nun framework interno de LitElement para operativas compartidas.',
                 stack: ['Kotlin', 'Java', 'Swift', 'Objective-C', 'LitElement'],
             },
@@ -104,6 +104,33 @@ export const gl: Translations = {
                 linkLabel: 'Como o construín',
             },
             {
+                title: 'Pichurri Fitness',
+                description: 'Coach de IA autónomo: programa adestramentos, controla nutrición, analiza running e non acepta escusas.',
+                category: 'Axente IA',
+                badge: 'En uso',
+                role: 'Deseño de sistemas',
+                proof: 'OpenClaw, Claude, Telegram, 20+ cron jobs, memoria persistente.',
+                highlights: [
+                    'Coaching 24/7 con accountability real',
+                    '20+ cron jobs automáticos (nutrición, adestramento, suplementos)',
+                    'Tracking de progresión por exercicio e sesión',
+                ],
+                linkLabel: 'Ver caso de estudo',
+            },
+            {
+                title: 'Homelab',
+                description: 'Infraestrutura real na casa: un NAS con axentes de IA, domótica e +20 contedores.',
+                category: 'Infra',
+                role: 'DevOps',
+                proof: 'Docker Compose, reverse proxy, Home Assistant, backups.',
+                highlights: [
+                    '+20 servizos orquestrados con Docker Compose',
+                    'Monitoring 24/7 con alertas automáticas',
+                    'Contorno reproducible: un docker compose up e funciona',
+                ],
+                linkLabel: 'Ver caso de estudo',
+            },
+            {
                 title: 'DiploTest',
                 description: 'Plataforma de estudo para as oposicións ao corpo diplomático español.',
                 category: 'App web',
@@ -132,19 +159,6 @@ export const gl: Translations = {
                 ],
                 linkLabel: 'Ver en GitHub',
                 linkUrl: 'https://github.com/Juhume/HeyHaiku',
-            },
-            {
-                title: 'Homelab',
-                description: 'Infraestrutura real na casa: un NAS con axentes de IA, domótica e +20 contedores.',
-                category: 'Infra',
-                role: 'DevOps',
-                proof: 'Docker Compose, reverse proxy, Home Assistant, backups.',
-                highlights: [
-                    '+20 servizos orquestrados con Docker Compose',
-                    'Monitoring 24/7 con alertas automáticas',
-                    'Contorno reproducible: un docker compose up e funciona',
-                ],
-                linkLabel: 'Ver caso de estudo',
             },
         ],
     },
@@ -222,7 +236,7 @@ export const gl: Translations = {
         ],
         personalTitle: 'Fóra do editor',
         personal: [
-            'Son coruñés e vivo en Madrid. Case sempre levo cascos comigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">escoito música</a> practicamente a todas horas: na casa, saíndo a correr ou pola rúa. Tamén intento ir a todos os concertos que podo.',
+            'Son coruñés e vivo en Madrid. Case sempre levo cascos comigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">escoito música</a> practicamente a todas horas: na casa, saíndo a correr ou pola rúa. Estudei 6 anos nun conservatorio e aprendín a tocar o piano, así que a música é algo que levo comigo desde sempre. Tamén intento ir a todos os concertos que podo.',
             'Estudei Dereito, aínda que desde pequeno xa andaba trasteando con páxinas web, montando sitios persoais e levantando servidores de Habbo para xogar cos meus amigos.',
             'Tamén me dá por abrir FlightRadar cando me distraio e intento mellorar na bricolaxe, aínda que polo de agora sigo construíndo bastante mellor software que mobles.',
         ],
