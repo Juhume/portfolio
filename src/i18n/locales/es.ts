@@ -3,7 +3,7 @@ import type { Translations } from '../types';
 export const es: Translations = {
     meta: {
         title: 'Julio Huerta (juhume) | Desarrollador Frontend Web & Mobile',
-        description: 'Desarrollador con +5 años en BBVA Empresas. Apps usadas por miles de empresas, proyectos con cifrado real, y demasiados contenedores Docker.',
+        description: 'Desarrollador en BBVA desde 2019. Apps con más de 500.000 usuarios, proyectos con cifrado real y demasiados contenedores Docker.',
         keywords: 'Julio Huerta, juhume, desarrollador, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
         jobTitle: 'Desarrollador Frontend Web & Mobile',
         ogLocale: 'es_ES',
@@ -15,6 +15,7 @@ export const es: Translations = {
         menuButton: 'Menú',
         mainNavigation: 'Navegación principal',
         mobileMenuLabel: 'Menú de navegación',
+        sectionsNav: 'Secciones del sitio',
     },
     nav: {
         experience: 'Experiencia',
@@ -28,9 +29,9 @@ export const es: Translations = {
     hero: {
         label: 'Julio Huerta',
         title: 'Desarrollo producto en banca.\nFuera, construyo lo que me interesa.',
-        subtitle: '+5 años en BBVA · apps para miles de empresas. Por las noches, una app con cifrado que ni yo puedo romper.',
+        subtitle: 'En BBVA desde 2019 · apps con más de 500.000 usuarios. Por las noches, una app con cifrado que ni yo puedo romper.',
         proofs: [
-            'BBVA Empresas · +5 años',
+            'BBVA · desde 2019',
             '3 plataformas · 2 apps nativas',
         ],
         noteTitle: '',
@@ -45,7 +46,7 @@ export const es: Translations = {
         company: 'BBVA',
         period: '2019 – Presente',
         role: 'Desarrollador · BBVA Empresas',
-        context: 'Frontend, mobile nativo, releases y migración de stack. 5 años construyendo producto que usan miles de empresas.',
+        context: 'Frontend, mobile nativo, releases y migración de stack. Desde 2019 construyendo producto que usan más de 500.000 personas.',
         signalsTitle: 'Lo que hago',
         signals: [
             'Frontend web (LitElement)',
@@ -65,19 +66,19 @@ export const es: Translations = {
             {
                 role: 'Team Lead · BBVA Empresas',
                 period: '2026 – Presente',
-                context: 'Liderando el equipo de mantenimiento y desarrollo de la nueva aplicación de BBVA Empresas. Migración de stack hacia mayor carga de webview.',
+                context: 'Liderando un equipo de 4 personas en el mantenimiento y desarrollo de la nueva aplicación de BBVA Empresas. Migración de stack hacia mayor carga de webview.',
                 stack: ['LitElement', 'TypeScript', 'Kotlin'],
             },
             {
                 role: 'Desarrollador Mobile · BBVA Empresas',
                 period: '2020 – 2025',
-                context: 'Desarrollo en iOS y Android simultáneamente. Apps nativas con webviews basadas en un framework interno de LitElement para operativas compartidas.',
+                context: 'Desarrollo en iOS y Android simultáneamente para una app con más de 500.000 usuarios. Apps nativas con webviews basadas en un framework interno de LitElement para operativas compartidas.',
                 stack: ['Kotlin', 'Java', 'Swift', 'Objective-C', 'LitElement'],
             },
             {
                 role: 'Desarrollador Web & Release Manager · BBVA Particulares',
                 period: '2019 – 2020',
-                context: 'Desarrollo web en el core de banca de particulares. Coordinación de releases de toda la factoría.',
+                context: 'Desarrollo web en el core de banca de particulares. Coordinación de las releases mensuales de toda la factoría.',
                 stack: ['Backbone.js'],
             },
         ],
@@ -114,7 +115,7 @@ export const es: Translations = {
                     'Ves dónde fallas antes del examen',
                     'Usuarios activos preparando oposiciones',
                 ],
-                linkLabel: 'Abrir DiploTest',
+                linkLabel: 'Cómo lo construí',
                 linkUrl: 'https://diplo-test.vercel.app/',
             },
             {
@@ -232,6 +233,8 @@ export const es: Translations = {
             'Antes de tocar algo, prefiero entender bien el contexto y cómo afecta al conjunto',
             'Me fijo mucho en los detalles que hacen que un producto se sienta claro, sólido y bien resuelto',
         ],
+        nowPlaying: 'Ahora suena',
+        lastPlayed: 'Última escucha',
     },
     contact: {
         sectionNumber: '05',
@@ -264,8 +267,9 @@ export const es: Translations = {
         relatedProject: 'Proyecto relacionado',
     },
     home: {
-        role: 'Me gusta construir productos, herramientas e infraestructura con software.',
-        bio: 'Me gusta construir productos, herramientas e infraestructura con software.',
+        role: 'Construyo productos, herramientas e infraestructura con software.',
+        bio: 'Construyo productos, herramientas e infraestructura con software.',
+        location: 'Madrid, España',
         tagline: 'Software con sentidiño.',
         cvDownload: 'Descargar CV',
         navCards: {
@@ -282,11 +286,15 @@ export const es: Translations = {
                 description: 'Cómo trabajo y qué me mueve.',
             },
         },
+        latestTitle: 'Últimas del blog',
+        latestAll: 'Ver todo el blog',
+        contactHook: '¿Tienes algo en mente?',
     },
     notFound: {
         title: '404',
         text: 'Aquí no hay nada. Puede que existiera, puede que no.',
         backHome: 'Volver al inicio',
+        hint: 'Si crees que aquí debería haber algo, escríbeme.',
     },
     homeLab: {
         pageEyebrow: 'Arquitectura',

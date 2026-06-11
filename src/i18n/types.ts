@@ -77,6 +77,7 @@ export interface Translations {
         menuButton: string;
         mainNavigation: string;
         mobileMenuLabel: string;
+        sectionsNav: string;
     };
     nav: {
         experience: string;
@@ -141,6 +142,8 @@ export interface Translations {
         personal: string[];
         principlesTitle: string;
         principles: string[];
+        nowPlaying: string;
+        lastPlayed: string;
     };
     contact: {
         sectionNumber: string;
@@ -175,6 +178,7 @@ export interface Translations {
     home: {
         role: string;
         bio: string;
+        location: string;
         tagline: string;
         cvDownload: string;
         navCards: {
@@ -182,11 +186,15 @@ export interface Translations {
             blog: { title: string; description: string };
             about: { title: string; description: string };
         };
+        latestTitle: string;
+        latestAll: string;
+        contactHook: string;
     };
     notFound: {
         title: string;
         text: string;
         backHome: string;
+        hint: string;
     };
     homeLab: HomelabTranslations;
     diploTest: DiploTestTranslations;

@@ -3,7 +3,7 @@ import type { Translations } from '../types';
 export const en: Translations = {
     meta: {
         title: 'Julio Huerta (juhume) | Frontend Web & Mobile Developer',
-        description: 'Developer with 5+ years at BBVA Business. Apps used by thousands of businesses, projects with real encryption, and too many Docker containers.',
+        description: 'Developer at BBVA since 2019. Apps with over 500,000 users, projects with real encryption, and too many Docker containers.',
         keywords: 'Julio Huerta, juhume, developer, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
         jobTitle: 'Frontend Web & Mobile Developer',
         ogLocale: 'en_US',
@@ -15,6 +15,7 @@ export const en: Translations = {
         menuButton: 'Menu',
         mainNavigation: 'Main navigation',
         mobileMenuLabel: 'Navigation menu',
+        sectionsNav: 'Site sections',
     },
     nav: {
         experience: 'Experience',
@@ -28,9 +29,9 @@ export const en: Translations = {
     hero: {
         label: 'Julio Huerta',
         title: 'I build product in banking.\nOutside, I build what interests me.',
-        subtitle: '5+ years at BBVA · apps for thousands of businesses. At night, an app with encryption even I can\'t break.',
+        subtitle: 'At BBVA since 2019 · apps with over 500,000 users. At night, an app with encryption even I can\'t break.',
         proofs: [
-            'BBVA Business · 5+ years',
+            'BBVA · since 2019',
             '3 platforms · 2 native apps',
         ],
         noteTitle: '',
@@ -45,7 +46,7 @@ export const en: Translations = {
         company: 'BBVA',
         period: '2019 – Present',
         role: 'Developer · BBVA Business',
-        context: 'Frontend, native mobile, releases and stack migration. 5 years building product used by thousands of businesses.',
+        context: 'Frontend, native mobile, releases and stack migration. Building product used by over 500,000 people since 2019.',
         signalsTitle: 'What I do',
         signals: [
             'Frontend web (LitElement)',
@@ -65,19 +66,19 @@ export const en: Translations = {
             {
                 role: 'Team Lead · BBVA Business',
                 period: '2026 – Present',
-                context: 'Leading maintenance and development of the new BBVA Business app. Stack migration towards greater webview coverage.',
+                context: 'Leading a 4-person team maintaining and developing the new BBVA Business app. Stack migration towards greater webview coverage.',
                 stack: ['LitElement', 'TypeScript', 'Kotlin'],
             },
             {
                 role: 'Mobile Developer · BBVA Business',
                 period: '2020 – 2025',
-                context: 'Developing for iOS and Android simultaneously. Native apps with webviews based on an internal LitElement framework for shared flows.',
+                context: 'Developing for iOS and Android simultaneously on an app with over 500,000 users. Native apps with webviews based on an internal LitElement framework for shared flows.',
                 stack: ['Kotlin', 'Java', 'Swift', 'Objective-C', 'LitElement'],
             },
             {
                 role: 'Web Developer & Release Manager · BBVA Retail',
                 period: '2019 – 2020',
-                context: 'Web development in the retail banking core. Coordinating releases for the entire factory.',
+                context: 'Web development in the retail banking core. Coordinating the monthly releases of the entire factory.',
                 stack: ['Backbone.js'],
             },
         ],
@@ -114,7 +115,7 @@ export const en: Translations = {
                     'See where you fail before the exam',
                     'Active users preparing for exams',
                 ],
-                linkLabel: 'Open DiploTest',
+                linkLabel: 'How I built it',
                 linkUrl: 'https://diplo-test.vercel.app/',
             },
             {
@@ -227,11 +228,13 @@ export const en: Translations = {
         ],
         principlesTitle: 'How I work',
         principles: [
-            'I don\'t just want a product to work; I want it to feel cared for, consistent and a good experience for the user',
+            'I don\'t just want a product to work; I want it to feel cared for, consistent, and genuinely good to use',
             'I try to prioritize readability and clarity over unnecessarily complex solutions',
             'Before touching anything, I prefer to understand the context well and how it affects the whole',
             'I pay close attention to the details that make a product feel clear, solid and well-crafted',
         ],
+        nowPlaying: 'Now playing',
+        lastPlayed: 'Last played',
     },
     contact: {
         sectionNumber: '05',
@@ -264,8 +267,9 @@ export const en: Translations = {
         relatedProject: 'Related project',
     },
     home: {
-        role: 'I like building products, tools and infrastructure with software.',
-        bio: 'I like building products, tools and infrastructure with software.',
+        role: 'I build products, tools and infrastructure with software.',
+        bio: 'I build products, tools and infrastructure with software.',
+        location: 'Madrid, Spain',
         tagline: 'Software con sentidiño.',
         cvDownload: 'Download CV',
         navCards: {
@@ -282,19 +286,23 @@ export const en: Translations = {
                 description: 'How I work and what drives me.',
             },
         },
+        latestTitle: 'Latest from the blog',
+        latestAll: 'See all posts',
+        contactHook: 'Got something in mind?',
     },
     notFound: {
         title: '404',
         text: 'Nothing here. Maybe it existed, maybe it didn\'t.',
         backHome: 'Back home',
+        hint: 'If you think something should be here, write me.',
     },
     homeLab: {
         pageEyebrow: 'Architecture',
         title: 'Homelab',
-        pageSummary: 'A personal infrastructure project running 24/7 on a single NAS. Development lab, home automation hub, and AI agent orchestration platform.',
+        pageSummary: 'One NAS, 20+ services and 5 AI agents. All self-hosted, all in production.',
         pageHighlights: [
             '20+ Docker containers',
-            '24/7 uptime',
+            '4 critical services',
             '3 protocols (Zigbee, WiFi, miio)',
             '5 AI agents',
         ],
@@ -305,9 +313,9 @@ export const en: Translations = {
         alsoSee: 'Also see',
         blocks: [
             {
-                label: 'What it is',
-                highlight: 'Personal infrastructure in 24/7 production.',
-                content: 'A single NAS running 20+ containerized services. Combines development lab, multi-protocol smart home hub, and AI agent orchestration platform. Fully self-hosted, fully managed with Docker Compose.',
+                label: 'Why',
+                highlight: 'The cloud won\'t let me touch what I want to touch.',
+                content: 'It started as curiosity and became a need. I wanted a place to experiment with AI, home automation and DevOps without depending on third parties or paying per container. A central NAS running 20+ containerized services with Docker Compose: development lab, multi-protocol smart home hub and AI agent platform. All under my control.',
             },
             {
                 label: 'Architecture decisions',
@@ -319,18 +327,6 @@ export const en: Translations = {
                     'DNS-level ad blocking: network-wide, zero client config',
                     'Mesh VPN for remote access: no exposed ports, no router changes',
                     'Multi-agent AI system: specialized agents per domain',
-                ],
-            },
-            {
-                label: 'Numbers',
-                highlight: 'Infrastructure in data.',
-                content: '',
-                list: [
-                    '20+ containers in production',
-                    '24/7 uptime',
-                    '3 smart home protocols (Zigbee, WiFi, miio)',
-                    '5 specialized AI agents',
-                    'Remote access from any network',
                 ],
             },
             {

@@ -3,7 +3,7 @@ import type { Translations } from '../types';
 export const gl: Translations = {
     meta: {
         title: 'Julio Huerta (juhume) | Desenvolvedor Frontend Web & Mobile',
-        description: 'Desenvolvedor con +5 anos en BBVA Empresas. Apps usadas por miles de empresas, proxectos con cifrado real, e demasiados contedores Docker.',
+        description: 'Desenvolvedor en BBVA desde 2019. Apps con máis de 500.000 usuarios, proxectos con cifrado real e demasiados contedores Docker.',
         keywords: 'Julio Huerta, juhume, desenvolvedor, mobile, web, Kotlin, Swift, LitElement, TypeScript, React, Next.js, Docker, infra',
         jobTitle: 'Desenvolvedor Frontend Web & Mobile',
         ogLocale: 'gl_ES',
@@ -15,6 +15,7 @@ export const gl: Translations = {
         menuButton: 'Menú',
         mainNavigation: 'Navegación principal',
         mobileMenuLabel: 'Menú de navegación',
+        sectionsNav: 'Seccións do sitio',
     },
     nav: {
         experience: 'Experiencia',
@@ -28,9 +29,9 @@ export const gl: Translations = {
     hero: {
         label: 'Julio Huerta',
         title: 'Desenvolvo produto en banca.\nFóra, construo o que me interesa.',
-        subtitle: '+5 anos en BBVA · apps para miles de empresas. Polas noites, unha app con cifrado que nin eu podo romper.',
+        subtitle: 'En BBVA desde 2019 · apps con máis de 500.000 usuarios. Polas noites, unha app con cifrado que nin eu podo romper.',
         proofs: [
-            'BBVA Empresas · +5 anos',
+            'BBVA · desde 2019',
             '3 plataformas · 2 apps nativas',
         ],
         noteTitle: '',
@@ -45,7 +46,7 @@ export const gl: Translations = {
         company: 'BBVA',
         period: '2019 – Presente',
         role: 'Desenvolvedor · BBVA Empresas',
-        context: 'Frontend, mobile nativo, releases e migración de stack. 5 anos construíndo produto que usan miles de empresas.',
+        context: 'Frontend, mobile nativo, releases e migración de stack. Desde 2019 construíndo produto que usan máis de 500.000 persoas.',
         signalsTitle: 'O que fago',
         signals: [
             'Frontend web (LitElement)',
@@ -56,7 +57,7 @@ export const gl: Translations = {
         achievementsTitle: 'Impacto',
         achievements: [
             'Capa frontend unificada entre 3 plataformas (web, iOS, Android)',
-            'Releases de apps con miles de usuarios activos',
+            'Releases de apps con milleiros de usuarios activos',
             '2 apps nativas publicadas en produción (Kotlin + Swift)',
             'Liderando migración a stack híbrido',
         ],
@@ -65,19 +66,19 @@ export const gl: Translations = {
             {
                 role: 'Team Lead · BBVA Empresas',
                 period: '2026 – Presente',
-                context: 'Liderando o equipo de mantemento e desenvolvemento da nova aplicación de BBVA Empresas. Migración de stack cara maior carga de webview.',
+                context: 'Liderando un equipo de 4 persoas no mantemento e desenvolvemento da nova aplicación de BBVA Empresas. Migración de stack cara a unha maior carga de webview.',
                 stack: ['LitElement', 'TypeScript', 'Kotlin'],
             },
             {
                 role: 'Desenvolvedor Mobile · BBVA Empresas',
                 period: '2020 – 2025',
-                context: 'Desenvolvemento en iOS e Android simultaneamente. Apps nativas con webviews baseadas nun framework interno de LitElement para operativas compartidas.',
+                context: 'Desenvolvemento en iOS e Android simultaneamente para unha app con máis de 500.000 usuarios. Apps nativas con webviews baseadas nun framework interno de LitElement para operativas compartidas.',
                 stack: ['Kotlin', 'Java', 'Swift', 'Objective-C', 'LitElement'],
             },
             {
                 role: 'Desenvolvedor Web & Release Manager · BBVA Particulares',
                 period: '2019 – 2020',
-                context: 'Desenvolvemento web no core de banca de particulares. Coordinación de releases de toda a factoría.',
+                context: 'Desenvolvemento web no core de banca de particulares. Coordinación das releases mensuais de toda a factoría.',
                 stack: ['Backbone.js'],
             },
         ],
@@ -97,7 +98,7 @@ export const gl: Translations = {
                 highlights: [
                     'Funciona sen conexión',
                     'O servidor nunca ve o contido',
-                    'Sen rachas nin gamificación',
+                    'Sen series nin gamificación',
                 ],
                 linkUrl: 'https://espejo.day',
                 linkLabel: 'Como o construín',
@@ -114,7 +115,7 @@ export const gl: Translations = {
                     'Ves onde fallas antes do exame',
                     'Usuarios activos preparando oposicións',
                 ],
-                linkLabel: 'Abrir DiploTest',
+                linkLabel: 'Como o construín',
                 linkUrl: 'https://diplo-test.vercel.app/',
             },
             {
@@ -166,7 +167,7 @@ export const gl: Translations = {
         blocks: [
             {
                 label: 'Problema',
-                content: 'As apps de journaling presionan con rachas e gamificación. E ningunha ofrece privacidade real: as túas entradas viven en texto plano en servidores alleos.',
+                content: 'As apps de journaling presionan con series e gamificación. E ningunha ofrece privacidade real: as túas entradas viven en texto plano en servidores alleos.',
             },
             {
                 label: 'Arquitectura',
@@ -221,9 +222,9 @@ export const gl: Translations = {
         ],
         personalTitle: 'Fóra do editor',
         personal: [
-            'Son coruñés e vivo en Madrid. Case sempre levo cascos conmigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">escoito música</a> practicamente a todas horas: na casa, saíndo a correr ou pola rúa. Tamén intento ir a todos os concertos que podo.',
+            'Son coruñés e vivo en Madrid. Case sempre levo cascos comigo porque <a href="https://open.spotify.com/playlist/34FRecc8ZQW3E9vK7VM14n?si=TKceDGNTR82qrcJgLlhIMg&pi=MnMapYJfRUWIc" target="_blank" rel="noopener noreferrer" class="about-link">escoito música</a> practicamente a todas horas: na casa, saíndo a correr ou pola rúa. Tamén intento ir a todos os concertos que podo.',
             'Estudei Dereito, aínda que desde pequeno xa andaba trasteando con páxinas web, montando sitios persoais e levantando servidores de Habbo para xogar cos meus amigos.',
-            'Tamén me dá por abrir FlightRadar cando me distraio e intento mellorar no bricolaxe, aínda que polo de agora sigo construíndo bastante mellor software que mobles.',
+            'Tamén me dá por abrir FlightRadar cando me distraio e intento mellorar na bricolaxe, aínda que polo de agora sigo construíndo bastante mellor software que mobles.',
         ],
         principlesTitle: 'A miña forma de traballar',
         principles: [
@@ -232,6 +233,8 @@ export const gl: Translations = {
             'Antes de tocar algo, prefiro entender ben o contexto e como afecta ao conxunto',
             'Fíxome moito nos detalles que fan que un produto se sinta claro, sólido e ben resolto',
         ],
+        nowPlaying: 'Agora soa',
+        lastPlayed: 'Última escoita',
     },
     contact: {
         sectionNumber: '05',
@@ -253,9 +256,9 @@ export const gl: Translations = {
         backToBlog: 'Volver ao blog',
         publishedOn: 'Publicado o',
         minRead: 'min de lectura',
-        noPosts: 'Primeira entrada polo camiño.',
+        noPosts: 'Primeira entrada en camiño.',
         spanishOnlyTitle: 'Blog en español',
-        spanishOnlyText: 'Polo de agora o blog escribo só en español. Esta ruta mantense para que o cambio de idioma non rompa a navegación.',
+        spanishOnlyText: 'Polo de agora escribo o blog só en español. Esta ruta mantense para que o cambio de idioma non rompa a navegación.',
         readInSpanish: 'Ler en español',
         unavailableInLocale: 'Esta entrada non está traducida. Podes ler a versión orixinal en español.',
         backToHome: 'Volver ao inicio',
@@ -264,8 +267,9 @@ export const gl: Translations = {
         relatedProject: 'Proxecto relacionado',
     },
     home: {
-        role: 'Gústame construír produtos, ferramentas e infraestrutura con software.',
-        bio: 'Gústame construír produtos, ferramentas e infraestrutura con software.',
+        role: 'Constrúo produtos, ferramentas e infraestrutura con software.',
+        bio: 'Constrúo produtos, ferramentas e infraestrutura con software.',
+        location: 'Madrid, España',
         tagline: 'Software con sentidiño.',
         cvDownload: 'Descargar CV',
         navCards: {
@@ -282,19 +286,23 @@ export const gl: Translations = {
                 description: 'Como traballo e que me move.',
             },
         },
+        latestTitle: 'Últimas do blog',
+        latestAll: 'Ver todo o blog',
+        contactHook: 'Tes algo en mente?',
     },
     notFound: {
         title: '404',
         text: 'Aquí non hai nada. Pode que existise, pode que non.',
         backHome: 'Volver ao inicio',
+        hint: 'Se cres que aquí debería haber algo, escríbeme.',
     },
     homeLab: {
         pageEyebrow: 'Arquitectura',
         title: 'Homelab',
-        pageSummary: 'Proxecto de infraestrutura persoal correndo 24/7 nun único NAS. Laboratorio de desenvolvemento, hub de domótica e plataforma de orquestración de axentes de IA.',
+        pageSummary: 'Un NAS, +20 servizos e 5 axentes de IA. Todo auto-aloxado, todo en produción.',
         pageHighlights: [
             '+20 contedores Docker',
-            'Uptime 24/7',
+            '4 servizos críticos',
             '3 protocolos (Zigbee, WiFi, miio)',
             '5 axentes de IA',
         ],
@@ -305,9 +313,9 @@ export const gl: Translations = {
         alsoSee: 'Tamén podes ver',
         blocks: [
             {
-                label: 'Que é',
-                highlight: 'Infraestrutura persoal en produción 24/7.',
-                content: 'Un NAS como servidor central executando +20 servizos containerizados. Combina laboratorio de desenvolvemento, hub de domótica multi-protocolo e plataforma de orquestración de axentes de IA. Todo auto-aloxado, todo xestionado con Docker Compose.',
+                label: 'Por que',
+                highlight: 'A nube non me deixa tocar o que quero tocar.',
+                content: 'Empezou como curiosidade e converteuse en necesidade. Quería un sitio onde experimentar con IA, domótica e DevOps sen depender de terceiros nin pagar por cada contedor. Un NAS central executando +20 servizos containerizados con Docker Compose: laboratorio de desenvolvemento, hub de domótica multi-protocolo e plataforma de axentes de IA. Todo baixo o meu control.',
             },
             {
                 label: 'Decisións de arquitectura',
@@ -322,21 +330,9 @@ export const gl: Translations = {
                 ],
             },
             {
-                label: 'Números',
-                highlight: 'A infraestrutura en datos.',
-                content: '',
-                list: [
-                    '+20 contedores en produción',
-                    'Uptime 24/7',
-                    '3 protocolos de domótica (Zigbee, WiFi, miio)',
-                    '5 axentes de IA especializados',
-                    'Acceso remoto desde calquera rede',
-                ],
-            },
-            {
                 label: 'Sistema multi-axente',
                 highlight: 'O diferenciador: IA especializada correndo en local.',
-                content: 'Un sistema multi-axente corre directamente no NAS. Cada axente ten un dominio claro (desenvolvemento, trading, medios, orquestración) coas súas propias ferramentas e contexto. Comunícanse en tempo real e coordinan tarefas de forma autónoma.\n\nA decisión de deseño foi especialización sobre xeneralización: axentes con dominios acotados en lugar dun modelo monolítico. Resultado: erros contidos, coordinación paralela e escalado horizontal por capacidade.',
+                content: 'Un sistema multi-axente corre directamente no NAS. Cada axente ten un dominio claro (desenvolvemento, trading, medios, orquestración) coas súas propias ferramentas e contexto. Comunícanse en tempo real e coordinan tarefas de forma autónoma.\n\nA decisión de deseño foi especialización sobre xeneralización: axentes con dominios acoutados en lugar dun modelo monolítico. Resultado: erros contidos, coordinación paralela e escalado horizontal por capacidade.',
                 list: [
                     'Axentes especializados con dominios separados',
                     'Comunicación inter-axente en tempo real',
@@ -363,7 +359,7 @@ export const gl: Translations = {
         blocks: [
             {
                 label: 'Problema',
-                content: 'Preparar unha oposición diplomática significa memorizar miles de preguntas de lexislación, historia e dereito internacional. Os métodos tradicionais non che din onde fallas ata que é demasiado tarde.',
+                content: 'Preparar unha oposición diplomática significa memorizar milleiros de preguntas de lexislación, historia e dereito internacional. Os métodos tradicionais non che din onde fallas ata que é demasiado tarde.',
             },
             {
                 label: 'Solución',
@@ -372,7 +368,7 @@ export const gl: Translations = {
                 list: [
                     'Modo repaso: preguntas por tema con feedback inmediato',
                     'Modo exame: simulacro cronometrado con condicións reais',
-                    'Modo resistencia: preguntas ata fallar, mide a túa racha máxima',
+                    'Modo resistencia: preguntas ata fallar, mide a túa mellor serie',
                     'Dashboard con estatísticas por tema, acertos e evolución',
                 ],
             },
