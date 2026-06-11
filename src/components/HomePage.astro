@@ -1,4 +1,6 @@
 ---
+import { getCollection } from 'astro:content';
+import { groupPostsBySlug, resolvePost } from '../utils/blog';
 import type { Locale, Translations } from '../i18n';
 
 interface Props {
@@ -7,39 +9,99 @@ interface Props {
 }
 
 const { t, lang } = Astro.props;
+
+const allPosts = await getCollection('blog');
+const latestPosts = [...groupPostsBySlug(allPosts).values()]
+    .map(group => resolvePost(group, lang))
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, 3);
+
+const indexLinks = [
+    { num: '01', href: `/${lang}/projects/`, ...t.home.navCards.projects },
+    { num: '02', href: `/${lang}/blog/`, ...t.home.navCards.blog },
+    { num: '03', href: `/${lang}/about/`, ...t.home.navCards.about },
+];
 ---
 
-<main class="card">
-    <div class="card__glow" aria-hidden="true"></div>
+<div class="home">
+    <section class="card">
+        <div class="card__glow" aria-hidden="true"></div>
 
-    <div class="card__inner">
-        <div class="card__photo-ring">
-            <img
-                src="/julio-huerta.jpg"
-                alt={t.about.photoAlt}
-                class="card__photo"
-                width="160"
-                height="160"
-            />
+        <div class="card__inner">
+            <div class="card__photo-ring">
+                <img
+                    src="/julio-huerta.jpg"
+                    alt={t.about.photoAlt}
+                    class="card__photo"
+                    width="160"
+                    height="160"
+                />
+            </div>
+
+            <h1 class="card__name home__name">JULIO HUERTA MEDINA</h1>
+            <p class="card__role">{t.home.role}</p>
+            <p class="card__location">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                {t.home.location}
+            </p>
+
+            <div class="card__bio">
+                <p>{t.about.paragraphs[0]}</p>
+            </div>
+
+            <a href={`/cv/julio-huerta-cv-${lang === 'en' ? 'en' : 'es'}.pdf`} class="card__cv" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                {t.home.cvDownload}
+            </a>
         </div>
+    </section>
 
-        <h1 class="card__name home__name">JULIO HUERTA MEDINA</h1>
-        <p class="card__role">{t.home.role}</p>
+    <div class="home__below">
+        <nav class="home-index" aria-label={t.a11y.sectionsNav}>
+            {indexLinks.map(link => (
+                <a href={link.href} class="home-index__row">
+                    <span class="home-index__num" aria-hidden="true">{link.num}</span>
+                    <span class="home-index__text">
+                        <span class="home-index__title">{link.title}</span>
+                        <span class="home-index__desc">{link.description}</span>
+                    </span>
+                    <span class="home-index__arrow" aria-hidden="true">→</span>
+                </a>
+            ))}
+        </nav>
 
-        <div class="card__bio">
-            <p>{t.about.paragraphs[0]}</p>
-        </div>
+        {latestPosts.length > 0 && (
+            <section class="home-latest">
+                <h2 class="home-latest__eyebrow">{t.home.latestTitle}</h2>
+                <ul class="home-latest__list">
+                    {latestPosts.map(post => (
+                        <li>
+                            <a href={`/${lang}/blog/${post.data.canonicalSlug || post.id}/`} class="home-latest__post">
+                                <time class="home-latest__date" datetime={post.data.date.toISOString()}>
+                                    {post.data.date.toLocaleDateString(lang, { day: '2-digit', month: 'short', year: 'numeric' })}
+                                </time>
+                                <span class="home-latest__post-title">{post.data.title}</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+                <a href={`/${lang}/blog/`} class="home-latest__all">{t.home.latestAll} →</a>
+            </section>
+        )}
 
-        <a href={`/cv/julio-huerta-cv-${lang === 'en' ? 'en' : 'es'}.pdf`} class="card__cv" download>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            {t.home.cvDownload}
-        </a>
+        <section class="home-contact">
+            <h2 class="home-contact__hook">{t.home.contactHook}</h2>
+            <a href="mailto:hola@juhume.com" class="home-contact__email">hola@juhume.com</a>
+        </section>
     </div>
-</main>
+</div>
 
 <style>
     /* ==========================================
@@ -50,8 +112,8 @@ const { t, lang } = Astro.props;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 100vh;
-        padding: var(--space-lg) var(--space-md);
+        min-height: max(88svh, 36rem);
+        padding: calc(3.5rem + var(--space-md)) var(--space-md) var(--space-lg);
     }
 
     .card__inner {
@@ -163,6 +225,25 @@ const { t, lang } = Astro.props;
     :global(.js) .card__role {
         opacity: 0;
         animation: springIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+    }
+
+    /* ==========================================
+       Location
+       ========================================== */
+    .card__location {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: var(--text-xs);
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        color: var(--text-muted);
+        margin-bottom: var(--space-sm);
+    }
+
+    :global(.js) .card__location {
+        opacity: 0;
+        animation: springIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
     }
 
     /* ==========================================
@@ -300,6 +381,222 @@ const { t, lang } = Astro.props;
     }
 
     /* ==========================================
+       Below the fold: index + latest + contact
+       ========================================== */
+    .home__below {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 0 var(--space-md) var(--space-2xl);
+    }
+
+    :global(.js) .home__below {
+        opacity: 0;
+        animation: fadeUp 0.8s var(--ease-out) 1.15s forwards;
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Section index --- */
+    .home-index {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-index__row {
+        display: grid;
+        grid-template-columns: 2.6rem 1fr auto;
+        align-items: center;
+        gap: var(--space-sm);
+        padding: 1.3rem 0;
+        border-top: 1px solid var(--border);
+        text-decoration: none;
+    }
+
+    .home-index__row:last-child {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .home-index__num {
+        font-size: var(--text-xs);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--accent-text);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .home-index__text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        min-width: 0;
+    }
+
+    .home-index__title {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 3.5vw, 2rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+        color: var(--text-primary);
+        transition: transform var(--duration-normal) var(--ease-out),
+                    color var(--duration-fast) ease;
+    }
+
+    .home-index__desc {
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+    }
+
+    .home-index__arrow {
+        font-size: 1.3rem;
+        color: var(--accent-text);
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity var(--duration-normal) var(--ease-out),
+                    transform var(--duration-normal) var(--ease-out);
+    }
+
+    @media (hover: hover) {
+        .home-index__row:hover .home-index__title {
+            transform: translateX(6px);
+            color: var(--accent-text);
+        }
+        .home-index__row:hover .home-index__arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .home-index__row:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+        border-radius: 4px;
+    }
+
+    /* --- Latest posts --- */
+    .home-latest {
+        margin-top: var(--space-2xl);
+    }
+
+    .home-latest__eyebrow,
+    .home-contact__hook {
+        font-size: var(--text-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent-text);
+        margin-bottom: var(--space-sm);
+    }
+
+    .home-latest__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .home-latest__post {
+        display: flex;
+        align-items: baseline;
+        gap: var(--space-sm);
+        padding: 0.7rem 0;
+        border-top: 1px solid var(--border);
+        text-decoration: none;
+    }
+
+    .home-latest__list li:last-child .home-latest__post {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .home-latest__date {
+        flex-shrink: 0;
+        width: 6.2rem;
+        font-size: var(--text-xs);
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .home-latest__post-title {
+        font-size: var(--text-base);
+        font-weight: 500;
+        color: var(--text-secondary);
+        line-height: 1.45;
+        transition: color var(--duration-fast) ease;
+    }
+
+    @media (hover: hover) {
+        .home-latest__post:hover .home-latest__post-title {
+            color: var(--accent-text);
+        }
+    }
+
+    .home-latest__all {
+        display: inline-block;
+        margin-top: var(--space-sm);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color var(--duration-fast) ease;
+    }
+
+    .home-latest__all:hover {
+        color: var(--accent-text);
+    }
+
+    /* --- Contact --- */
+    .home-contact {
+        margin-top: var(--space-2xl);
+    }
+
+    .home-contact__email {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        color: var(--text-primary);
+        text-decoration: none;
+        background-image: linear-gradient(var(--accent), var(--accent));
+        background-size: 0% 3px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size 0.4s var(--ease-out), color var(--duration-fast) ease;
+        padding-bottom: 4px;
+    }
+
+    @media (hover: hover) {
+        .home-contact__email:hover {
+            background-size: 100% 3px;
+            color: var(--accent-text);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .home-index__row {
+            grid-template-columns: 2.2rem 1fr auto;
+            padding: 1rem 0;
+        }
+
+        .home-latest__post {
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .home-latest__date {
+            width: auto;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        :global(.js) .home__below {
+            animation: none;
+            opacity: 1;
+        }
+    }
+
+    /* ==========================================
        Animations
        ========================================== */
     @keyframes springIn {
@@ -321,7 +618,8 @@ const { t, lang } = Astro.props;
        ========================================== */
     @media (max-width: 480px) {
         .card {
-            padding: var(--space-md) var(--space-sm);
+            padding: calc(3.5rem + var(--space-sm)) var(--space-sm) var(--space-md);
+            min-height: max(82svh, 32rem);
         }
 
         .card__glow {
@@ -378,92 +676,3 @@ const { t, lang } = Astro.props;
 
     }
 </style>
-
-<script is:inline>
-// Check for reduced motion preference
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (prefersReducedMotion) {
-    // Skip all JS animations if user prefers reduced motion
-} else {
-    
-    // 1. CURSOR-REACTIVE GLOW
-    (() => {
-        const card = document.querySelector('.card');
-        const glow = document.querySelector('.card__glow');
-        
-        if (!card || !glow) return;
-        
-        let currentX = 50;
-        let currentY = 50;
-        let targetX = 50;
-        let targetY = 50;
-        
-        // Linear interpolation for smooth movement
-        function lerp(start, end, factor) {
-            return start + (end - start) * factor;
-        }
-        
-        function updateGlow() {
-            currentX = lerp(currentX, targetX, 0.1);
-            currentY = lerp(currentY, targetY, 0.1);
-            
-            card.style.setProperty('--glow-x', currentX + '%');
-            card.style.setProperty('--glow-y', currentY + '%');
-            
-            requestAnimationFrame(updateGlow);
-        }
-        
-        // Mouse tracking
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            targetX = ((e.clientX - rect.left) / rect.width) * 100;
-            targetY = ((e.clientY - rect.top) / rect.height) * 100;
-        });
-        
-        // Reset when mouse leaves
-        card.addEventListener('mouseleave', () => {
-            targetX = 50;
-            targetY = 50;
-        });
-        
-        // Mobile: gyroscope effect
-        if (window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', (e) => {
-                if (e.gamma !== null && e.beta !== null) {
-                    // Subtle movement based on device tilt
-                    targetX = 50 + (e.gamma * 0.5); // Left/right tilt
-                    targetY = 50 + (e.beta * 0.3);  // Forward/back tilt
-                    
-                    // Clamp values
-                    targetX = Math.max(20, Math.min(80, targetX));
-                    targetY = Math.max(20, Math.min(80, targetY));
-                }
-            });
-        }
-        
-        // Start animation loop
-        updateGlow();
-    })();
-
-    // 2. BIO TEXT SHIMMER
-    (() => {
-        // Add shimmer effect after entrance animation
-        setTimeout(() => {
-            document.querySelector('.card__bio')?.classList.add('card__bio--shimmer');
-        }, 1600);
-        
-        // Reset to normal text after shimmer
-        setTimeout(() => {
-            const bio = document.querySelector('.card__bio');
-            if (bio) {
-                bio.classList.remove('card__bio--shimmer');
-                bio.querySelectorAll('p').forEach(p => {
-                    p.style.background = 'none';
-                    p.style.webkitTextFillColor = '';
-                });
-            }
-        }, 3200);
-    })();
-
-}
-</script>
