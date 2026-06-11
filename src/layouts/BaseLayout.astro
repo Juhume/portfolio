@@ -298,7 +298,9 @@ const ogImageURL = new URL(ogImage, siteURL);
         }
 
         function initAnimations() {
-            import('../scripts/animations');
+            // init() es re-ejecutable: limpia los listeners de la página
+            // anterior, necesario porque import() solo corre el módulo una vez
+            import('../scripts/animations').then(m => m.init());
         }
 
         // Initial load
@@ -331,10 +333,91 @@ const ogImageURL = new URL(ogImage, siteURL);
             initNavigation();
             initAnimations();
         });
+
+        // ==========================================
+        // Analytics (GoatCounter)
+        // ==========================================
+        // count.js solo cuenta la carga inicial; las navegaciones con
+        // View Transitions no recargan la página, así que se cuentan aquí.
+        let isFirstPageLoad = true;
+        document.addEventListener('astro:page-load', () => {
+            if (isFirstPageLoad) {
+                isFirstPageLoad = false;
+                return;
+            }
+            (window as any).goatcounter?.count?.({ path: location.pathname });
+        });
+
+        // Evento de descarga del CV: delegación en document para
+        // sobrevivir a los swaps de View Transitions.
+        document.addEventListener('click', (e) => {
+            const link = (e.target as HTMLElement | null)?.closest?.('a[download]');
+            if (!link) return;
+            const href = link.getAttribute('href') || '';
+            const langMatch = href.match(/-(es|en|gl)\.pdf$/);
+            (window as any).goatcounter?.count?.({
+                path: `cv-download${langMatch ? '-' + langMatch[1] : ''}`,
+                title: 'Descarga CV',
+                event: true,
+            });
+        });
+
+        // ==========================================
+        // Detalles con sentidiño
+        // ==========================================
+        // El pulpo suelta tinta al hacer clic (footer y 404)
+        document.addEventListener('click', (e) => {
+            const octo = (e.target as HTMLElement | null)?.closest?.('.octo');
+            if (!octo) return;
+            octo.classList.remove('octo--ink');
+            void (octo as HTMLElement).offsetWidth; // reinicia la animación
+            octo.classList.add('octo--ink');
+        });
+        document.addEventListener('animationend', (e) => {
+            const target = e.target as HTMLElement;
+            if (e.animationName === 'octo-wiggle' && target.classList?.contains('octo--ink')) {
+                target.classList.remove('octo--ink');
+            }
+        });
+
+        // Avión de FlightRadar: cruza el footer en ~1 de cada 4 visitas
+        function initFlight() {
+            const footer = document.querySelector('.footer');
+            if (!footer) return;
+            if (Math.random() < 0.25) {
+                (footer as HTMLElement).style.setProperty('--flight-delay', `${2 + Math.random() * 6}s`);
+                footer.classList.add('has-flight');
+            } else {
+                footer.classList.remove('has-flight');
+            }
+        }
+        initFlight();
+        document.addEventListener('astro:page-load', initFlight);
+
+        // Título de pestaña vivo: el pulpo pregunta si sigues ahí
+        const awayTitles: Record<string, string> = {
+            es: '🐙 ¿Sigues ahí?',
+            en: '🐙 Still there?',
+            gl: '🐙 Sigues aí?',
+        };
+        let titleBeforeAway = document.title;
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                titleBeforeAway = document.title;
+                document.title = awayTitles[document.documentElement.lang] || awayTitles.es;
+            } else {
+                document.title = titleBeforeAway;
+            }
+        });
     </script>
 
-    <!-- Cloudflare Web Analytics -->
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "CLOUDFLARE_TOKEN"}'></script>
+    <!-- GoatCounter Analytics (count.js ignora localhost por defecto) -->
+    <script
+        is:inline
+        data-goatcounter={`https://${import.meta.env.PUBLIC_GOATCOUNTER_CODE || 'juhume'}.goatcounter.com/count`}
+        async
+        src="https://gc.zgo.at/count.js"
+    ></script>
 
 </body>
 </html>
